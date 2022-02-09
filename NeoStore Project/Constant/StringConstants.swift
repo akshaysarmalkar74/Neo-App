@@ -10,4 +10,5 @@ import Foundation
 enum StringConstants {
     static let registerViewController = "RegisterScreenViewController"
     static let loginViewController = "LoginScreenViewController"
+    static let forgotViewController = "ForgotScreenViewController"
 }

@@ -29,6 +29,9 @@
 		92E7426827B3D64D007BEE0D /* ReactiveListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7426727B3D64D007BEE0D /* ReactiveListener.swift */; };
 		92E7426C27B3D6A8007BEE0D /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7426A27B3D6A7007BEE0D /* TestViewController.swift */; };
 		92E7426D27B3D6A8007BEE0D /* TestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E7426B27B3D6A7007BEE0D /* TestViewController.xib */; };
+		92E7427227B3DE33007BEE0D /* ForgotScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7427027B3DE33007BEE0D /* ForgotScreenViewController.swift */; };
+		92E7427327B3DE33007BEE0D /* ForgotScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E7427127B3DE33007BEE0D /* ForgotScreenViewController.xib */; };
+		92E7427527B3E18D007BEE0D /* ForgotScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7427427B3E18D007BEE0D /* ForgotScreenViewModel.swift */; };
 		92F7A07127ACE8BC00D53B68 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F7A07027ACE8BC00D53B68 /* Validator.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +60,9 @@
 		92E7426727B3D64D007BEE0D /* ReactiveListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveListener.swift; sourceTree = "<group>"; };
 		92E7426A27B3D6A7007BEE0D /* TestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		92E7426B27B3D6A7007BEE0D /* TestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TestViewController.xib; sourceTree = "<group>"; };
+		92E7427027B3DE33007BEE0D /* ForgotScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotScreenViewController.swift; sourceTree = "<group>"; };
+		92E7427127B3DE33007BEE0D /* ForgotScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgotScreenViewController.xib; sourceTree = "<group>"; };
+		92E7427427B3E18D007BEE0D /* ForgotScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotScreenViewModel.swift; sourceTree = "<group>"; };
 		92F7A07027ACE8BC00D53B68 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +133,7 @@
 			children = (
 				92028AC527AC20A400C54D37 /* LoginScreenViewModel.swift */,
 				92E0404227B1257C00E72818 /* RegisterScreenViewModel.swift */,
+				92E7427427B3E18D007BEE0D /* ForgotScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -169,6 +176,7 @@
 		925EE48827A9522700B2B73F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				92E7426F27B3DDE3007BEE0D /* ForgotScreenViewController */,
 				92E7426E27B3D6B5007BEE0D /* TestViewController */,
 				923D4DFA27AD02D900598034 /* RegisterScreenViewController */,
 				92A92DE627AAA0D900FCEE14 /* LoginScreenViewController */,
@@ -270,6 +278,15 @@
 			path = TestViewController;
 			sourceTree = "<group>";
 		};
+		92E7426F27B3DDE3007BEE0D /* ForgotScreenViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92E7427027B3DE33007BEE0D /* ForgotScreenViewController.swift */,
+				92E7427127B3DE33007BEE0D /* ForgotScreenViewController.xib */,
+			);
+			path = ForgotScreenViewController;
+			sourceTree = "<group>";
+		};
 		92F7A06F27ACE8A200D53B68 /* Validators */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +359,7 @@
 				925EE47427A93FDD00B2B73F /* Assets.xcassets in Resources */,
 				92E7426D27B3D6A8007BEE0D /* TestViewController.xib in Resources */,
 				92A92DF427AB9C3100FCEE14 /* GothamMedium.otf in Resources */,
+				92E7427327B3DE33007BEE0D /* ForgotScreenViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92518AFB27A992000037CB3D /* EnumConstants.swift in Sources */,
+				92E7427227B3DE33007BEE0D /* ForgotScreenViewController.swift in Sources */,
 				92E0404327B1257C00E72818 /* RegisterScreenViewModel.swift in Sources */,
 				92E7426C27B3D6A8007BEE0D /* TestViewController.swift in Sources */,
 				923D4DFD27AD031000598034 /* RegisterScreenViewController.swift in Sources */,
@@ -362,6 +381,7 @@
 				92F7A07127ACE8BC00D53B68 /* Validator.swift in Sources */,
 				92A92DEF27AB9A2100FCEE14 /* ColorExtension.swift in Sources */,
 				925EE48E27A9556300B2B73F /* StringConstants.swift in Sources */,
+				92E7427527B3E18D007BEE0D /* ForgotScreenViewModel.swift in Sources */,
 				92028AC427ABD71000C54D37 /* UserService.swift in Sources */,
 				925EE46B27A93FDB00B2B73F /* AppDelegate.swift in Sources */,
 				925EE46D27A93FDB00B2B73F /* SceneDelegate.swift in Sources */,

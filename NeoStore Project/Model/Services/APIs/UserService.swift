@@ -50,4 +50,20 @@ class UserService {
             }
         }
     }
+    
+    // Forgot Password
+    static func userForgotPassword(email: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        let params: AnyDict = ["email": email]
+        
+        // Perform Request
+        APIManager.sharedInstance.performRequest(serviceType: .forgotPassword(parameters: params)) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
 }
