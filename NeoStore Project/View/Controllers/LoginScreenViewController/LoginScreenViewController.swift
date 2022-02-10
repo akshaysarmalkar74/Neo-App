@@ -61,7 +61,6 @@ class LoginScreenViewController: UIViewController {
     }
     
     @IBAction func forgotBtnTapped(_ sender: UIButton) {
-        print("Hello")
         let viewModel = ForgotScreenViewModel()
         let vc = ForgotScreenViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
