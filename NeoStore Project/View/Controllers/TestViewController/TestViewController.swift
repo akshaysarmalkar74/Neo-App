@@ -31,4 +31,9 @@ class TestViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.user.rawValue)
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
     }
+    
+    @IBAction func myAccountTapped(_ sender: Any) {
+        let vc = MyAccountViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
