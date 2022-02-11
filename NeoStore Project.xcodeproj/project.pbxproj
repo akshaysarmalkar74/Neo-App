@@ -28,6 +28,7 @@
 		92A2129027B52394002C9585 /* MyAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A2128E27B52394002C9585 /* MyAccountViewController.xib */; };
 		92A2129427B62D16002C9585 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2129227B62D16002C9585 /* ResetPasswordViewController.swift */; };
 		92A2129527B62D16002C9585 /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A2129327B62D16002C9585 /* ResetPasswordViewController.xib */; };
+		92A2129727B6402A002C9585 /* ResetPasswordScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2129627B6402A002C9585 /* ResetPasswordScreenViewModel.swift */; };
 		92A92DE927AAA13000FCEE14 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A92DE727AAA13000FCEE14 /* LoginScreenViewController.swift */; };
 		92A92DEA27AAA13000FCEE14 /* LoginScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A92DE827AAA13000FCEE14 /* LoginScreenViewController.xib */; };
 		92A92DEF27AB9A2100FCEE14 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */; };
@@ -68,6 +69,7 @@
 		92A2128E27B52394002C9585 /* MyAccountViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyAccountViewController.xib; sourceTree = "<group>"; };
 		92A2129227B62D16002C9585 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		92A2129327B62D16002C9585 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResetPasswordViewController.xib; sourceTree = "<group>"; };
+		92A2129627B6402A002C9585 /* ResetPasswordScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordScreenViewModel.swift; sourceTree = "<group>"; };
 		92A92DE727AAA13000FCEE14 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		92A92DE827AAA13000FCEE14 /* LoginScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginScreenViewController.xib; sourceTree = "<group>"; };
 		92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				92028AC527AC20A400C54D37 /* LoginScreenViewModel.swift */,
 				92E0404227B1257C00E72818 /* RegisterScreenViewModel.swift */,
 				92E7427427B3E18D007BEE0D /* ForgotScreenViewModel.swift */,
+				92A2129627B6402A002C9585 /* ResetPasswordScreenViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				92A2129427B62D16002C9585 /* ResetPasswordViewController.swift in Sources */,
 				92E7426C27B3D6A8007BEE0D /* TestViewController.swift in Sources */,
 				92A2128327B4ED6B002C9585 /* ProductListingTableViewCell.swift in Sources */,
+				92A2129727B6402A002C9585 /* ResetPasswordScreenViewModel.swift in Sources */,
 				923D4DFD27AD031000598034 /* RegisterScreenViewController.swift in Sources */,
 				92518AF927A9917E0037CB3D /* APIManager.swift in Sources */,
 				92A2128827B52148002C9585 /* CartProductCell.swift in Sources */,

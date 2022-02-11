@@ -54,7 +54,7 @@ class ForgotScreenViewController: UIViewController {
     
     // Success Alert Function
     func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Password has been reset!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
             self?.navigationController?.popViewController(animated: true)

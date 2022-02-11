@@ -66,4 +66,27 @@ class UserService {
             }
         }
     }
+    
+    // Reset Password
+    static func resetPassword(password: String, confirmPassword: String, oldPassword: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        let params: AnyDict = [
+            "password": password,
+            "confirm_password": confirmPassword,
+            "old_password": oldPassword
+        ]
+        
+
+        // Get New Headers (Access Token)
+        let accessToken = UserDefaults.standard.getUserToken() ?? ""
+        
+        APIManager.sharedInstance.performRequest(serviceType: .changePassword(parameters: params, headers: ["access_token": accessToken])) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
 }

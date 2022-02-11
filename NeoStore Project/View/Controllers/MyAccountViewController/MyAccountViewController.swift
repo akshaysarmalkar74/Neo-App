@@ -38,6 +38,9 @@ class MyAccountViewController: UIViewController {
     
     @IBAction func resetBtnTapped(_ sender: Any) {
         print("Reset Btn Tapped")
+        let viewModel =  ResetPasswordScreenViewModel()
+        let vc = ResetPasswordViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
