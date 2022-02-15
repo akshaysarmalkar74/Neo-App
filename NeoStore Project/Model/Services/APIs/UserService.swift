@@ -89,4 +89,46 @@ class UserService {
             }
         }
     }
+    
+    // Update Profile
+    static func updateUser(firstName: String, lastName: String, email: String, phoneNo: Int, birthDate: String, profilePic: String , completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        let params: [String: Any] = [
+            "first_name": firstName,
+            "last_name": lastName,
+            "email": email,
+            "phone_no": phoneNo,
+            "dob": birthDate,
+            "profile_pic": profilePic
+        ]
+        
+        
+        // Get New Headers (Access Token)
+        let accessToken = UserDefaults.standard.getUserToken() ?? ""
+        
+        APIManager.sharedInstance.performRequest(serviceType: .updateUserProfile(parameters: params, headers: ["access_token": accessToken])) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
+    
+    // Fetch User Details
+    static func getUserDetails(completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        // Get New Headers (Access Token)
+        let accessToken = UserDefaults.standard.getUserToken() ?? ""
+        
+        APIManager.sharedInstance.performRequest(serviceType: .getUser(headers: ["access_token": accessToken])) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
 }

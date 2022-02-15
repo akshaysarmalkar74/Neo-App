@@ -53,8 +53,8 @@ enum APIServices {
     case userRegister(parameters: AnyDict)
     case forgotPassword(parameters: AnyDict)
     case changePassword(parameters: AnyDict, headers: StringDict)
-    case updatePassword(parameters: AnyDict)
-    case getUser
+    case updateUserProfile(parameters: AnyDict, headers: StringDict)
+    case getUser(headers: StringDict)
     
     // MARK:- Product Methods
     case getProducts(parameters: AnyDict)
@@ -89,7 +89,7 @@ extension APIServices {
             servicePath = userDomain + "/forgot"
         case .changePassword:
             servicePath = userDomain + "/change"
-        case .updatePassword:
+        case .updateUserProfile:
             servicePath = userDomain + "/update"
         case .getUser:
             servicePath = userDomain + "/getUserData"
@@ -122,7 +122,9 @@ extension APIServices {
     
     var headers: StringDict? {
         switch self {
-        case .changePassword(parameters: _, headers: var headers):
+        case .changePassword(parameters: _, headers: var headers),
+             .updateUserProfile(parameters: _, headers: var headers),
+             .getUser(headers: var headers):
             headers[contentKey] = contentValue
             return headers
         default:
@@ -140,7 +142,7 @@ extension APIServices {
              .userRegister(parameters: let parameters),
              .forgotPassword(parameters: let parameters),
              .changePassword(parameters: let parameters, headers: _),
-             .updatePassword(parameters: let parameters),
+             .updateUserProfile(parameters: let parameters, headers: _),
              .getProducts(parameters: let parameters),
              .getProductDetails(parameters: let parameters),
              .setProductRating(parameters: let parameters),

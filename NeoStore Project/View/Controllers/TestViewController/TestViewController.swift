@@ -33,7 +33,8 @@ class TestViewController: UIViewController {
     }
     
     @IBAction func myAccountTapped(_ sender: Any) {
-        let vc = MyAccountViewController()
+        let viewModel = MyAccountScreenViewModel()
+        let vc = MyAccountViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

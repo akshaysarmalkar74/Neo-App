@@ -34,6 +34,7 @@
 		92A92DEF27AB9A2100FCEE14 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */; };
 		92A92DF227AB9C1B00FCEE14 /* GothamBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 92A92DF127AB9C1B00FCEE14 /* GothamBold.otf */; };
 		92A92DF427AB9C3100FCEE14 /* GothamMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 92A92DF327AB9C3100FCEE14 /* GothamMedium.otf */; };
+		92B826E627BA4674008D3A4A /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B826E527BA4674008D3A4A /* MyAccountViewModel.swift */; };
 		92E0404327B1257C00E72818 /* RegisterScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E0404227B1257C00E72818 /* RegisterScreenViewModel.swift */; };
 		92E7426427B3D5EE007BEE0D /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7426327B3D5EE007BEE0D /* UserDefaultsExtension.swift */; };
 		92E7426827B3D64D007BEE0D /* ReactiveListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E7426727B3D64D007BEE0D /* ReactiveListener.swift */; };
@@ -75,6 +76,7 @@
 		92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		92A92DF127AB9C1B00FCEE14 /* GothamBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBold.otf; sourceTree = "<group>"; };
 		92A92DF327AB9C3100FCEE14 /* GothamMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamMedium.otf; sourceTree = "<group>"; };
+		92B826E527BA4674008D3A4A /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
 		92E0404227B1257C00E72818 /* RegisterScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenViewModel.swift; sourceTree = "<group>"; };
 		92E7426327B3D5EE007BEE0D /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 		92E7426727B3D64D007BEE0D /* ReactiveListener.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactiveListener.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				92E0404227B1257C00E72818 /* RegisterScreenViewModel.swift */,
 				92E7427427B3E18D007BEE0D /* ForgotScreenViewModel.swift */,
 				92A2129627B6402A002C9585 /* ResetPasswordScreenViewModel.swift */,
+				92B826E527BA4674008D3A4A /* MyAccountViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				923D4DFD27AD031000598034 /* RegisterScreenViewController.swift in Sources */,
 				92518AF927A9917E0037CB3D /* APIManager.swift in Sources */,
 				92A2128827B52148002C9585 /* CartProductCell.swift in Sources */,
+				92B826E627BA4674008D3A4A /* MyAccountViewModel.swift in Sources */,
 				92028AC627AC20A400C54D37 /* LoginScreenViewModel.swift in Sources */,
 				92A92DE927AAA13000FCEE14 /* LoginScreenViewController.swift in Sources */,
 				92F7A07127ACE8BC00D53B68 /* Validator.swift in Sources */,
