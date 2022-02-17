@@ -30,12 +30,7 @@ class ForgotScreenViewController: UIViewController {
     }
 
     @IBAction func sendBtnTapped(_ sender: UIButton) {
-        let emailResult = Validator.email(str: emailField.text ?? "")
-        if emailResult.result {
-            viewModel.forgotPassword(email: emailField.text!)
-        } else {
-            showErrorAlert(msg: emailResult.message)
-        }
+        viewModel.forgotPassword(email: emailField.text ?? "")
     }
     
     // Error Alert Function
