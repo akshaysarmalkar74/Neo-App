@@ -44,20 +44,7 @@ class LoginScreenViewController: UIViewController {
     }
 
     @IBAction func loginBtnTapped(_ sender: UIButton) {
-        // Validate Email And Password
-        let emailTuple = Validator.email(str: usernameField.text ?? "")
-        let passwordTuple  = Validator.loginPassword(str: passwordField.text ?? "")
-        
-        if emailTuple.result && passwordTuple.result {
-            viewModel.doLogin(username: usernameField.text!, password: passwordField.text!)
-        } else if !emailTuple.result {
-            // Show Alert for Email
-            showErrorAlert(error: emailTuple.message)
-        } else {
-            // Show Alert for password
-            showErrorAlert(error: passwordTuple.message)
-        }
-        
+        viewModel.doLogin(username: usernameField.text ?? "", password: passwordField.text ?? "")
     }
     
     @IBAction func forgotBtnTapped(_ sender: UIButton) {
