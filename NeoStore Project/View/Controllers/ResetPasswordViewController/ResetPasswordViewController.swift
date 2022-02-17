@@ -39,20 +39,7 @@ class ResetPasswordViewController: UIViewController {
     }
 
     @IBAction func resetBtnTapped(_ sender: UIButton) {
-        let passwordResult = Validator.loginPassword(str: currentPassword.text ?? "")
-        let newPasswordResult = Validator.registerPassword(str: newPassword.text ?? "")
-        let confirmPassResult = Validator.confirmPassword(password: newPassword.text ?? "", confirmPass: newPasswordConfirm.text ?? "")
-        
-        if passwordResult.result && newPasswordResult.result && confirmPassResult.result {
-            // Make Request
-            self.viewModel.reset(password: newPassword.text!, confirmPassword: newPasswordConfirm.text!, oldPassword: currentPassword.text!)
-        } else if !passwordResult.result {
-            showErrorAlert(msg: passwordResult.message)
-        } else if !newPasswordResult.result {
-            showErrorAlert(msg: newPasswordResult.message)
-        } else {
-            showErrorAlert(msg: confirmPassResult.message)
-        }
+        self.viewModel.reset(password: newPassword.text ?? "", confirmPassword: newPasswordConfirm.text ?? "", oldPassword: currentPassword.text ?? "")
     }
     
     // KeyBoard Notification Functions
@@ -174,9 +161,6 @@ extension ResetPasswordViewController {
         self.title = "Reset Password"
         
         // Customise Naviagtion Bar
-//        let height: CGFloat = 40
-//        let bounds = self.navigationController!.navigationBar.bounds
-//        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height)
         self.navigationController?.navigationBar.barTintColor = .mainRed
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
