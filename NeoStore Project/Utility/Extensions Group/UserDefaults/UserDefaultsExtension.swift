@@ -52,4 +52,15 @@ extension UserDefaults{
             return [String: Any]()
         }
     }
+    
+    //MARK:- Set Profile Update
+    func setUpdatedProfile(value: Bool){
+        set(value, forKey: UserDefaultsKeys.isProfileUpdated.rawValue)
+    }
+    
+    //MARK:- Get Profile Updated Status
+    func isProfileUpdated()-> Bool {
+        return bool(forKey: UserDefaultsKeys.isProfileUpdated.rawValue)
+    }
+
 }

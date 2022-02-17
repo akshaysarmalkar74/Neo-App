@@ -25,8 +25,6 @@ class MyAccountViewController: UIViewController {
     
     init(viewModel: MyAccountViewType) {
         super.init(nibName: "MyAccountViewController", bundle: nil)
-        user = UserDefaults.standard.getUser()
-        currentProfileImgUrl = user["profile_pic"] as? String ?? "user_male"
         self.viewModel = viewModel
     }
     
@@ -36,6 +34,16 @@ class MyAccountViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Fetch User
+        if UserDefaults.standard.isProfileUpdated() {
+            self.viewModel.getUser()
+        } else {
+            user = UserDefaults.standard.getUser()
+            currentProfileImgUrl = user["profile_pic"] as? String ?? "user_male"
+            setUserDetails(user: user)
+        }
+        
         setUp()
         setupObservers()
     }
@@ -57,7 +65,7 @@ class MyAccountViewController: UIViewController {
                 let actualPhoneNum: Int = Int(phoneField.text!)!
                 
                 // Make Request
-                viewModel.updateUser(firstName: firstNameField.text!, lastName: lastNameField.text! ,email: emailField.text!, birthDate: birthDateField.text ?? "", phoneNo: actualPhoneNum, profilePic: currentProfileImgUrl)
+                viewModel.updateUser(firstName: firstNameField.text!, lastName: lastNameField.text! ,email: emailField.text!, birthDate: birthDateField.text ?? "", phoneNo: actualPhoneNum, profilePic: convertImageToBase64String(img: profileImg.image!))
             } else if !emailResult.result {
                 showErrorAlert(msg: emailResult.message)
             } else {
@@ -138,23 +146,23 @@ extension MyAccountViewController {
         customiseNavbar()
         
         // Set User Details
-        setUserDetails(user: user)
+//        setUserDetails(user: user)
         
         // Configure Date Picker
-//        createDatePicker()
+        createDatePicker()
     }
     
     // Date Picker BirthDate
     func createDatePicker() {
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
+        // let toolBar = UIToolbar()
+        // toolBar.sizeToFit()
         
         // Bar Button
-        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
-        toolBar.setItems([doneBtn], animated: true)
+        // let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
+        // toolBar.setItems([doneBtn], animated: true)
         
         // Assign ToolBar
-        birthDateField.inputAccessoryView = toolBar
+        // birthDateField.inputAccessoryView = toolBar
         
         // Assign Date Picker to text Field
         birthDateField.inputView = datePicker
@@ -163,6 +171,8 @@ extension MyAccountViewController {
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
         datePicker.maximumDate = Date()
+        
+        datePicker.addTarget(self, action: #selector(datePickerValChanged(_:)), for: .valueChanged)
     }
     
     // Setup Observers
@@ -171,10 +181,10 @@ extension MyAccountViewController {
             guard let `self` = self else {return}
             switch value {
             case .success:
-                print("Got expected")
-                self.viewModel.getUser()
+                UserDefaults.standard.setUpdatedProfile(value: true)
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.setUserDetails(user: self.user)
                     self.showErrorAlert(msg: msg)
                 }
             case .none:
@@ -186,11 +196,12 @@ extension MyAccountViewController {
             guard let `self` = self else {return}
             switch value {
             case .success(let user):
-                // Update User
-                print(user)
-//                DispatchQueue.main.async {
-//                    self.setUserDetails(user: user)
-//                }
+                // Update isUpdated Profile
+                self.user = user
+                UserDefaults.standard.setUpdatedProfile(value: false)
+                DispatchQueue.main.async {
+                    self.setUserDetails(user: user)
+                }
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.showErrorAlert(msg: msg)
@@ -201,9 +212,13 @@ extension MyAccountViewController {
         }
     }
     
-    @objc func doneTapped(_ sender: UIBarButtonItem) {
+//    @objc func doneTapped(_ sender: UIBarButtonItem) {
+//        birthDateField.text = dateToString(curDate: datePicker.date)
+//        self.view.endEditing(true)
+//    }
+    
+    @objc func datePickerValChanged(_ sender: UIDatePicker) {
         birthDateField.text = dateToString(curDate: datePicker.date)
-        self.view.endEditing(true)
     }
     
     // Convert Date into string
@@ -255,6 +270,7 @@ extension MyAccountViewController {
     
     // Get User Details
     func setUserDetails(user: [String: Any]) {
+        print("Here")
         firstNameField.text = user["first_name"] as? String ?? ""
         lastNameField.text = user["last_name"] as? String ?? ""
         emailField.text = user["email"] as? String ?? ""
@@ -280,7 +296,7 @@ extension MyAccountViewController: UIImagePickerControllerDelegate & UINavigatio
             picker.dismiss(animated: true, completion: nil)
             return
         }
-        currentProfileImgUrl = convertImageToBase64String(img: selectedImg)
+//        currentProfileImgUrl = convertImageToBase64String(img: selectedImg)
         profileImg.image = selectedImg
         
         picker.dismiss(animated: true, completion: nil)

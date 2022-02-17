@@ -16,4 +16,5 @@ enum UserDefaultsKeys : String {
     case isLoggedIn
     case userToken
     case user
+    case isProfileUpdated
 }

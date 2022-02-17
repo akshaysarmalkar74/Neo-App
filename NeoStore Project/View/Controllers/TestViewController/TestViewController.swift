@@ -37,4 +37,8 @@ class TestViewController: UIViewController {
         let vc = MyAccountViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    @IBAction func ProductShow(_ sender: Any) {
+        let vc = ProductHomeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

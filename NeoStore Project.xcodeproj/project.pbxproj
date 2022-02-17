@@ -29,6 +29,10 @@
 		92A2129427B62D16002C9585 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2129227B62D16002C9585 /* ResetPasswordViewController.swift */; };
 		92A2129527B62D16002C9585 /* ResetPasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A2129327B62D16002C9585 /* ResetPasswordViewController.xib */; };
 		92A2129727B6402A002C9585 /* ResetPasswordScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A2129627B6402A002C9585 /* ResetPasswordScreenViewModel.swift */; };
+		92A4A67C27BCCD110064105A /* ProductHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4A67A27BCCD110064105A /* ProductHomeViewController.swift */; };
+		92A4A67D27BCCD110064105A /* ProductHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A4A67B27BCCD110064105A /* ProductHomeViewController.xib */; };
+		92A4A68127BCD7600064105A /* SliderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A4A67F27BCD7600064105A /* SliderCell.swift */; };
+		92A4A68227BCD7600064105A /* SliderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A4A68027BCD7600064105A /* SliderCell.xib */; };
 		92A92DE927AAA13000FCEE14 /* LoginScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A92DE727AAA13000FCEE14 /* LoginScreenViewController.swift */; };
 		92A92DEA27AAA13000FCEE14 /* LoginScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92A92DE827AAA13000FCEE14 /* LoginScreenViewController.xib */; };
 		92A92DEF27AB9A2100FCEE14 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */; };
@@ -71,6 +75,10 @@
 		92A2129227B62D16002C9585 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		92A2129327B62D16002C9585 /* ResetPasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResetPasswordViewController.xib; sourceTree = "<group>"; };
 		92A2129627B6402A002C9585 /* ResetPasswordScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordScreenViewModel.swift; sourceTree = "<group>"; };
+		92A4A67A27BCCD110064105A /* ProductHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHomeViewController.swift; sourceTree = "<group>"; };
+		92A4A67B27BCCD110064105A /* ProductHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductHomeViewController.xib; sourceTree = "<group>"; };
+		92A4A67F27BCD7600064105A /* SliderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderCell.swift; sourceTree = "<group>"; };
+		92A4A68027BCD7600064105A /* SliderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderCell.xib; sourceTree = "<group>"; };
 		92A92DE727AAA13000FCEE14 /* LoginScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewController.swift; sourceTree = "<group>"; };
 		92A92DE827AAA13000FCEE14 /* LoginScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginScreenViewController.xib; sourceTree = "<group>"; };
 		92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
@@ -193,6 +201,7 @@
 		925EE48727A9521A00B2B73F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				92A4A67E27BCD67F0064105A /* SliderCell */,
 				92A2128527B5211B002C9585 /* CartPageCell */,
 				92A2128027B4ED07002C9585 /* ProductListingCell */,
 			);
@@ -202,6 +211,7 @@
 		925EE48827A9522700B2B73F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				92A4A67927BCCC420064105A /* ProductHomeViewController */,
 				92A2129127B62A27002C9585 /* ResetPasswordViewController */,
 				92A2128C27B5233C002C9585 /* MyAccountViewController */,
 				92E7426F27B3DDE3007BEE0D /* ForgotScreenViewController */,
@@ -271,6 +281,24 @@
 				92A2129327B62D16002C9585 /* ResetPasswordViewController.xib */,
 			);
 			path = ResetPasswordViewController;
+			sourceTree = "<group>";
+		};
+		92A4A67927BCCC420064105A /* ProductHomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92A4A67A27BCCD110064105A /* ProductHomeViewController.swift */,
+				92A4A67B27BCCD110064105A /* ProductHomeViewController.xib */,
+			);
+			path = ProductHomeViewController;
+			sourceTree = "<group>";
+		};
+		92A4A67E27BCD67F0064105A /* SliderCell */ = {
+			isa = PBXGroup;
+			children = (
+				92A4A67F27BCD7600064105A /* SliderCell.swift */,
+				92A4A68027BCD7600064105A /* SliderCell.xib */,
+			);
+			path = SliderCell;
 			sourceTree = "<group>";
 		};
 		92A92DE627AAA0D900FCEE14 /* LoginScreenViewController */ = {
@@ -422,12 +450,14 @@
 				923D4DFE27AD031000598034 /* RegisterScreenViewController.xib in Resources */,
 				92A2128927B52148002C9585 /* CartProductCell.xib in Resources */,
 				92A92DEA27AAA13000FCEE14 /* LoginScreenViewController.xib in Resources */,
+				92A4A67D27BCCD110064105A /* ProductHomeViewController.xib in Resources */,
 				92A2128427B4ED6B002C9585 /* ProductListingTableViewCell.xib in Resources */,
 				925EE47427A93FDD00B2B73F /* Assets.xcassets in Resources */,
 				92E7426D27B3D6A8007BEE0D /* TestViewController.xib in Resources */,
 				92A92DF427AB9C3100FCEE14 /* GothamMedium.otf in Resources */,
 				92A2128B27B521CB002C9585 /* Gotham Book Regular.otf in Resources */,
 				92A2129527B62D16002C9585 /* ResetPasswordViewController.xib in Resources */,
+				92A4A68227BCD7600064105A /* SliderCell.xib in Resources */,
 				92A2129027B52394002C9585 /* MyAccountViewController.xib in Resources */,
 				92E7427327B3DE33007BEE0D /* ForgotScreenViewController.xib in Resources */,
 			);
@@ -449,6 +479,7 @@
 				92A2129727B6402A002C9585 /* ResetPasswordScreenViewModel.swift in Sources */,
 				923D4DFD27AD031000598034 /* RegisterScreenViewController.swift in Sources */,
 				92518AF927A9917E0037CB3D /* APIManager.swift in Sources */,
+				92A4A67C27BCCD110064105A /* ProductHomeViewController.swift in Sources */,
 				92A2128827B52148002C9585 /* CartProductCell.swift in Sources */,
 				92B826E627BA4674008D3A4A /* MyAccountViewModel.swift in Sources */,
 				92028AC627AC20A400C54D37 /* LoginScreenViewModel.swift in Sources */,
@@ -461,6 +492,7 @@
 				925EE46B27A93FDB00B2B73F /* AppDelegate.swift in Sources */,
 				925EE46D27A93FDB00B2B73F /* SceneDelegate.swift in Sources */,
 				92A2128F27B52394002C9585 /* MyAccountViewController.swift in Sources */,
+				92A4A68127BCD7600064105A /* SliderCell.swift in Sources */,
 				92E7426827B3D64D007BEE0D /* ReactiveListener.swift in Sources */,
 				92E7426427B3D5EE007BEE0D /* UserDefaultsExtension.swift in Sources */,
 				92518AF727A9779F0037CB3D /* APIServices.swift in Sources */,
