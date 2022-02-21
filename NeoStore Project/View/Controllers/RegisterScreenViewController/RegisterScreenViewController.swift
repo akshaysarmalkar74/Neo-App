@@ -59,36 +59,10 @@ class RegisterScreenViewController: UIViewController {
     
     
     @IBAction func registerBtnTapped(_ sender: UIButton) {
-        // Get Validations Results
-        let firstNameResult = Validator.firstName(str: firstNameField.text ?? "")
-        let lastNameResult = Validator.lastName(str: lastNameField.text ?? "")
-        let emailResult = Validator.email(str: emailField.text ?? "")
-        let passwordResult = Validator.registerPassword(str: passwordField.text ?? "")
-        let confirmPasswordResult = Validator.confirmPassword(password: passwordField.text ?? "", confirmPass: confirmPasswordField.text ?? "")
-        let phoneResult = Validator.phoneNumber(str: phoneField.text ?? "")
-        let termsResult = Validator.termsChecked(btn: termsBtn)
         
-        // Check all Validations
-        if firstNameResult.result && lastNameResult.result && emailResult.result && passwordResult.result && confirmPasswordResult.result && phoneResult.result && termsResult.result {
-            let actualPhoneNum: Int = Int(phoneField.text!)!
-            let genderValue: String = maleBtn.isSelected ? "M" : "F"
-            
-            viewModel.doRegister(firstName: firstNameField.text!, lastName: lastNameField.text!, email: emailField.text!, password: passwordField.text!, confirmPassword: confirmPasswordField.text!, gender: genderValue, phoneNumber: actualPhoneNum)
-        } else if !firstNameResult.result {
-            showErrorAlert(error: firstNameResult.message)
-        } else if !lastNameResult.result {
-            showErrorAlert(error: lastNameResult.message)
-        } else if !emailResult.result {
-            showErrorAlert(error: emailResult.message)
-        } else if !passwordResult.result {
-            showErrorAlert(error: passwordResult.message)
-        } else if !confirmPasswordResult.result {
-            showErrorAlert(error: confirmPasswordResult.message)
-        } else if !phoneResult.result {
-            showErrorAlert(error: phoneResult.message)
-        } else {
-            showErrorAlert(error: termsResult.message)
-        }
+        let genderValue: String = maleBtn.isSelected ? "M" : "F"
+        
+        viewModel.doRegister(firstName: firstNameField.text ?? "", lastName: lastNameField.text ?? "", email: emailField.text ?? "", password: passwordField.text ?? "", confirmPassword: confirmPasswordField.text ?? "", gender: genderValue, phoneNumber: phoneField.text ?? "", termsBtn: termsBtn)
     }
     
     // Error Alert Function
