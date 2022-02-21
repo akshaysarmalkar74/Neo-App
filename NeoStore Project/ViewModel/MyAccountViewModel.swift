@@ -39,6 +39,7 @@ class MyAccountScreenViewModel: MyAccountViewType {
                 if let curData = value as? Data {
                     do {
                         let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
+                        print(mainData)
                         if let statusCode = mainData["status"] as? Int {
                             if statusCode == 200 {
                                 self.updateUserStatus.value = .success
@@ -71,7 +72,7 @@ class MyAccountScreenViewModel: MyAccountViewType {
                         
                         if let statusCode = mainData["status"] as? Int {
                             if statusCode == 200 {
-                                print(mainData)
+                                print("Got User from API")
                                 let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
                                 let user = tempData["user_data"] as? [String: Any] ?? [String: Any]()
                                 
