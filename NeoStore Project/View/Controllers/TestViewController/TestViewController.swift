@@ -32,6 +32,12 @@ class TestViewController: UIViewController {
         UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
     }
     
+    @IBAction func orderListTapped(_ sender: Any) {
+        let vm = MyOrdersViewModel()
+        let vc = MyOrdersViewController(viewModel: vm)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     @IBAction func myAccountTapped(_ sender: Any) {
         let viewModel = MyAccountScreenViewModel()
         let vc = MyAccountViewController(viewModel: viewModel)
@@ -39,6 +45,11 @@ class TestViewController: UIViewController {
     }
     @IBAction func ProductShow(_ sender: Any) {
         let vc = ProductHomeViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @IBAction func cartListTapped(_ sender: Any) {
+        let vm = CartListViewModel()
+        let vc = CartListViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

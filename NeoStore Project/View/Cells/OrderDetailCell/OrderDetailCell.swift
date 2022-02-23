@@ -1,19 +1,20 @@
 //
-//  CartProductCell.swift
+//  OrderDetailCell.swift
 //  NeoStore Project
 //
-//  Created by Neosoft on 10/02/22.
+//  Created by Neosoft on 22/02/22.
 //
 
 import UIKit
 
-class CartProductCell: UITableViewCell {
+class OrderDetailCell: UITableViewCell {
 
     @IBOutlet weak var productImg: LazyImageView!
-    @IBOutlet weak var productName: UILabel!
+    @IBOutlet weak var productTitle: UILabel!
     @IBOutlet weak var productCategory: UILabel!
+    @IBOutlet weak var productQty: UILabel!
     @IBOutlet weak var productPrice: UILabel!
-    @IBOutlet weak var quantityBtn: UIButton!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,20 +27,17 @@ class CartProductCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    @IBAction func quantityBtn(_ sender: UIButton) {
-        print("Quantity Btn Tapped")
-    }
-    
-    func configure(name: String, img: String, category: String, price: Int, quantity: Int) {
-        // Set Image
+    func configure(img: String, name: String, category: String, qty: Int, price: Int) {
+        // Fetch Image
         let url = URL(string: img)
         if let actualUrl = url {
             productImg.loadImage(fromURL: actualUrl, placeHolderImage: "place")
         }
         
-        productName.text = name
-        productCategory.text = "\(category)"
+        productTitle.text = name
+        productCategory.text = "(\(category))"
+        productQty.text = "QTY - \(qty)"
         productPrice.text = "₹ \(price)"
-        quantityBtn.setTitle("\(quantity)", for: .normal)
     }
+    
 }

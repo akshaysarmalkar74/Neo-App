@@ -65,12 +65,12 @@ enum APIServices {
     case addToCart(parameters: AnyDict)
     case editCart(parameters: AnyDict)
     case deleteCart(parameters: AnyDict)
-    case getCart
+    case getCart(headers: StringDict)
     
     // MARK:- Order Methods
     case placeOrder(parameters: AnyDict)
-    case getOrders
-    case getOrderDetail(parameters: AnyDict)
+    case getOrders(headers: StringDict)
+    case getOrderDetail(parameters: AnyDict, headers: StringDict)
 }
 
 extension APIServices {
@@ -124,7 +124,10 @@ extension APIServices {
         switch self {
         case .changePassword(parameters: _, headers: var headers),
              .updateUserProfile(parameters: _, headers: var headers),
-             .getUser(headers: var headers):
+             .getUser(headers: var headers),
+             .getCart(headers: var headers),
+             .getOrders(headers: var headers),
+             .getOrderDetail(parameters: _, headers: var headers):
             headers[contentKey] = contentValue
             return headers
         default:
@@ -150,7 +153,7 @@ extension APIServices {
              .editCart(parameters: let parameters),
              .deleteCart(parameters: let parameters),
              .placeOrder(parameters: let parameters),
-             .getOrderDetail(parameters: let parameters):
+             .getOrderDetail(parameters: let parameters, headers: _):
              
             return parameters
             

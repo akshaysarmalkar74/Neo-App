@@ -1,36 +1,43 @@
 //
-//  ProductListViewModel.swift
+//  CartListViewModel.swift
 //  NeoStore Project
 //
-//  Created by Neosoft on 20/02/22.
+//  Created by Neosoft on 21/02/22.
 //
 
 import Foundation
 
-enum FetchProductsApiResult {
-    case success
+enum FetchCartApiResult {
     case failure(msg: String?)
     case none
 }
 
-protocol ProductListViewType {
-    var fetchProductsStatus: ReactiveListener<FetchProductsApiResult> {get set}
+
+protocol CartListViewType {
     var tableViewShouldReload: ReactiveListener<Bool> {get set}
-    var products: [[String: Any]] {get set}
+    var fetchCartStatus: ReactiveListener<FetchCartApiResult> {get set}
     
-    func fetchProducts(categoryId: String, page: Int)
+    var cartItems: [[String: Any]] {get set}
+    var total: Int {get set}
+    
+    // Methods
+    func fetchCart()
     func getNumOfRows() -> Int
     func getItemAndIndexPath(index: Int) -> [String: Any]
+    func getNumOfItems() -> Int
+    func getTotalPrice() -> Int
 }
 
-class ProductListViewModel: ProductListViewType {
-    var products = [[String: Any]]()
+class CartListViewModel: CartListViewType {
+    var total: Int = 0
+    
+    var cartItems = [[String : Any]]()
     
     var tableViewShouldReload: ReactiveListener<Bool> = ReactiveListener(false)
-    var fetchProductsStatus: ReactiveListener<FetchProductsApiResult> = ReactiveListener(.none)
+    var fetchCartStatus: ReactiveListener<FetchCartApiResult> = ReactiveListener(.none)
     
-    func fetchProducts(categoryId: String, page: Int = 1) {
-        ProductService.getProducts(categoryId: categoryId, page: page) { res in
+    func fetchCart() {
+        CartService.fetchCart { res in
             switch res {
             case .success(value: let value):
                 if let curData = value as? Data {
@@ -39,13 +46,16 @@ class ProductListViewModel: ProductListViewType {
                         if let statusCode = mainData["status"] as? Int {
                             if statusCode == 200 {
                                 let tempData = mainData["data"] as? [[String: Any]] ?? [[String: Any]()]
-                                self.products.append(contentsOf: tempData)
-                                self.fetchProductsStatus.value = .success
+                                if let cartTotal = mainData["total"] as? Int {
+                                    self.total = cartTotal
+                                }
+                                self.cartItems.append(contentsOf: tempData)
+                                print(self.cartItems.count)
                                 self.tableViewShouldReload.value = true
                             } else {
                                 // Show Error to User
                                 let userMsg = mainData["user_msg"] as? String
-                                self.fetchProductsStatus.value = .failure(msg: userMsg)
+                                self.fetchCartStatus.value = .failure(msg: userMsg)
                             }
                         }
                     } catch let err {
@@ -59,12 +69,21 @@ class ProductListViewModel: ProductListViewType {
             }
         }
     }
-    
+
     func getNumOfRows() -> Int {
-        return products.count
+        return cartItems.count + 1
     }
     
     func getItemAndIndexPath(index: Int) -> [String : Any] {
-        return products[index]
+        return cartItems[index]
     }
+    
+    func getNumOfItems() -> Int {
+        return cartItems.count
+    }
+    
+    func getTotalPrice() -> Int {
+        return total
+    }
+    
 }

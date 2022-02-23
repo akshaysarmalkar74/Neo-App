@@ -13,7 +13,7 @@ class ProductListViewController: UIViewController {
     var categoryId: String!
     var viewModel: ProductListViewType!
     var page = 1
-    var allProducts: [[String: Any]] = []
+//    var allProducts: [[String: Any]] = []
     var isPaginating: Bool = false
     var shouldPaginate: Bool = false
     
@@ -45,23 +45,28 @@ class ProductListViewController: UIViewController {
         self.viewModel.fetchProductsStatus.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
             switch value {
-            case .success(let data):
-                self.allProducts.append(contentsOf: data)
-                if data.count == 10 {
+            case .success:
+                if self.viewModel.products.count % 10 == 0 {
                     self.shouldPaginate = true
                 } else {
                     self.shouldPaginate = false
                 }
                 self.isPaginating = false
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.showErrorAlert(msg: msg)
                 }
             case .none:
                 break
+            }
+        }
+        
+        self.viewModel.tableViewShouldReload.bindAndFire { [weak self] (value) in
+            guard let `self` = self else {return}
+            if value {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -83,13 +88,12 @@ class ProductListViewController: UIViewController {
 
 extension ProductListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allProducts.count
+        return viewModel.getNumOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListingCell", for: indexPath) as! ProductListingTableViewCell
-        let product = allProducts[indexPath.row]
-
+        let product = self.viewModel.getItemAndIndexPath(index: indexPath.row)
         // Configure Data
         let imgName = product["product_images"] as? String ?? ""
         let name = product["name"] as? String ?? ""
@@ -103,13 +107,15 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 98
+        return UITableView.automaticDimension
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
+            print("Called")
             if !isPaginating && shouldPaginate {
+                print("Called Twice")
                 page += 1
                 self.viewModel.fetchProducts(categoryId: categoryId, page: page)
                 isPaginating = true
