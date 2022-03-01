@@ -13,7 +13,6 @@ class ProductListViewController: UIViewController {
     var categoryId: String!
     var viewModel: ProductListViewType!
     var page = 1
-//    var allProducts: [[String: Any]] = []
     var isPaginating: Bool = false
     var shouldPaginate: Bool = false
     
@@ -110,12 +109,19 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
         return UITableView.automaticDimension
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let product = viewModel.getItemAndIndexPath(index: indexPath.row)
+        let productId = product["id"] as? Int ?? 0
+        let productDetailViewModel = ProductDetailViewModel()
+        let vc = ProductDetailViewController(viewModel: productDetailViewModel, productId: String(productId))
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-            print("Called")
             if !isPaginating && shouldPaginate {
-                print("Called Twice")
                 page += 1
                 self.viewModel.fetchProducts(categoryId: categoryId, page: page)
                 isPaginating = true

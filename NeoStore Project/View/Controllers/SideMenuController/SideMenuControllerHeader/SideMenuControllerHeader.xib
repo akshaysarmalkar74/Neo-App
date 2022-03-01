@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Gotham Book Regular.otf">
+            <string>Gotham-Book</string>
+        </array>
+        <array key="GothamMedium.otf">
+            <string>Gotham-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SideMenuControllerHeader" customModule="NeoStore_Project" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="427" height="199"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user_male" translatesAutoresizingMaskIntoConstraints="NO" id="yNC-WY-VVs">
+                    <rect key="frame" x="172" y="35" width="83" height="83"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="83" id="4v2-77-ime"/>
+                        <constraint firstAttribute="height" constant="83" id="6hl-7O-pCX"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE3-Lb-Yvx">
+                    <rect key="frame" x="13" y="136" width="401" height="23"/>
+                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="23"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hello@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flC-Gq-1M6">
+                    <rect key="frame" x="13" y="172" width="401" height="14"/>
+                    <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="0.30980392159999998" green="0.30980392159999998" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="yNC-WY-VVs" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ONn-M2-VWl"/>
+                <constraint firstItem="flC-Gq-1M6" firstAttribute="top" secondItem="WE3-Lb-Yvx" secondAttribute="bottom" constant="13" id="Ozv-xB-hvC"/>
+                <constraint firstAttribute="bottom" secondItem="flC-Gq-1M6" secondAttribute="bottom" constant="13" id="RaK-Wy-wRU"/>
+                <constraint firstItem="yNC-WY-VVs" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="35" id="Skg-ov-qTy"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="WE3-Lb-Yvx" secondAttribute="trailing" constant="13" id="UkG-dz-zeo"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="flC-Gq-1M6" secondAttribute="trailing" constant="13" id="Zvv-Gh-yco"/>
+                <constraint firstItem="WE3-Lb-Yvx" firstAttribute="top" secondItem="yNC-WY-VVs" secondAttribute="bottom" constant="18" id="gqb-nA-ZQi"/>
+                <constraint firstItem="WE3-Lb-Yvx" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="pzb-aA-jdw"/>
+                <constraint firstItem="flC-Gq-1M6" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="wwp-sb-jhq"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="name" destination="WE3-Lb-Yvx" id="Mmu-tl-jBL"/>
+                <outlet property="userName" destination="yNC-WY-VVs" id="z6B-wv-zi7"/>
+            </connections>
+            <point key="canvasLocation" x="-94.927536231884062" y="96.09375"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="user_male" width="128" height="128"/>
+    </resources>
+</document>

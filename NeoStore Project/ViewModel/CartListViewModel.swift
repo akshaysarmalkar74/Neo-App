@@ -45,12 +45,13 @@ class CartListViewModel: CartListViewType {
                         let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
                         if let statusCode = mainData["status"] as? Int {
                             if statusCode == 200 {
-                                let tempData = mainData["data"] as? [[String: Any]] ?? [[String: Any]()]
+                                if let tempData = mainData["data"] as? [[String: Any]] {
+                                    self.cartItems.append(contentsOf: tempData)
+                                }
                                 if let cartTotal = mainData["total"] as? Int {
                                     self.total = cartTotal
                                 }
-                                self.cartItems.append(contentsOf: tempData)
-                                print(self.cartItems.count)
+                                print(self.cartItems)
                                 self.tableViewShouldReload.value = true
                             } else {
                                 // Show Error to User
@@ -71,7 +72,7 @@ class CartListViewModel: CartListViewType {
     }
 
     func getNumOfRows() -> Int {
-        return cartItems.count + 1
+        return cartItems.count
     }
     
     func getItemAndIndexPath(index: Int) -> [String : Any] {

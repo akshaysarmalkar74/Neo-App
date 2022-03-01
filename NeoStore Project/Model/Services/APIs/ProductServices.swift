@@ -8,13 +8,29 @@
 import Foundation
 
 class ProductService {
-    // Get Products
     
+    // Get Products
     static func getProducts(categoryId: String, page: Int, completionHandler: @escaping(APIResponse<Any>) -> Void) {
         let params: AnyDict = ["product_category_id": categoryId, "page": page]
         
         // Perform Request
         APIManager.sharedInstance.performRequest(serviceType: .getProducts(parameters: params)) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
+    
+    // Get Product Details
+    static func getProductDetail(productId: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        let params: AnyDict = ["product_id": productId]
+        
+        // Perform Request
+        APIManager.sharedInstance.performRequest(serviceType: .getProductDetails(parameters: params)) { response in
             switch response {
             case .success(value: let value):
                 completionHandler(.success(value: value))

@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import SideMenu
 
 class ProductHomeViewController: UIViewController {
+    
+    private let sideMenu = SideMenuNavigationController(rootViewController: SideMenuViewController())
     
     // MARK:- IBOutlets
     @IBOutlet weak var sliderCollectionView: UICollectionView!
@@ -35,6 +38,7 @@ class ProductHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customiseNavbar()
+        configureSideMenu()
         
         // Set Delegate and Datasource
         sliderCollectionView.delegate = self
@@ -51,6 +55,7 @@ class ProductHomeViewController: UIViewController {
         
         // Configure Slider Page Control
         sliderPageControl.numberOfPages = sliderImages.count
+        
     }
     
     @objc func changeSliderImg(_ sender: Timer) {
@@ -86,6 +91,16 @@ class ProductHomeViewController: UIViewController {
     
     @objc func menuTapped(_ sender: UIBarButtonItem) {
         print("Menu Tapped")
+        self.present(sideMenu, animated: true, completion: nil)
+    }
+    
+    // MARK:- Side Menu
+    func configureSideMenu() {
+        sideMenu.leftSide = true
+        SideMenuManager.default.leftMenuNavigationController = sideMenu
+        SideMenuManager.default.addPanGestureToPresent(toView: view)
+        sideMenu.setNavigationBarHidden(true, animated: false)
+        sideMenu.menuWidth = 300
     }
 }
 

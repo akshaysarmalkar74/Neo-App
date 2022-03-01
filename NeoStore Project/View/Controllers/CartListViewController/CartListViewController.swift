@@ -31,11 +31,8 @@ class CartListViewController: UIViewController {
         cartTable.delegate = self
         cartTable.dataSource = self
         cartTable.register(UINib(nibName: "CartProductCell", bundle: nil), forCellReuseIdentifier: "CartListCell")
-        cartTable.register(UINib(nibName: "CartListFooterCell", bundle: nil), forCellReuseIdentifier: "CartListFooterCell")
-        
-        // Cell Height
-        cartTable.rowHeight = UITableView.automaticDimension;
-        cartTable.estimatedRowHeight = 90.0;
+        cartTable.register(UINib(nibName: "SideMenuControllerHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "SideMenuControllerHeader")
+//        cartTable.register(UINib(nibName: "CartListFooterCell", bundle: nil), forCellReuseIdentifier: "CartListFooterCell")
         
         // Fetch Carts
         self.viewModel.fetchCart()
