@@ -1,5 +1,5 @@
 //
-//  ProductBuyViewController.swift
+//  ProductRateViewController.swift
 //  NeoStore Project
 //
 //  Created by Neosoft on 01/03/22.
@@ -7,30 +7,26 @@
 
 import UIKit
 
-protocol ProductBuyViewControllerDelegate {
-    func didReceiveResponse(userMsg: String?)
-}
-
-class ProductBuyViewController: UIViewController {
+class ProductRateViewController: UIViewController {
     
     @IBOutlet weak var productNameLbl: UILabel!
     @IBOutlet weak var productImg: UIImageView!
-    @IBOutlet weak var qtyInput: UITextField!
-    @IBOutlet weak var containerView: UIView!
+    @IBOutlet var stars: [UIImageView]!
     
     // Variables
     var productId: Int!
     var productImgStrUrl: String!
     var productName: String!
-    var viewModel: ProductBuyViewType!
+    var viewModel: ProductRateViewType!
     var delegate: ProductBuyViewControllerDelegate?
+    var rating: Int = 3
     
-    init(productId: Int, productImgStrUrl: String, productName: String, viewModel: ProductBuyViewType) {
+    init(productId: Int, productImgStrUrl: String, productName: String, viewModel: ProductRateViewType) {
         self.viewModel = viewModel
         self.productId = productId
         self.productImgStrUrl = productImgStrUrl
         self.productName = productName
-        super.init(nibName: "ProductBuyViewController", bundle: nil)
+        super.init(nibName: "ProductRateViewController", bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -52,7 +48,20 @@ class ProductBuyViewController: UIViewController {
         }
         
         addTapGesture(view: view)
+        addTapGesture(imgViews: stars)
+        
+        paintStars(curRating: rating)
         setupObservers()
+    }
+    
+    func paintStars(curRating: Int) {
+        for i in 1...5 {
+            if i <= rating {
+                stars[i-1].image = UIImage(named: "star_check")
+            } else {
+                stars[i-1].image = UIImage(named: "star_unchek")
+            }
+        }
     }
 
     // Tap Gesture
@@ -62,9 +71,33 @@ class ProductBuyViewController: UIViewController {
         view.addGestureRecognizer(tapGesture)
     }
     
+    func addTapGesture(imgViews: [UIImageView]) {
+        for imgView in imgViews {
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imgViewTapped(_:)))
+            imgView.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    @objc func viewTapped(_ sender: UITapGestureRecognizer) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func imgViewTapped(_ sender: UITapGestureRecognizer) {
+        if let senderView = sender.view as? UIImageView {
+            if let newRating = stars.firstIndex(of: senderView) {
+                rating = newRating + 1
+                paintStars(curRating: rating)
+            }
+        }
+    }
+    
+    @IBAction func senderBtnTapped(_ sender: UIButton) {
+        self.viewModel.rateProduct(productId: "12", rating: 4)
+    }
+    
     // Setup Observers
     func setupObservers() {
-        self.viewModel.productBuyDetailStatus.bindAndFire { [weak self] (value) in
+        self.viewModel.productRateDetailStatus.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
             switch value {
             case .success(let msg), .failure(let msg):
@@ -77,42 +110,10 @@ class ProductBuyViewController: UIViewController {
             }
         }
     }
-    
-    @objc func viewTapped(_ sender: UITapGestureRecognizer) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
-    // Submit Btn Tapped
-    
-    @IBAction func submitBtnTapped(_ sender: UIButton) {
-        print("BTN Tapped")
-        let qtyResult = Validator.validateQuantity(val: qtyInput.text ?? "")
-        if qtyResult.result {
-            // Make API Call
-            viewModel.buyProduct(productId: "16", quantity: 3)
-        } else {
-            // Show Error
-            showAlert(msg: qtyResult.message)
-        }
-    }
-    
-    // Error Alert Function
-    func showAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default, handler: nil)
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
-    
 }
 
-extension ProductBuyViewController: UIGestureRecognizerDelegate {
+extension ProductRateViewController: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return touch.view == gestureRecognizer.view
     }
 }
-

@@ -40,4 +40,22 @@ class ProductService {
             }
         }
     }
+    
+    // Set Product Rating
+    static func setProductRating(productId: String, rating: Int, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        
+        // Params
+        let params: AnyDict = ["product_id": productId, "rating": rating]
+        
+        // Perform Request
+        APIManager.sharedInstance.performRequest(serviceType: .setProductRating(parameters: params)) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
 }

@@ -181,7 +181,20 @@ extension ProductDetailViewController: ProductDetailFooterDelegate {
     }
     
     func didTapRateBtn() {
-        print("Rate BTN Tapped")
+        // Get Id, Name and Image URL
+        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
+        let name = self.curProduct?["name"] as? String ?? ""
+        let id = self.curProduct?["id"] as? Int
+        
+        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+            let viewModel = ProductRateViewModel()
+            let vc = ProductRateViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
+            vc.delegate = self
+            
+            self.present(vc, animated: true, completion: nil)
+        }
     }
 }
 

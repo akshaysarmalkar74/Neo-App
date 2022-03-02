@@ -84,7 +84,10 @@ class Validator {
     
     // Validate Quantity
     static func validateQuantity(val: String) -> (message: String?, result: Bool) {
-        if let _ = Int(val) {
+        if let quantity = Int(val) {
+            if quantity <= 0 || quantity > 7 {
+                return ("Please enter quantity between 1 to 7", false)
+            }
             return (message: nil, result: true)
         }
         return ("Please enter valid quantity", false)

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol SideMenuViewControllerDelegate {
+    func didTapMenuItem()
+}
+
 class SideMenuViewController: UIViewController {
 
     // Outlets

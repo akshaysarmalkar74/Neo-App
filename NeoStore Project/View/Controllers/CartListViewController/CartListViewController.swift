@@ -59,7 +59,6 @@ class CartListViewController: UIViewController {
         self.viewModel.tableViewShouldReload.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
             if value {
-                print("Hello")
                 DispatchQueue.main.async {
                     self.cartTable.reloadData()
                 }
