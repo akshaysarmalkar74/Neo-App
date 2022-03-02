@@ -81,4 +81,12 @@ class Validator {
         }
         return ("Please agree to Terms & Conditions", false)
     }
+    
+    // Validate Quantity
+    static func validateQuantity(val: String) -> (message: String?, result: Bool) {
+        if let _ = Int(val) {
+            return (message: nil, result: true)
+        }
+        return ("Please enter valid quantity", false)
+    }
 }

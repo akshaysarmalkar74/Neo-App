@@ -23,7 +23,6 @@ class ProductDetailBodyCell: UICollectionViewCell {
                 productImg.image = UIImage(data: actualData)
             }
         }
-        
     }
     
 }

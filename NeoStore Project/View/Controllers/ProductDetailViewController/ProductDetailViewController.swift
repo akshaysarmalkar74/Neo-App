@@ -7,12 +7,7 @@
 
 import UIKit
 
-class ProductDetailViewController: UIViewController, ProductDetailFooterDelegate {
-    func didTapRateBtn() {
-        
-    }
-    
-
+class ProductDetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // Variables
@@ -84,6 +79,21 @@ class ProductDetailViewController: UIViewController, ProductDetailFooterDelegate
         self.present(alertVc, animated: true, completion: nil)
     }
     
+    // Show Success Alert
+    func showSuccessAlert(msg: String?) {
+        let alertVc = UIAlertController(title: "Success!!", message: msg, preferredStyle: .alert)
+        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+            self?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        // Add Button to Alert
+        alertVc.addAction(alertBtn)
+        
+        // Present Alert
+        self.present(alertVc, animated: true, completion: nil)
+    }
+    
     func convertIdToCategory(categoryId: Int) -> String {
         let categories = ["Tables", "Sofa", "Chair", "CupBoards"]
         if categoryId < categories.count {
@@ -92,12 +102,6 @@ class ProductDetailViewController: UIViewController, ProductDetailFooterDelegate
         return ""
     }
     
-    // Footer Btn Tapped
-    func didTapBuyNow() {
-        print("BTN Tapped")
-        let vc = ProductBuyViewController()
-        self.present(vc, animated: true, completion: nil)
-    }
 }
 
 extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -156,3 +160,34 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
 }
 
+extension ProductDetailViewController: ProductDetailFooterDelegate {
+    func didTapBuyNow() {
+        // Get Id, Name and Image URL
+        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
+        let name = self.curProduct?["name"] as? String ?? ""
+        let id = self.curProduct?["id"] as? Int
+        
+        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+            let viewModel = ProductBuyViewModel()
+            let vc = ProductBuyViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
+            vc.delegate = self
+            
+            self.present(vc, animated: true, completion: nil)
+        }
+        
+        
+    }
+    
+    func didTapRateBtn() {
+        print("Rate BTN Tapped")
+    }
+}
+
+extension ProductDetailViewController: ProductBuyViewControllerDelegate {
+    
+    func didReceiveResponse(userMsg: String?) {
+        showSuccessAlert(msg: userMsg)
+    }
+}
