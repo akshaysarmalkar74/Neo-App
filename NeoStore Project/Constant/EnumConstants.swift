@@ -18,3 +18,15 @@ enum UserDefaultsKeys : String {
     case user
     case isProfileUpdated
 }
+
+enum SideMenuControllerNames {
+    case MyCart
+    case Tables
+    case Sofas
+    case Chair
+    case Cupboard
+    case MyAccount
+    case StoreLocator
+    case MyOrders
+    case Logout
+}

@@ -51,7 +51,6 @@ class CartListViewModel: CartListViewType {
                                 if let cartTotal = mainData["total"] as? Int {
                                     self.total = cartTotal
                                 }
-                                print(self.cartItems)
                                 self.tableViewShouldReload.value = true
                             } else {
                                 // Show Error to User

@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SideMenuViewControllerDelegate {
-    func didTapMenuItem()
+    func didTapMenuItem(vcAttr: SideMenuControllerNames)
 }
 
 class SideMenuViewController: UIViewController {
@@ -20,6 +20,7 @@ class SideMenuViewController: UIViewController {
     let itemNames = ["My Cart", "Tables", "Sofas", "Chair", "Cupboards", "My Account", "Store Locator", "My Orders", "Logout"]
     let itemImages = ["shoppingcart_icon", "tables_icon", "sofa_icon", "chair", "cupboard_icon", "username_icon", "storelocator_icon", "myorders_icon", "logout_icon"]
     var user: [String: Any]!
+    var customDelegate: SideMenuViewControllerDelegate?
     
     
     override func viewDidLoad() {
@@ -78,5 +79,9 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 199.0
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.customDelegate?.didTapMenuItem(vcAttr: .MyCart)
     }
 }

@@ -8,9 +8,8 @@
 import UIKit
 import SideMenu
 
-class ProductHomeViewController: UIViewController {
-    
-    private let sideMenu = SideMenuNavigationController(rootViewController: SideMenuViewController())
+class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegate {
+    let sideMenu = SideMenuNavigationController(rootViewController: SideMenuViewController())
     
     // MARK:- IBOutlets
     @IBOutlet weak var sliderCollectionView: UICollectionView!
@@ -90,7 +89,6 @@ class ProductHomeViewController: UIViewController {
     }
     
     @objc func menuTapped(_ sender: UIBarButtonItem) {
-        print("Menu Tapped")
         self.present(sideMenu, animated: true, completion: nil)
     }
     
@@ -101,6 +99,38 @@ class ProductHomeViewController: UIViewController {
         SideMenuManager.default.addPanGestureToPresent(toView: view)
         sideMenu.setNavigationBarHidden(true, animated: false)
         sideMenu.menuWidth = 300
+        if let mainRootVc = sideMenu.viewControllers[0] as? SideMenuViewController {
+            mainRootVc.customDelegate = self
+        }
+    }
+    
+    func didTapMenuItem(vcAttr: SideMenuControllerNames) {
+        switch vcAttr {
+        case .MyCart:
+            let myCartVm = CartListViewModel()
+            let myCartVc = CartListViewController(viewModel: myCartVm)
+            self.navigationController?.pushViewController(myCartVc, animated: true)
+            self.sideMenu.dismiss(animated: false, completion: nil)
+        case .Tables:
+            let myCartVm = ProductListViewModel()
+            let myCartVc = ProductListViewController(categoryId: "1", viewModel: myCartVm)
+            self.sideMenu.dismiss(animated: false, completion: nil)
+            self.navigationController?.pushViewController(myCartVc, animated: true)
+        case .Sofas:
+            break
+        case .Chair:
+            break
+        case .Cupboard:
+            break
+        case .MyAccount:
+            break
+        case .StoreLocator:
+            break
+        case .MyOrders:
+            break
+        case .Logout:
+            break
+        }
     }
 }
 
