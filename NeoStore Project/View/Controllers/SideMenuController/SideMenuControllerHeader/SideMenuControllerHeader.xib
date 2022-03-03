@@ -28,13 +28,13 @@
                         <constraint firstAttribute="height" constant="83" id="6hl-7O-pCX"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello World" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE3-Lb-Yvx">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE3-Lb-Yvx">
                     <rect key="frame" x="13" y="136" width="401" height="23"/>
                     <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="23"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hello@gmail.com" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flC-Gq-1M6">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="flC-Gq-1M6">
                     <rect key="frame" x="13" y="172" width="401" height="14"/>
                     <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="13"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,8 +56,9 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="name" destination="WE3-Lb-Yvx" id="Mmu-tl-jBL"/>
-                <outlet property="userName" destination="yNC-WY-VVs" id="z6B-wv-zi7"/>
+                <outlet property="email" destination="flC-Gq-1M6" id="UCN-Nn-2qk"/>
+                <outlet property="profileImg" destination="yNC-WY-VVs" id="cZa-DB-UW7"/>
+                <outlet property="userName" destination="WE3-Lb-Yvx" id="qf5-n6-Xlb"/>
             </connections>
             <point key="canvasLocation" x="-94.927536231884062" y="96.09375"/>
         </view>

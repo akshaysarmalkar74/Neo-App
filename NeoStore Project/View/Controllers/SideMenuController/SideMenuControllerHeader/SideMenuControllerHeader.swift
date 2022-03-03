@@ -9,14 +9,15 @@ import UIKit
 
 class SideMenuControllerHeader: UITableViewHeaderFooterView {
     
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var userName: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var profileImg: UIImageView!
+    @IBOutlet weak var email: UILabel!
     
     
-    //    func configure(firstName: String, lastName: String, userEmail: String) {
-//        profileImg.image = UIImage(named: "user_male")
-//        userName.text = "\(firstName) \(lastName)"
-//        email.text = userEmail
-//    }
-//
+        func configure(firstName: String, lastName: String, userEmail: String) {
+        profileImg.image = UIImage(named: "user_male")
+        userName.text = "\(firstName) \(lastName)"
+        email.text = userEmail
+    }
+
 }

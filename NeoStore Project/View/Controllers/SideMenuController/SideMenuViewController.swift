@@ -70,10 +70,9 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         let firstName = user["first_name"] as? String ?? ""
         let lastName = user["last_name"] as? String ?? ""
         let email = user["email"] as? String ?? ""
-//        
-//        
-//        headerView.configure(firstName: firstName, lastName: lastName, userEmail: email)
-//        
+        
+        headerView.configure(firstName: firstName, lastName: lastName, userEmail: email)
+        
         return headerView
     }
     
