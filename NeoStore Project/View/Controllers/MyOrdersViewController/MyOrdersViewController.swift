@@ -101,5 +101,4 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {
         
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
 }

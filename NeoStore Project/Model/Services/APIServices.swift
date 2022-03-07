@@ -63,8 +63,8 @@ enum APIServices {
     
     // MARK:- Cart Methods
     case addToCart(parameters: AnyDict, headers: StringDict)
-    case editCart(parameters: AnyDict)
-    case deleteCart(parameters: AnyDict)
+    case editCart(parameters: AnyDict, headers: StringDict)
+    case deleteCart(parameters: AnyDict, headers: StringDict)
     case getCart(headers: StringDict)
     
     // MARK:- Order Methods
@@ -128,7 +128,9 @@ extension APIServices {
              .getCart(headers: var headers),
              .getOrders(headers: var headers),
              .getOrderDetail(parameters: _, headers: var headers),
-             .addToCart(parameters: _, headers: var headers):
+             .addToCart(parameters: _, headers: var headers),
+             .deleteCart(parameters: _, headers: var headers),
+             .editCart(parameters: _, headers: var headers):
             headers[contentKey] = contentValue
             return headers
         default:
@@ -151,8 +153,8 @@ extension APIServices {
              .getProductDetails(parameters: let parameters),
              .setProductRating(parameters: let parameters),
              .addToCart(parameters: let parameters, headers: _),
-             .editCart(parameters: let parameters),
-             .deleteCart(parameters: let parameters),
+             .editCart(parameters: let parameters, headers: _),
+             .deleteCart(parameters: let parameters, headers: _),
              .placeOrder(parameters: let parameters),
              .getOrderDetail(parameters: let parameters, headers: _):
              

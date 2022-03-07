@@ -167,7 +167,19 @@ extension ProductHomeViewController: UICollectionViewDelegateFlowLayout, UIColle
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
-            let categoryId = indexPath.item + 1
+            var categoryId: Int
+            switch indexPath.item {
+            case 0:
+                categoryId = 1
+            case 1:
+                categoryId = 3
+            case 2:
+                categoryId = 2
+            case 3:
+                categoryId = 4
+            default:
+                categoryId = 0
+            }
             let viewModel = ProductListViewModel()
             let vc = ProductListViewController(categoryId: String(categoryId), viewModel: viewModel)
             self.navigationController?.pushViewController(vc, animated: true)

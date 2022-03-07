@@ -52,4 +52,8 @@ class TestViewController: UIViewController {
         let vc = CartListViewController(viewModel: vm)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    @IBAction func addressTapped(_ sender: Any) {
+        let vc = AddressListViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

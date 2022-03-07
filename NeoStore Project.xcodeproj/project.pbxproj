@@ -57,6 +57,13 @@
 		92A92DF227AB9C1B00FCEE14 /* GothamBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 92A92DF127AB9C1B00FCEE14 /* GothamBold.otf */; };
 		92A92DF427AB9C3100FCEE14 /* GothamMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 92A92DF327AB9C3100FCEE14 /* GothamMedium.otf */; };
 		92B826E627BA4674008D3A4A /* MyAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B826E527BA4674008D3A4A /* MyAccountViewModel.swift */; };
+		92D2DEBE27D1E68C00E44022 /* NewAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2DEBC27D1E68C00E44022 /* NewAddressViewController.swift */; };
+		92D2DEBF27D1E68C00E44022 /* NewAddressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D2DEBD27D1E68C00E44022 /* NewAddressViewController.xib */; };
+		92D2DEC327D20F9300E44022 /* StoreLocatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2DEC127D20F9300E44022 /* StoreLocatorViewController.swift */; };
+		92D2DEC427D20F9300E44022 /* StoreLocatorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D2DEC227D20F9300E44022 /* StoreLocatorViewController.xib */; };
+		92D2DEC727D5C85300E44022 /* CartListSectionFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2DEC627D5C85300E44022 /* CartListSectionFooter.swift */; };
+		92D2DEC927D5C87400E44022 /* CartListSectionFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D2DEC827D5C87400E44022 /* CartListSectionFooter.xib */; };
+		92D2DECB27D5E2D300E44022 /* NewAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2DECA27D5E2D300E44022 /* NewAddressViewModel.swift */; };
 		92D6D77E27CDD80B00764509 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D6D77D27CDD80B00764509 /* ProductDetailViewModel.swift */; };
 		92D6D78227CE017600764509 /* ProductDetailBodyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D6D78027CE017600764509 /* ProductDetailBodyCell.swift */; };
 		92D6D78327CE017600764509 /* ProductDetailBodyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D6D78127CE017600764509 /* ProductDetailBodyCell.xib */; };
@@ -82,8 +89,6 @@
 		92F349D727C39F5E0076ABC4 /* CartListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92F349D527C39F5E0076ABC4 /* CartListViewController.xib */; };
 		92F349D927C3B2BA0076ABC4 /* CartListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F349D827C3B2BA0076ABC4 /* CartListViewModel.swift */; };
 		92F349DB27C3B5610076ABC4 /* CartService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F349DA27C3B5610076ABC4 /* CartService.swift */; };
-		92F349DE27C4A1FF0076ABC4 /* CartListFooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F349DC27C4A1FF0076ABC4 /* CartListFooterCell.swift */; };
-		92F349DF27C4A1FF0076ABC4 /* CartListFooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92F349DD27C4A1FF0076ABC4 /* CartListFooterCell.xib */; };
 		92F349E427C4B4030076ABC4 /* MyOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F349E227C4B4030076ABC4 /* MyOrderCell.swift */; };
 		92F349E527C4B4030076ABC4 /* MyOrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92F349E327C4B4030076ABC4 /* MyOrderCell.xib */; };
 		92F349E927C4B8730076ABC4 /* MyOrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F349E727C4B8730076ABC4 /* MyOrdersViewController.swift */; };
@@ -156,6 +161,13 @@
 		92A92DF127AB9C1B00FCEE14 /* GothamBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamBold.otf; sourceTree = "<group>"; };
 		92A92DF327AB9C3100FCEE14 /* GothamMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GothamMedium.otf; sourceTree = "<group>"; };
 		92B826E527BA4674008D3A4A /* MyAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAccountViewModel.swift; sourceTree = "<group>"; };
+		92D2DEBC27D1E68C00E44022 /* NewAddressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddressViewController.swift; sourceTree = "<group>"; };
+		92D2DEBD27D1E68C00E44022 /* NewAddressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewAddressViewController.xib; sourceTree = "<group>"; };
+		92D2DEC127D20F9300E44022 /* StoreLocatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreLocatorViewController.swift; sourceTree = "<group>"; };
+		92D2DEC227D20F9300E44022 /* StoreLocatorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreLocatorViewController.xib; sourceTree = "<group>"; };
+		92D2DEC627D5C85300E44022 /* CartListSectionFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListSectionFooter.swift; sourceTree = "<group>"; };
+		92D2DEC827D5C87400E44022 /* CartListSectionFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartListSectionFooter.xib; sourceTree = "<group>"; };
+		92D2DECA27D5E2D300E44022 /* NewAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAddressViewModel.swift; sourceTree = "<group>"; };
 		92D6D77D27CDD80B00764509 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		92D6D78027CE017600764509 /* ProductDetailBodyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailBodyCell.swift; sourceTree = "<group>"; };
 		92D6D78127CE017600764509 /* ProductDetailBodyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailBodyCell.xib; sourceTree = "<group>"; };
@@ -181,8 +193,6 @@
 		92F349D527C39F5E0076ABC4 /* CartListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartListViewController.xib; sourceTree = "<group>"; };
 		92F349D827C3B2BA0076ABC4 /* CartListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListViewModel.swift; sourceTree = "<group>"; };
 		92F349DA27C3B5610076ABC4 /* CartService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartService.swift; sourceTree = "<group>"; };
-		92F349DC27C4A1FF0076ABC4 /* CartListFooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartListFooterCell.swift; sourceTree = "<group>"; };
-		92F349DD27C4A1FF0076ABC4 /* CartListFooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartListFooterCell.xib; sourceTree = "<group>"; };
 		92F349E227C4B4030076ABC4 /* MyOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrderCell.swift; sourceTree = "<group>"; };
 		92F349E327C4B4030076ABC4 /* MyOrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyOrderCell.xib; sourceTree = "<group>"; };
 		92F349E727C4B8730076ABC4 /* MyOrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyOrdersViewController.swift; sourceTree = "<group>"; };
@@ -353,6 +363,7 @@
 				92D6D77D27CDD80B00764509 /* ProductDetailViewModel.swift */,
 				92D6D78427CE24D600764509 /* ProductBuyViewModel.swift */,
 				92FEBB4327CF5930008AC613 /* ProductRateViewModel.swift */,
+				92D2DECA27D5E2D300E44022 /* NewAddressViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -404,6 +415,8 @@
 		925EE48827A9522700B2B73F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				92D2DEC027D20EC200E44022 /* StoreLocatorViewController */,
+				92D2DEB927D1E5B800E44022 /* NewAddressViewController */,
 				92FEBB3E27CF5001008AC613 /* ProductRateViewController */,
 				92D6D78627CE251E00764509 /* ProductBuyViewController */,
 				92134E6627C740FD00096523 /* AddressListViewController */,
@@ -571,6 +584,33 @@
 			path = "Custom Fonts";
 			sourceTree = "<group>";
 		};
+		92D2DEB927D1E5B800E44022 /* NewAddressViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92D2DEBC27D1E68C00E44022 /* NewAddressViewController.swift */,
+				92D2DEBD27D1E68C00E44022 /* NewAddressViewController.xib */,
+			);
+			path = NewAddressViewController;
+			sourceTree = "<group>";
+		};
+		92D2DEC027D20EC200E44022 /* StoreLocatorViewController */ = {
+			isa = PBXGroup;
+			children = (
+				92D2DEC127D20F9300E44022 /* StoreLocatorViewController.swift */,
+				92D2DEC227D20F9300E44022 /* StoreLocatorViewController.xib */,
+			);
+			path = StoreLocatorViewController;
+			sourceTree = "<group>";
+		};
+		92D2DEC527D5C82600E44022 /* CartListSectionFooter */ = {
+			isa = PBXGroup;
+			children = (
+				92D2DEC627D5C85300E44022 /* CartListSectionFooter.swift */,
+				92D2DEC827D5C87400E44022 /* CartListSectionFooter.xib */,
+			);
+			path = CartListSectionFooter;
+			sourceTree = "<group>";
+		};
 		92D6D77F27CE013600764509 /* ProductDetailBodyCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -664,10 +704,9 @@
 		92F349D327C39F3B0076ABC4 /* CartListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				92D2DEC527D5C82600E44022 /* CartListSectionFooter */,
 				92F349D427C39F5E0076ABC4 /* CartListViewController.swift */,
 				92F349D527C39F5E0076ABC4 /* CartListViewController.xib */,
-				92F349DC27C4A1FF0076ABC4 /* CartListFooterCell.swift */,
-				92F349DD27C4A1FF0076ABC4 /* CartListFooterCell.xib */,
 			);
 			path = CartListViewController;
 			sourceTree = "<group>";
@@ -802,12 +841,13 @@
 				92A4A67D27BCCD110064105A /* ProductHomeViewController.xib in Resources */,
 				92F349F527C4FC660076ABC4 /* OrderDetailViewController.xib in Resources */,
 				9298673427C6436A00F65D64 /* SideMenuViewController.xib in Resources */,
-				92F349DF27C4A1FF0076ABC4 /* CartListFooterCell.xib in Resources */,
 				92A2128427B4ED6B002C9585 /* ProductListingTableViewCell.xib in Resources */,
+				92D2DEC427D20F9300E44022 /* StoreLocatorViewController.xib in Resources */,
 				925EE47427A93FDD00B2B73F /* Assets.xcassets in Resources */,
 				92F349EA27C4B8730076ABC4 /* MyOrdersViewController.xib in Resources */,
 				92E7426D27B3D6A8007BEE0D /* TestViewController.xib in Resources */,
 				92F349E527C4B4030076ABC4 /* MyOrderCell.xib in Resources */,
+				92D2DEBF27D1E68C00E44022 /* NewAddressViewController.xib in Resources */,
 				92A92DF427AB9C3100FCEE14 /* GothamMedium.otf in Resources */,
 				92134E7E27CCA62F00096523 /* ProductDetailBody.xib in Resources */,
 				92A2128B27B521CB002C9585 /* Gotham Book Regular.otf in Resources */,
@@ -816,6 +856,7 @@
 				92A4A68227BCD7600064105A /* SliderCell.xib in Resources */,
 				92A2129027B52394002C9585 /* MyAccountViewController.xib in Resources */,
 				92134E6A27C741A300096523 /* AddressListViewController.xib in Resources */,
+				92D2DEC927D5C87400E44022 /* CartListSectionFooter.xib in Resources */,
 				92F349C027BF87DC0076ABC4 /* CategoryViewCell.xib in Resources */,
 				92F349C527BFBE840076ABC4 /* ProductListViewController.xib in Resources */,
 				92E7427327B3DE33007BEE0D /* ForgotScreenViewController.xib in Resources */,
@@ -891,14 +932,15 @@
 				92134E7D27CCA62F00096523 /* ProductDetailBody.swift in Sources */,
 				923D4DFD27AD031000598034 /* RegisterScreenViewController.swift in Sources */,
 				92134E7827CC9A6300096523 /* ProductDetailHeader.swift in Sources */,
+				92D2DEC727D5C85300E44022 /* CartListSectionFooter.swift in Sources */,
 				92F349CD27C356010076ABC4 /* LazyImageView.swift in Sources */,
 				92518AF927A9917E0037CB3D /* APIManager.swift in Sources */,
 				92F349E927C4B8730076ABC4 /* MyOrdersViewController.swift in Sources */,
 				92F349CA27C29A270076ABC4 /* ProductServices.swift in Sources */,
 				92A4A67C27BCCD110064105A /* ProductHomeViewController.swift in Sources */,
 				92D6D78927CE255B00764509 /* ProductBuyViewController.swift in Sources */,
-				92F349DE27C4A1FF0076ABC4 /* CartListFooterCell.swift in Sources */,
 				92D6D78527CE24D600764509 /* ProductBuyViewModel.swift in Sources */,
+				92D2DEC327D20F9300E44022 /* StoreLocatorViewController.swift in Sources */,
 				92A2128827B52148002C9585 /* CartProductCell.swift in Sources */,
 				92B826E627BA4674008D3A4A /* MyAccountViewModel.swift in Sources */,
 				92028AC627AC20A400C54D37 /* LoginScreenViewModel.swift in Sources */,
@@ -918,6 +960,7 @@
 				92F349DB27C3B5610076ABC4 /* CartService.swift in Sources */,
 				92F349D627C39F5E0076ABC4 /* CartListViewController.swift in Sources */,
 				92F349F927C4FCD00076ABC4 /* OrderDetailCell.swift in Sources */,
+				92D2DECB27D5E2D300E44022 /* NewAddressViewModel.swift in Sources */,
 				92A2128F27B52394002C9585 /* MyAccountViewController.swift in Sources */,
 				92134E8827CCE63D00096523 /* ProductDetailViewController.swift in Sources */,
 				92A4A68127BCD7600064105A /* SliderCell.swift in Sources */,
@@ -925,6 +968,7 @@
 				92D6D77E27CDD80B00764509 /* ProductDetailViewModel.swift in Sources */,
 				928AE81C27C686C600325B64 /* SideMenuCell.swift in Sources */,
 				92E7426427B3D5EE007BEE0D /* UserDefaultsExtension.swift in Sources */,
+				92D2DEBE27D1E68C00E44022 /* NewAddressViewController.swift in Sources */,
 				92518AF727A9779F0037CB3D /* APIServices.swift in Sources */,
 				92FEBB4127CF50AD008AC613 /* ProductRateViewController.swift in Sources */,
 				92F349F427C4FC660076ABC4 /* OrderDetailViewController.swift in Sources */,

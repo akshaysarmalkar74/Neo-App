@@ -44,7 +44,7 @@ class OrderDetailViewModel: OrderDetailViewType {
                                 let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
                                 let productsData = tempData["order_details"] as? [[String: Any]] ?? [[String: Any]]()
                                 
-                                self.total = tempData["total"] as? Int
+                                self.total = tempData["cost"] as? Int
                                 self.orderItems.append(contentsOf: productsData)
                                 self.tableViewShouldReload.value = true
                             } else {

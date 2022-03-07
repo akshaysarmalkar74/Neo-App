@@ -67,6 +67,4 @@ class MyOrdersViewModel: MyOrdersViewType {
     func getItemAtIndec(idx: Int) -> [String : Any] {
         return orders[idx]
     }
-    
-    
 }

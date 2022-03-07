@@ -45,4 +45,42 @@ class CartService {
             }
         }
     }
+    
+    // Delete Cart Item
+    static func deleteCart(productId: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        // Get New Headers (Access Token)
+        let accessToken = UserDefaults.standard.getUserToken() ?? ""
+        
+        // Construct Params
+        let params: AnyDict = ["product_id": productId]
+        
+        APIManager.sharedInstance.performRequest(serviceType: .deleteCart(parameters: params, headers: ["access_token": accessToken])) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
+    
+    // Edit Cart
+    static func editCart(productId: String, quantity: Int, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        // Get New Headers (Access Token)
+        let accessToken = UserDefaults.standard.getUserToken() ?? ""
+        
+        // Construct Params
+        let params: AnyDict = ["product_id": productId, "quantity": quantity]
+        
+        APIManager.sharedInstance.performRequest(serviceType: .editCart(parameters: params, headers: ["access_token": accessToken])) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
 }

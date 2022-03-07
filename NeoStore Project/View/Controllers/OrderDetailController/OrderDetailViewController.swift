@@ -35,6 +35,7 @@ class OrderDetailViewController: UIViewController {
         
         // Register Cell
         tableView.register(UINib(nibName: "OrderDetailCell", bundle: nil), forCellReuseIdentifier: "OrderDetailCell")
+        tableView.register(UINib(nibName: "CartListSectionFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "CartListSectionFooter")
         
         // Get Order
         self.viewModel.getOrderWith(id: orderId)
@@ -101,5 +102,18 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CartListSectionFooter") as! CartListSectionFooter
+        
+        let backgroundView = UIView(frame: footerView.bounds)
+        backgroundView.backgroundColor = UIColor.white
+        footerView.backgroundView =  backgroundView
+        
+        footerView.priceLabel.text = "Rs - \(viewModel.getTotalPrice())"
+        return footerView
+    }
     
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 67.0
+    }
 }

@@ -88,8 +88,7 @@ class ProductBuyViewController: UIViewController {
         print("BTN Tapped")
         let qtyResult = Validator.validateQuantity(val: qtyInput.text ?? "")
         if qtyResult.result {
-            // Make API Call
-            viewModel.buyProduct(productId: "16", quantity: 3)
+            viewModel.buyProduct(productId: String(productId), quantity: Int(qtyInput.text!)!)
         } else {
             // Show Error
             showAlert(msg: qtyResult.message)

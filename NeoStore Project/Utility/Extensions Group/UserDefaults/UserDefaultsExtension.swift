@@ -62,5 +62,16 @@ extension UserDefaults{
     func isProfileUpdated()-> Bool {
         return bool(forKey: UserDefaultsKeys.isProfileUpdated.rawValue)
     }
-
+    
+    // MARK:- Add New Address
+    func addNewAddress(address: String) {
+        var allAddress = UserDefaults.standard.array(forKey: "address") as? [String] ?? [String]()
+        allAddress.append(address)
+    }
+    
+    // MARK:- Get All Address
+    func getAllAddress() -> [String] {
+        let allAddress = UserDefaults.standard.array(forKey: "address") as? [String] ?? [String]()
+        return allAddress
+    }
 }
