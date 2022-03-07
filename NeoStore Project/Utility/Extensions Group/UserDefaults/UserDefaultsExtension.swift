@@ -65,13 +65,14 @@ extension UserDefaults{
     
     // MARK:- Add New Address
     func addNewAddress(address: String) {
-        var allAddress = UserDefaults.standard.array(forKey: "address") as? [String] ?? [String]()
+        var allAddress = UserDefaults.standard.stringArray(forKey: "address") ?? [String]()
         allAddress.append(address)
+        UserDefaults.standard.set(allAddress, forKey: "address")
     }
     
     // MARK:- Get All Address
     func getAllAddress() -> [String] {
-        let allAddress = UserDefaults.standard.array(forKey: "address") as? [String] ?? [String]()
+        let allAddress = UserDefaults.standard.stringArray(forKey: "address") ?? [String]()
         return allAddress
     }
 }

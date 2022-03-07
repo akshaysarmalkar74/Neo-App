@@ -11,6 +11,9 @@
         <array key="Gotham Book Regular.otf">
             <string>Gotham-Book</string>
         </array>
+        <array key="GothamMedium.otf">
+            <string>Gotham-Medium</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddressListViewController" customModule="NeoStore_Project" customModuleProvider="target">
@@ -25,7 +28,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="t4A-U8-baL">
-                    <rect key="frame" x="13" y="92" width="388" height="770"/>
+                    <rect key="frame" x="13" y="92" width="388" height="675"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shipping Address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xuk-ay-fSm">
@@ -34,17 +37,39 @@
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jyE-j3-nk4">
+                    <rect key="frame" x="13" y="797" width="388" height="45"/>
+                    <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="Wz1-ud-UxS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="25"/>
+                    <state key="normal" title="PLACE ORDER">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="7"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="placeOrderBtnTapped:" destination="-1" eventType="touchUpInside" id="cvq-9w-T9B"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="t4A-U8-baL" firstAttribute="top" secondItem="xuk-ay-fSm" secondAttribute="bottom" constant="12" id="7Wu-h4-Idh"/>
+                <constraint firstItem="jyE-j3-nk4" firstAttribute="top" secondItem="t4A-U8-baL" secondAttribute="bottom" constant="30" id="8LU-wH-ugP"/>
                 <constraint firstItem="xuk-ay-fSm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="EhX-x8-6kK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuk-ay-fSm" secondAttribute="trailing" constant="12" id="Rcn-aX-Cve"/>
                 <constraint firstItem="t4A-U8-baL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-13" id="ZqP-RV-BFo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="jyE-j3-nk4" secondAttribute="bottom" constant="20" id="aLw-un-5Fx"/>
+                <constraint firstItem="jyE-j3-nk4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="13" id="bs4-5w-rMb"/>
                 <constraint firstItem="t4A-U8-baL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="13" id="jsY-Tg-PxU"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="jyE-j3-nk4" secondAttribute="trailing" constant="13" id="mGS-D6-dHq"/>
                 <constraint firstItem="xuk-ay-fSm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="qEX-OD-gOx"/>
-                <constraint firstItem="t4A-U8-baL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="tuQ-xh-bdg"/>
             </constraints>
             <point key="canvasLocation" x="-113.04347826086958" y="34.821428571428569"/>
         </view>

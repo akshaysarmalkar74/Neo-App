@@ -10,7 +10,7 @@ import UIKit
 class AddressListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    let allAddress = UserDefaults.standard.getAllAddress()
+    var allAddress = [String]()
     let user = UserDefaults.standard.getUser()
     var currentSelectedIdx = 0
     
@@ -28,8 +28,16 @@ class AddressListViewController: UIViewController {
         customiseNavbar()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UINib(nibName: "AddressListCell", bundle: nil), forCellReuseIdentifier: "AddressListCell")
+
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        allAddress = UserDefaults.standard.getAllAddress()
+        tableView.reloadData()
+    }
+    
     // Customise Navbar
     func customiseNavbar() {
         // Set Title
@@ -48,10 +56,13 @@ class AddressListViewController: UIViewController {
     }
     
     @objc func newBtnTapped(_ sender: UIBarButtonItem) {
-        let vc = NewAddressViewController()
+        let viewModel = NewAddressViewModel()
+        let vc = NewAddressViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    @IBAction func placeOrderBtnTapped(_ sender: UIButton) {
+    }
 }
 
 
@@ -70,12 +81,19 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
         let fullName = "\(firstName) \(lastName)"
         
         if indexPath.row == currentSelectedIdx {
-            cell.configureCell(name: fullName, address: address, isChecked: true)
+            cell.configureCell(name: fullName, address: address, isUnchecked: false)
         } else {
-            cell.configureCell(name: fullName, address: address, isChecked: false)
+            cell.configureCell(name: fullName, address: address, isUnchecked: true)
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let oldIdx = currentSelectedIdx
+        currentSelectedIdx = indexPath.row
+        tableView.reloadRows(at: [IndexPath(row: oldIdx, section: 0), IndexPath(row: currentSelectedIdx, section: 0)], with: .none)
     }
     
 }

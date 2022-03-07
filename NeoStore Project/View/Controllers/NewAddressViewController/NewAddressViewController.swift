@@ -16,8 +16,12 @@ class NewAddressViewController: UIViewController {
     @IBOutlet weak var stateField: UITextField!
     @IBOutlet weak var countryField: UITextField!
     
-    init() {
+    // Variables
+    var viewModel: NewAddressViewType!
+    
+    init(viewModel: NewAddressViewType) {
         super.init(nibName: "NewAddressViewController", bundle: nil)
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -29,13 +33,33 @@ class NewAddressViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         customiseNavbar()
+        
+        setupObservers()
     }
 
     @IBAction func addAddressTapped(_ sender: UIButton) {
         // Add Address to User Defaults
-        
-        
-        self.navigationController?.popViewController(animated: true)
+        self.viewModel.addNewAddress(address: addressField.text ?? "", landmark: landMarkField.text ?? "", city: cityField.text ?? "", zipCode: zipCodeField.text ?? "", state: stateField.text ?? "", country: countryField.text ?? "")
+//        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // Setup Observers
+    func setupObservers() {
+        self.viewModel.saveAddressStatus.bindAndFire { [weak self] (value) in
+            guard let `self` = self else {return}
+            switch value {
+            case .success:
+                DispatchQueue.main.async {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            case .failure(let msg):
+                DispatchQueue.main.async {
+                    self.showErrorAlert(error: msg)
+                }
+            case .none:
+                break
+            }
+        }
     }
  
     // Error Alert Function

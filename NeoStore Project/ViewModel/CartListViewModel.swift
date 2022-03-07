@@ -46,7 +46,6 @@ class CartListViewModel: CartListViewType {
                         let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
                         if let statusCode = mainData["status"] as? Int {
                             if statusCode == 200, let tempData = mainData["data"] as? [[String: Any]] {
-                                print(tempData)
                                 self.cartItems = tempData
                                 if let cartTotal = mainData["total"] as? Int {
                                     self.total = cartTotal

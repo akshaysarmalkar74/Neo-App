@@ -92,4 +92,52 @@ class Validator {
         }
         return ("Please enter valid quantity", false)
     }
+    
+    // Validate Address
+    static func address(str: String) -> (message: String?, result: Bool) {
+        if str.count > 0 {
+            return (nil, true)
+        }
+        return ("Please enter address", false)
+    }
+    
+    // Validate LandMark
+    static func landMark(str: String) -> (message: String?, result: Bool) {
+        if str.count > 0 {
+            return (nil, true)
+        }
+        return ("Please enter landMark", false)
+    }
+    
+    // Validate PinCode
+    static func pincode(str: String) -> (message: String?, result: Bool) {
+        if str.count > 0, let _ = Int(str) {
+            return (nil, true)
+        }
+        return ("Please enter valid pincode", false)
+    }
+    
+    // Validate State
+    static func state(str: String) -> (message: String?, result: Bool) {
+        if str.count > 0 {
+            return (nil, true)
+        }
+        return ("Please enter state", false)
+    }
+    
+    // Validate City
+    static func city(str: String) -> (message: String?, result: Bool) {
+        if str.count > 0 {
+            return (nil, true)
+        }
+        return ("Please enter city", false)
+    }
+    
+    // Validate Last Name
+    static func country(str: String) -> (message: String?, result: Bool) {
+        if str.count > 0 {
+            return (nil, true)
+        }
+        return ("Please enter country", false)
+    }
 }
