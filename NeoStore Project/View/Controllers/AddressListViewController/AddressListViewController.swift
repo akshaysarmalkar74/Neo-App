@@ -13,9 +13,11 @@ class AddressListViewController: UIViewController {
     var allAddress = [String]()
     let user = UserDefaults.standard.getUser()
     var currentSelectedIdx = 0
+    var viewModel: AddressListViewType!
     
-    init() {
+    init(viewModel: AddressListViewType) {
         super.init(nibName: "AddressListViewController", bundle: nil)
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -29,6 +31,8 @@ class AddressListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "AddressListCell", bundle: nil), forCellReuseIdentifier: "AddressListCell")
+        
+        setUpObservers()
 
     }
 
@@ -62,6 +66,62 @@ class AddressListViewController: UIViewController {
     }
 
     @IBAction func placeOrderBtnTapped(_ sender: UIButton) {
+        let selectedAddress = allAddress[currentSelectedIdx]
+        self.viewModel.placeOrder(address: selectedAddress)
+    }
+    
+    func setUpObservers() {
+        self.viewModel.placeOrderStatus.bindAndFire { [weak self] (value) in
+            guard let `self` = self else {return}
+            switch value {
+            case .failure(let msg):
+                DispatchQueue.main.async {
+                    self.showSuccessAlert(msg: msg)
+                }
+            case .none:
+                break
+            case .success(msg: let msg):
+                DispatchQueue.main.async {
+                    self.showErrorAlert(msg: msg)
+                }
+            }
+        }
+    }
+    
+    // Success Alert Function
+    func showSuccessAlert(msg: String?) {
+        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
+        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+            self?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        // Add Button to Alert
+        alertVc.addAction(alertBtn)
+        
+        // Present Alert
+        self.present(alertVc, animated: true, completion: nil)
+    }
+    
+    // Error Alert Function
+    func showErrorAlert(msg: String?) {
+        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+            self?.dismiss(animated: true, completion: nil)
+            
+            for controller in (self?.navigationController!.viewControllers)! as Array {
+                if controller.isKind(of: ProductHomeViewController.self) {
+                    self?.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
+        }
+        
+        // Add Button to Alert
+        alertVc.addAction(alertBtn)
+        
+        // Present Alert
+        self.present(alertVc, animated: true, completion: nil)
     }
 }
 

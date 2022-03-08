@@ -30,6 +30,7 @@ protocol CartListViewType {
 }
 
 class CartListViewModel: CartListViewType {
+    
     var total: Int = 0
     
     var cartItems = [[String : Any]]()
@@ -53,7 +54,6 @@ class CartListViewModel: CartListViewType {
                                 self.tableViewShouldReload.value = true
                             } else {
                                 // Show Error to User
-                                print("There")
                                 let userMsg = mainData["user_msg"] as? String
                                 self.fetchCartStatus.value = .failure(msg: userMsg)
                             }

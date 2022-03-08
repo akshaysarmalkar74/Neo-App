@@ -132,10 +132,7 @@ extension ForgotScreenViewController {
         // Set Title
         self.title = "Forgot Password"
         
-        // Customise Naviagtion Bar
-        let height: CGFloat = 40
-        let bounds = self.navigationController!.navigationBar.bounds
-        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height)
+       
         self.navigationController?.navigationBar.barTintColor = .mainRed
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         

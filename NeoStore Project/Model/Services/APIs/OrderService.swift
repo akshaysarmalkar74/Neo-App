@@ -32,11 +32,31 @@ class OrderService {
         
         // Params
         let params: [String: Any] = ["order_id": id]
-        print(params)
+        
         // Get New Headers (Access Token)
         let accessToken = UserDefaults.standard.getUserToken() ?? ""
         
         APIManager.sharedInstance.performRequest(serviceType: .getOrderDetail(parameters: params, headers: ["access_token": accessToken])) { response in
+            switch response {
+            case .success(value: let value):
+                completionHandler(.success(value: value))
+            case .failure(error: let error):
+                print(error.localizedDescription)
+                completionHandler(.failure(error: error))
+            }
+        }
+    }
+    
+    // Place order
+    static func placeOrder(address: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+        
+        // Params
+        let params: [String: Any] = ["address": address]
+        
+        // Headers
+        let accessToken = UserDefaults.standard.getUserToken() ?? ""
+        
+        APIManager.sharedInstance.performRequest(serviceType: .placeOrder(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
                 completionHandler(.success(value: value))

@@ -45,7 +45,8 @@ class CartListViewController: UIViewController {
     }
 
     @IBAction func orderNowBtnTapped(_ sender: Any) {
-        let vc = AddressListViewController()
+        let viewModel = AddressListViewModel()
+        let vc = AddressListViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -71,6 +72,22 @@ class CartListViewController: UIViewController {
                 }
             }
         }
+        
+    }
+    
+    // Success Alert Function
+    func showSuccessAlert(msg: String?) {
+        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
+        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+            self?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        // Add Button to Alert
+        alertVc.addAction(alertBtn)
+        
+        // Present Alert
+        self.present(alertVc, animated: true, completion: nil)
     }
     
     // Error Alert Function

@@ -53,7 +53,8 @@ class TestViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func addressTapped(_ sender: Any) {
-        let vc = AddressListViewController()
+        let viewModel = AddressListViewModel()
+        let vc = AddressListViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

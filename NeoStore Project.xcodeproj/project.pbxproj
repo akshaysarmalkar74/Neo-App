@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		92028AC427ABD71000C54D37 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92028AC327ABD71000C54D37 /* UserService.swift */; };
 		92028AC627AC20A400C54D37 /* LoginScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92028AC527AC20A400C54D37 /* LoginScreenViewModel.swift */; };
+		920560B727D71096006BFE8D /* AddressListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920560B627D71096006BFE8D /* AddressListViewModel.swift */; };
 		92134E6927C741A300096523 /* AddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92134E6727C741A300096523 /* AddressListViewController.swift */; };
 		92134E6A27C741A300096523 /* AddressListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92134E6827C741A300096523 /* AddressListViewController.xib */; };
 		92134E6D27C744A600096523 /* SideMenuControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92134E6C27C744A600096523 /* SideMenuControllerHeader.swift */; };
@@ -111,6 +112,7 @@
 		6D0817CDE7BC4FB292FC1363 /* Pods-NeoStore Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NeoStore Project.release.xcconfig"; path = "Target Support Files/Pods-NeoStore Project/Pods-NeoStore Project.release.xcconfig"; sourceTree = "<group>"; };
 		92028AC327ABD71000C54D37 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		92028AC527AC20A400C54D37 /* LoginScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScreenViewModel.swift; sourceTree = "<group>"; };
+		920560B627D71096006BFE8D /* AddressListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewModel.swift; sourceTree = "<group>"; };
 		92134E6727C741A300096523 /* AddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewController.swift; sourceTree = "<group>"; };
 		92134E6827C741A300096523 /* AddressListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListViewController.xib; sourceTree = "<group>"; };
 		92134E6C27C744A600096523 /* SideMenuControllerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuControllerHeader.swift; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 				92D6D78427CE24D600764509 /* ProductBuyViewModel.swift */,
 				92FEBB4327CF5930008AC613 /* ProductRateViewModel.swift */,
 				92D2DECA27D5E2D300E44022 /* NewAddressViewModel.swift */,
+				920560B627D71096006BFE8D /* AddressListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -913,6 +916,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				92F349D927C3B2BA0076ABC4 /* CartListViewModel.swift in Sources */,
+				920560B727D71096006BFE8D /* AddressListViewModel.swift in Sources */,
 				92F349C827C298C10076ABC4 /* ProductListViewModel.swift in Sources */,
 				92134E7327C78FB500096523 /* AddressListCell.swift in Sources */,
 				92518AFB27A992000037CB3D /* EnumConstants.swift in Sources */,
