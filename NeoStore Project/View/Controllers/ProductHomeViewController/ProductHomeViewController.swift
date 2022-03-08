@@ -117,19 +117,39 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Sofas:
-            break
+            let myCartVm = ProductListViewModel()
+            let myCartVc = ProductListViewController(categoryId: "3", viewModel: myCartVm)
+            self.sideMenu.dismiss(animated: false, completion: nil)
+            self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Chair:
-            break
+            let myCartVm = ProductListViewModel()
+            let myCartVc = ProductListViewController(categoryId: "2", viewModel: myCartVm)
+            self.sideMenu.dismiss(animated: false, completion: nil)
+            self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Cupboard:
-            break
+            let myCartVm = ProductListViewModel()
+            let myCartVc = ProductListViewController(categoryId: "4", viewModel: myCartVm)
+            self.sideMenu.dismiss(animated: false, completion: nil)
+            self.navigationController?.pushViewController(myCartVc, animated: true)
         case .MyAccount:
-            break
+            let myAccountVm = MyAccountScreenViewModel()
+            let myAccountVc = MyAccountViewController(viewModel: myAccountVm)
+            self.sideMenu.dismiss(animated: false, completion: nil)
+            self.navigationController?.pushViewController(myAccountVc, animated: true)
         case .StoreLocator:
             break
         case .MyOrders:
-            break
+            let myOrdersVm = MyOrdersViewModel()
+            let myOrdersVc = MyOrdersViewController(viewModel: myOrdersVm)
+            self.sideMenu.dismiss(animated: false, completion: nil)
+            self.navigationController?.pushViewController(myOrdersVc, animated: true)
         case .Logout:
-            break
+            // Remove User Defaults
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.user.rawValue)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
+            
+            // Pop to Login Vc
         }
     }
 }
