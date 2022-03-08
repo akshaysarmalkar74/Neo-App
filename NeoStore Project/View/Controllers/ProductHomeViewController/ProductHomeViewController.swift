@@ -150,6 +150,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
             
             // Pop to Login Vc
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
 }

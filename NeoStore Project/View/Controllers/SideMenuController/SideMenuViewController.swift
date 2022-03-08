@@ -81,6 +81,27 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.customDelegate?.didTapMenuItem(vcAttr: .MyCart)
+        switch indexPath.row {
+        case 0:
+            self.customDelegate?.didTapMenuItem(vcAttr: .MyCart)
+        case 1:
+            self.customDelegate?.didTapMenuItem(vcAttr: .Tables)
+        case 2:
+            self.customDelegate?.didTapMenuItem(vcAttr: .Sofas)
+        case 3:
+            self.customDelegate?.didTapMenuItem(vcAttr: .Chair)
+        case 4:
+            self.customDelegate?.didTapMenuItem(vcAttr: .Cupboard)
+        case 5:
+            self.customDelegate?.didTapMenuItem(vcAttr: .MyAccount)
+        case 6:
+            self.customDelegate?.didTapMenuItem(vcAttr: .StoreLocator)
+        case 7:
+            self.customDelegate?.didTapMenuItem(vcAttr: .MyOrders)
+        case 8:
+            self.customDelegate?.didTapMenuItem(vcAttr: .Logout)
+        default:
+            break
+        }
     }
 }
