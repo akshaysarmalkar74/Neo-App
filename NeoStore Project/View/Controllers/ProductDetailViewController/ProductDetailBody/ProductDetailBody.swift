@@ -81,7 +81,8 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width / 2, height: collectionView.frame.height)
+        let cellHeight = collectionView.frame.size.height
+        return CGSize(width: cellHeight * 1.1, height: cellHeight)
     }
     
 }

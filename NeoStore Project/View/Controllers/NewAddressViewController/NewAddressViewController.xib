@@ -15,7 +15,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewAddressViewController" customModule="NeoStore_Project" customModuleProvider="target">
             <connections>
-                <outlet property="addressField" destination="LWW-C0-9dI" id="2Ze-NO-uED"/>
+                <outlet property="addressField" destination="UR6-zh-lmp" id="8Q3-qH-0kq"/>
                 <outlet property="cityField" destination="rRk-er-gRk" id="kun-5K-CU8"/>
                 <outlet property="countryField" destination="juc-8W-Zbv" id="ja2-ZU-NTy"/>
                 <outlet property="landMarkField" destination="hjc-8L-cKD" id="BBG-Lk-LJw"/>
@@ -41,14 +41,16 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LWW-C0-9dI">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="UR6-zh-lmp">
                                     <rect key="frame" x="13" y="50" width="388" height="80"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="80" id="ASS-dZ-Yeq"/>
+                                        <constraint firstAttribute="height" constant="80" id="oXJ-cg-lzI"/>
                                     </constraints>
+                                    <color key="textColor" systemColor="labelColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hjc-8L-cKD">
                                     <rect key="frame" x="13" y="190" width="388" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -158,21 +160,21 @@
                                 <constraint firstAttribute="trailing" secondItem="CFS-Yh-ZRx" secondAttribute="trailing" constant="13" id="1FK-fD-BrQ"/>
                                 <constraint firstItem="PNj-r9-hb1" firstAttribute="leading" secondItem="fLo-c8-XpX" secondAttribute="leading" constant="13" id="61v-8M-r4f"/>
                                 <constraint firstAttribute="trailing" secondItem="hjc-8L-cKD" secondAttribute="trailing" constant="13" id="A1l-Jg-jqh"/>
+                                <constraint firstAttribute="trailing" secondItem="UR6-zh-lmp" secondAttribute="trailing" constant="13" id="AT7-70-jbr"/>
                                 <constraint firstItem="jYw-yC-KGx" firstAttribute="top" secondItem="fLo-c8-XpX" secondAttribute="top" constant="20" id="BZK-zB-t3K"/>
                                 <constraint firstItem="pan-w8-kr2" firstAttribute="leading" secondItem="fLo-c8-XpX" secondAttribute="leading" constant="13" id="Eph-xV-uLF"/>
-                                <constraint firstAttribute="trailing" secondItem="LWW-C0-9dI" secondAttribute="trailing" constant="13" id="Ivq-Y9-Eac"/>
                                 <constraint firstItem="jYw-yC-KGx" firstAttribute="leading" secondItem="fLo-c8-XpX" secondAttribute="leading" constant="13" id="Jll-4j-TJy"/>
                                 <constraint firstAttribute="trailing" secondItem="PNj-r9-hb1" secondAttribute="trailing" constant="13" id="K9E-We-883"/>
+                                <constraint firstItem="UR6-zh-lmp" firstAttribute="leading" secondItem="fLo-c8-XpX" secondAttribute="leading" constant="13" id="RLa-HA-WxY"/>
                                 <constraint firstItem="CFS-Yh-ZRx" firstAttribute="top" secondItem="pan-w8-kr2" secondAttribute="bottom" constant="27" id="brf-xW-CrR"/>
                                 <constraint firstAttribute="bottom" secondItem="CFS-Yh-ZRx" secondAttribute="bottom" constant="20" id="fdJ-ly-Otp"/>
-                                <constraint firstItem="LWW-C0-9dI" firstAttribute="leading" secondItem="fLo-c8-XpX" secondAttribute="leading" constant="13" id="feB-gq-YR2"/>
                                 <constraint firstItem="CFS-Yh-ZRx" firstAttribute="leading" secondItem="fLo-c8-XpX" secondAttribute="leading" constant="13" id="ftm-fZ-YNr"/>
+                                <constraint firstItem="UR6-zh-lmp" firstAttribute="top" secondItem="jYw-yC-KGx" secondAttribute="bottom" constant="13" id="nb2-iW-y2M"/>
                                 <constraint firstItem="pan-w8-kr2" firstAttribute="top" secondItem="hjc-8L-cKD" secondAttribute="bottom" constant="20" id="nks-67-M66"/>
+                                <constraint firstItem="PNj-r9-hb1" firstAttribute="top" secondItem="UR6-zh-lmp" secondAttribute="bottom" constant="27" id="oix-QF-A93"/>
                                 <constraint firstItem="hjc-8L-cKD" firstAttribute="top" secondItem="PNj-r9-hb1" secondAttribute="bottom" constant="16" id="qRo-tu-9jI"/>
                                 <constraint firstItem="hjc-8L-cKD" firstAttribute="leading" secondItem="fLo-c8-XpX" secondAttribute="leading" constant="13" id="rBc-Ub-Emx"/>
                                 <constraint firstAttribute="trailing" secondItem="jYw-yC-KGx" secondAttribute="trailing" constant="13" id="svq-JX-wSx"/>
-                                <constraint firstItem="PNj-r9-hb1" firstAttribute="top" secondItem="LWW-C0-9dI" secondAttribute="bottom" constant="27" id="vqq-ze-DBd"/>
-                                <constraint firstItem="LWW-C0-9dI" firstAttribute="top" secondItem="jYw-yC-KGx" secondAttribute="bottom" constant="13" id="xrf-MM-XUx"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -199,6 +201,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

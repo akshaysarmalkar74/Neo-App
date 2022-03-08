@@ -9,7 +9,7 @@ import UIKit
 
 class NewAddressViewController: UIViewController {
 
-    @IBOutlet weak var addressField: UITextField!
+    @IBOutlet weak var addressField: UITextView!
     @IBOutlet weak var landMarkField: UITextField!
     @IBOutlet weak var cityField: UITextField!
     @IBOutlet weak var zipCodeField: UITextField!

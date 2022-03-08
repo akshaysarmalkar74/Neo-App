@@ -109,7 +109,7 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
         backgroundView.backgroundColor = UIColor.white
         footerView.backgroundView =  backgroundView
         
-        footerView.priceLabel.text = "Rs - \(viewModel.getTotalPrice())"
+//        footerView.priceLabel.text = "Rs - \(viewModel.getTotalPrice())"
         return footerView
     }
     

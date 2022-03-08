@@ -7,11 +7,6 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="GothamMedium.otf">
-            <string>Gotham-Medium</string>
-        </array>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CartListViewController" customModule="NeoStore_Project" customModuleProvider="target">
             <connections>
@@ -24,27 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QaR-05-7rO">
-                    <rect key="frame" x="13" y="797" width="388" height="45"/>
-                    <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="BB0-1t-aAY"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="25"/>
-                    <state key="normal" title="ORDER NOW">
-                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </state>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="7"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                    <connections>
-                        <action selector="orderNowBtnTapped:" destination="-1" eventType="touchUpInside" id="zAz-xV-dVs"/>
-                    </connections>
-                </button>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y6L-Bw-EGt">
-                    <rect key="frame" x="13" y="57" width="388" height="710"/>
+                    <rect key="frame" x="13" y="57" width="388" height="792"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
             </subviews>
@@ -52,13 +28,9 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Y6L-Bw-EGt" secondAttribute="trailing" constant="13" id="8gV-2X-TFz"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="QaR-05-7rO" secondAttribute="trailing" constant="13" id="EBB-nY-zTY"/>
                 <constraint firstItem="Y6L-Bw-EGt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="13" id="NTF-5n-glh"/>
-                <constraint firstItem="QaR-05-7rO" firstAttribute="top" secondItem="Y6L-Bw-EGt" secondAttribute="bottom" constant="30" id="XTD-1W-Ck5"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="QaR-05-7rO" secondAttribute="bottom" constant="20" id="gui-RN-Pjb"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="QaR-05-7rO" secondAttribute="bottom" constant="20" id="gy6-rd-q80"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Y6L-Bw-EGt" secondAttribute="bottom" constant="13" id="Yjh-n3-R3T"/>
                 <constraint firstItem="Y6L-Bw-EGt" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="13" id="oke-B6-aGK"/>
-                <constraint firstItem="QaR-05-7rO" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="13" id="ttz-lS-A45"/>
             </constraints>
             <point key="canvasLocation" x="-57" y="66"/>
         </view>

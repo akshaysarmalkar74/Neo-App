@@ -92,7 +92,7 @@ class ProductRateViewController: UIViewController {
     }
     
     @IBAction func senderBtnTapped(_ sender: UIButton) {
-        self.viewModel.rateProduct(productId: "12", rating: 4)
+        self.viewModel.rateProduct(productId: String(productId), rating: rating)
     }
     
     // Setup Observers

@@ -7,7 +7,12 @@
 
 import UIKit
 
-class CartListViewController: UIViewController {
+class CartListViewController: UIViewController, CartListSectionFooterDelegate {
+    func didTappedOrderButton() {
+        let viewModel = AddressListViewModel()
+        let vc = AddressListViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
     // Outlets
     @IBOutlet weak var cartTable: UITableView!
@@ -38,16 +43,11 @@ class CartListViewController: UIViewController {
         cartTable.delegate = self
         cartTable.dataSource = self
         cartTable.register(UINib(nibName: "CartProductCell", bundle: nil), forCellReuseIdentifier: "CartListCell")
+        cartTable.register(UINib(nibName: "CartPageTotalCell", bundle: nil), forCellReuseIdentifier: "CartPageTotalCell")
         cartTable.register(UINib(nibName: "CartListSectionFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "CartListSectionFooter")
         
         // Fetch Carts
         self.viewModel.fetchCart()
-    }
-
-    @IBAction func orderNowBtnTapped(_ sender: Any) {
-        let viewModel = AddressListViewModel()
-        let vc = AddressListViewController(viewModel: viewModel)
-        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // Setup Observers
@@ -57,6 +57,7 @@ class CartListViewController: UIViewController {
             switch value {
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.cartTable.isHidden = true
                     self.showErrorAlert(msg: msg)
                 }
             case .none:
@@ -92,7 +93,7 @@ class CartListViewController: UIViewController {
     
     // Error Alert Function
     func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
             self?.navigationController?.popViewController(animated: true)
@@ -109,26 +110,40 @@ class CartListViewController: UIViewController {
 
 extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as! CartProductCell
-        cell.delegate = self
-        let cartItem = self.viewModel.getItemAndIndexPath(index: indexPath.row)
-        let productDetails = cartItem["product"] as? [String: Any] ?? [String: Any]()
-        
-        // Configure Cell
-        let name = productDetails["name"] as? String ?? ""
-        let price = productDetails["sub_total"] as? Int ?? 0
-        let category = productDetails["category"] as? String ?? ""
-        let img = productDetails["product_images"] as? String ?? ""
-        let id = productDetails["id"] as? Int ?? 0
-        let quantity = cartItem["quantity"] as? Int ?? 0
-        
-        cell.configure(name: name, img: img, category: category, price: price, quantity: quantity, id: id)
-        
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as! CartProductCell
+            cell.delegate = self
+            let cartItem = self.viewModel.getItemAndIndexPath(index: indexPath.row)
+            let productDetails = cartItem["product"] as? [String: Any] ?? [String: Any]()
+            
+            // Configure Cell
+            let name = productDetails["name"] as? String ?? ""
+            let price = productDetails["sub_total"] as? Int ?? 0
+            let category = productDetails["category"] as? String ?? ""
+            let img = productDetails["product_images"] as? String ?? ""
+            let id = productDetails["id"] as? Int ?? 0
+            let quantity = cartItem["quantity"] as? Int ?? 0
+            
+            cell.configure(name: name, img: img, category: category, price: price, quantity: quantity, id: id)
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CartPageTotalCell", for: indexPath) as! CartPageTotalCell
+            cell.priceLabel.text = "Rs - \(viewModel.getTotalPrice())"
+            return cell
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.viewModel.getNumOfRows()
+        if section == 0 {
+            return self.viewModel.getNumOfRows()
+        } else {
+            return 1
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -136,13 +151,13 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        if self.viewModel.getNumOfRows() > 0 {
+        if self.viewModel.getNumOfRows() > 0 && section == 1 {
             let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CartListSectionFooter") as! CartListSectionFooter
+            footerView.delegate = self
+            
             let backgroundView = UIView(frame: footerView.bounds)
             backgroundView.backgroundColor = UIColor.white
             footerView.backgroundView =  backgroundView
-            
-            footerView.priceLabel.text = "Rs - \(viewModel.getTotalPrice())"
             
             return footerView
         } else {
@@ -150,8 +165,16 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 1 {
+            return 67.0
+        } else {
+            return UITableView.automaticDimension
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        if self.viewModel.getNumOfRows() > 0 {
+        if self.viewModel.getNumOfRows() > 0 && section == 1 {
             return 67.0
         }
         return 0
@@ -173,6 +196,7 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
+    
     
 }
 

@@ -7,8 +7,15 @@
 
 import UIKit
 
+protocol CartListSectionFooterDelegate {
+    func didTappedOrderButton()
+}
+
 class CartListSectionFooter: UITableViewHeaderFooterView {
-
-    @IBOutlet weak var priceLabel: UILabel!
-
+    
+    var delegate: CartListSectionFooterDelegate?
+    
+    @IBAction func orderTapped(_ sender: Any) {
+        self.delegate?.didTappedOrderButton()
+    }
 }

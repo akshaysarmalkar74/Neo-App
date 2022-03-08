@@ -74,13 +74,13 @@ class AddressListViewController: UIViewController {
         self.viewModel.placeOrderStatus.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
             switch value {
-            case .failure(let msg):
+            case .success(let msg):
                 DispatchQueue.main.async {
                     self.showSuccessAlert(msg: msg)
                 }
             case .none:
                 break
-            case .success(msg: let msg):
+            case .failure(let msg):
                 DispatchQueue.main.async {
                     self.showErrorAlert(msg: msg)
                 }
@@ -90,7 +90,7 @@ class AddressListViewController: UIViewController {
     
     // Success Alert Function
     func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: "Successfully Placed Order", message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
             self?.navigationController?.popViewController(animated: true)

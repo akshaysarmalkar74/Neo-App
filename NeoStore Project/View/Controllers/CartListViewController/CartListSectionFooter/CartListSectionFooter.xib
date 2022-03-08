@@ -19,36 +19,35 @@
             <rect key="frame" x="0.0" y="0.0" width="432" height="67"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="G5k-FR-XEr">
-                    <rect key="frame" x="13" y="0.0" width="406" height="67"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8WK-W9-pR5">
-                            <rect key="frame" x="0.0" y="0.0" width="51" height="67"/>
-                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
-                            <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9I-1D-4B0">
-                            <rect key="frame" x="364.5" y="0.0" width="41.5" height="67"/>
-                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
-                            <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                    </subviews>
-                </stackView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a4z-H9-XKC">
+                    <rect key="frame" x="13" y="11" width="406" height="45"/>
+                    <color key="backgroundColor" red="0.91372549020000005" green="0.10980392160000001" blue="0.1019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="fdo-t6-i32"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="25"/>
+                    <state key="normal" title="ORDER NOW">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="7"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                    <connections>
+                        <action selector="orderTapped:" destination="-1" eventType="touchUpInside" id="KCU-db-Wdt"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="G5k-FR-XEr" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BaA-1q-61B"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="G5k-FR-XEr" secondAttribute="trailing" constant="13" id="IPb-ak-3JZ"/>
-                <constraint firstAttribute="bottom" secondItem="G5k-FR-XEr" secondAttribute="bottom" id="n7X-re-IPv"/>
-                <constraint firstItem="G5k-FR-XEr" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="w1e-Wd-xl3"/>
+                <constraint firstItem="a4z-H9-XKC" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="13" id="2q3-kJ-oDz"/>
+                <constraint firstAttribute="trailing" secondItem="a4z-H9-XKC" secondAttribute="trailing" constant="13" id="9vS-oZ-ZGA"/>
+                <constraint firstAttribute="bottom" secondItem="a4z-H9-XKC" secondAttribute="bottom" constant="11" id="kEy-l2-SVD"/>
+                <constraint firstItem="a4z-H9-XKC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="vXt-el-9ay"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outlet property="priceLabel" destination="t9I-1D-4B0" id="sR4-R5-qrZ"/>
-            </connections>
             <point key="canvasLocation" x="176.81159420289856" y="-123.21428571428571"/>
         </view>
     </objects>

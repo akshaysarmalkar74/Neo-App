@@ -15,12 +15,14 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     @IBOutlet weak var sliderCollectionView: UICollectionView!
     @IBOutlet weak var sliderPageControl: UIPageControl!
     @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var sliderHeightConstrant: NSLayoutConstraint!
     
     // MARK:- Variables
     let sliderImages = ["slider_img1", "slider_img2", "slider_img3", "slider_img4"]
     let categoryImages = ["tableicon", "sofaicon" ,"chairsicon", "cupboardicon"]
     var currentIdx = 0
     var timer: Timer!
+    let screenHeight = UIScreen.main.bounds.height
     
     init() {
         super.init(nibName: "ProductHomeViewController", bundle: nil)
@@ -55,7 +57,11 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         // Configure Slider Page Control
         sliderPageControl.numberOfPages = sliderImages.count
         
+        // Update Height of Slider Image Constraint
+        sliderHeightConstrant.constant = screenHeight * 0.35
+        
     }
+
     
     @objc func changeSliderImg(_ sender: Timer) {
         if currentIdx < sliderImages.count - 1 {
@@ -63,8 +69,10 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         } else {
             currentIdx = 0
         }
+        let indexPath = IndexPath(item: currentIdx, section: 0)
         sliderPageControl.currentPage = currentIdx
-        sliderCollectionView.scrollToItem(at: IndexPath(item: currentIdx, section: 0), at: .right, animated: true)
+        sliderCollectionView.layoutIfNeeded()
+        sliderCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
     }
     
     // Customise Navigation Bar
