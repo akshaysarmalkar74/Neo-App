@@ -10,25 +10,25 @@ import UIKit
 
 extension UIViewController {
 
-    func showLoader(view: UIView, aic: inout UIActivityIndicatorView?) {
+    func showLoader(view: UIView, aicView: inout UIView?) {
         let parentView = UIView(frame: view.bounds)
         parentView.isUserInteractionEnabled = false
         parentView.backgroundColor = UIColor.black
         parentView.alpha = 0.3
         
-        aic = UIActivityIndicatorView(style: .large)
-        aic?.color = .white
-        aic?.startAnimating()
-        aic?.center = view.center
+        let aic = UIActivityIndicatorView(style: .large)
+        aic.color = .white
+        aic.startAnimating()
         
-        if let actualAic = aic {
-            parentView.addSubview(actualAic)
-        }
+        parentView.addSubview(aic)
         view.addSubview(parentView)
+        aic.center = view.center
+        
+        // Assign view to
+        aicView = parentView
     }
     
-    func hideLoader(viewLoader: UIActivityIndicatorView?) {
-        viewLoader?.removeFromSuperview()
-        viewLoader?.stopAnimating()
+    func hideLoader(viewLoaderScreen: UIView?) {
+        viewLoaderScreen?.removeFromSuperview()
     }
 }

@@ -15,6 +15,7 @@ class ProductListViewController: UIViewController {
     var page = 1
     var isPaginating: Bool = false
     var shouldPaginate: Bool = false
+    var screenLoaderScreen: UIView?
     
     init(categoryId: String, viewModel: ProductListViewType) {
         super.init(nibName: "ProductListViewController", bundle: nil)
@@ -28,6 +29,8 @@ class ProductListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        showLoader(view: self.view, aicView: &screenLoaderScreen)
         
         // Set Observers
         setupObservers()
@@ -64,6 +67,7 @@ class ProductListViewController: UIViewController {
             guard let `self` = self else {return}
             if value {
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.screenLoaderScreen)
                     self.tableView.reloadData()
                 }
             }
