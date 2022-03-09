@@ -35,7 +35,7 @@ class OrderDetailViewController: UIViewController {
         
         // Register Cell
         tableView.register(UINib(nibName: "OrderDetailCell", bundle: nil), forCellReuseIdentifier: "OrderDetailCell")
-        tableView.register(UINib(nibName: "CartListSectionFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "CartListSectionFooter")
+        tableView.register(UINib(nibName: "OrderDetailFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "OrderDetailFooter")
         
         // Get Order
         self.viewModel.getOrderWith(id: orderId)
@@ -82,7 +82,6 @@ class OrderDetailViewController: UIViewController {
 
 extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(viewModel.getNumOfRows())
         return viewModel.getNumOfRows()
     }
     
@@ -103,13 +102,13 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "CartListSectionFooter") as! CartListSectionFooter
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "OrderDetailFooter") as! OrderDetailFooter
         
         let backgroundView = UIView(frame: footerView.bounds)
         backgroundView.backgroundColor = UIColor.white
         footerView.backgroundView =  backgroundView
         
-//        footerView.priceLabel.text = "Rs - \(viewModel.getTotalPrice())"
+        footerView.priceLabel.text = "₹ \(viewModel.getTotalPrice())"
         return footerView
     }
     

@@ -129,7 +129,7 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CartPageTotalCell", for: indexPath) as! CartPageTotalCell
-            cell.priceLabel.text = "Rs - \(viewModel.getTotalPrice())"
+            cell.priceLabel.text = "₹  \(viewModel.getTotalPrice())"
             return cell
         }
     }

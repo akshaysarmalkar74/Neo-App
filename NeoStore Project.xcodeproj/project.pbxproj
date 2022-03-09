@@ -14,6 +14,8 @@
 		920560BE27D72096006BFE8D /* StoreLocatorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 920560BC27D72096006BFE8D /* StoreLocatorCell.xib */; };
 		920560C227D77F53006BFE8D /* CartPageTotalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920560C027D77F53006BFE8D /* CartPageTotalCell.swift */; };
 		920560C327D77F53006BFE8D /* CartPageTotalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 920560C127D77F53006BFE8D /* CartPageTotalCell.xib */; };
+		920BE66127D85EB500FAE0DB /* OrderDetailFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BE66027D85EB500FAE0DB /* OrderDetailFooter.swift */; };
+		920BE66327D85EE500FAE0DB /* OrderDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 920BE66227D85EE500FAE0DB /* OrderDetailFooter.xib */; };
 		92134E6927C741A300096523 /* AddressListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92134E6727C741A300096523 /* AddressListViewController.swift */; };
 		92134E6A27C741A300096523 /* AddressListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92134E6827C741A300096523 /* AddressListViewController.xib */; };
 		92134E6D27C744A600096523 /* SideMenuControllerHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92134E6C27C744A600096523 /* SideMenuControllerHeader.swift */; };
@@ -121,6 +123,8 @@
 		920560BC27D72096006BFE8D /* StoreLocatorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StoreLocatorCell.xib; sourceTree = "<group>"; };
 		920560C027D77F53006BFE8D /* CartPageTotalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPageTotalCell.swift; sourceTree = "<group>"; };
 		920560C127D77F53006BFE8D /* CartPageTotalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartPageTotalCell.xib; sourceTree = "<group>"; };
+		920BE66027D85EB500FAE0DB /* OrderDetailFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailFooter.swift; sourceTree = "<group>"; };
+		920BE66227D85EE500FAE0DB /* OrderDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailFooter.xib; sourceTree = "<group>"; };
 		92134E6727C741A300096523 /* AddressListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewController.swift; sourceTree = "<group>"; };
 		92134E6827C741A300096523 /* AddressListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListViewController.xib; sourceTree = "<group>"; };
 		92134E6C27C744A600096523 /* SideMenuControllerHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuControllerHeader.swift; sourceTree = "<group>"; };
@@ -267,6 +271,15 @@
 				920560C127D77F53006BFE8D /* CartPageTotalCell.xib */,
 			);
 			path = CartPageTotalCell;
+			sourceTree = "<group>";
+		};
+		920BE65F27D85E7200FAE0DB /* OrderDetailFooter */ = {
+			isa = PBXGroup;
+			children = (
+				920BE66027D85EB500FAE0DB /* OrderDetailFooter.swift */,
+				920BE66227D85EE500FAE0DB /* OrderDetailFooter.xib */,
+			);
+			path = OrderDetailFooter;
 			sourceTree = "<group>";
 		};
 		92134E6627C740FD00096523 /* AddressListViewController */ = {
@@ -763,6 +776,7 @@
 		92F349EF27C4FB070076ABC4 /* OrderDetailController */ = {
 			isa = PBXGroup;
 			children = (
+				920BE65F27D85E7200FAE0DB /* OrderDetailFooter */,
 				92F349F227C4FC660076ABC4 /* OrderDetailViewController.swift */,
 				92F349F327C4FC660076ABC4 /* OrderDetailViewController.xib */,
 			);
@@ -874,6 +888,7 @@
 				92A4A67D27BCCD110064105A /* ProductHomeViewController.xib in Resources */,
 				92F349F527C4FC660076ABC4 /* OrderDetailViewController.xib in Resources */,
 				9298673427C6436A00F65D64 /* SideMenuViewController.xib in Resources */,
+				920BE66327D85EE500FAE0DB /* OrderDetailFooter.xib in Resources */,
 				92A2128427B4ED6B002C9585 /* ProductListingTableViewCell.xib in Resources */,
 				92D2DEC427D20F9300E44022 /* StoreLocatorViewController.xib in Resources */,
 				925EE47427A93FDD00B2B73F /* Assets.xcassets in Resources */,
@@ -993,6 +1008,7 @@
 				925EE46B27A93FDB00B2B73F /* AppDelegate.swift in Sources */,
 				925EE46D27A93FDB00B2B73F /* SceneDelegate.swift in Sources */,
 				92F349DB27C3B5610076ABC4 /* CartService.swift in Sources */,
+				920BE66127D85EB500FAE0DB /* OrderDetailFooter.swift in Sources */,
 				92F349D627C39F5E0076ABC4 /* CartListViewController.swift in Sources */,
 				92F349F927C4FCD00076ABC4 /* OrderDetailCell.swift in Sources */,
 				92D2DECB27D5E2D300E44022 /* NewAddressViewModel.swift in Sources */,

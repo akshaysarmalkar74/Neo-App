@@ -93,7 +93,13 @@ class AddressListViewController: UIViewController {
         let alertVc = UIAlertController(title: "Successfully Placed Order", message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
-            self?.navigationController?.popViewController(animated: true)
+            
+            for controller in (self?.navigationController!.viewControllers)! as Array {
+                if controller.isKind(of: ProductHomeViewController.self) {
+                    self?.navigationController!.popToViewController(controller, animated: true)
+                    break
+                }
+            }
         }
         
         // Add Button to Alert
