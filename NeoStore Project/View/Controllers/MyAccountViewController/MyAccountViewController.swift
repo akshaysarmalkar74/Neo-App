@@ -212,10 +212,6 @@ extension MyAccountViewController {
         }
     }
     
-//    @objc func doneTapped(_ sender: UIBarButtonItem) {
-//        birthDateField.text = dateToString(curDate: datePicker.date)
-//        self.view.endEditing(true)
-//    }
     
     @objc func datePickerValChanged(_ sender: UIDatePicker) {
         birthDateField.text = dateToString(curDate: datePicker.date)
@@ -270,7 +266,6 @@ extension MyAccountViewController {
     
     // Get User Details
     func setUserDetails(user: [String: Any]) {
-        print("Here")
         firstNameField.text = user["first_name"] as? String ?? ""
         lastNameField.text = user["last_name"] as? String ?? ""
         emailField.text = user["email"] as? String ?? ""

@@ -21,7 +21,7 @@ class SideMenuViewController: UIViewController {
     let itemImages = ["shoppingcart_icon", "tables_icon", "sofa_icon", "chair", "cupboard_icon", "username_icon", "storelocator_icon", "myorders_icon", "logout_icon"]
     var user: [String: Any]!
     var customDelegate: SideMenuViewControllerDelegate?
-    
+    var totalNumOfCarts: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,8 @@ class SideMenuViewController: UIViewController {
         
         // Get User
         user = UserDefaults.standard.getUser()
+        
+        print(totalNumOfCarts)
     }
 
 }

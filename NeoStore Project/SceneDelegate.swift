@@ -25,7 +25,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let isLoggedIn = UserDefaults.standard.isLoggedIn()
         
         if isLoggedIn {
-            rootVc = TestViewController()
+            let vm = ProductHomeViewModel()
+            rootVc = ProductHomeViewController(viewModel: vm)
         } else {
             let viewModel = LoginScreenViewModel()
             rootVc = LoginScreenViewController(viewModel: viewModel)

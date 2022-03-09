@@ -23,9 +23,11 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     var currentIdx = 0
     var timer: Timer!
     let screenHeight = UIScreen.main.bounds.height
+    var viewModel: ProductHomeViewType!
     
-    init() {
+    init(viewModel: ProductHomeViewType) {
         super.init(nibName: "ProductHomeViewController", bundle: nil)
+        self.viewModel = viewModel
     }
     
     required init?(coder: NSCoder) {
@@ -39,7 +41,6 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         customiseNavbar()
-        configureSideMenu()
         
         // Set Delegate and Datasource
         sliderCollectionView.delegate = self
@@ -60,6 +61,14 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         // Update Height of Slider Image Constraint
         sliderHeightConstrant.constant = screenHeight * 0.35
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Fetch Account Details
+        self.viewModel.fetchAccountDetails()
+        configureSideMenu()
     }
 
     
@@ -102,6 +111,11 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     
     // MARK:- Side Menu
     func configureSideMenu() {
+        if let tempSideController = sideMenu.navigationController?.viewControllers[0] as? SideMenuViewController {
+            print("Done")
+            tempSideController.totalNumOfCarts = self.viewModel.getTotalCartProduct()
+        }
+        print("Not Done")
         sideMenu.leftSide = true
         SideMenuManager.default.leftMenuNavigationController = sideMenu
         SideMenuManager.default.addPanGestureToPresent(toView: view)

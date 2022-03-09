@@ -16,6 +16,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductBuyViewController" customModule="NeoStore_Project" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="eIa-oX-g99" id="ufB-Zr-Xr0"/>
+                <outlet property="containerViewTopConstraint" destination="ZhU-SK-o4W" id="sny-Ob-gtZ"/>
                 <outlet property="productImg" destination="o0c-Ms-Dlj" id="fOq-43-Xkg"/>
                 <outlet property="productNameLbl" destination="qMX-e7-dTQ" id="y3g-Rm-N9Y"/>
                 <outlet property="qtyInput" destination="ySM-b8-CAC" id="c4m-g0-eUP"/>

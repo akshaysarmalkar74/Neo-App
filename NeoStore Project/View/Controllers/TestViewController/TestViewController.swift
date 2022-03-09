@@ -44,7 +44,8 @@ class TestViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func ProductShow(_ sender: Any) {
-        let vc = ProductHomeViewController()
+        let viewModel = ProductHomeViewModel()
+        let vc = ProductHomeViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func cartListTapped(_ sender: Any) {

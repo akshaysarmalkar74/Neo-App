@@ -84,7 +84,6 @@ class ProductDetailViewController: UIViewController {
         let alertVc = UIAlertController(title: "Success!!", message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
-            self?.navigationController?.popViewController(animated: true)
         }
         
         // Add Button to Alert
@@ -101,12 +100,46 @@ class ProductDetailViewController: UIViewController {
         }
         return ""
     }
+    @IBAction func buyNowTapped(_ sender: Any) {
+        // Get Id, Name and Image URL
+        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
+        let name = self.curProduct?["name"] as? String ?? ""
+        let id = self.curProduct?["id"] as? Int
+        
+        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+            let viewModel = ProductBuyViewModel()
+            let vc = ProductBuyViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
+            vc.delegate = self
+            
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
+    @IBAction func rateNowTapped(_ sender: Any) {
+        // Get Id, Name and Image URL
+        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
+        let name = self.curProduct?["name"] as? String ?? ""
+        let id = self.curProduct?["id"] as? Int
+        
+        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+            let viewModel = ProductRateViewModel()
+            let vc = ProductRateViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
+            vc.modalPresentationStyle = .overCurrentContext
+            vc.modalTransitionStyle = .crossDissolve
+            vc.delegate = self
+            
+            self.present(vc, animated: true, completion: nil)
+        }
+    }
+    
     
 }
 
 extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -201,6 +234,7 @@ extension ProductDetailViewController: ProductDetailFooterDelegate {
 extension ProductDetailViewController: ProductBuyViewControllerDelegate {
     
     func didReceiveResponse(userMsg: String?) {
+        self.viewModel.fetchProductDetails(productId: self.productId)
         showSuccessAlert(msg: userMsg)
     }
 }
