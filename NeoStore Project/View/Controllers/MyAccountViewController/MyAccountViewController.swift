@@ -22,6 +22,7 @@ class MyAccountViewController: UIViewController {
     let datePicker = UIDatePicker()
     var viewModel: MyAccountViewType!
     var currentProfileImgUrl: String!
+    var loaderViewScreen: UIView?
     
     init(viewModel: MyAccountViewType) {
         super.init(nibName: "MyAccountViewController", bundle: nil)
@@ -35,6 +36,8 @@ class MyAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        showLoader(view: self.view, aicView: &loaderViewScreen)
+        
         // Fetch User
         if UserDefaults.standard.isProfileUpdated() {
             self.viewModel.getUser()
@@ -42,6 +45,7 @@ class MyAccountViewController: UIViewController {
             user = UserDefaults.standard.getUser()
             currentProfileImgUrl = user["profile_pic"] as? String ?? "user_male"
             setUserDetails(user: user)
+            hideLoader(viewLoaderScreen: loaderViewScreen)
         }
         
         setUp()
@@ -66,6 +70,8 @@ class MyAccountViewController: UIViewController {
                 
                 // Make Request
                 viewModel.updateUser(firstName: firstNameField.text!, lastName: lastNameField.text! ,email: emailField.text!, birthDate: birthDateField.text ?? "", phoneNo: actualPhoneNum, profilePic: convertImageToBase64String(img: profileImg.image!))
+                
+                showLoader(view: self.view, aicView: &loaderViewScreen)
             } else if !emailResult.result {
                 showErrorAlert(msg: emailResult.message)
             } else {
@@ -181,9 +187,13 @@ extension MyAccountViewController {
             guard let `self` = self else {return}
             switch value {
             case .success:
+                DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
+                }
                 UserDefaults.standard.setUpdatedProfile(value: true)
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.setUserDetails(user: self.user)
                     self.showErrorAlert(msg: msg)
                 }
@@ -200,10 +210,12 @@ extension MyAccountViewController {
                 self.user = user
                 UserDefaults.standard.setUpdatedProfile(value: false)
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.setUserDetails(user: user)
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(msg: msg)
                 }
             case .none:

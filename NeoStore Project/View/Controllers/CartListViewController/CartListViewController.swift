@@ -24,6 +24,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
     let screenWidth = UIScreen.main.bounds.width - 10
     let screenHeight = UIScreen.main.bounds.height / 3
     let quantity = [1,2,3,4,5,6,7]
+    var loaderViewScreen: UIView?
     
     init(viewModel: CartListViewType) {
         super.init(nibName: "CartListViewController", bundle: nil)
@@ -47,6 +48,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
         cartTable.register(UINib(nibName: "CartListSectionFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "CartListSectionFooter")
         
         // Fetch Carts
+        showLoader(view: self.view, aicView: &loaderViewScreen)
         self.viewModel.fetchCart()
     }
     
@@ -57,6 +59,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
             switch value {
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.cartTable.isHidden = true
                     self.showErrorAlert(msg: msg)
                 }
@@ -69,6 +72,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
             guard let `self` = self else {return}
             if value {
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.cartTable.reloadData()
                 }
             }

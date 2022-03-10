@@ -15,6 +15,7 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet weak var plusIcon: UIImageView!
     
     var viewModel: LoginScreenViewType!
+    var loaderViewScreen: UIView?
     
     init(viewModel: LoginScreenViewType) {
         self.viewModel = viewModel
@@ -45,6 +46,8 @@ class LoginScreenViewController: UIViewController {
 
     @IBAction func loginBtnTapped(_ sender: UIButton) {
         viewModel.doLogin(username: usernameField.text ?? "", password: passwordField.text ?? "")
+        
+        showLoader(view: self.view, aicView: &loaderViewScreen)
     }
     
     @IBAction func forgotBtnTapped(_ sender: UIButton) {
@@ -95,11 +98,13 @@ extension LoginScreenViewController {
             switch value {
             case .success:
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     let vc = TestViewController()
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(error: msg)
                 }
             case .none:

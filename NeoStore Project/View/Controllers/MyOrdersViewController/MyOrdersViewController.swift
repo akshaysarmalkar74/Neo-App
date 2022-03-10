@@ -9,8 +9,10 @@ import UIKit
 
 class MyOrdersViewController: UIViewController {
 
+    // MARK:- Outlets and Variables
     @IBOutlet weak var tableView: UITableView!
     var viewModel: MyOrdersViewType!
+    var loaderViewScreen: UIView?
     
     init(viewModel: MyOrdersViewType) {
         self.viewModel = viewModel
@@ -27,6 +29,8 @@ class MyOrdersViewController: UIViewController {
         tableView.dataSource = self
         setupObservers()
         
+        showLoader(view: self.view, aicView: &loaderViewScreen)
+        
         // Register Table View Cell
         tableView.register(UINib(nibName: "MyOrderCell", bundle: nil), forCellReuseIdentifier: "MyOrderCell")
         
@@ -41,6 +45,7 @@ class MyOrdersViewController: UIViewController {
             switch value {
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(msg: msg)
                 }
             case .none:
@@ -52,6 +57,7 @@ class MyOrdersViewController: UIViewController {
             guard let `self` = self else {return}
             if value {
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.tableView.reloadData()
                 }
             }

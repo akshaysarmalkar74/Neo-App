@@ -18,6 +18,7 @@ class NewAddressViewController: UIViewController {
     
     // Variables
     var viewModel: NewAddressViewType!
+    var loaderViewScreen: UIView?
     
     init(viewModel: NewAddressViewType) {
         super.init(nibName: "NewAddressViewController", bundle: nil)
@@ -40,6 +41,8 @@ class NewAddressViewController: UIViewController {
     @IBAction func addAddressTapped(_ sender: UIButton) {
         // Add Address to User Defaults
         self.viewModel.addNewAddress(address: addressField.text ?? "", landmark: landMarkField.text ?? "", city: cityField.text ?? "", zipCode: zipCodeField.text ?? "", state: stateField.text ?? "", country: countryField.text ?? "")
+        
+        showLoader(view: self.view, aicView: &loaderViewScreen)
 //        self.navigationController?.popViewController(animated: true)
     }
     
@@ -50,10 +53,12 @@ class NewAddressViewController: UIViewController {
             switch value {
             case .success:
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.navigationController?.popViewController(animated: true)
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(error: msg)
                 }
             case .none:

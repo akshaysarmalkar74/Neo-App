@@ -14,6 +14,7 @@ class ProductDetailViewController: UIViewController {
     var viewModel: ProductDetailViewType!
     var productId: String!
     var curProduct: [String: Any]?
+    var loaderViewScreen: UIView?
     
     init(viewModel: ProductDetailViewType, productId: String) {
         super.init(nibName: "ProductDetailViewController", bundle: nil)
@@ -29,6 +30,8 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
+        showLoader(view: self.view, aicView: &loaderViewScreen)
         
         // Register Cell
         tableView.register(UINib(nibName: "ProductDetailHeader", bundle: nil), forCellReuseIdentifier: "ProductDetailHeader")
@@ -52,10 +55,12 @@ class ProductDetailViewController: UIViewController {
             case .success(let product):
                 self.curProduct = product
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.tableView.reloadData()
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(msg: msg)
                 }
             case .none:

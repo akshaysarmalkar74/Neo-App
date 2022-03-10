@@ -25,6 +25,7 @@ class RegisterScreenViewController: UIViewController {
     // Variables
     var isKeyBoardExpanded: Bool = false
     var viewModel: RegisterScreenViewType!
+    var loaderViewScreen: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,6 +64,8 @@ class RegisterScreenViewController: UIViewController {
         let genderValue: String = maleBtn.isSelected ? "M" : "F"
         
         viewModel.doRegister(firstName: firstNameField.text ?? "", lastName: lastNameField.text ?? "", email: emailField.text ?? "", password: passwordField.text ?? "", confirmPassword: confirmPasswordField.text ?? "", gender: genderValue, phoneNumber: phoneField.text ?? "", termsBtn: termsBtn)
+        
+        showLoader(view: self.view, aicView: &loaderViewScreen)
     }
     
     // Error Alert Function
@@ -137,11 +140,13 @@ extension RegisterScreenViewController {
             switch value {
             case .success:
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     let vc = TestViewController()
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(error: msg)
                 }
             case .none:
@@ -172,9 +177,6 @@ extension RegisterScreenViewController {
         self.title = "Register"
         
         // Customise Naviagtion Bar
-        let height: CGFloat = 40
-        let bounds = self.navigationController!.navigationBar.bounds
-        self.navigationController?.navigationBar.frame = CGRect(x: 0, y: 0, width: bounds.width, height: bounds.height + height)
         self.navigationController?.navigationBar.barTintColor = .mainRed
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         

@@ -9,9 +9,11 @@ import UIKit
 
 class OrderDetailViewController: UIViewController {
 
+    // MARK:- Outlets & Variables
     @IBOutlet weak var tableView: UITableView!
     var viewModel: OrderDetailViewType!
     var orderId: Int!
+    var loaderViewScreen: UIView?
     
     init(viewModel: OrderDetailViewType, orderId: Int) {
         super.init(nibName: "OrderDetailViewController", bundle: nil)
@@ -38,6 +40,7 @@ class OrderDetailViewController: UIViewController {
         tableView.register(UINib(nibName: "OrderDetailFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "OrderDetailFooter")
         
         // Get Order
+        showLoader(view: self.view, aicView: &loaderViewScreen)
         self.viewModel.getOrderWith(id: orderId)
     }
 
@@ -48,6 +51,7 @@ class OrderDetailViewController: UIViewController {
             switch value {
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(msg: msg)
                 }
             case .none:
@@ -59,6 +63,7 @@ class OrderDetailViewController: UIViewController {
             guard let `self` = self else {return}
             if value {
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.tableView.reloadData()
                 }
             }

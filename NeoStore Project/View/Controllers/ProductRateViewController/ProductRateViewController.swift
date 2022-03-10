@@ -20,6 +20,7 @@ class ProductRateViewController: UIViewController {
     var viewModel: ProductRateViewType!
     var delegate: ProductBuyViewControllerDelegate?
     var rating: Int = 3
+    var loaderViewScreen: UIView?
     
     init(productId: Int, productImgStrUrl: String, productName: String, viewModel: ProductRateViewType) {
         self.viewModel = viewModel
@@ -93,6 +94,7 @@ class ProductRateViewController: UIViewController {
     
     @IBAction func senderBtnTapped(_ sender: UIButton) {
         self.viewModel.rateProduct(productId: String(productId), rating: rating)
+        showLoader(view: self.view, aicView: &loaderViewScreen)
     }
     
     // Setup Observers
@@ -102,6 +104,7 @@ class ProductRateViewController: UIViewController {
             switch value {
             case .success(let msg), .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.didReceiveResponse(userMsg: msg)
                 }

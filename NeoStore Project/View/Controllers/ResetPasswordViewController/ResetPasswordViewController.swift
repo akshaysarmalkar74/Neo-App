@@ -18,6 +18,7 @@ class ResetPasswordViewController: UIViewController {
     // Variables
     var isKeyBoardExpanded: Bool = false
     var viewModel: ResetPasswordScreenViewType!
+    var loaderViewScreen: UIView?
     
     init(viewModel: ResetPasswordScreenViewType) {
         self.viewModel = viewModel
@@ -40,6 +41,8 @@ class ResetPasswordViewController: UIViewController {
 
     @IBAction func resetBtnTapped(_ sender: UIButton) {
         self.viewModel.reset(password: newPassword.text ?? "", confirmPassword: newPasswordConfirm.text ?? "", oldPassword: currentPassword.text ?? "")
+        
+        showLoader(view: self.view, aicView: &loaderViewScreen)
     }
     
     // KeyBoard Notification Functions

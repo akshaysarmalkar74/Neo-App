@@ -26,6 +26,7 @@ class ProductBuyViewController: UIViewController {
     var viewModel: ProductBuyViewType!
     var delegate: ProductBuyViewControllerDelegate?
     var isViewShifted = false
+    var loaderViewScreen: UIView?
     
     init(productId: Int, productImgStrUrl: String, productName: String, viewModel: ProductBuyViewType) {
         self.viewModel = viewModel
@@ -74,7 +75,6 @@ class ProductBuyViewController: UIViewController {
     }
     
     @objc func containerViewTapped(_ sender: UITapGestureRecognizer) {
-        print("UEP")
         self.view.endEditing(true)
     }
     
@@ -85,6 +85,7 @@ class ProductBuyViewController: UIViewController {
             switch value {
             case .success(let msg), .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.dismiss(animated: true, completion: nil)
                     self.delegate?.didReceiveResponse(userMsg: msg)
                 }
@@ -104,6 +105,7 @@ class ProductBuyViewController: UIViewController {
         let qtyResult = Validator.validateQuantity(val: qtyInput.text ?? "")
         if qtyResult.result {
             viewModel.buyProduct(productId: String(productId), quantity: Int(qtyInput.text!)!)
+            showLoader(view: self.view, aicView: &loaderViewScreen)
         } else {
             // Show Error
             showAlert(msg: qtyResult.message)

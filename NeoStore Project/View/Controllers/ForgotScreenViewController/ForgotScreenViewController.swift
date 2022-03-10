@@ -9,9 +9,10 @@ import UIKit
 
 class ForgotScreenViewController: UIViewController {
 
-    // MARK:- Outlet & ViewModel
+    // MARK:- Outlet & Variables
     @IBOutlet weak var emailField: UITextField!
     var viewModel: ForgotScreenViewType!
+    var loaderViewScreen: UIView?
     
     init(viewModel: ForgotScreenViewType) {
         super.init(nibName: StringConstants.forgotViewController, bundle: nil)
@@ -31,6 +32,7 @@ class ForgotScreenViewController: UIViewController {
 
     @IBAction func sendBtnTapped(_ sender: UIButton) {
         viewModel.forgotPassword(email: emailField.text ?? "")
+        showLoader(view: self.view, aicView: &loaderViewScreen)
     }
     
     // Error Alert Function
@@ -89,10 +91,12 @@ extension ForgotScreenViewController {
             switch value {
             case .success(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showSuccessAlert(msg: msg)
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(msg: msg)
                 }
             case .none:

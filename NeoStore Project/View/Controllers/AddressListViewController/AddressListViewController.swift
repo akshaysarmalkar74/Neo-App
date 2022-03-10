@@ -14,6 +14,7 @@ class AddressListViewController: UIViewController {
     let user = UserDefaults.standard.getUser()
     var currentSelectedIdx = 0
     var viewModel: AddressListViewType!
+    var loaderViewScreen: UIView?
     
     init(viewModel: AddressListViewType) {
         super.init(nibName: "AddressListViewController", bundle: nil)
@@ -67,6 +68,7 @@ class AddressListViewController: UIViewController {
 
     @IBAction func placeOrderBtnTapped(_ sender: UIButton) {
         let selectedAddress = allAddress[currentSelectedIdx]
+        showLoader(view: self.view, aicView: &loaderViewScreen)
         self.viewModel.placeOrder(address: selectedAddress)
     }
     
@@ -76,12 +78,14 @@ class AddressListViewController: UIViewController {
             switch value {
             case .success(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showSuccessAlert(msg: msg)
                 }
             case .none:
                 break
             case .failure(let msg):
                 DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.showErrorAlert(msg: msg)
                 }
             }
