@@ -22,7 +22,7 @@ extension UIViewController {
         containerView.center = parentView.center
         
         let aic = UIActivityIndicatorView(style: .large)
-        aic.color = .red
+        aic.color = .gray
         aic.startAnimating()
         aic.center = parentView.center
         

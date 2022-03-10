@@ -118,7 +118,8 @@ extension LoginScreenViewController {
             case .success:
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    let vc = TestViewController()
+                    let viewModel = ProductHomeViewModel()
+                    let vc = ProductHomeViewController(viewModel: viewModel)
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
             case .failure(let msg):
