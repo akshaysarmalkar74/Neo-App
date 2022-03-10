@@ -11,7 +11,8 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var rootVc: UIViewController!
+    var rootNavVc: UINavigationController!
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -20,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Check if user is logged in
         let isLoggedIn = UserDefaults.standard.isLoggedIn()
         
+        var rootVc: UIViewController!
         if isLoggedIn {
             let vm = ProductHomeViewModel()
             rootVc = ProductHomeViewController(viewModel: vm)
@@ -28,8 +30,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             rootVc = LoginScreenViewController(viewModel: viewModel)
         }
         let navVc = UINavigationController(rootViewController: rootVc)
+        rootNavVc = navVc
         window?.rootViewController = navVc
         window?.makeKeyAndVisible()
+        
+//        let navVc = UINavigationController(rootViewController: rootVc)
+//        rootNavVc = navVc
+//        window.rootViewController = rootNavVc
+//        self.window = window
+//        window.makeKeyAndVisible()
         
         return true
     }

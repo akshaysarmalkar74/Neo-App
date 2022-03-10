@@ -48,6 +48,11 @@ class ProductRateViewController: UIViewController {
             }
         }
         
+        // Add Border to Image
+        productImg.layer.borderColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0).cgColor
+        productImg.layer.masksToBounds = true
+        productImg.layer.borderWidth = 1
+        
         addTapGesture(view: view)
         addTapGesture(imgViews: stars)
         

@@ -30,6 +30,7 @@ class ProductDetailViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         
         showLoader(view: self.view, aicView: &loaderViewScreen)
         

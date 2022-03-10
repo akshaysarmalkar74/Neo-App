@@ -21,7 +21,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     let sliderImages = ["slider_img1", "slider_img2", "slider_img3", "slider_img4"]
     let categoryImages = ["tableicon", "sofaicon" ,"chairsicon", "cupboardicon"]
     var currentIdx = 0
-    var timer: Timer!
+    var timer: Timer?
     let screenHeight = UIScreen.main.bounds.height
     var viewModel: ProductHomeViewType!
     
@@ -35,7 +35,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     }
     
     deinit {
-        timer.invalidate()
+        timer?.invalidate()
     }
     
     override func viewDidLoad() {
@@ -167,18 +167,38 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
             self.navigationController?.pushViewController(myOrdersVc, animated: true)
         case .Logout:
             // Remove User Defaults
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.user.rawValue)
-            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
+//            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+//            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.user.rawValue)
+//            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
             
             // Pop to Login Vc
-            
-            self.navigationController?.popToRootViewController(animated: true)
+            setRootToLoginController()
+//            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
     func setRootToLoginController() {
         if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//            print(appDelegate.rootNavVc.viewControllers)
+//            print(appDelegate.rootNavVc.viewControllers.contains(ProductHomeViewController(viewModel: ProductHomeViewModel())))
+        var isPopped = false
+            for controller in appDelegate.rootNavVc.viewControllers {
+                print("In Loop")
+                if controller.isKind(of: LoginScreenViewController.self) {
+                    print("True")
+                    self.navigationController?.popToViewController(controller, animated: true)
+                    isPopped = true
+                    break
+                }
+            }
+            
+            if !isPopped {
+                print("iSPopped")
+                appDelegate.rootNavVc.viewControllers[0] = LoginScreenViewController(viewModel: LoginScreenViewModel())
+                print(appDelegate.rootNavVc.viewControllers)
+                appDelegate.rootNavVc.popToRootViewController(animated: true)
+            }
+            
         }
     }
 }
