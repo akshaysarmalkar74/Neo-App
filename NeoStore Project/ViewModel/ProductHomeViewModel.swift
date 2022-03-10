@@ -45,7 +45,6 @@ class ProductHomeViewModel: ProductHomeViewType {
                                 
                                 // Update Cart Number
                                 self.totalCartProducts = tempData["total_carts"] as? Int ?? 0
-                                print(self.totalCartProducts)
                                 self.fetchAccountDetailStatus.value = .success
                             } else {
                                 self.fetchAccountDetailStatus.value = .failure

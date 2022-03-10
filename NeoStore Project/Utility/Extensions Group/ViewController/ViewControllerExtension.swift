@@ -11,20 +11,25 @@ import UIKit
 extension UIViewController {
 
     func showLoader(view: UIView, aicView: inout UIView?) {
-        let parentView = UIView(frame: view.bounds)
+        let parentView = UIView(frame: UIScreen.main.bounds)
         parentView.isUserInteractionEnabled = false
-        parentView.backgroundColor = UIColor.black
-        parentView.alpha = 0.3
+        
+        let containerView = UIView()
+        containerView.backgroundColor = UIColor(red: 0.00, green: 0.00, blue: 0.00, alpha: 0.3)
+        containerView.layer.cornerRadius = 10
+        containerView.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        parentView.addSubview(containerView)
+        containerView.center = parentView.center
         
         let aic = UIActivityIndicatorView(style: .large)
-        aic.color = .white
+        aic.color = .red
         aic.startAnimating()
+        aic.center = parentView.center
         
         parentView.addSubview(aic)
         view.addSubview(parentView)
-        aic.center = view.center
         
-        // Assign view to
+        // Assign view
         aicView = parentView
     }
     
