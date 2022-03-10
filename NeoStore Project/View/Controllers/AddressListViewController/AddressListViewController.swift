@@ -138,6 +138,7 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressListCell", for: indexPath) as! AddressListCell
+        cell.selectionStyle = .none
         
         // Configure Cell
         let firstName = user["first_name"] as? String ?? ""

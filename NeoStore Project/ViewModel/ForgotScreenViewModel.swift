@@ -7,11 +7,11 @@
 
 import Foundation
 
-enum ForgotApiStatus {
-    case success(msg: String?)
-    case failure(msg: String?)
-    case none
-}
+//enum ForgotApiStatus {
+//    case success(msg: String?)
+//    case failure(msg: String?)
+//    case none
+//}
 
 protocol ForgotScreenViewType {
     var userForgotStatus: ReactiveListener<ForgotApiStatus> {get set}

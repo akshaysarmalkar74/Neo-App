@@ -94,6 +94,7 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {
         let created = item["created"] as? String ?? ""
         
         cell.configureCell(id: id, cost: cost, created: created)
+        cell.selectionStyle = .none
         return cell
     }
     

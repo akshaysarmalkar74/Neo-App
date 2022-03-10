@@ -71,6 +71,8 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentImgUrl = allImages[indexPath.row]["image"] as? String
+        let cell = collectionView.cellForItem(at: indexPath) as! ProductDetailBodyCell
+        cell.isSelected = true
         
         if let unWrappedImgUrl = currentImgUrl {
             let url = URL(string: unWrappedImgUrl)
@@ -78,6 +80,12 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
                 mainImg.loadImage(fromURL: actualUrl, placeHolderImage: "place")
             }
         }
+
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! ProductDetailBodyCell
+        cell.isSelected = false
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

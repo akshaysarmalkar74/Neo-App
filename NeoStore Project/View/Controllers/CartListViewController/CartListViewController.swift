@@ -117,6 +117,8 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CartListCell", for: indexPath) as! CartProductCell
             cell.delegate = self
+            cell.selectionStyle = .none
+            
             let cartItem = self.viewModel.getItemAndIndexPath(index: indexPath.row)
             let productDetails = cartItem["product"] as? [String: Any] ?? [String: Any]()
             
@@ -133,6 +135,7 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CartPageTotalCell", for: indexPath) as! CartPageTotalCell
+            cell.selectionStyle = .none
             cell.priceLabel.text = "₹  \(viewModel.getTotalPrice())"
             return cell
         }

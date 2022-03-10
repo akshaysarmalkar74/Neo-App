@@ -151,6 +151,7 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailHeader", for: indexPath) as! ProductDetailHeader
+            cell.selectionStyle = .none
             
             // Configure Header
             let name = self.curProduct?["name"] as? String ?? ""
@@ -166,6 +167,7 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailBody", for: indexPath) as! ProductDetailBody
+            cell.selectionStyle = .none
             
             // Configure Header
             let price = self.curProduct?["cost"] as? Int ?? 0
@@ -182,6 +184,7 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailFooter", for: indexPath) as! ProductDetailFooter
             cell.delegate = self
+            cell.selectionStyle = .none
             return cell
         default:
             return UITableViewCell()

@@ -13,6 +13,7 @@ class LoginScreenViewController: UIViewController {
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var plusIcon: UIImageView!
+    @IBOutlet weak var plusIconContainer: UIView!
     
     var viewModel: LoginScreenViewType!
     var loaderViewScreen: UIView?
@@ -51,9 +52,27 @@ class LoginScreenViewController: UIViewController {
     }
     
     @IBAction func forgotBtnTapped(_ sender: UIButton) {
-        let viewModel = ForgotScreenViewModel()
-        let vc = ForgotScreenViewController(viewModel: viewModel)
-        self.navigationController?.pushViewController(vc, animated: true)
+//        let viewModel = ForgotScreenViewModel()
+//        let vc = ForgotScreenViewController(viewModel: viewModel)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        
+        // Create Alert with TextFields
+        let alertVc = UIAlertController(title: "Forgot Password", message: "Please enter email", preferredStyle: .alert)
+        alertVc.addTextField(configurationHandler: nil)
+        
+        let submitBtn = UIAlertAction(title: "Submit", style: .default) { action in
+            // Send Request
+            let textField = alertVc.textFields?[0]
+            self.viewModel.forgotPassword(email: textField?.text ?? "")
+        }
+        let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel) { action in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        alertVc.addAction(submitBtn)
+        alertVc.addAction(cancelBtn)
+        
+        self.present(alertVc, animated: true, completion: nil)
     }
     
     // Error Alert Function
@@ -111,6 +130,24 @@ extension LoginScreenViewController {
                 break
             }
         }
+        
+        self.viewModel.userForgotStatus.bindAndFire { [weak self] (value) in
+            guard let `self` = self else {return}
+            switch value {
+            case .success(let msg):
+                DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
+                    self.showSuccessAlert(msg: msg)
+                }
+            case .failure(let msg):
+                DispatchQueue.main.async {
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
+                    self.showErrorAlert(error: msg)
+                }
+            case .none:
+                break
+            }
+        }
     }
     
     // Customise Text Fields
@@ -129,6 +166,10 @@ extension LoginScreenViewController {
         textField.leftView = view
     }
     
+    func addCanceBtnToTextField() {
+        
+    }
+    
     // Add Tap Gesture to View
     func addTapGestureToView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(_:)))
@@ -136,17 +177,33 @@ extension LoginScreenViewController {
     }
     
     @objc func viewTapped(_ sender: UITapGestureRecognizer) {
+        print("Here!")
         self.view.endEditing(true)
     }
     
     // Add tap gesture to Plus Icon
     func addTapGestureToPlusIcon() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(plusIconTapped(_:)))
-        plusIcon.addGestureRecognizer(tapGesture)
+        plusIconContainer.addGestureRecognizer(tapGesture)
     }
     
     @objc func plusIconTapped(_ sender: UITapGestureRecognizer) {
         let viewModel = RegisterScreenViewModel()
         navigationController?.pushViewController(RegisterScreenViewController(viewModel: viewModel), animated: true)
+    }
+    
+    // Success Alert Function
+    func showSuccessAlert(msg: String?) {
+        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
+        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+            self?.dismiss(animated: true, completion: nil)
+            self?.navigationController?.popViewController(animated: true)
+        }
+        
+        // Add Button to Alert
+        alertVc.addAction(alertBtn)
+        
+        // Present Alert
+        self.present(alertVc, animated: true, completion: nil)
     }
 }

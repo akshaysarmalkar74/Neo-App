@@ -15,12 +15,16 @@ class Validator {
         let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
 
         let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        let result = emailPred.evaluate(with: str)
         
-        if result {
-            return (nil, true)
+        if str.count == 0 {
+           return ("Email cannot be blank", false)
+        } else {
+            let result = emailPred.evaluate(with: str)
+            if result {
+                return (nil, true)
+            }
+            return ("Please enter valid email", false)
         }
-        return ("Please enter Valid Email", false)
     }
     
     // Login Validate Password

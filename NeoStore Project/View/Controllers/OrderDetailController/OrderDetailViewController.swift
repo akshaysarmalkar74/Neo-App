@@ -102,6 +102,7 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
         let total = product["total"] as? Int ?? 0
         
         cell.configure(img: img, name: name, category: category, qty: quantity, price: total)
+        cell.selectionStyle = .none
         
         return cell
     }
