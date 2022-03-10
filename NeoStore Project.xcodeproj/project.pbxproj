@@ -42,6 +42,8 @@
 		925EE47427A93FDD00B2B73F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 925EE47327A93FDD00B2B73F /* Assets.xcassets */; };
 		925EE47727A93FDD00B2B73F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925EE47527A93FDD00B2B73F /* LaunchScreen.storyboard */; };
 		925EE48E27A9556300B2B73F /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EE48D27A9556300B2B73F /* StringConstants.swift */; };
+		925FA06F27D9C8C400C27C9E /* AddressListViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FA06E27D9C8C400C27C9E /* AddressListViewFooter.swift */; };
+		925FA07127D9C92200C27C9E /* AddressListViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 925FA07027D9C92200C27C9E /* AddressListViewFooter.xib */; };
 		928AE81C27C686C600325B64 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298673627C6487600F65D64 /* SideMenuCell.swift */; };
 		9298673327C6436900F65D64 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298673127C6436900F65D64 /* SideMenuViewController.swift */; };
 		9298673427C6436A00F65D64 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9298673227C6436900F65D64 /* SideMenuViewController.xib */; };
@@ -155,6 +157,8 @@
 		925EE47627A93FDD00B2B73F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		925EE47827A93FDD00B2B73F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		925EE48D27A9556300B2B73F /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
+		925FA06E27D9C8C400C27C9E /* AddressListViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewFooter.swift; sourceTree = "<group>"; };
+		925FA07027D9C92200C27C9E /* AddressListViewFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListViewFooter.xib; sourceTree = "<group>"; };
 		9298673127C6436900F65D64 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		9298673227C6436900F65D64 /* SideMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuViewController.xib; sourceTree = "<group>"; };
 		9298673627C6487600F65D64 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
@@ -289,6 +293,7 @@
 		92134E6627C740FD00096523 /* AddressListViewController */ = {
 			isa = PBXGroup;
 			children = (
+				925FA06D27D9C87800C27C9E /* AddressListViewFooter */,
 				92134E6727C741A300096523 /* AddressListViewController.swift */,
 				92134E6827C741A300096523 /* AddressListViewController.xib */,
 			);
@@ -520,6 +525,15 @@
 				92F349EB27C4C1E90076ABC4 /* OrderService.swift */,
 			);
 			path = APIs;
+			sourceTree = "<group>";
+		};
+		925FA06D27D9C87800C27C9E /* AddressListViewFooter */ = {
+			isa = PBXGroup;
+			children = (
+				925FA06E27D9C8C400C27C9E /* AddressListViewFooter.swift */,
+				925FA07027D9C92200C27C9E /* AddressListViewFooter.xib */,
+			);
+			path = AddressListViewFooter;
 			sourceTree = "<group>";
 		};
 		9298673027C6427800F65D64 /* SideMenuController */ = {
@@ -882,6 +896,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925FA07127D9C92200C27C9E /* AddressListViewFooter.xib in Resources */,
 				920560BE27D72096006BFE8D /* StoreLocatorCell.xib in Resources */,
 				925EE47727A93FDD00B2B73F /* LaunchScreen.storyboard in Resources */,
 				9298673927C6487600F65D64 /* SideMenuCell.xib in Resources */,
@@ -1000,6 +1015,7 @@
 				92F349CD27C356010076ABC4 /* LazyImageView.swift in Sources */,
 				92518AF927A9917E0037CB3D /* APIManager.swift in Sources */,
 				92F349E927C4B8730076ABC4 /* MyOrdersViewController.swift in Sources */,
+				925FA06F27D9C8C400C27C9E /* AddressListViewFooter.swift in Sources */,
 				92F349CA27C29A270076ABC4 /* ProductServices.swift in Sources */,
 				92A4A67C27BCCD110064105A /* ProductHomeViewController.swift in Sources */,
 				92D6D78927CE255B00764509 /* ProductBuyViewController.swift in Sources */,

@@ -32,6 +32,7 @@ class AddressListViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "AddressListCell", bundle: nil), forCellReuseIdentifier: "AddressListCell")
+        tableView.register(UINib(nibName: "AddressListViewFooter", bundle: nil), forHeaderFooterViewReuseIdentifier: "AddressListViewFooter")
         
         setUpObservers()
 
@@ -64,12 +65,6 @@ class AddressListViewController: UIViewController {
         let viewModel = NewAddressViewModel()
         let vc = NewAddressViewController(viewModel: viewModel)
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-
-    @IBAction func placeOrderBtnTapped(_ sender: UIButton) {
-        let selectedAddress = allAddress[currentSelectedIdx]
-        showLoader(view: self.view, aicView: &loaderViewScreen)
-        self.viewModel.placeOrder(address: selectedAddress)
     }
     
     func setUpObservers() {
@@ -159,6 +154,21 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "AddressListViewFooter") as! AddressListViewFooter
+        footerView.delegate = self
+        
+        let backgroundView = UIView(frame: footerView.bounds)
+        backgroundView.backgroundColor = UIColor.white
+        footerView.backgroundView =  backgroundView
+        
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 67.0
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let oldIdx = currentSelectedIdx
@@ -166,4 +176,13 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
         tableView.reloadRows(at: [IndexPath(row: oldIdx, section: 0), IndexPath(row: currentSelectedIdx, section: 0)], with: .none)
     }
     
+}
+
+
+extension AddressListViewController: AddressListViewFooterDelegate {
+    func didTapppedOrderBtn() {
+        let selectedAddress = allAddress[currentSelectedIdx]
+        showLoader(view: self.view, aicView: &loaderViewScreen)
+        self.viewModel.placeOrder(address: selectedAddress)
+    }
 }
