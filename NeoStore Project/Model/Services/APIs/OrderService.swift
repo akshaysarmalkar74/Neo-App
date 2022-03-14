@@ -10,7 +10,7 @@ import Foundation
 class OrderService {
     
     // Fetch All Orders
-    static func fetchOrders(completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func fetchOrders(completionHandler: @escaping(APIResponse<OrderListResponse>) -> Void) {
         
         // Get New Headers (Access Token)
         let accessToken = UserDefaults.standard.getUserToken() ?? ""
@@ -18,7 +18,17 @@ class OrderService {
         APIManager.sharedInstance.performRequest(serviceType: .getOrders(headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let orderRes = try JSONDecoder().decode(OrderListResponse.self, from: extractedData)
+                        completionHandler(.success(value: orderRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))

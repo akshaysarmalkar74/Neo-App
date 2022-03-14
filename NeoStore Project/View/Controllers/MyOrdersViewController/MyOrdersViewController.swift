@@ -88,19 +88,15 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyOrderCell", for: indexPath) as! MyOrderCell
         let item = self.viewModel.getItemAtIndec(idx: indexPath.row)
         
-        // Configure Cell
-        let id = item["id"] as? Int ?? 0
-        let cost = item["cost"] as? Int ?? 0
-        let created = item["created"] as? String ?? ""
-        
-        cell.configureCell(id: id, cost: cost, created: created)
+//      cell.configureCell(id: id, cost: cost, created: created)
+        cell.configureCell(item: item)
         cell.selectionStyle = .none
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = self.viewModel.getItemAtIndec(idx: indexPath.row)
-        let orderId = item["id"] as? Int ?? 0
+        let orderId = item.id ?? 0
         
         // Create View Controller
         let viewModel = OrderDetailViewModel()

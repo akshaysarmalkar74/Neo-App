@@ -25,7 +25,12 @@ class MyOrderCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(id: Int, cost: Int, created: String) {
+    func configureCell(item: OrderModel) {
+        // Configure Cell
+        let id = item.id ?? 0
+        let cost = item.cost ?? 0
+        let created = item.created ?? ""
+        
         self.orderId.text = "Order ID : \(id)"
         self.orderDate.text = "Order Date: \(created)"
         self.orderPrice.text = "₹ \(cost)"
