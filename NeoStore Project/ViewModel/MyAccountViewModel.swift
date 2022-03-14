@@ -14,7 +14,7 @@ enum UpdateAccountApiResult {
 }
 
 enum UserDetailsApiResult {
-    case success(user: [String: Any])
+    case success(user: UserData)
     case failure(msg: String?)
     case none
 }
@@ -36,24 +36,30 @@ class MyAccountScreenViewModel: MyAccountViewType {
         UserService.updateUser(firstName: firstName, lastName: lastName ,email: email, phoneNo: phoneNo, birthDate: birthDate, profilePic: profilePic) { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-                        print(mainData)
-                        if let statusCode = mainData["status"] as? Int {
-                            if statusCode == 200 {
-                                self.updateUserStatus.value = .success
-                            } else {
-                                // Show Error to User
-                                let userMsg = mainData["user_msg"] as? String
-                                self.updateUserStatus.value = .failure(msg: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
-                    }
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
+//                        print(mainData)
+//                        if let statusCode = mainData["status"] as? Int {
+//                            if statusCode == 200 {
+//                                self.updateUserStatus.value = .success
+//                            } else {
+//                                // Show Error to User
+//                                let userMsg = mainData["user_msg"] as? String
+//                                self.updateUserStatus.value = .failure(msg: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                } else {
+//                    print("Some Another Error")
+//                }
+            
+                if let statusCode = value.status, statusCode == 200 {
+                    self.updateUserStatus.value = .success
                 } else {
-                    print("Some Another Error")
+                    self.updateUserStatus.value = .failure(msg: value.userMsg)
                 }
             case .failure(error: let error):
                 print(error.localizedDescription)
@@ -66,30 +72,41 @@ class MyAccountScreenViewModel: MyAccountViewType {
         UserService.getUserDetails { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-                        
-                        if let statusCode = mainData["status"] as? Int {
-                            if statusCode == 200 {
-                                print("Got User from API")
-                                let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
-                                let user = tempData["user_data"] as? [String: Any] ?? [String: Any]()
-                                
-                                // Update User Defaults
-                                UserDefaults.standard.saveUser(value: user)
-                                
-                                // Pass user to VC
-                                self.userDetailsStatus.value = .success(user: user)
-                            } else {
-                                // Show Error to User
-                                let userMsg = mainData["user_msg"] as? String
-                                self.updateUserStatus.value = .failure(msg: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
+//
+//                        if let statusCode = mainData["status"] as? Int {
+//                            if statusCode == 200 {
+//                                print("Got User from API")
+//                                let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
+//                                let user = tempData["user_data"] as? [String: Any] ?? [String: Any]()
+//
+//                                // Update User Defaults
+//                                UserDefaults.standard.saveUser(value: user)
+//
+//                                // Pass user to VC
+//                                self.userDetailsStatus.value = .success(user: user)
+//                            } else {
+//                                // Show Error to User
+//                                let userMsg = mainData["user_msg"] as? String
+//                                self.updateUserStatus.value = .failure(msg: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                }
+            
+                if let statusCode = value.status, statusCode == 200 {
+                    if let userData = value.data?.userData {
+                        // Save User to Defaults
+                        UserDefaults.standard.saveUserInstance(user: userData)
+                        // Pass User to Vc
+                        self.userDetailsStatus.value = .success(user: userData)
                     }
+                } else {
+                    self.userDetailsStatus.value = .failure(msg: value.userMsg)
                 }
             case .failure(error: let error):
                 print(error.localizedDescription)

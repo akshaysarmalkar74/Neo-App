@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct ChangePasswordResponse: Codable {
+struct UpdateResponse: Codable {
     let status: Int?
-    let data: [String]?
+    let data: [Bool]?
     let message, userMsg: String?
 
     enum CodingKeys: String, CodingKey {

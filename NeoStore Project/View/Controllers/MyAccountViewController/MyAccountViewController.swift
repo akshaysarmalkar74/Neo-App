@@ -18,7 +18,7 @@ class MyAccountViewController: UIViewController {
     @IBOutlet weak var birthDateField: UITextField!
     
     // Variables
-    var user: [String: Any]!
+    var user: UserData!
     let datePicker = UIDatePicker()
     var viewModel: MyAccountViewType!
     var currentProfileImgUrl: String!
@@ -42,8 +42,8 @@ class MyAccountViewController: UIViewController {
         if UserDefaults.standard.isProfileUpdated() {
             self.viewModel.getUser()
         } else {
-            user = UserDefaults.standard.getUser()
-            currentProfileImgUrl = user["profile_pic"] as? String ?? "user_male"
+            user = UserDefaults.standard.getUserInstance()
+            currentProfileImgUrl = user.profilePic ?? "user_male"
             setUserDetails(user: user)
             hideLoader(viewLoaderScreen: loaderViewScreen)
         }
@@ -277,21 +277,21 @@ extension MyAccountViewController {
     }
     
     // Get User Details
-    func setUserDetails(user: [String: Any]) {
-        firstNameField.text = user["first_name"] as? String ?? ""
-        lastNameField.text = user["last_name"] as? String ?? ""
-        emailField.text = user["email"] as? String ?? ""
-        phoneField.text = user["phone_no"] as? String ?? ""
+    func setUserDetails(user: UserData) {
+        firstNameField.text = user.firstName ?? ""
+        lastNameField.text = user.lastName ?? ""
+        emailField.text = user.email ?? ""
+        phoneField.text = user.phoneNo ?? ""
         
         // Set Profile Image
-        if let imgName = user["profile_pic"] as? String, imgName.count > 0 {
+        if let imgName = user.profilePic, imgName.count > 0 {
             profileImg.image = convertBase64StringToImage(imageBase64String: imgName)
         } else {
             profileImg.image = UIImage(named: "user_male")
         }
         
         // Set Birthdate
-        birthDateField.text = user["dob"] as? String ?? ""
+        birthDateField.text = user.dob ?? ""
     }
     
 }

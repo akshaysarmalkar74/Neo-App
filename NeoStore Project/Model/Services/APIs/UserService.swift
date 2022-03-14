@@ -98,7 +98,7 @@ class UserService {
     }
     
     // Reset Password
-    static func resetPassword(password: String, confirmPassword: String, oldPassword: String, completionHandler: @escaping(APIResponse<ChangePasswordResponse>) -> Void) {
+    static func resetPassword(password: String, confirmPassword: String, oldPassword: String, completionHandler: @escaping(APIResponse<UpdateResponse>) -> Void) {
         let params: AnyDict = [
             "password": password,
             "confirm_password": confirmPassword,
@@ -115,7 +115,7 @@ class UserService {
                 // Decode the data
                 do {
                     if let extractedData = value as? Data {
-                        let changeRes = try JSONDecoder().decode(ChangePasswordResponse.self, from: extractedData)
+                        let changeRes = try JSONDecoder().decode(UpdateResponse.self, from: extractedData)
                         completionHandler(.success(value: changeRes))
                     } else {
                         print("Some Error while converting to data")
@@ -131,7 +131,7 @@ class UserService {
     }
     
     // Update Profile
-    static func updateUser(firstName: String, lastName: String, email: String, phoneNo: Int, birthDate: String, profilePic: String , completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func updateUser(firstName: String, lastName: String, email: String, phoneNo: Int, birthDate: String, profilePic: String , completionHandler: @escaping(APIResponse<UpdateResponse>) -> Void) {
         let params: [String: Any] = [
             "first_name": firstName,
             "last_name": lastName,
@@ -148,7 +148,17 @@ class UserService {
         APIManager.sharedInstance.performRequest(serviceType: .updateUserProfile(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let changeRes = try JSONDecoder().decode(UpdateResponse.self, from: extractedData)
+                        completionHandler(.success(value: changeRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
@@ -157,14 +167,24 @@ class UserService {
     }
     
     // Fetch User Details
-    static func getUserDetails(completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func getUserDetails(completionHandler: @escaping(APIResponse<FetchAccountResponse>) -> Void) {
         // Get New Headers (Access Token)
         let accessToken = UserDefaults.standard.getUserToken() ?? ""
         
         APIManager.sharedInstance.performRequest(serviceType: .getUser(headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let fetchAccRes = try JSONDecoder().decode(FetchAccountResponse.self, from: extractedData)
+                        completionHandler(.success(value: fetchAccRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))

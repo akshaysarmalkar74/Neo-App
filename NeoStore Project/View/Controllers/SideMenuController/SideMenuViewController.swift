@@ -19,7 +19,7 @@ class SideMenuViewController: UIViewController {
     // Variables
     let itemNames = ["My Cart", "Tables", "Sofas", "Chair", "Cupboards", "My Account", "Store Locator", "My Orders", "Logout"]
     let itemImages = ["shoppingcart_icon", "tables_icon", "sofa_icon", "chair", "cupboard_icon", "username_icon", "storelocator_icon", "myorders_icon", "logout_icon"]
-    var user: [String: Any]!
+    var user: UserData!
     var customDelegate: SideMenuViewControllerDelegate?
     var totalNumOfCarts: Int!
     
@@ -34,7 +34,7 @@ class SideMenuViewController: UIViewController {
         
         
         // Get User
-        user = UserDefaults.standard.getUser()
+        user = UserDefaults.standard.getUserInstance()
         
         print(totalNumOfCarts)
     }
@@ -69,9 +69,9 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         // Configure Header
-        let firstName = user["first_name"] as? String ?? ""
-        let lastName = user["last_name"] as? String ?? ""
-        let email = user["email"] as? String ?? ""
+        let firstName = user.firstName ?? ""
+        let lastName = user.lastName ?? ""
+        let email = user.email ?? ""
         
         headerView.configure(firstName: firstName, lastName: lastName, userEmail: email)
         

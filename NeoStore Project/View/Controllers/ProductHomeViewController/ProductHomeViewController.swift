@@ -67,7 +67,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         super.viewWillAppear(animated)
         
         // Fetch Account Details
-        self.viewModel.fetchAccountDetails()
+//        self.viewModel.fetchAccountDetails()
         configureSideMenu()
     }
 
