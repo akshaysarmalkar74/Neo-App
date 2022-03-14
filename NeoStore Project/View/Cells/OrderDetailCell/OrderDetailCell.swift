@@ -27,7 +27,14 @@ class OrderDetailCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configure(img: String, name: String, category: String, qty: Int, price: Int) {
+    func configure(product: SpecificOrderDetail) {
+        // Configure Cell
+        let img = product.prodImage ?? ""
+        let name = product.prodName  ?? ""
+        let category = product.prodCatName ?? ""
+        let quantity = product.quantity ?? 0
+        let total = product.total ?? 0
+        
         // Fetch Image
         let url = URL(string: img)
         if let actualUrl = url {
@@ -36,8 +43,8 @@ class OrderDetailCell: UITableViewCell {
         
         productTitle.text = name
         productCategory.text = "(\(category))"
-        productQty.text = "QTY - \(qty)"
-        productPrice.text = "₹ \(price)"
+        productQty.text = "QTY - \(quantity)"
+        productPrice.text = "₹ \(total)"
     }
     
 }

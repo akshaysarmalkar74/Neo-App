@@ -17,6 +17,7 @@
 		920A4DE427DF0AB000B68FDE /* RegisterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A4DE327DF0AB000B68FDE /* RegisterResponse.swift */; };
 		920A4DE827DF0C9B00B68FDE /* OrderListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A4DE727DF0C9B00B68FDE /* OrderListResponse.swift */; };
 		920A4DEA27DF14F600B68FDE /* PlaceOrderResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A4DE927DF14F600B68FDE /* PlaceOrderResponse.swift */; };
+		920A4DEC27DF19ED00B68FDE /* OrderDetailResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920A4DEB27DF19ED00B68FDE /* OrderDetailResponse.swift */; };
 		920BE66127D85EB500FAE0DB /* OrderDetailFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BE66027D85EB500FAE0DB /* OrderDetailFooter.swift */; };
 		920BE66327D85EE500FAE0DB /* OrderDetailFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 920BE66227D85EE500FAE0DB /* OrderDetailFooter.xib */; };
 		920BE66527D8651100FAE0DB /* ProductHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BE66427D8651100FAE0DB /* ProductHomeViewModel.swift */; };
@@ -133,6 +134,7 @@
 		920A4DE327DF0AB000B68FDE /* RegisterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterResponse.swift; sourceTree = "<group>"; };
 		920A4DE727DF0C9B00B68FDE /* OrderListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListResponse.swift; sourceTree = "<group>"; };
 		920A4DE927DF14F600B68FDE /* PlaceOrderResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceOrderResponse.swift; sourceTree = "<group>"; };
+		920A4DEB27DF19ED00B68FDE /* OrderDetailResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailResponse.swift; sourceTree = "<group>"; };
 		920BE66027D85EB500FAE0DB /* OrderDetailFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailFooter.swift; sourceTree = "<group>"; };
 		920BE66227D85EE500FAE0DB /* OrderDetailFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailFooter.xib; sourceTree = "<group>"; };
 		920BE66427D8651100FAE0DB /* ProductHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductHomeViewModel.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 			children = (
 				920A4DE727DF0C9B00B68FDE /* OrderListResponse.swift */,
 				920A4DE927DF14F600B68FDE /* PlaceOrderResponse.swift */,
+				920A4DEB27DF19ED00B68FDE /* OrderDetailResponse.swift */,
 			);
 			path = Order;
 			sourceTree = "<group>";
@@ -1068,6 +1071,7 @@
 				92E7427527B3E18D007BEE0D /* ForgotScreenViewModel.swift in Sources */,
 				92028AC427ABD71000C54D37 /* UserService.swift in Sources */,
 				92F349FC27C5F9EE0076ABC4 /* OrderDetailViewModel.swift in Sources */,
+				920A4DEC27DF19ED00B68FDE /* OrderDetailResponse.swift in Sources */,
 				92134E6D27C744A600096523 /* SideMenuControllerHeader.swift in Sources */,
 				92F349E427C4B4030076ABC4 /* MyOrderCell.swift in Sources */,
 				92134E6927C741A300096523 /* AddressListViewController.swift in Sources */,

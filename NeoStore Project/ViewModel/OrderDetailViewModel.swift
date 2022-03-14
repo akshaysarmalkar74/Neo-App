@@ -13,21 +13,21 @@ enum OrderDetailStatus {
 }
 
 protocol OrderDetailViewType {
-    var orderItems: [[String: Any]] {get set}
-    var total: Int? {get set}
+    var orderItems: [SpecificOrderDetail] {get set}
+    var total: Double? {get set}
     
     var orderDetailStatus: ReactiveListener<OrderDetailStatus> {get set}
     var tableViewShouldReload: ReactiveListener<Bool> {get set}
     
     func getOrderWith(id: Int)
     func getNumOfRows() -> Int
-    func getItemAndIndexPath(index: Int) -> [String: Any]
-    func getTotalPrice() -> Int
+    func getItemAndIndexPath(index: Int) -> SpecificOrderDetail
+    func getTotalPrice() -> Double
 }
 
 class OrderDetailViewModel: OrderDetailViewType {
-    var total: Int?
-    var orderItems = [[String : Any]]()
+    var total: Double?
+    var orderItems = [SpecificOrderDetail]()
     
     var orderDetailStatus: ReactiveListener<OrderDetailStatus> = ReactiveListener(.none)
     var tableViewShouldReload: ReactiveListener<Bool> = ReactiveListener(false)
@@ -36,28 +36,39 @@ class OrderDetailViewModel: OrderDetailViewType {
         OrderService.fetchOrderWith(id: id) { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-                        if let statusCode = mainData["status"] as? Int {
-                            if statusCode == 200 {
-                                let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
-                                let productsData = tempData["order_details"] as? [[String: Any]] ?? [[String: Any]]()
-                                
-                                self.total = tempData["cost"] as? Int
-                                self.orderItems.append(contentsOf: productsData)
-                                self.tableViewShouldReload.value = true
-                            } else {
-                                // Show Error to User
-                                let userMsg = mainData["user_msg"] as? String
-                                self.orderDetailStatus.value = .failure(msg: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
+//                        if let statusCode = mainData["status"] as? Int {
+//                            if statusCode == 200 {
+//                                let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
+//                                let productsData = tempData["order_details"] as? [[String: Any]] ?? [[String: Any]]()
+//
+//                                self.total = tempData["cost"] as? Int
+//                                self.orderItems.append(contentsOf: productsData)
+//                                self.tableViewShouldReload.value = true
+//                            } else {
+//                                // Show Error to User
+//                                let userMsg = mainData["user_msg"] as? String
+//                                self.orderDetailStatus.value = .failure(msg: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                } else {
+//                    print("Some Another Error")
+//                }
+            
+                // Check for success status
+                if let statusCode = value.status, statusCode == 200 {
+                    if let order = value.data {
+                        self.total = order.cost
+                        self.orderItems.append(contentsOf: order.orderDetails ?? [SpecificOrderDetail]())
+                        self.tableViewShouldReload.value = true
                     }
                 } else {
-                    print("Some Another Error")
+                    self.orderDetailStatus.value = .failure(msg: value.userMsg)
                 }
             case .failure(error: let error):
                 print(error.localizedDescription)
@@ -69,11 +80,11 @@ class OrderDetailViewModel: OrderDetailViewType {
         return orderItems.count
     }
     
-    func getItemAndIndexPath(index: Int) -> [String : Any] {
+    func getItemAndIndexPath(index: Int) -> SpecificOrderDetail {
         return orderItems[index]
     }
     
-    func getTotalPrice() -> Int {
+    func getTotalPrice() -> Double {
         return total ?? 0
     }
 }

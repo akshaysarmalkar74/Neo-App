@@ -94,14 +94,7 @@ extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderDetailCell", for: indexPath) as! OrderDetailCell
         let product = self.viewModel.getItemAndIndexPath(index: indexPath.row)
         
-        // Configure Cell
-        let img = product["prod_image"] as? String ?? ""
-        let name = product["prod_name"] as? String  ?? ""
-        let category = product["prod_cat_name"] as? String  ?? ""
-        let quantity = product["quantity"] as? Int ?? 0
-        let total = product["total"] as? Int ?? 0
-        
-        cell.configure(img: img, name: name, category: category, qty: quantity, price: total)
+        cell.configure(product: product)
         cell.selectionStyle = .none
         
         return cell

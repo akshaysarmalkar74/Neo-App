@@ -38,7 +38,7 @@ class OrderService {
     
     // Get Specific Order
     
-    static func fetchOrderWith(id: Int, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func fetchOrderWith(id: Int, completionHandler: @escaping(APIResponse<OrderDetailResponse>) -> Void) {
         
         // Params
         let params: [String: Any] = ["order_id": id]
@@ -49,7 +49,17 @@ class OrderService {
         APIManager.sharedInstance.performRequest(serviceType: .getOrderDetail(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let orderRes = try JSONDecoder().decode(OrderDetailResponse.self, from: extractedData)
+                        completionHandler(.success(value: orderRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
