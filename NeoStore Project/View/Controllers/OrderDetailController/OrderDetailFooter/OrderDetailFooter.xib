@@ -20,7 +20,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="133" translatesAutoresizingMaskIntoConstraints="NO" id="mjS-7F-KXD">
-                    <rect key="frame" x="13" y="0.0" width="388" height="67"/>
+                    <rect key="frame" x="20" y="0.0" width="374" height="67"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLW-dV-ObG">
                             <rect key="frame" x="0.0" y="0.0" width="51" height="67"/>
@@ -29,7 +29,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41G-ME-0Lb">
-                            <rect key="frame" x="346.5" y="0.0" width="41.5" height="67"/>
+                            <rect key="frame" x="332.5" y="0.0" width="41.5" height="67"/>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
                             <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -40,9 +40,9 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="mjS-7F-KXD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="Hy6-ps-bbP"/>
+                <constraint firstItem="mjS-7F-KXD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Hy6-ps-bbP"/>
                 <constraint firstItem="mjS-7F-KXD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LYb-YM-0OF"/>
-                <constraint firstAttribute="trailing" secondItem="mjS-7F-KXD" secondAttribute="trailing" constant="13" id="bem-En-JP3"/>
+                <constraint firstAttribute="trailing" secondItem="mjS-7F-KXD" secondAttribute="trailing" constant="20" id="bem-En-JP3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mjS-7F-KXD" secondAttribute="bottom" id="gqa-14-mLG"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

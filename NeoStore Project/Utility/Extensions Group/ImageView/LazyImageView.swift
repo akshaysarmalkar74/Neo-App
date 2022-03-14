@@ -30,7 +30,7 @@ class LazyImageView: UIImageView {
                 if let image = UIImage(data: imageData)
                 {
                     DispatchQueue.main.async {
-                        self!.imageCache.setObject(image, forKey: imageURL as AnyObject)
+                        self?.imageCache.setObject(image, forKey: imageURL as AnyObject)
                         self?.image = image
                     }
                 }

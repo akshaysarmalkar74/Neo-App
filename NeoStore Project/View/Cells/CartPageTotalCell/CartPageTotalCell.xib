@@ -22,7 +22,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="OzV-rM-2Wa">
-                        <rect key="frame" x="13" y="0.0" width="289" height="67"/>
+                        <rect key="frame" x="20" y="0.0" width="275" height="67"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zzC-RB-yub">
                                 <rect key="frame" x="0.0" y="0.0" width="51" height="67"/>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4V0-et-pm5">
-                                <rect key="frame" x="247.5" y="0.0" width="41.5" height="67"/>
+                                <rect key="frame" x="233.5" y="0.0" width="41.5" height="67"/>
                                 <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
                                 <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -41,8 +41,8 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="OzV-rM-2Wa" secondAttribute="bottom" id="GTv-3S-cne"/>
-                    <constraint firstItem="OzV-rM-2Wa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="13" id="ckN-ZG-Pcf"/>
-                    <constraint firstAttribute="trailing" secondItem="OzV-rM-2Wa" secondAttribute="trailing" constant="13" id="dv2-bX-Fmt"/>
+                    <constraint firstItem="OzV-rM-2Wa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="20" id="ckN-ZG-Pcf"/>
+                    <constraint firstAttribute="trailing" secondItem="OzV-rM-2Wa" secondAttribute="trailing" constant="20" id="dv2-bX-Fmt"/>
                     <constraint firstItem="OzV-rM-2Wa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="uu9-NV-UfF"/>
                 </constraints>
             </tableViewCellContentView>
