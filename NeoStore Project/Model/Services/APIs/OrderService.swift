@@ -58,7 +58,7 @@ class OrderService {
     }
     
     // Place order
-    static func placeOrder(address: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func placeOrder(address: String, completionHandler: @escaping(APIResponse<PlaceOrderResponse>) -> Void) {
         
         // Params
         let params: [String: Any] = ["address": address]
@@ -69,7 +69,17 @@ class OrderService {
         APIManager.sharedInstance.performRequest(serviceType: .placeOrder(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let placeOrderRes = try JSONDecoder().decode(PlaceOrderResponse.self, from: extractedData)
+                        completionHandler(.success(value: placeOrderRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
