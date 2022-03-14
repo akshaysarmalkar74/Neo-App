@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegisterResponse: Codable {
+struct AuthResponse: Codable {
     let status: Int?
     let data: UserData?
     let message, userMsg: String?

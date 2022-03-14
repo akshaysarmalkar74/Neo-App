@@ -10,7 +10,7 @@ import Foundation
 class UserService {
     
     // Login
-    static func userLogin(username: String, password: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func userLogin(username: String, password: String, completionHandler: @escaping(APIResponse<AuthResponse>) -> Void) {
         
         let params = ["email": username, "password": password]
         
@@ -18,7 +18,17 @@ class UserService {
         APIManager.sharedInstance.performRequest(serviceType: .userLogin(parameters: params)) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let registerRes = try JSONDecoder().decode(AuthResponse.self, from: extractedData)
+                        completionHandler(.success(value: registerRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
@@ -27,7 +37,7 @@ class UserService {
     }
     
     // Register
-    static func userRegister(firstName: String, lastName: String, email: String, password: String, confirmPassword: String ,gender: String, phoneNumber: Int, completionHandler: @escaping(APIResponse<RegisterResponse>) -> Void) {
+    static func userRegister(firstName: String, lastName: String, email: String, password: String, confirmPassword: String ,gender: String, phoneNumber: Int, completionHandler: @escaping(APIResponse<AuthResponse>) -> Void) {
         
         let params: AnyDict = [
             "first_name": firstName,
@@ -46,7 +56,7 @@ class UserService {
                 // Decode the data
                 do {
                     if let extractedData = value as? Data {
-                        let registerRes = try JSONDecoder().decode(RegisterResponse.self, from: extractedData)
+                        let registerRes = try JSONDecoder().decode(AuthResponse.self, from: extractedData)
                         completionHandler(.success(value: registerRes))
                     } else {
                         print("Some Error while converting to data")
