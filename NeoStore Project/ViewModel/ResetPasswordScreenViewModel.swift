@@ -33,25 +33,33 @@ class ResetPasswordScreenViewModel: ResetPasswordScreenViewType {
             UserService.resetPassword(password: password, confirmPassword: confirmPassword, oldPassword: oldPassword) { res in
                 switch res {
                 case .success(value: let value):
-                    if let curData = value as? Data {
-                        do {
-                            let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-                            
-                            if let statusCode = mainData["status"] as? Int {
-                                let userMsg = mainData["user_msg"] as? String
-                                if statusCode == 200 {
-                                    self.passwordResetStatus.value = .success(success: userMsg)
-                                } else {
-                                    // Show Error to User
-                                    self.passwordResetStatus.value = .failure(msg: userMsg)
-                                }
-                            }
-                        } catch let err {
-                            print(err.localizedDescription)
-                        }
+//                    if let curData = value as? Data {
+//                        do {
+//                            let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
+//
+//                            if let statusCode = mainData["status"] as? Int {
+//                                let userMsg = mainData["user_msg"] as? String
+//                                if statusCode == 200 {
+//                                    self.passwordResetStatus.value = .success(success: userMsg)
+//                                } else {
+//                                    // Show Error to User
+//                                    self.passwordResetStatus.value = .failure(msg: userMsg)
+//                                }
+//                            }
+//                        } catch let err {
+//                            print(err.localizedDescription)
+//                        }
+//                    } else {
+//                        print("Some Another Error")
+//                    }
+                
+                    // Check for success status
+                    if let statusCode = value.status, statusCode == 200 {
+                        self.passwordResetStatus.value = .success(success: value.userMsg)
                     } else {
-                        print("Some Another Error")
+                        self.passwordResetStatus.value = .failure(msg: value.userMsg)
                     }
+                
                 case .failure(error: let error):
                     print(error.localizedDescription)
                 }

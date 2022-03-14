@@ -98,7 +98,7 @@ class UserService {
     }
     
     // Reset Password
-    static func resetPassword(password: String, confirmPassword: String, oldPassword: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func resetPassword(password: String, confirmPassword: String, oldPassword: String, completionHandler: @escaping(APIResponse<ChangePasswordResponse>) -> Void) {
         let params: AnyDict = [
             "password": password,
             "confirm_password": confirmPassword,
@@ -112,7 +112,17 @@ class UserService {
         APIManager.sharedInstance.performRequest(serviceType: .changePassword(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let changeRes = try JSONDecoder().decode(ChangePasswordResponse.self, from: extractedData)
+                        completionHandler(.success(value: changeRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
