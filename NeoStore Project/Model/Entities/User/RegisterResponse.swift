@@ -9,7 +9,7 @@ import Foundation
 
 struct RegisterResponse: Codable {
     let status: Int?
-    let data: RegisterData?
+    let data: UserData?
     let message, userMsg: String?
 
     enum CodingKeys: String, CodingKey {
@@ -19,14 +19,14 @@ struct RegisterResponse: Codable {
 }
 
 // MARK: - DataClass
-struct RegisterData: Codable {
+struct UserData: Codable {
     let id, roleID: Int?
     let firstName, lastName, email, username: String?
     let profilePic, countryID, gender: String?
-    let phoneNo: Int?
+    let phoneNo: String?
     let dob: String?
     let isActive: Bool?
-    let created, modified: Date?
+    let created, modified: String?
     let accessToken: String?
 
     enum CodingKeys: String, CodingKey {

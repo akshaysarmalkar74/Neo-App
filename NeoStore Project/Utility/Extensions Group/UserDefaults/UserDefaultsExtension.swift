@@ -75,4 +75,28 @@ extension UserDefaults{
         let allAddress = UserDefaults.standard.stringArray(forKey: "address") ?? [String]()
         return allAddress
     }
+    
+    // MARK:- Save User Instance
+    func saveUserInstance(user: UserData) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(user) {
+            let defaults = UserDefaults.standard
+            defaults.set(encoded, forKey: "SavedPerson")
+        }
+    }
+    
+    // MARK: Get User Instance
+    func getUserInstance() -> UserData? {
+        let defaults = UserDefaults.standard
+        if let savedPerson = defaults.object(forKey: "SavedPerson") as? Data {
+            let decoder = JSONDecoder()
+            if let loadedPerson = try? decoder.decode(UserData.self, from: savedPerson) {
+//                print(loadedPerson.firstName)
+                return loadedPerson
+            } else {
+                return nil
+            }
+        }
+        return nil
+    }
 }

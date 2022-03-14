@@ -126,7 +126,6 @@ class ProductDetailViewController: UIViewController {
     @IBAction func rateNowTapped(_ sender: Any) {
         // Get Id, Name and Image URL
         let images = self.curProduct?.productImages ?? [ProductImage]()
-        print(self.curProduct?.name)
         let name = self.curProduct?.name ?? ""
         let id = self.curProduct?.id
         
