@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CartEditButtonDelegate {
-    func didTapEditBtn(id: Int)
+    func didTapEditBtn(id: Int, quantity: String?)
 }
 
 class CartProductCell: UITableViewCell {
@@ -36,12 +36,20 @@ class CartProductCell: UITableViewCell {
     
     @IBAction func quantityBtn(_ sender: UIButton) {
         // Call delegate
+        print(sender.currentTitle!)
         if let actualId = productId {
-            self.delegate?.didTapEditBtn(id: actualId)
+            self.delegate?.didTapEditBtn(id: actualId, quantity: sender.currentTitle)
         }
     }
     
-    func configure(name: String, img: String, category: String, price: Int, quantity: Int, id: Int) {
+    func configure(productDetails: Product, cartItem: CartListData) {
+        let name = productDetails.name ?? ""
+        let price = productDetails.subTotal ?? 0
+        let category = productDetails.productCategory ?? ""
+        let img = productDetails.productImages ?? ""
+        let id = productDetails.id ?? 0
+        let quantity = cartItem.quantity ?? 0
+        
         // Set Image
         let url = URL(string: img)
         if let actualUrl = url {

@@ -17,13 +17,13 @@ protocol CartListViewType {
     var tableViewShouldReload: ReactiveListener<Bool> {get set}
     var fetchCartStatus: ReactiveListener<FetchCartApiResult> {get set}
     
-    var cartItems: [[String: Any]] {get set}
+    var cartItems: [CartListData] {get set}
     var total: Int {get set}
     
     // Methods
     func fetchCart()
     func getNumOfRows() -> Int
-    func getItemAndIndexPath(index: Int) -> [String: Any]
+    func getItemAndIndexPath(index: Int) -> CartListData
     func getTotalPrice() -> Int
     func deleteCart(productId: String)
     func editCart(productId: String, quantity: Int)
@@ -33,7 +33,7 @@ class CartListViewModel: CartListViewType {
     
     var total: Int = 0
     
-    var cartItems = [[String : Any]]()
+    var cartItems = [CartListData]()
     
     var tableViewShouldReload: ReactiveListener<Bool> = ReactiveListener(false)
     var fetchCartStatus: ReactiveListener<FetchCartApiResult> = ReactiveListener(.none)
@@ -42,28 +42,38 @@ class CartListViewModel: CartListViewType {
         CartService.fetchCart { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-                        if let statusCode = mainData["status"] as? Int {
-                            if statusCode == 200, let tempData = mainData["data"] as? [[String: Any]] {
-                                self.cartItems = tempData
-                                if let cartTotal = mainData["total"] as? Int {
-                                    self.total = cartTotal
-                                }
-                                self.tableViewShouldReload.value = true
-                            } else {
-                                // Show Error to User
-                                let userMsg = mainData["user_msg"] as? String
-                                self.fetchCartStatus.value = .failure(msg: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
+//                        if let statusCode = mainData["status"] as? Int {
+//                            if statusCode == 200, let tempData = mainData["data"] as? [[String: Any]] {
+//                                self.cartItems = tempData
+//                                if let cartTotal = mainData["total"] as? Int {
+//                                    self.total = cartTotal
+//                                }
+//                                self.tableViewShouldReload.value = true
+//                            } else {
+//                                // Show Error to User
+//                                let userMsg = mainData["user_msg"] as? String
+//                                self.fetchCartStatus.value = .failure(msg: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                } else {
+//                    print("Some Another Error")
+//                }
+                if let statusCode = value.status, statusCode == 200 {
+                    if let cartItems = value.data {
+                        self.cartItems = cartItems
+                        self.total = value.total ?? 0
+                        self.tableViewShouldReload.value = true
                     }
                 } else {
-                    print("Some Another Error")
+                    self.fetchCartStatus.value = .failure(msg: value.userMsg)
                 }
+                  
             case .failure(error: let error):
                 print(error.localizedDescription)
             }
@@ -74,7 +84,7 @@ class CartListViewModel: CartListViewType {
         return cartItems.count
     }
     
-    func getItemAndIndexPath(index: Int) -> [String : Any] {
+    func getItemAndIndexPath(index: Int) -> CartListData {
         return cartItems[index]
     }
 

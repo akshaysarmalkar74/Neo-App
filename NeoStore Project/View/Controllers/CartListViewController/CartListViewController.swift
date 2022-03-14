@@ -120,18 +120,12 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
             cell.selectionStyle = .none
             
             let cartItem = self.viewModel.getItemAndIndexPath(index: indexPath.row)
-            let productDetails = cartItem["product"] as? [String: Any] ?? [String: Any]()
-            
-            // Configure Cell
-            let name = productDetails["name"] as? String ?? ""
-            let price = productDetails["sub_total"] as? Int ?? 0
-            let category = productDetails["category"] as? String ?? ""
-            let img = productDetails["product_images"] as? String ?? ""
-            let id = productDetails["id"] as? Int ?? 0
-            let quantity = cartItem["quantity"] as? Int ?? 0
-            
-            cell.configure(name: name, img: img, category: category, price: price, quantity: quantity, id: id)
-            
+            if let productDetails = cartItem.product {
+                // Configure Cell
+                cell.configure(productDetails: productDetails, cartItem: cartItem)
+            } else {
+                print("Unable to Fetch info about product")
+            }
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "CartPageTotalCell", for: indexPath) as! CartPageTotalCell
@@ -190,8 +184,7 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
     // Delete Item
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let cartItem = self.viewModel.getItemAndIndexPath(index: indexPath.row)
-        let product = cartItem["product"] as? [String: Any] ?? [String: Any]()
-        let productId = product["id"] as? Int ?? 0
+        let productId = cartItem.product?.id ?? 0
         
         let deleteAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, _ in
             print(productId)
@@ -208,15 +201,17 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension CartListViewController: CartEditButtonDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
-    func didTapEditBtn(id: Int) {
+    func didTapEditBtn(id: Int, quantity: String?) {
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: screenWidth, height: screenHeight)
         let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: screenWidth, height:screenHeight))
         pickerView.dataSource = self
         pickerView.delegate = self
         
-        pickerView.selectRow(selectedRow, inComponent: 0, animated: false)
-        
+        if let curQty = Int(quantity ?? "") {
+            pickerView.selectRow(curQty - 1, inComponent: 0, animated: false)
+        }
+
         vc.view.addSubview(pickerView)
         
         let alert = UIAlertController(title: "Update Quantity", message: "", preferredStyle: .actionSheet)
