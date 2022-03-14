@@ -15,7 +15,7 @@ class ProductDetailBody: UITableViewCell {
     @IBOutlet weak var productDesc: UILabel!
     
     // Variables
-    var allImages: [[String: Any]]!
+    var allImages: [ProductImage]!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -40,7 +40,7 @@ class ProductDetailBody: UITableViewCell {
         
         if allImages.count > 0 {
             // Set Main Image
-            let imgStr = allImages[0]["image"] as? String ?? ""
+            let imgStr = allImages[0].image ?? ""
             let url = URL(string: imgStr)
             if let actualUrl = url {
                 mainImg.loadImage(fromURL: actualUrl, placeHolderImage: "place")
@@ -60,7 +60,7 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailBodyCell", for: indexPath) as! ProductDetailBodyCell
-        let currentImgUrl = allImages[indexPath.row]["image"] as? String
+        let currentImgUrl = allImages[indexPath.row].image
         
         if let unWrappedImgUrl = currentImgUrl {
             cell.configureProductDetailBodyCell(img: unWrappedImgUrl)
@@ -70,7 +70,7 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let currentImgUrl = allImages[indexPath.row]["image"] as? String
+        let currentImgUrl = allImages[indexPath.row].image
         let cell = collectionView.cellForItem(at: indexPath) as! ProductDetailBodyCell
         cell.isSelected = true
         

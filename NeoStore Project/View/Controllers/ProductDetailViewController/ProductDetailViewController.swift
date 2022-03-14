@@ -13,7 +13,7 @@ class ProductDetailViewController: UIViewController {
     // Variables
     var viewModel: ProductDetailViewType!
     var productId: String!
-    var curProduct: [String: Any]?
+    var curProduct: ProductDetail?
     var loaderViewScreen: UIView?
     
     init(viewModel: ProductDetailViewType, productId: String) {
@@ -108,11 +108,11 @@ class ProductDetailViewController: UIViewController {
     }
     @IBAction func buyNowTapped(_ sender: Any) {
         // Get Id, Name and Image URL
-        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
-        let name = self.curProduct?["name"] as? String ?? ""
-        let id = self.curProduct?["id"] as? Int
+        let images = self.curProduct?.productImages ?? [ProductImage]()
+        let name = self.curProduct?.name ?? ""
+        let id = self.curProduct?.id
         
-        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+        if let mainImgUrl = images[0].image, let mainId = id {
             let viewModel = ProductBuyViewModel()
             let vc = ProductBuyViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
             vc.modalPresentationStyle = .overCurrentContext
@@ -125,11 +125,11 @@ class ProductDetailViewController: UIViewController {
     
     @IBAction func rateNowTapped(_ sender: Any) {
         // Get Id, Name and Image URL
-        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
-        let name = self.curProduct?["name"] as? String ?? ""
-        let id = self.curProduct?["id"] as? Int
+        let images = self.curProduct?.productImages ?? [ProductImage]()
+        let name = self.curProduct?.name ?? ""
+        let id = self.curProduct?.id
         
-        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+        if let mainImgUrl = images[0].image, let mainId = id {
             let viewModel = ProductRateViewModel()
             let vc = ProductRateViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
             vc.modalPresentationStyle = .overCurrentContext
@@ -155,11 +155,11 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.selectionStyle = .none
             
             // Configure Header
-            let name = self.curProduct?["name"] as? String ?? ""
-            let provider = self.curProduct?["producer"] as? String ?? ""
-            let rating = self.curProduct?["rating"] as? Int ?? 0
+            let name = self.curProduct?.name ?? ""
+            let provider = self.curProduct?.producer ?? ""
+            let rating = self.curProduct?.rating ?? 0
             
-            let categoryId = self.curProduct?["product_category_id"] as? Int ?? 0
+            let categoryId = self.curProduct?.productCategoryID ?? 0
             let category = convertIdToCategory(categoryId: categoryId)
             
             
@@ -171,9 +171,9 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.selectionStyle = .none
             
             // Configure Header
-            let price = self.curProduct?["cost"] as? Int ?? 0
-            let description = self.curProduct?["description"] as? String ?? ""
-            let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
+            let price = self.curProduct?.cost ?? 0
+            let description = self.curProduct?.dataDescription ?? ""
+            let images = self.curProduct?.productImages ?? [ProductImage]()
 
             // Set Other Images
             cell.allImages = images
@@ -205,11 +205,11 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
 extension ProductDetailViewController: ProductDetailFooterDelegate {
     func didTapBuyNow() {
         // Get Id, Name and Image URL
-        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
-        let name = self.curProduct?["name"] as? String ?? ""
-        let id = self.curProduct?["id"] as? Int
+        let images = self.curProduct?.productImages ?? [ProductImage]()
+        let name = self.curProduct?.name ?? ""
+        let id = self.curProduct?.id
         
-        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+        if let mainImgUrl = images[0].image, let mainId = id {
             let viewModel = ProductBuyViewModel()
             let vc = ProductBuyViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
             vc.modalPresentationStyle = .overCurrentContext
@@ -224,11 +224,11 @@ extension ProductDetailViewController: ProductDetailFooterDelegate {
     
     func didTapRateBtn() {
         // Get Id, Name and Image URL
-        let images = self.curProduct?["product_images"] as? [[String: Any]] ?? [[String: Any]]()
-        let name = self.curProduct?["name"] as? String ?? ""
-        let id = self.curProduct?["id"] as? Int
+        let images = self.curProduct?.productImages ?? [ProductImage]()
+        let name = self.curProduct?.name ?? ""
+        let id = self.curProduct?.id
         
-        if let mainImgUrl = images[0]["image"] as? String, let mainId = id {
+        if let mainImgUrl = images[0].image, let mainId = id {
             let viewModel = ProductRateViewModel()
             let vc = ProductRateViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
             vc.modalPresentationStyle = .overCurrentContext
