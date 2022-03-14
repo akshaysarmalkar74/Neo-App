@@ -34,16 +34,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O5P-Ya-ug4">
-                    <rect key="frame" x="30" y="104" width="354" height="537.5"/>
+                    <rect key="frame" x="30" y="104" width="354" height="447.5"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vl9-Rd-trK">
-                            <rect key="frame" x="13" y="33" width="328" height="61"/>
+                            <rect key="frame" x="13" y="33" width="328" height="27"/>
                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="25"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Bqy-bF-Arw">
-                            <rect key="frame" x="82" y="420.5" width="190" height="30"/>
+                            <rect key="frame" x="82" y="330.5" width="190" height="30"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="68f-H7-a9j">
                                     <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
@@ -83,7 +83,7 @@
                             </subviews>
                         </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lrg-Df-AoU">
-                            <rect key="frame" x="80" y="472.5" width="194" height="35"/>
+                            <rect key="frame" x="80" y="382.5" width="194" height="35"/>
                             <color key="backgroundColor" red="0.85882352941176465" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="194" id="9W3-A0-N3b"/>
@@ -103,13 +103,15 @@
                             </connections>
                         </button>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cp9-SV-21b">
-                            <rect key="frame" x="35.5" y="119" width="283" height="268.5"/>
+                            <rect key="frame" x="35.5" y="85" width="283" height="212.5"/>
+                            <constraints>
+                                <constraint firstAttribute="height" secondItem="cp9-SV-21b" secondAttribute="width" multiplier="3:4" id="cbJ-Um-nOi"/>
+                            </constraints>
                         </imageView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Lrg-Df-AoU" secondAttribute="bottom" constant="30" id="1pM-rF-ar8"/>
-                        <constraint firstItem="cp9-SV-21b" firstAttribute="height" secondItem="O5P-Ya-ug4" secondAttribute="height" multiplier="0.5" id="3rw-ur-cCK"/>
                         <constraint firstItem="Lrg-Df-AoU" firstAttribute="centerX" secondItem="O5P-Ya-ug4" secondAttribute="centerX" id="6N3-D3-Efa"/>
                         <constraint firstItem="cp9-SV-21b" firstAttribute="top" secondItem="Vl9-Rd-trK" secondAttribute="bottom" constant="25" id="8wV-AU-HWe"/>
                         <constraint firstAttribute="trailing" secondItem="Vl9-Rd-trK" secondAttribute="trailing" constant="13" id="DxM-b2-lSk"/>
@@ -134,7 +136,6 @@
                 <constraint firstItem="O5P-Ya-ug4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="1aZ-EM-lFu"/>
                 <constraint firstItem="O5P-Ya-ug4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="Dti-YW-hAP"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="O5P-Ya-ug4" secondAttribute="trailing" constant="30" id="Ngd-MD-ee7"/>
-                <constraint firstItem="O5P-Ya-ug4" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.6" id="pxD-cc-lNI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="38" y="32"/>

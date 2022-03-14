@@ -62,7 +62,7 @@ class ProductService {
     }
     
     // Set Product Rating
-    static func setProductRating(productId: String, rating: Int, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func setProductRating(productId: String, rating: Int, completionHandler: @escaping(APIResponse<SetProductRatingResponse>) -> Void) {
         
         // Params
         let params: AnyDict = ["product_id": productId, "rating": rating]
@@ -71,7 +71,17 @@ class ProductService {
         APIManager.sharedInstance.performRequest(serviceType: .setProductRating(parameters: params)) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let productDetailRes = try JSONDecoder().decode(SetProductRatingResponse.self, from: extractedData)
+                        completionHandler(.success(value: productDetailRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
