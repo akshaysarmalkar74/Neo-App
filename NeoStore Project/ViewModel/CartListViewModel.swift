@@ -88,24 +88,31 @@ class CartListViewModel: CartListViewType {
         CartService.deleteCart(productId: productId) { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-                        if let statusCode = mainData["status"] as? Int {
-                            if statusCode == 200 {
-                                // Get Updated Cart
-                                self.fetchCart()
-                            } else {
-                                // Show Error to User
-                                let userMsg = mainData["user_msg"] as? String
-                                self.fetchCartStatus.value = .failure(msg: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
-                    }
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
+//                        if let statusCode = mainData["status"] as? Int {
+//                            if statusCode == 200 {
+//                                // Get Updated Cart
+//                                self.fetchCart()
+//                            } else {
+//                                // Show Error to User
+//                                let userMsg = mainData["user_msg"] as? String
+//                                self.fetchCartStatus.value = .failure(msg: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                } else {
+//                    print("Some Another Error")
+//                }
+            
+                if let statusCode = value.status, statusCode == 200 {
+                    // Get Updated Cart
+                    self.fetchCart()
                 } else {
-                    print("Some Another Error")
+                    self.fetchCartStatus.value = .failure(msg: value.userMsg)
                 }
             case .failure(error: let error):
                 print(error.localizedDescription)
@@ -118,24 +125,30 @@ class CartListViewModel: CartListViewType {
         CartService.editCart(productId: productId, quantity: quantity) { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-                        if let statusCode = mainData["status"] as? Int {
-                            if statusCode == 200 {
-                                // Get Updated Cart
-                                self.fetchCart()
-                            } else {
-                                // Show Error to User
-                                let userMsg = mainData["user_msg"] as? String
-                                self.fetchCartStatus.value = .failure(msg: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
-                    }
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
+//                        if let statusCode = mainData["status"] as? Int {
+//                            if statusCode == 200 {
+//                                // Get Updated Cart
+//                                self.fetchCart()
+//                            } else {
+//                                // Show Error to User
+//                                let userMsg = mainData["user_msg"] as? String
+//                                self.fetchCartStatus.value = .failure(msg: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                } else {
+//                    print("Some Another Error")
+//                }
+                if let statusCode = value.status, statusCode == 200 {
+                    // Get Updated Cart
+                    self.fetchCart()
                 } else {
-                    print("Some Another Error")
+                    self.fetchCartStatus.value = .failure(msg: value.userMsg)
                 }
             case .failure(error: let error):
                 print(error.localizedDescription)

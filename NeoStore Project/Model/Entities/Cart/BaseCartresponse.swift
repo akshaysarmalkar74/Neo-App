@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AddCartResponse: Codable {
+struct BaseCartresponse: Codable {
     let status: Int?
     let data: Bool?
     let totalCarts: Int?

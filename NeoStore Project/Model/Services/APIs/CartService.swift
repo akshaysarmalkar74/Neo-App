@@ -27,7 +27,7 @@ class CartService {
     }
     
     // Add To Cart
-    static func addToCart(productId: String, quantity: Int, completionHandler: @escaping(APIResponse<AddCartResponse>) -> Void) {
+    static func addToCart(productId: String, quantity: Int, completionHandler: @escaping(APIResponse<BaseCartresponse>) -> Void) {
         
         // Get New Headers (Access Token)
         let accessToken = UserDefaults.standard.getUserToken() ?? ""
@@ -41,7 +41,7 @@ class CartService {
                 // Decode the data
                 do {
                     if let extractedData = value as? Data {
-                        let productDetailRes = try JSONDecoder().decode(AddCartResponse.self, from: extractedData)
+                        let productDetailRes = try JSONDecoder().decode(BaseCartresponse.self, from: extractedData)
                         completionHandler(.success(value: productDetailRes))
                     } else {
                         print("Some Error while converting to data")
@@ -57,7 +57,7 @@ class CartService {
     }
     
     // Delete Cart Item
-    static func deleteCart(productId: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func deleteCart(productId: String, completionHandler: @escaping(APIResponse<BaseCartresponse>) -> Void) {
         // Get New Headers (Access Token)
         let accessToken = UserDefaults.standard.getUserToken() ?? ""
         
@@ -67,7 +67,16 @@ class CartService {
         APIManager.sharedInstance.performRequest(serviceType: .deleteCart(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                do {
+                    if let extractedData = value as? Data {
+                        let productDetailRes = try JSONDecoder().decode(BaseCartresponse.self, from: extractedData)
+                        completionHandler(.success(value: productDetailRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
@@ -76,7 +85,7 @@ class CartService {
     }
     
     // Edit Cart
-    static func editCart(productId: String, quantity: Int, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func editCart(productId: String, quantity: Int, completionHandler: @escaping(APIResponse<BaseCartresponse>) -> Void) {
         // Get New Headers (Access Token)
         let accessToken = UserDefaults.standard.getUserToken() ?? ""
         
@@ -86,7 +95,16 @@ class CartService {
         APIManager.sharedInstance.performRequest(serviceType: .editCart(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                do {
+                    if let extractedData = value as? Data {
+                        let productDetailRes = try JSONDecoder().decode(BaseCartresponse.self, from: extractedData)
+                        completionHandler(.success(value: productDetailRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
