@@ -97,14 +97,11 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListingCell", for: indexPath) as! ProductListingTableViewCell
         let product = self.viewModel.getItemAndIndexPath(index: indexPath.row)
-        // Configure Data
-        let imgName = product["product_images"] as? String ?? ""
-        let name = product["name"] as? String ?? ""
-        let desc = product["producer"] as? String ?? ""
-        let price = product["cost"] as? Int ?? 0
-        let rating = product["rating"] as? Int ?? 0
         
-        cell.configureProduct(imgName: imgName, name: name, desc: desc, price: price, rating: rating)
+        
+        
+//        cell.configureProduct(imgName: imgName, name: name, desc: desc, price: price, rating: rating)
+        cell.configureProduct(product: product)
         
         return cell
     }
@@ -115,7 +112,7 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let product = viewModel.getItemAndIndexPath(index: indexPath.row)
-        let productId = product["id"] as? Int ?? 0
+        let productId = product.id ?? 0
         let productDetailViewModel = ProductDetailViewModel()
         let vc = ProductDetailViewController(viewModel: productDetailViewModel, productId: String(productId))
         self.navigationController?.pushViewController(vc, animated: true)

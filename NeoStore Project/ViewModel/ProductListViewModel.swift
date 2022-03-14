@@ -16,15 +16,15 @@ enum FetchProductsApiResult {
 protocol ProductListViewType {
     var fetchProductsStatus: ReactiveListener<FetchProductsApiResult> {get set}
     var tableViewShouldReload: ReactiveListener<Bool> {get set}
-    var products: [[String: Any]] {get set}
+    var products: [SpecificProduct] {get set}
     
     func fetchProducts(categoryId: String, page: Int)
     func getNumOfRows() -> Int
-    func getItemAndIndexPath(index: Int) -> [String: Any]
+    func getItemAndIndexPath(index: Int) -> SpecificProduct
 }
 
 class ProductListViewModel: ProductListViewType {
-    var products = [[String: Any]]()
+    var products = [SpecificProduct]()
     
     var tableViewShouldReload: ReactiveListener<Bool> = ReactiveListener(false)
     var fetchProductsStatus: ReactiveListener<FetchProductsApiResult> = ReactiveListener(.none)
@@ -33,26 +33,37 @@ class ProductListViewModel: ProductListViewType {
         ProductService.getProducts(categoryId: categoryId, page: page) { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-                        if let statusCode = mainData["status"] as? Int {
-                            if statusCode == 200 {
-                                let tempData = mainData["data"] as? [[String: Any]] ?? [[String: Any]()]
-                                self.products.append(contentsOf: tempData)
-                                self.fetchProductsStatus.value = .success
-                                self.tableViewShouldReload.value = true
-                            } else {
-                                // Show Error to User
-                                let userMsg = mainData["user_msg"] as? String
-                                self.fetchProductsStatus.value = .failure(msg: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
+//                        if let statusCode = mainData["status"] as? Int {
+//                            if statusCode == 200 {
+//                                let tempData = mainData["data"] as? [[String: Any]] ?? [[String: Any]()]
+//                                self.products.append(contentsOf: tempData)
+//                                self.fetchProductsStatus.value = .success
+//                                self.tableViewShouldReload.value = true
+//                            } else {
+//                                // Show Error to User
+//                                let userMsg = mainData["user_msg"] as? String
+//                                self.fetchProductsStatus.value = .failure(msg: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                } else {
+//                    print("Some Another Error")
+//                }
+            
+                // Check for success status
+                if let statusCode = value.status, statusCode == 200 {
+                    if let allProducts = value.data {
+                        self.products.append(contentsOf: allProducts)
+                        self.fetchProductsStatus.value = .success
+                        self.tableViewShouldReload.value = true
                     }
                 } else {
-                    print("Some Another Error")
+                    self.fetchProductsStatus.value = .failure(msg: value.userMsg)
                 }
             case .failure(error: let error):
                 print(error.localizedDescription)
@@ -64,7 +75,7 @@ class ProductListViewModel: ProductListViewType {
         return products.count
     }
     
-    func getItemAndIndexPath(index: Int) -> [String : Any] {
+    func getItemAndIndexPath(index: Int) -> SpecificProduct {
         return products[index]
     }
 }

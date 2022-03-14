@@ -27,18 +27,24 @@ class ProductListingTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureProduct(imgName: String, name: String, desc: String, price: Int, rating: Int) {
+    func configureProduct(product: SpecificProduct) {
+        // Configure Data
+        let imgName = product.productImages ?? ""
+        let name = product.name ?? ""
+        let desc = product.producer ?? ""
+        let price = product.cost ?? 0
+        let rating = product.rating ?? 0
+
         // Set Image
         let url = URL(string: imgName)
         if let actualUrl = url {
             productImg.loadImage(fromURL: actualUrl, placeHolderImage: "place")
         }
-        
-//        productImg.image = UIImage(named: imgName)
+
         productName.text = name
         productDesc.text = desc
-        productPrice.text = "Rs. \(price)"
-        
+        productPrice.text = "₹ \(price)"
+
         for i in 1...5 {
             if i <= rating {
                 stars[i-1].image = UIImage(named: "star_check")
