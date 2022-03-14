@@ -27,7 +27,7 @@ class CartService {
     }
     
     // Add To Cart
-    static func addToCart(productId: String, quantity: Int, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func addToCart(productId: String, quantity: Int, completionHandler: @escaping(APIResponse<AddCartResponse>) -> Void) {
         
         // Get New Headers (Access Token)
         let accessToken = UserDefaults.standard.getUserToken() ?? ""
@@ -38,7 +38,17 @@ class CartService {
         APIManager.sharedInstance.performRequest(serviceType: .addToCart(parameters: params, headers: ["access_token": accessToken])) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let productDetailRes = try JSONDecoder().decode(AddCartResponse.self, from: extractedData)
+                        completionHandler(.success(value: productDetailRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))

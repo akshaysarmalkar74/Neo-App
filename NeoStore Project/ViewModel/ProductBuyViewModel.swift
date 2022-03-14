@@ -26,23 +26,30 @@ class ProductBuyViewModel: ProductBuyViewType {
         CartService.addToCart(productId: productId, quantity: quantity) { res in
             switch res {
             case .success(value: let value):
-                if let curData = value as? Data {
-                    do {
-                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-                        if let statusCode = mainData["status"] as? Int {
-                            let userMsg = mainData["user_msg"] as? String
-                            if statusCode == 200 {
-                                self.productBuyDetailStatus.value = .success(msg: userMsg)
-                            } else {
-                                self.productBuyDetailStatus.value = .failure(err: userMsg)
-                            }
-                        }
-                    } catch let err {
-                        print(err.localizedDescription)
-                    }
-                } else {
-                    print("Some Another Error")
-                }
+//                if let curData = value as? Data {
+//                    do {
+//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
+//                        if let statusCode = mainData["status"] as? Int {
+//                            let userMsg = mainData["user_msg"] as? String
+//                            if statusCode == 200 {
+//                                self.productBuyDetailStatus.value = .success(msg: userMsg)
+//                            } else {
+//                                self.productBuyDetailStatus.value = .failure(err: userMsg)
+//                            }
+//                        }
+//                    } catch let err {
+//                        print(err.localizedDescription)
+//                    }
+//                } else {
+//                    print("Some Another Error")
+//                }
+            // Check for success status
+            if let statusCode = value.status, statusCode == 200 {
+                self.productBuyDetailStatus.value = .success(msg: value.userMsg)
+            } else {
+                self.productBuyDetailStatus.value = .failure(err: value.userMsg)
+            }
+            
             case .failure(error: let error):
                 print(error.localizedDescription)
             }
