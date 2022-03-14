@@ -72,14 +72,24 @@ class UserService {
     }
     
     // Forgot Password
-    static func userForgotPassword(email: String, completionHandler: @escaping(APIResponse<Any>) -> Void) {
+    static func userForgotPassword(email: String, completionHandler: @escaping(APIResponse<ForgotPasswordResponse>) -> Void) {
         let params: AnyDict = ["email": email]
         
         // Perform Request
         APIManager.sharedInstance.performRequest(serviceType: .forgotPassword(parameters: params)) { response in
             switch response {
             case .success(value: let value):
-                completionHandler(.success(value: value))
+                // Decode the data
+                do {
+                    if let extractedData = value as? Data {
+                        let forgotRes = try JSONDecoder().decode(ForgotPasswordResponse.self, from: extractedData)
+                        completionHandler(.success(value: forgotRes))
+                    } else {
+                        print("Some Error while converting to data")
+                    }
+                } catch {
+                    print("Error - \(error.localizedDescription)")
+                }
             case .failure(error: let error):
                 print(error.localizedDescription)
                 completionHandler(.failure(error: error))
