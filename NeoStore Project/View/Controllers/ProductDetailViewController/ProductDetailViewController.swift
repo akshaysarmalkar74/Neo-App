@@ -15,6 +15,7 @@ class ProductDetailViewController: UIViewController {
     var productId: String!
     var curProduct: ProductDetail?
     var loaderViewScreen: UIView?
+    @IBOutlet weak var contentHidderView: UIView!
     
     init(viewModel: ProductDetailViewType, productId: String) {
         super.init(nibName: "ProductDetailViewController", bundle: nil)
@@ -56,7 +57,10 @@ class ProductDetailViewController: UIViewController {
             case .success(let product):
                 self.curProduct = product
                 DispatchQueue.main.async {
+                    self.contentHidderView.removeFromSuperview()
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
+                    // Customise Navbar
+                    self.customiseNavbar(pageTitle: self.curProduct?.name ?? "")
                     self.tableView.reloadData()
                 }
             case .failure(let msg):
@@ -72,7 +76,7 @@ class ProductDetailViewController: UIViewController {
     
     // Error Alert Function
     func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
             self?.navigationController?.popViewController(animated: true)
@@ -87,7 +91,7 @@ class ProductDetailViewController: UIViewController {
     
     // Show Success Alert
     func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Success!!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -140,7 +144,19 @@ class ProductDetailViewController: UIViewController {
         }
     }
     
-    
+    // Customise Navigation Bar
+    func customiseNavbar(pageTitle: String) {
+        // Set Title
+        self.title = pageTitle
+        
+        // Customise Naviagtion Bar
+        self.navigationController?.navigationBar.barTintColor = .mainRed
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        // Customise Back Button Color & Title
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+    }
 }
 
 extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -169,6 +185,7 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailBody", for: indexPath) as! ProductDetailBody
             cell.selectionStyle = .none
+            cell.delegate = self
             
             // Configure Header
             let price = self.curProduct?.cost ?? 0
@@ -240,10 +257,16 @@ extension ProductDetailViewController: ProductDetailFooterDelegate {
     }
 }
 
-extension ProductDetailViewController: ProductBuyViewControllerDelegate {
+extension ProductDetailViewController: ProductBuyViewControllerDelegate, ShareButtonDelegate {
+    func didTapShareBtn() {
+        print("Hello Share Btn")
+    }
+    
     
     func didReceiveResponse(userMsg: String?) {
         self.viewModel.fetchProductDetails(productId: self.productId)
         showSuccessAlert(msg: userMsg)
     }
+    
+    
 }

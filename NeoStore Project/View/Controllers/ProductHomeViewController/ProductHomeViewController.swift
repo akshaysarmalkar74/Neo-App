@@ -87,7 +87,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     // Customise Navigation Bar
     func customiseNavbar() {
         // Set Title
-        self.title = "Register"
+        self.title = "NeoStore"
         
         // Customise Naviagtion Bar
         self.navigationController?.navigationBar.barTintColor = .mainRed
@@ -135,22 +135,22 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
             self.sideMenu.dismiss(animated: false, completion: nil)
         case .Tables:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "1", viewModel: myCartVm)
+            let myCartVc = ProductListViewController(categoryId: "1", viewModel: myCartVm, title: "Tables")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Sofas:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "3", viewModel: myCartVm)
+            let myCartVc = ProductListViewController(categoryId: "3", viewModel: myCartVm, title: "Sofas")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Chair:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "2", viewModel: myCartVm)
+            let myCartVc = ProductListViewController(categoryId: "2", viewModel: myCartVm, title: "Chairs")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Cupboard:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "4", viewModel: myCartVm)
+            let myCartVc = ProductListViewController(categoryId: "4", viewModel: myCartVm, title: "CupBoards")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .MyAccount:
@@ -237,20 +237,26 @@ extension ProductHomeViewController: UICollectionViewDelegateFlowLayout, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == categoryCollectionView {
             var categoryId: Int
+            var pageTitle: String
             switch indexPath.item {
             case 0:
                 categoryId = 1
+                pageTitle = "Tables"
             case 1:
                 categoryId = 3
+                pageTitle = "Chairs"
             case 2:
                 categoryId = 2
+                pageTitle = "Sofas"
             case 3:
                 categoryId = 4
+                pageTitle = "CupBoards"
             default:
                 categoryId = 0
+                pageTitle = ""
             }
             let viewModel = ProductListViewModel()
-            let vc = ProductListViewController(categoryId: String(categoryId), viewModel: viewModel)
+            let vc = ProductListViewController(categoryId: String(categoryId), viewModel: viewModel, title: pageTitle)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

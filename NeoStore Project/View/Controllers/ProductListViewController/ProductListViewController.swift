@@ -16,11 +16,14 @@ class ProductListViewController: UIViewController {
     var isPaginating: Bool = false
     var shouldPaginate: Bool = false
     var screenLoaderScreen: UIView?
+    var pageTitle: String!
+    @IBOutlet weak var contentHidderView: UIView!
     
-    init(categoryId: String, viewModel: ProductListViewType) {
+    init(categoryId: String, viewModel: ProductListViewType, title: String) {
         super.init(nibName: "ProductListViewController", bundle: nil)
         self.categoryId = categoryId
         self.viewModel = viewModel
+        self.pageTitle = title
     }
     
     required init?(coder: NSCoder) {
@@ -35,9 +38,14 @@ class ProductListViewController: UIViewController {
         // Set Observers
         setupObservers()
         
+        // Setup Navigation
+        customiseNavbar(pageTitle: pageTitle)
+        
+        // Configure TableView
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ProductListingTableViewCell", bundle: nil), forCellReuseIdentifier: "ProductListingCell")
+        tableView.separatorStyle = .none
         
         viewModel.fetchProducts(categoryId: categoryId, page: 1)
     }
@@ -67,6 +75,8 @@ class ProductListViewController: UIViewController {
             guard let `self` = self else {return}
             if value {
                 DispatchQueue.main.async {
+                    self.contentHidderView.removeFromSuperview()
+                    
                     self.hideLoader(viewLoaderScreen: self.screenLoaderScreen)
                     self.tableView.reloadData()
                 }
@@ -76,7 +86,7 @@ class ProductListViewController: UIViewController {
     
     // Error Alert Function
     func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -98,9 +108,6 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProductListingCell", for: indexPath) as! ProductListingTableViewCell
         let product = self.viewModel.getItemAndIndexPath(index: indexPath.row)
         
-        
-        
-//        cell.configureProduct(imgName: imgName, name: name, desc: desc, price: price, rating: rating)
         cell.configureProduct(product: product)
         
         return cell
@@ -128,5 +135,19 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
                 isPaginating = true
             }
         }
+    }
+    
+    // Customise Navigation Bar
+    func customiseNavbar(pageTitle: String) {
+        // Set Title
+        self.title = pageTitle
+        
+        // Customise Naviagtion Bar
+        self.navigationController?.navigationBar.barTintColor = .mainRed
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        // Customise Back Button Color & Title
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
     }
 }

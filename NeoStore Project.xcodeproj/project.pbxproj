@@ -44,6 +44,7 @@
 		92134E8827CCE63D00096523 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92134E8627CCE63D00096523 /* ProductDetailViewController.swift */; };
 		92134E8927CCE63D00096523 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92134E8727CCE63D00096523 /* ProductDetailViewController.xib */; };
 		9213B74127E061AF00B86019 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213B74027E061AF00B86019 /* StringExtension.swift */; };
+		9213B74427E080D900B86019 /* UiApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213B74327E080D900B86019 /* UiApplicationExt.swift */; };
 		923D4DFD27AD031000598034 /* RegisterScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D4DFB27AD031000598034 /* RegisterScreenViewController.swift */; };
 		923D4DFE27AD031000598034 /* RegisterScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 923D4DFC27AD031000598034 /* RegisterScreenViewController.xib */; };
 		9241394D27D8D2CC0081336F /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241394C27D8D2CC0081336F /* ViewControllerExtension.swift */; };
@@ -170,6 +171,7 @@
 		92134E8627CCE63D00096523 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
 		92134E8727CCE63D00096523 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		9213B74027E061AF00B86019 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		9213B74327E080D900B86019 /* UiApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiApplicationExt.swift; sourceTree = "<group>"; };
 		923D4DFB27AD031000598034 /* RegisterScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenViewController.swift; sourceTree = "<group>"; };
 		923D4DFC27AD031000598034 /* RegisterScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterScreenViewController.xib; sourceTree = "<group>"; };
 		9241394C27D8D2CC0081336F /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -417,6 +419,14 @@
 				9213B74027E061AF00B86019 /* StringExtension.swift */,
 			);
 			path = StringExt;
+			sourceTree = "<group>";
+		};
+		9213B74227E080AB00B86019 /* UIApplicationExt */ = {
+			isa = PBXGroup;
+			children = (
+				9213B74327E080D900B86019 /* UiApplicationExt.swift */,
+			);
+			path = UIApplicationExt;
 			sourceTree = "<group>";
 		};
 		923D4DFA27AD02D900598034 /* RegisterScreenViewController */ = {
@@ -699,6 +709,7 @@
 		92A92DEB27AB97B200FCEE14 /* Extensions Group */ = {
 			isa = PBXGroup;
 			children = (
+				9213B74227E080AB00B86019 /* UIApplicationExt */,
 				9213B73F27E0618D00B86019 /* StringExt */,
 				9241394B27D8D29D0081336F /* ViewController */,
 				92F349CB27C355E80076ABC4 /* ImageView */,
@@ -1100,6 +1111,7 @@
 				92F349CD27C356010076ABC4 /* LazyImageView.swift in Sources */,
 				92518AF927A9917E0037CB3D /* APIManager.swift in Sources */,
 				92F349E927C4B8730076ABC4 /* MyOrdersViewController.swift in Sources */,
+				9213B74427E080D900B86019 /* UiApplicationExt.swift in Sources */,
 				920A4DF927DFA31000B68FDE /* ForgotPasswordResponse.swift in Sources */,
 				925FA06F27D9C8C400C27C9E /* AddressListViewFooter.swift in Sources */,
 				92F349CA27C29A270076ABC4 /* ProductServices.swift in Sources */,

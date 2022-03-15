@@ -40,6 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.window = window
 //        window.makeKeyAndVisible()
         
+        // Back Button Minimal
+        let BarButtonItemAppearance = UIBarButtonItem.appearance()
+        BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
+        
         return true
     }
 

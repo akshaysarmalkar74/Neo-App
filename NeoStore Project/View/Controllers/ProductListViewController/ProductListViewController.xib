@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProductListViewController" customModule="NeoStore_Project" customModuleProvider="target">
             <connections>
+                <outlet property="contentHidderView" destination="Gv8-la-cij" id="pD3-vr-5Xn"/>
                 <outlet property="tableView" destination="8BV-w2-Pix" id="Lr1-44-qpJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,14 +24,22 @@
                     <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gv8-la-cij">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Gv8-la-cij" secondAttribute="trailing" id="5EH-iM-9QF"/>
+                <constraint firstItem="Gv8-la-cij" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ay4-zH-a5c"/>
+                <constraint firstItem="Gv8-la-cij" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="N6o-rL-Bzk"/>
                 <constraint firstItem="8BV-w2-Pix" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RiE-gD-bm2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="8BV-w2-Pix" secondAttribute="trailing" id="XT8-Cp-dk9"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="8BV-w2-Pix" secondAttribute="bottom" id="jjs-LH-W1U"/>
                 <constraint firstItem="8BV-w2-Pix" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="rhA-H0-tKJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Gv8-la-cij" secondAttribute="bottom" id="vOM-eX-hly"/>
             </constraints>
             <point key="canvasLocation" x="-101" y="66"/>
         </view>

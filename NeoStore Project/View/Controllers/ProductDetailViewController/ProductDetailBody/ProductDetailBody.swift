@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ShareButtonDelegate {
+    func didTapShareBtn()
+}
+
 class ProductDetailBody: UITableViewCell {
 
     @IBOutlet weak var productPrice: UILabel!
@@ -16,6 +20,7 @@ class ProductDetailBody: UITableViewCell {
     
     // Variables
     var allImages: [ProductImage]!
+    var delegate: ShareButtonDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,8 +35,6 @@ class ProductDetailBody: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configureCell(price: Int, description: String) {
@@ -51,6 +54,10 @@ class ProductDetailBody: UITableViewCell {
         productImages.reloadData()
     }
     
+    @IBAction func shareBtnTapped(_ sender: UIButton) {
+        // Call delegate
+        delegate?.didTapShareBtn()
+    }
 }
 
 extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {

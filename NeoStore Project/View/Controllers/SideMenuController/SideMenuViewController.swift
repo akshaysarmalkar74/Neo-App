@@ -27,7 +27,8 @@ class SideMenuViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1.00)
+        tableView.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.00)
+        self.view.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.00)
         
         tableView.register(UINib(nibName: "SideMenuControllerHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "SideMenuControllerHeader")
         tableView.register(UINib(nibName: "SideMenuCell", bundle: nil), forCellReuseIdentifier: "SideMenuCell")
@@ -62,7 +63,7 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SideMenuControllerHeader") as! SideMenuControllerHeader
         let backgroundView = UIView(frame: headerView.bounds)
-        backgroundView.backgroundColor = UIColor(red: 0.31, green: 0.31, blue: 0.31, alpha: 1.00)
+        backgroundView.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1.00)
         headerView.backgroundView =  backgroundView
         
         
