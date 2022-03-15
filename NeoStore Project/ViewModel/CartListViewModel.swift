@@ -69,6 +69,8 @@ class CartListViewModel: CartListViewType {
                         self.cartItems = cartItems
                         self.total = value.total ?? 0
                         self.tableViewShouldReload.value = true
+                    } else {
+                        self.fetchCartStatus.value = .failure(msg: value.userMsg)
                     }
                 } else {
                     self.fetchCartStatus.value = .failure(msg: value.userMsg)
