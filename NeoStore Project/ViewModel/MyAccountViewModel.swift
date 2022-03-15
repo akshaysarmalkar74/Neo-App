@@ -97,7 +97,6 @@ class MyAccountScreenViewModel: MyAccountViewType {
 //                        print(err.localizedDescription)
 //                    }
 //                }
-            
                 if let statusCode = value.status, statusCode == 200 {
                     if let userData = value.data?.userData {
                         // Save User to Defaults

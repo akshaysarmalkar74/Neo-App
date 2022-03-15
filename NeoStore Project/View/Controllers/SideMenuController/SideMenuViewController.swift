@@ -35,8 +35,6 @@ class SideMenuViewController: UIViewController {
         
         // Get User
         user = UserDefaults.standard.getUserInstance()
-        
-        print(totalNumOfCarts)
     }
 
 }

@@ -77,7 +77,7 @@ class LoginScreenViewController: UIViewController {
     
     // Error Alert Function
     func showErrorAlert(error: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: error, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: error, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -195,7 +195,7 @@ extension LoginScreenViewController {
     
     // Success Alert Function
     func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
             self?.navigationController?.popViewController(animated: true)

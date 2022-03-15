@@ -11,7 +11,7 @@ class AddressListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var allAddress = [String]()
-    let user = UserDefaults.standard.getUser()
+    let user = UserDefaults.standard.getUserInstance()
     var currentSelectedIdx = 0
     var viewModel: AddressListViewType!
     var loaderViewScreen: UIView?
@@ -141,8 +141,8 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
         cell.selectionStyle = .none
         
         // Configure Cell
-        let firstName = user["first_name"] as? String ?? ""
-        let lastName = user["last_name"] as? String ?? ""
+        let firstName = user?.firstName ?? ""
+        let lastName = user?.lastName ?? ""
         let address = allAddress[indexPath.row]
         let fullName = "\(firstName) \(lastName)"
         

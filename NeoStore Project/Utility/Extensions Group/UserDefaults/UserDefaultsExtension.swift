@@ -91,7 +91,6 @@ extension UserDefaults{
         if let savedPerson = defaults.object(forKey: "SavedPerson") as? Data {
             let decoder = JSONDecoder()
             if let loadedPerson = try? decoder.decode(UserData.self, from: savedPerson) {
-//                print(loadedPerson.firstName)
                 return loadedPerson
             } else {
                 return nil
