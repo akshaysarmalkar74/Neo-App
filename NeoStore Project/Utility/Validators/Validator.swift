@@ -48,18 +48,32 @@ class Validator {
     
     // Validate First Name
     static func firstName(str: String) -> (message: String?, result: Bool) {
-        if str.count > 0 {
-            return (nil, true)
+        if str.count == 0 {
+            return ("Please enter first name", false)
+        } else {
+            let result = str.containsOnlyLettersAndWhitespace()
+            
+            if !result {
+                return ("No Digits allowed in first name", false)
+            } else {
+                return (nil, true)
+            }
         }
-        return ("Please enter first name", false)
     }
     
     // Validate Last Name
     static func lastName(str: String) -> (message: String?, result: Bool) {
-        if str.count > 0 {
-            return (nil, true)
+        if str.count == 0 {
+            return ("Please enter last name", false)
+        } else {
+            let result = str.containsOnlyLettersAndWhitespace()
+            
+            if !result {
+                return ("No Digits allowed in last name", false)
+            } else {
+                return (nil, true)
+            }
         }
-        return ("Please enter last name", false)
     }
     
     // Validate Phone Number

@@ -52,9 +52,6 @@ class LoginScreenViewController: UIViewController {
     }
     
     @IBAction func forgotBtnTapped(_ sender: UIButton) {
-//        let viewModel = ForgotScreenViewModel()
-//        let vc = ForgotScreenViewController(viewModel: viewModel)
-//        self.navigationController?.pushViewController(vc, animated: true)
         
         // Create Alert with TextFields
         let alertVc = UIAlertController(title: "Forgot Password", message: "Please enter email", preferredStyle: .alert)

@@ -37,3 +37,11 @@ extension UIViewController {
         viewLoaderScreen?.removeFromSuperview()
     }
 }
+
+
+extension String {
+    func containsOnlyLettersAndWhitespace() -> Bool {
+        let allowed = CharacterSet.letters.union(.whitespaces)
+        return unicodeScalars.allSatisfy(allowed.contains)
+    }
+}
