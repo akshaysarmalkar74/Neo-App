@@ -15,9 +15,15 @@ class SideMenuControllerHeader: UITableViewHeaderFooterView {
     
     
         func configure(firstName: String, lastName: String, userEmail: String) {
-        profileImg.image = UIImage(named: "user_male")
+        profileImg.image = UIImage(named: "profileDemo")
         userName.text = "\(firstName) \(lastName)"
         email.text = userEmail
+            
+            // Add Border to profileImg
+            profileImg.layer.masksToBounds = true
+            profileImg.layer.borderWidth = 1.5
+            profileImg.layer.borderColor = UIColor.white.cgColor
+            profileImg.layer.cornerRadius = profileImg.bounds.width / 2
     }
 
 }

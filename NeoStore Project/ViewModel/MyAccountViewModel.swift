@@ -23,7 +23,7 @@ protocol MyAccountViewType {
     var updateUserStatus: ReactiveListener<UpdateAccountApiResult> {get set}
     var userDetailsStatus: ReactiveListener<UserDetailsApiResult> {get set}
     
-    func updateUser(firstName: String, lastName: String, email: String, birthDate: String, phoneNo: Int, profilePic: String)
+    func updateUser(firstName: String, lastName: String, email: String, birthDate: String, phoneNo: String, profilePic: String)
     func getUser()
 }
 
@@ -32,39 +32,59 @@ class MyAccountScreenViewModel: MyAccountViewType {
     var updateUserStatus: ReactiveListener<UpdateAccountApiResult> = ReactiveListener(.none)
     
     // Update User
-    func updateUser(firstName: String, lastName: String, email: String, birthDate: String, phoneNo: Int, profilePic: String) {
-        UserService.updateUser(firstName: firstName, lastName: lastName ,email: email, phoneNo: phoneNo, birthDate: birthDate, profilePic: profilePic) { res in
-            switch res {
-            case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-//                        print(mainData)
-//                        if let statusCode = mainData["status"] as? Int {
-//                            if statusCode == 200 {
-//                                self.updateUserStatus.value = .success
-//                            } else {
-//                                // Show Error to User
-//                                let userMsg = mainData["user_msg"] as? String
-//                                self.updateUserStatus.value = .failure(msg: userMsg)
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                } else {
-//                    print("Some Another Error")
-//                }
-            
-                if let statusCode = value.status, statusCode == 200 {
-                    self.updateUserStatus.value = .success
-                } else {
-                    self.updateUserStatus.value = .failure(msg: value.userMsg)
+    func updateUser(firstName: String, lastName: String, email: String, birthDate: String, phoneNo: String, profilePic: String) {
+        // Get Validations Results
+        let firstNameResult = Validator.firstName(str: firstName)
+        let lastNameResult = Validator.lastName(str: lastName)
+        let emailResult = Validator.email(str: email)
+        let phoneResult = Validator.phoneNumber(str: phoneNo)
+        
+        if firstNameResult.result && lastNameResult.result && emailResult.result && phoneResult.result {
+            let actualPhoneNum: Int = Int(phoneNo)!
+                
+            UserService.updateUser(firstName: firstName, lastName: lastName ,email: email, phoneNo: actualPhoneNum, birthDate: birthDate, profilePic: profilePic) { res in
+                switch res {
+                case .success(value: let value):
+    //                if let curData = value as? Data {
+    //                    do {
+    //                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
+    //                        print(mainData)
+    //                        if let statusCode = mainData["status"] as? Int {
+    //                            if statusCode == 200 {
+    //                                self.updateUserStatus.value = .success
+    //                            } else {
+    //                                // Show Error to User
+    //                                let userMsg = mainData["user_msg"] as? String
+    //                                self.updateUserStatus.value = .failure(msg: userMsg)
+    //                            }
+    //                        }
+    //                    } catch let err {
+    //                        print(err.localizedDescription)
+    //                    }
+    //                } else {
+    //                    print("Some Another Error")
+    //                }
+                
+                    if let statusCode = value.status, statusCode == 200 {
+                        self.updateUserStatus.value = .success
+                    } else {
+                        self.updateUserStatus.value = .failure(msg: value.userMsg)
+                    }
+                case .failure(error: let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(error: let error):
-                print(error.localizedDescription)
             }
+        } else if !firstNameResult.result {
+            self.updateUserStatus.value = .failure(msg: firstNameResult.message)
+        } else if !lastNameResult.result {
+            self.updateUserStatus.value = .failure(msg: lastNameResult.message)
+        } else if !emailResult.result {
+            self.updateUserStatus.value = .failure(msg: emailResult.message)
+        } else {
+            self.updateUserStatus.value = .failure(msg: phoneResult.message)
         }
+        
+        
     }
     
     // Get Current User

@@ -16,6 +16,7 @@ class MyAccountViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var phoneField: UITextField!
     @IBOutlet weak var birthDateField: UITextField!
+    @IBOutlet weak var resetPasswordBtn: UIButton!
     
     // Variables
     var user: UserData!
@@ -43,7 +44,7 @@ class MyAccountViewController: UIViewController {
             self.viewModel.getUser()
         } else {
             user = UserDefaults.standard.getUserInstance()
-            currentProfileImgUrl = user.profilePic ?? "user_male"
+            currentProfileImgUrl = user.profilePic ?? "profileDemo"
             setUserDetails(user: user)
             hideLoader(viewLoaderScreen: loaderViewScreen)
         }
@@ -55,31 +56,15 @@ class MyAccountViewController: UIViewController {
     
     @IBAction func editProfileBtnTapped(_ sender: UIButton) {
         if sender.currentTitle == "Edit Profile" {
+            // Hide Reset Password Button
+            resetPasswordBtn.isHidden = true
             sender.setTitle("Submit", for: .normal)
         } else {
-            // Get Validations Results
-            let firstNameResult = Validator.firstName(str: firstNameField.text ?? "")
-            let lastNameResult = Validator.lastName(str: lastNameField.text ?? "")
-            let emailResult = Validator.email(str: emailField.text ?? "")
-            let phoneResult = Validator.phoneNumber(str: phoneField.text ?? "")
-
-            
-            // Check all Validations
-            if firstNameResult.result && lastNameResult.result && emailResult.result && phoneResult.result {
-                let actualPhoneNum: Int = Int(phoneField.text!)!
-                
-                // Make Request
-                viewModel.updateUser(firstName: firstNameField.text!, lastName: lastNameField.text! ,email: emailField.text!, birthDate: birthDateField.text ?? "", phoneNo: actualPhoneNum, profilePic: convertImageToBase64String(img: profileImg.image!))
-                
-                showLoader(view: self.view, aicView: &loaderViewScreen)
-            } else if !emailResult.result {
-                showErrorAlert(msg: emailResult.message)
-            } else {
-                showErrorAlert(msg: phoneResult.message)
-            }
+            self.viewModel.updateUser(firstName: firstNameField.text ?? "", lastName: lastNameField.text ?? "", email: emailField.text ?? "", birthDate: birthDateField.text ?? "", phoneNo: phoneField.text ?? "", profilePic: "")
             
             // Send Request
             sender.setTitle("Edit Profile", for: .normal)
+            resetPasswordBtn.isHidden = false
         }
         toggleEditableFieldInteraction()
     }
@@ -115,7 +100,7 @@ class MyAccountViewController: UIViewController {
     
     // Error Alert Function
     func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
         }
@@ -156,6 +141,12 @@ extension MyAccountViewController {
         
         // Configure Date Picker
         createDatePicker()
+        
+        // Add Border to profileImg
+        profileImg.layer.masksToBounds = true
+        profileImg.layer.borderWidth = 1.5
+        profileImg.layer.borderColor = UIColor.white.cgColor
+        profileImg.layer.cornerRadius = profileImg.bounds.width / 2
     }
     
     // Date Picker BirthDate
@@ -287,7 +278,7 @@ extension MyAccountViewController {
         if let imgName = user.profilePic, imgName.count > 0 {
             profileImg.image = convertBase64StringToImage(imageBase64String: imgName)
         } else {
-            profileImg.image = UIImage(named: "user_male")
+            profileImg.image = UIImage(named: "profileDemo")
         }
         
         // Set Birthdate
