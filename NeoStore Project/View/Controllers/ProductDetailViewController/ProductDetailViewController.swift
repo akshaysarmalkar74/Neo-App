@@ -259,7 +259,22 @@ extension ProductDetailViewController: ProductDetailFooterDelegate {
 
 extension ProductDetailViewController: ProductBuyViewControllerDelegate, ShareButtonDelegate {
     func didTapShareBtn() {
-        print("Hello Share Btn")
+        let productName = curProduct?.name ?? ""
+        let productProducer = curProduct?.producer ?? ""
+        let productRating = curProduct?.rating ?? 0
+        
+        let sharableText = """
+        Name - \(productName)
+        Producer - \(productProducer)
+        Rating - \(productRating)
+        """
+        
+        let items: [Any] = [sharableText]
+        
+        
+        // Create Activity View Controller
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: [])
+        self.present(activityViewController, animated: true, completion: nil)
     }
     
     
