@@ -43,6 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Back Button Minimal
         let BarButtonItemAppearance = UIBarButtonItem.appearance()
         BarButtonItemAppearance.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.clear], for: .normal)
+        UINavigationBar.appearance().backgroundColor = .mainRed
         
         return true
     }

@@ -61,13 +61,15 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         // Update Height of Slider Image Constraint
         sliderHeightConstrant.constant = screenHeight * 0.35
         
+        customiseNavbar()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        // Show Navigation Bar
         
-        // Fetch Account Details
-//        self.viewModel.fetchAccountDetails()
+        
         configureSideMenu()
     }
 

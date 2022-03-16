@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,30 +21,40 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="133" translatesAutoresizingMaskIntoConstraints="NO" id="mjS-7F-KXD">
-                    <rect key="frame" x="20" y="0.0" width="374" height="67"/>
+                    <rect key="frame" x="20" y="0.0" width="374" height="66"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TOTAL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLW-dV-ObG">
-                            <rect key="frame" x="0.0" y="0.0" width="51" height="67"/>
+                            <rect key="frame" x="0.0" y="0.0" width="51" height="66"/>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
                             <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41G-ME-0Lb">
-                            <rect key="frame" x="332.5" y="0.0" width="41.5" height="67"/>
+                            <rect key="frame" x="332.5" y="0.0" width="41.5" height="66"/>
                             <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="15"/>
                             <color key="textColor" red="0.10980392160000001" green="0.10980392160000001" blue="0.10980392160000001" alpha="0.84705882349999995" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                 </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zoL-d6-xyy">
+                    <rect key="frame" x="0.0" y="66" width="414" height="1"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="r3f-Ly-VIc"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="mjS-7F-KXD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Hy6-ps-bbP"/>
                 <constraint firstItem="mjS-7F-KXD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="LYb-YM-0OF"/>
+                <constraint firstItem="zoL-d6-xyy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="MQ9-rd-uec"/>
+                <constraint firstAttribute="bottom" secondItem="zoL-d6-xyy" secondAttribute="bottom" id="N9T-k1-wp2"/>
                 <constraint firstAttribute="trailing" secondItem="mjS-7F-KXD" secondAttribute="trailing" constant="20" id="bem-En-JP3"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="mjS-7F-KXD" secondAttribute="bottom" id="gqa-14-mLG"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="zoL-d6-xyy" secondAttribute="trailing" id="ee9-Vc-Q5j"/>
+                <constraint firstItem="zoL-d6-xyy" firstAttribute="top" secondItem="mjS-7F-KXD" secondAttribute="bottom" id="esp-XZ-KTO"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>

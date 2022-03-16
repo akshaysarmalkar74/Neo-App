@@ -40,6 +40,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
         
         // Set Observers
         setupObservers()
+        customiseNavbar()
         
         cartTable.delegate = self
         cartTable.dataSource = self
@@ -109,6 +110,21 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
         // Present Alert
         self.present(alertVc, animated: true, completion: nil)
     }
+    
+    // Customise Navigation Bar
+    func customiseNavbar() {
+        // Set Title
+        self.title = "My Cart"
+        
+        // Customise Naviagtion Bar
+        self.navigationController?.navigationBar.barTintColor = .mainRed
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        // Customise Back Button Color & Title
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+    }
+
     
 }
 

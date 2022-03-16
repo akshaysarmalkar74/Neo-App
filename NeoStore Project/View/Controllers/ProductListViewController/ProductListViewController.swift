@@ -75,7 +75,7 @@ class ProductListViewController: UIViewController {
             guard let `self` = self else {return}
             if value {
                 DispatchQueue.main.async {
-                    self.contentHidderView.removeFromSuperview()
+                    self.contentHidderView.isHidden = true
                     
                     self.hideLoader(viewLoaderScreen: self.screenLoaderScreen)
                     self.tableView.reloadData()

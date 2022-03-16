@@ -1,0 +1,6 @@
+framework module Pods_NeoStore_Project {
+  umbrella header "Pods-NeoStore Project-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -41,7 +41,15 @@ class AddressListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         allAddress = UserDefaults.standard.getAllAddress()
-        tableView.reloadData()
+        
+        // Show/Hide Table View
+        if allAddress.isEmpty {
+            tableView.isHidden = true
+        } else {
+            tableView.isHidden = false
+            tableView.reloadData()
+        }
+//        tableView.reloadData()
     }
     
     // Customise Navbar

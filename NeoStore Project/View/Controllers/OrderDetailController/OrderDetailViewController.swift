@@ -31,9 +31,11 @@ class OrderDetailViewController: UIViewController {
         // Set Delegate and DataSource
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.separatorStyle = .none
         
         // Set Observers
         setupObservers()
+        customiseNavbar(orderId: orderId)
         
         // Register Cell
         tableView.register(UINib(nibName: "OrderDetailCell", bundle: nil), forCellReuseIdentifier: "OrderDetailCell")
@@ -83,6 +85,21 @@ class OrderDetailViewController: UIViewController {
         // Present Alert
         self.present(alertVc, animated: true, completion: nil)
     }
+    
+    // Customise Navigation Bar
+    func customiseNavbar(orderId: Int) {
+        // Set Title
+        self.title = "Order Id: \(orderId)"
+        
+        // Customise Naviagtion Bar
+        self.navigationController?.navigationBar.barTintColor = .mainRed
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        // Customise Back Button Color & Title
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+    }
+
 }
 
 extension OrderDetailViewController: UITableViewDelegate, UITableViewDataSource {

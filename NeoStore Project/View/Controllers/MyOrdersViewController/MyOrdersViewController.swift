@@ -33,9 +33,12 @@ class MyOrdersViewController: UIViewController {
         
         // Register Table View Cell
         tableView.register(UINib(nibName: "MyOrderCell", bundle: nil), forCellReuseIdentifier: "MyOrderCell")
+        tableView.separatorStyle = .none
         
         // fetch Orders
         viewModel.fetchOrders()
+        
+        customiseNavbar()
     }
     
     // Setup Observers
@@ -77,6 +80,21 @@ class MyOrdersViewController: UIViewController {
         // Present Alert
         self.present(alertVc, animated: true, completion: nil)
     }
+    
+    // Customise Navigation Bar
+    func customiseNavbar() {
+        // Set Title
+        self.title = "My Orders"
+        
+        // Customise Naviagtion Bar
+        self.navigationController?.navigationBar.barTintColor = .mainRed
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        
+        // Customise Back Button Color & Title
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+    }
+
 }
 
 extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {

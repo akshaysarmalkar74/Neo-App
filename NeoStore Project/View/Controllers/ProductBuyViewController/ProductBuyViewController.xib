@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -10,6 +11,9 @@
     <customFonts key="customFonts">
         <array key="Gotham Book Regular.otf">
             <string>Gotham-Book</string>
+        </array>
+        <array key="GothamMedium.otf">
+            <string>Gotham-Medium</string>
         </array>
     </customFonts>
     <objects>
@@ -29,7 +33,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eIa-oX-g99">
-                    <rect key="frame" x="30" y="104" width="354" height="480.5"/>
+                    <rect key="frame" x="30" y="104" width="354" height="515"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qMX-e7-dTQ">
                             <rect key="frame" x="13" y="33" width="328" height="27"/>
@@ -38,34 +42,39 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="o0c-Ms-Dlj">
-                            <rect key="frame" x="48.5" y="93" width="257" height="178"/>
+                            <rect key="frame" x="35.5" y="93" width="283" height="212.5"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="178" id="8aw-Ym-8uk"/>
-                                <constraint firstAttribute="width" constant="257" id="KbD-2u-CGW"/>
+                                <constraint firstAttribute="width" secondItem="o0c-Ms-Dlj" secondAttribute="height" multiplier="4:3" id="2IX-BT-3uz"/>
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Qty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bSb-pe-e1O">
-                            <rect key="frame" x="13" y="304" width="328" height="21.5"/>
+                            <rect key="frame" x="13" y="338.5" width="328" height="21.5"/>
                             <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBx-E1-Aq9">
-                            <rect key="frame" x="80" y="412.5" width="194" height="35"/>
-                            <color key="backgroundColor" red="1" green="0.061129800929999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="80" y="447" width="194" height="35"/>
+                            <color key="backgroundColor" red="0.85882352941176465" green="0.082352941176470587" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="194" id="IJY-WT-jw8"/>
                                 <constraint firstAttribute="height" constant="35" id="aRh-jS-Eto"/>
                             </constraints>
+                            <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="18"/>
                             <state key="normal" title="SUBMIT">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                             <connections>
                                 <action selector="submitBtnTapped:" destination="-1" eventType="touchUpInside" id="hJS-ju-ND2"/>
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ySM-b8-CAC">
-                            <rect key="frame" x="121" y="347.5" width="112" height="43"/>
+                            <rect key="frame" x="121" y="382" width="112" height="43"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="43" id="kmj-GM-mu0"/>
                                 <constraint firstAttribute="width" constant="112" id="nua-MV-8iQ"/>
@@ -81,6 +90,7 @@
                         <constraint firstItem="KBx-E1-Aq9" firstAttribute="top" secondItem="ySM-b8-CAC" secondAttribute="bottom" constant="22" id="Mra-4o-4s6"/>
                         <constraint firstItem="bSb-pe-e1O" firstAttribute="top" secondItem="o0c-Ms-Dlj" secondAttribute="bottom" constant="33" id="TV4-c6-EGg"/>
                         <constraint firstItem="bSb-pe-e1O" firstAttribute="leading" secondItem="eIa-oX-g99" secondAttribute="leading" constant="13" id="Th2-Sh-fuV"/>
+                        <constraint firstItem="o0c-Ms-Dlj" firstAttribute="width" secondItem="eIa-oX-g99" secondAttribute="width" multiplier="0.8" id="X9d-sY-nA7"/>
                         <constraint firstItem="ySM-b8-CAC" firstAttribute="centerX" secondItem="eIa-oX-g99" secondAttribute="centerX" id="YXz-li-HFm"/>
                         <constraint firstItem="KBx-E1-Aq9" firstAttribute="centerX" secondItem="eIa-oX-g99" secondAttribute="centerX" id="dBa-hx-Lvc"/>
                         <constraint firstItem="o0c-Ms-Dlj" firstAttribute="centerX" secondItem="eIa-oX-g99" secondAttribute="centerX" id="dh9-Kr-g3Y"/>
@@ -92,7 +102,7 @@
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                            <integer key="value" value="5"/>
+                            <integer key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>

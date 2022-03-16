@@ -57,7 +57,7 @@ class ProductDetailViewController: UIViewController {
             case .success(let product):
                 self.curProduct = product
                 DispatchQueue.main.async {
-                    self.contentHidderView.removeFromSuperview()
+                    self.contentHidderView.isHidden = true
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     // Customise Navbar
                     self.customiseNavbar(pageTitle: self.curProduct?.name ?? "")
