@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddressListViewController" customModule="NeoStore_Project" customModuleProvider="target">
             <connections>
+                <outlet property="contentHidderView" destination="2gT-dK-oJB" id="YBx-6c-OBz"/>
                 <outlet property="tableView" destination="t4A-U8-baL" id="J4V-Ww-gYh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -35,6 +36,10 @@
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gT-dK-oJB">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -42,10 +47,14 @@
                 <constraint firstItem="t4A-U8-baL" firstAttribute="top" secondItem="xuk-ay-fSm" secondAttribute="bottom" constant="12" id="7Wu-h4-Idh"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="t4A-U8-baL" secondAttribute="bottom" id="ClL-Mo-eJf"/>
                 <constraint firstItem="xuk-ay-fSm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="12" id="EhX-x8-6kK"/>
+                <constraint firstItem="2gT-dK-oJB" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="FRa-AG-as8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2gT-dK-oJB" secondAttribute="trailing" id="Mi6-jf-bgn"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="xuk-ay-fSm" secondAttribute="trailing" constant="12" id="Rcn-aX-Cve"/>
                 <constraint firstItem="t4A-U8-baL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-13" id="ZqP-RV-BFo"/>
                 <constraint firstItem="t4A-U8-baL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="13" id="jsY-Tg-PxU"/>
+                <constraint firstItem="2gT-dK-oJB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="krt-lU-Iiz"/>
                 <constraint firstItem="xuk-ay-fSm" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="12" id="qEX-OD-gOx"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="2gT-dK-oJB" secondAttribute="bottom" id="xpe-V9-OIh"/>
             </constraints>
             <point key="canvasLocation" x="-113.04347826086958" y="34.821428571428569"/>
         </view>

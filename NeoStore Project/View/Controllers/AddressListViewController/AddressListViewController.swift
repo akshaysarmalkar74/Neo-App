@@ -9,12 +9,14 @@ import UIKit
 
 class AddressListViewController: UIViewController {
 
+    @IBOutlet weak var contentHidderView: UIView!
     @IBOutlet weak var tableView: UITableView!
     var allAddress = [String]()
     let user = UserDefaults.standard.getUserInstance()
     var currentSelectedIdx = 0
     var viewModel: AddressListViewType!
     var loaderViewScreen: UIView?
+    
     
     init(viewModel: AddressListViewType) {
         super.init(nibName: "AddressListViewController", bundle: nil)
@@ -44,12 +46,11 @@ class AddressListViewController: UIViewController {
         
         // Show/Hide Table View
         if allAddress.isEmpty {
-            tableView.isHidden = true
+            contentHidderView.isHidden = false
         } else {
-            tableView.isHidden = false
-            tableView.reloadData()
+            contentHidderView.isHidden = true
         }
-//        tableView.reloadData()
+        tableView.reloadData()
     }
     
     // Customise Navbar
@@ -97,7 +98,7 @@ class AddressListViewController: UIViewController {
     
     // Success Alert Function
     func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Successfully Placed Order", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
             
@@ -118,7 +119,7 @@ class AddressListViewController: UIViewController {
     
     // Error Alert Function
     func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
             self?.dismiss(animated: true, completion: nil)
             
@@ -155,9 +156,9 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
         let fullName = "\(firstName) \(lastName)"
         
         if indexPath.row == currentSelectedIdx {
-            cell.configureCell(name: fullName, address: address, isUnchecked: false)
+            cell.configureCell(name: fullName, address: address, isChecked: true)
         } else {
-            cell.configureCell(name: fullName, address: address, isUnchecked: true)
+            cell.configureCell(name: fullName, address: address, isChecked: false)
         }
         
         return cell

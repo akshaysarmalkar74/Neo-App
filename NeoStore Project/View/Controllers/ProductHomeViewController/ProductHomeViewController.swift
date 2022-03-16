@@ -53,7 +53,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         categoryCollectionView.register(UINib(nibName: "CategoryViewCell", bundle: nil), forCellWithReuseIdentifier: "CategoryCell")
         
         // Set Timer
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(changeSliderImg(_:)), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(changeSliderImg(_:)), userInfo: nil, repeats: true)
         
         // Configure Slider Page Control
         sliderPageControl.numberOfPages = sliderImages.count
@@ -83,7 +83,9 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         let indexPath = IndexPath(item: currentIdx, section: 0)
         sliderPageControl.currentPage = currentIdx
         sliderCollectionView.layoutIfNeeded()
+        sliderCollectionView.isPagingEnabled = false
         sliderCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        sliderCollectionView.isPagingEnabled = true
     }
     
     // Customise Navigation Bar

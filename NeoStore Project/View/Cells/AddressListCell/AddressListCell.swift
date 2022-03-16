@@ -25,13 +25,13 @@ class AddressListCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(name: String, address: String, isUnchecked: Bool) {
+    func configureCell(name: String, address: String, isChecked: Bool) {
         nameLabel.text = name
         addressLabel.text = address
-        if isUnchecked {
-            radioImg.image = UIImage(named: "checked_icon")
+        if isChecked {
+            radioImg.image = UIImage(named: "on-btn")
         } else {
-            radioImg.image = UIImage(named: "uncheck_icon")
+            radioImg.image = UIImage(named: "off-btn")
         }
     }
     
