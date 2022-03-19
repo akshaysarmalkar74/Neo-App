@@ -249,7 +249,7 @@ extension MyAccountViewController {
         self.title = "My Account"
         
         // Customise Naviagtion Bar
-//        self.navigationController?.navigationBar.barTintColor = .mainRed
+        self.navigationController?.navigationBar.barTintColor = UIColor.blue
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         // Customise Back Button Color & Title
