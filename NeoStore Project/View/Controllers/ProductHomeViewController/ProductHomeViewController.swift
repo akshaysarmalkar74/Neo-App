@@ -129,23 +129,23 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
             self.navigationController?.pushViewController(myCartVc, animated: true)
             self.sideMenu.dismiss(animated: false, completion: nil)
         case .Tables:
-            let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Tables.rawValue, viewModel: myCartVm, title: "Tables")
+            let myCartVm = ProductListViewModel(categoryId: ProductCategoryId.Tables.rawValue)
+            let myCartVc = ProductListViewController(viewModel: myCartVm, title: "Tables")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Sofas:
-            let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Sofas.rawValue, viewModel: myCartVm, title: "Sofas")
+            let myCartVm = ProductListViewModel(categoryId: ProductCategoryId.Sofas.rawValue)
+            let myCartVc = ProductListViewController(viewModel: myCartVm, title: "Sofas")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Chair:
-            let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Chair.rawValue, viewModel: myCartVm, title: "Chairs")
+            let myCartVm = ProductListViewModel(categoryId: ProductCategoryId.Chair.rawValue)
+            let myCartVc = ProductListViewController(viewModel: myCartVm, title: "Chairs")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Cupboard:
-            let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Cupboards.rawValue, viewModel: myCartVm, title: "CupBoards")
+            let myCartVm = ProductListViewModel(categoryId: ProductCategoryId.Cupboards.rawValue)
+            let myCartVc = ProductListViewController(viewModel: myCartVm, title: "CupBoards")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .MyAccount:
@@ -246,8 +246,8 @@ extension ProductHomeViewController: UICollectionViewDelegateFlowLayout, UIColle
                 categoryId = 0
                 pageTitle = ""
             }
-            let viewModel = ProductListViewModel()
-            let vc = ProductListViewController(categoryId: String(categoryId), viewModel: viewModel, title: pageTitle)
+            let viewModel = ProductListViewModel(categoryId: String(categoryId))
+            let vc = ProductListViewController(viewModel: viewModel, title: pageTitle)
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -17,47 +17,48 @@ protocol ProductListViewType {
     var fetchProductsStatus: ReactiveListener<FetchProductsApiResult> {get set}
     var tableViewShouldReload: ReactiveListener<Bool> {get set}
     var products: [SpecificProduct] {get set}
+    var categoryId: String! {get}
+    var page: Int {get set}
+    var isPaginating: Bool {get set}
+    var shouldPaginate: Bool {get set}
     
-    func fetchProducts(categoryId: String, page: Int)
+    func fetchProducts()
     func getNumOfRows() -> Int
     func getItemAndIndexPath(index: Int) -> SpecificProduct
+    func getShouldPaginate() -> Bool
+    func getIsPaginating() -> Bool
 }
 
 class ProductListViewModel: ProductListViewType {
+    var page: Int = 1
+    var isPaginating: Bool = false
+    var shouldPaginate: Bool = false
+    
     var products = [SpecificProduct]()
+    var categoryId: String!
+    
+    init(categoryId: String) {
+        self.categoryId = categoryId
+    }
     
     var tableViewShouldReload: ReactiveListener<Bool> = ReactiveListener(false)
     var fetchProductsStatus: ReactiveListener<FetchProductsApiResult> = ReactiveListener(.none)
     
-    func fetchProducts(categoryId: String, page: Int = 1) {
+    func fetchProducts() {
         ProductService.getProducts(categoryId: categoryId, page: page) { res in
             switch res {
             case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-//                        if let statusCode = mainData["status"] as? Int {
-//                            if statusCode == 200 {
-//                                let tempData = mainData["data"] as? [[String: Any]] ?? [[String: Any]()]
-//                                self.products.append(contentsOf: tempData)
-//                                self.fetchProductsStatus.value = .success
-//                                self.tableViewShouldReload.value = true
-//                            } else {
-//                                // Show Error to User
-//                                let userMsg = mainData["user_msg"] as? String
-//                                self.fetchProductsStatus.value = .failure(msg: userMsg)
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                } else {
-//                    print("Some Another Error")
-//                }
-            
                 // Check for success status
                 if let statusCode = value.status, statusCode == 200 {
                     if let allProducts = value.data {
+                        // Update should Paginate
+                        if allProducts.count % 10 == 0 {
+                            self.shouldPaginate = true
+                        } else {
+                            self.shouldPaginate = false
+                        }
+                        self.isPaginating = false
+                        
                         self.products.append(contentsOf: allProducts)
                         self.fetchProductsStatus.value = .success
                         self.tableViewShouldReload.value = true
@@ -77,5 +78,13 @@ class ProductListViewModel: ProductListViewType {
     
     func getItemAndIndexPath(index: Int) -> SpecificProduct {
         return products[index]
+    }
+    
+    func getShouldPaginate() -> Bool {
+        return shouldPaginate
+    }
+    
+    func getIsPaginating() -> Bool {
+        return isPaginating
     }
 }

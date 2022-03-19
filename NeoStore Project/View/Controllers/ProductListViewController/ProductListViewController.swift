@@ -10,18 +10,14 @@ import UIKit
 class ProductListViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    var categoryId: String!
+    
     var viewModel: ProductListViewType!
-    var page = 1
-    var isPaginating: Bool = false
-    var shouldPaginate: Bool = false
     var screenLoaderScreen: UIView?
     var pageTitle: String!
     @IBOutlet weak var contentHidderView: UIView!
     
-    init(categoryId: String, viewModel: ProductListViewType, title: String) {
+    init(viewModel: ProductListViewType, title: String) {
         super.init(nibName: "ProductListViewController", bundle: nil)
-        self.categoryId = categoryId
         self.viewModel = viewModel
         self.pageTitle = title
     }
@@ -46,8 +42,9 @@ class ProductListViewController: UIViewController {
         tableView.dataSource = self
         tableView.register(UINib(nibName: "ProductListingTableViewCell", bundle: nil), forCellReuseIdentifier: "ProductListingCell")
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         
-        viewModel.fetchProducts(categoryId: categoryId, page: 1)
+        viewModel.fetchProducts()
     }
     
     // Setup Observers
@@ -56,12 +53,7 @@ class ProductListViewController: UIViewController {
             guard let `self` = self else {return}
             switch value {
             case .success:
-                if self.viewModel.products.count % 10 == 0 {
-                    self.shouldPaginate = true
-                } else {
-                    self.shouldPaginate = false
-                }
-                self.isPaginating = false
+                print("In Success")
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.showErrorAlert(msg: msg)
@@ -129,10 +121,10 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height-100-scrollView.frame.size.height) {
-            if !isPaginating && shouldPaginate {
-                page += 1
-                self.viewModel.fetchProducts(categoryId: categoryId, page: page)
-                isPaginating = true
+            if !self.viewModel.getIsPaginating() && self.viewModel.getShouldPaginate() {
+                self.viewModel.page += 1
+                self.viewModel.fetchProducts()
+                self.viewModel.isPaginating = true
             }
         }
     }
