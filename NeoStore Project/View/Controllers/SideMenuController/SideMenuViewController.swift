@@ -48,6 +48,10 @@ class SideMenuViewController: UIViewController {
         
         // Get User & Carts
         user = UserDefaults.standard.getUserInstance()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         self.viewModel.fetchAccount()
     }
     

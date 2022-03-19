@@ -51,16 +51,16 @@
                                         </subviews>
                                     </stackView>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U11-yV-jHZ" customClass="LazyImageView" customModule="NeoStore_Project" customModuleProvider="target">
-                                        <rect key="frame" x="51" y="45" width="237" height="142.5"/>
+                                        <rect key="frame" x="51" y="45" width="237" height="158"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" secondItem="U11-yV-jHZ" secondAttribute="height" multiplier="5:3" id="QU9-xp-b1r"/>
+                                            <constraint firstAttribute="width" secondItem="U11-yV-jHZ" secondAttribute="height" multiplier="6:4" id="QU9-xp-b1r"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BpD-Lr-aj3">
-                                        <rect key="frame" x="13" y="202.5" width="313" height="100"/>
+                                        <rect key="frame" x="13" y="218" width="313" height="100"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Cr8-m3-GyK"/>
@@ -73,19 +73,19 @@
                                         </collectionViewFlowLayout>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DESCRIPTION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZC1-L6-6c7">
-                                        <rect key="frame" x="10" y="343.5" width="319" height="16"/>
+                                        <rect key="frame" x="10" y="359" width="319" height="16"/>
                                         <fontDescription key="fontDescription" name="Gotham-Medium" family="Gotham" pointSize="16"/>
                                         <color key="textColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7vM-9Q-ha7">
-                                        <rect key="frame" x="10" y="367.5" width="319" height="15"/>
+                                        <rect key="frame" x="10" y="383" width="319" height="15"/>
                                         <fontDescription key="fontDescription" name="Gotham-Book" family="Gotham" pointSize="14"/>
                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rOS-7C-mX8">
-                                        <rect key="frame" x="0.0" y="322.5" width="339" height="1"/>
+                                        <rect key="frame" x="0.0" y="338" width="339" height="1"/>
                                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="vcs-L1-NxG"/>

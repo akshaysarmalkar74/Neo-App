@@ -73,6 +73,15 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProductDetailBodyCell", for: indexPath) as! ProductDetailBodyCell
         let currentImgUrl = allImages[indexPath.row].image
         
+        // HighLight the first Image
+        if indexPath.row == 0 {
+            cell.isSelected = true
+            // Show Border
+            cell.productImg.layer.masksToBounds = true
+            cell.productImg.layer.borderWidth = 2
+            cell.productImg.layer.borderColor = UIColor.gray.cgColor
+        }
+        
         if let unWrappedImgUrl = currentImgUrl {
             cell.configureProductDetailBodyCell(img: unWrappedImgUrl)
         }
@@ -83,8 +92,20 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentImgUrl = allImages[indexPath.row].image
         let cell = collectionView.cellForItem(at: indexPath) as! ProductDetailBodyCell
-        cell.isSelected = true
+        let startingCell = collectionView.cellForItem(at: IndexPath(item: 0, section: 0)) as! ProductDetailBodyCell
+       
+        // Hide Border of First Image
+        startingCell.productImg.layer.masksToBounds = true
+        startingCell.productImg.layer.borderWidth = 0
+        startingCell.productImg.layer.borderColor = UIColor.clear.cgColor
         
+        
+        // Show Border
+        cell.productImg.layer.masksToBounds = true
+        cell.productImg.layer.borderWidth = 2
+        cell.productImg.layer.borderColor = UIColor.gray.cgColor
+        
+       
         if let unWrappedImgUrl = currentImgUrl {
             let url = URL(string: unWrappedImgUrl)
             if let actualUrl = url {
@@ -96,7 +117,11 @@ extension ProductDetailBody: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! ProductDetailBodyCell
-        cell.isSelected = false
+        
+        // Hide Border of current selected cell
+        cell.productImg.layer.masksToBounds = true
+        cell.productImg.layer.borderWidth = 0
+        cell.productImg.layer.borderColor = UIColor.clear.cgColor
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

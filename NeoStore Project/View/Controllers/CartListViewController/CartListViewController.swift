@@ -203,8 +203,7 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         let productId = cartItem.product?.id ?? 0
         
         let deleteAction = UIContextualAction(style: .normal, title: nil) { [weak self] _, _, _ in
-            print(productId)
-            self?.viewModel.deleteCart(productId: "\(productId)")
+            self?.showDeleteAlert(productId: productId)
         }
         
         deleteAction.image = UIImage(named: "delete")
@@ -212,7 +211,22 @@ extension CartListViewController: UITableViewDelegate, UITableViewDataSource {
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
-    
+
+    func showDeleteAlert(productId: Int) {
+        let alertVc = UIAlertController(title: nil, message: "Are you sure you want to delete?", preferredStyle: .alert)
+        let deleteBtn = UIAlertAction(title: "Yes", style: .default) { [weak self] deleteAction in
+            self?.viewModel.deleteCart(productId: "\(productId)")
+        }
+        
+        let cancelBtn = UIAlertAction(title: "No", style: .default) { [weak self] cancelAction in
+            self?.dismiss(animated: true, completion: nil)
+        }
+        
+        alertVc.addAction(deleteBtn)
+        alertVc.addAction(cancelBtn)
+        
+        self.present(alertVc, animated: true)
+    }
     
 }
 
