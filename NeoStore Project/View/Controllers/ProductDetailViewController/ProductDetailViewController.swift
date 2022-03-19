@@ -134,8 +134,8 @@ class ProductDetailViewController: UIViewController {
         let id = product?.id
         
         if let mainImgUrl = images[0].image, let mainId = id {
-            let viewModel = ProductRateViewModel()
-            let vc = ProductRateViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
+            let viewModel = ProductRateViewModel(productId: mainId, productImgStrUrl: mainImgUrl, productName: name)
+            let vc = ProductRateViewController(viewModel: viewModel)
             vc.modalPresentationStyle = .overCurrentContext
             vc.modalTransitionStyle = .crossDissolve
             vc.delegate = self

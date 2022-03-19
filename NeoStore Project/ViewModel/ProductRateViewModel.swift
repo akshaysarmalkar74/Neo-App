@@ -14,16 +14,34 @@ enum ProductRateApiResponse {
 }
 
 protocol ProductRateViewType {
+    var productId: Int! {get set}
+    var productImgStrUrl: String! {get set}
+    var productName: String! {get set}
+    var rating: Int {get set}
     var productRateDetailStatus: ReactiveListener<ProductRateApiResponse> {get set}
     
-    func rateProduct(productId: String, rating: Int)
+    func rateProduct()
+    func getProductName() -> String
+    func getProductImgStr() -> String
+    func getRating() -> Int
 }
 
 class ProductRateViewModel: ProductRateViewType {
+    var productId: Int!
+    var productImgStrUrl: String!
+    var productName: String!
+    var rating: Int = 3
+    
+    init(productId: Int, productImgStrUrl: String, productName: String) {
+        self.productId = productId
+        self.productImgStrUrl = productImgStrUrl
+        self.productName = productName
+    }
+    
     var productRateDetailStatus: ReactiveListener<ProductRateApiResponse> = ReactiveListener(.none)
     
-    func rateProduct(productId: String, rating: Int) {
-        ProductService.setProductRating(productId: productId, rating: rating) { res in
+    func rateProduct() {
+        ProductService.setProductRating(productId: String(productId), rating: rating) { res in
             switch res {
             case .success(value: let value):
                 // Check for success status
@@ -38,5 +56,16 @@ class ProductRateViewModel: ProductRateViewType {
         }
     }
     
+    func getProductName() -> String {
+        return productName
+    }
+    
+    func getProductImgStr() -> String {
+        return productImgStrUrl
+    }
+    
+    func getRating() -> Int {
+        return self.rating
+    }
     
 }

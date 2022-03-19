@@ -14,19 +14,12 @@ class ProductRateViewController: UIViewController {
     @IBOutlet var stars: [UIImageView]!
     
     // Variables
-    var productId: Int!
-    var productImgStrUrl: String!
-    var productName: String!
     var viewModel: ProductRateViewType!
     var delegate: ProductBuyViewControllerDelegate?
-    var rating: Int = 3
     var loaderViewScreen: UIView?
     
-    init(productId: Int, productImgStrUrl: String, productName: String, viewModel: ProductRateViewType) {
+    init(viewModel: ProductRateViewType) {
         self.viewModel = viewModel
-        self.productId = productId
-        self.productImgStrUrl = productImgStrUrl
-        self.productName = productName
         super.init(nibName: "ProductRateViewController", bundle: nil)
     }
     
@@ -38,9 +31,9 @@ class ProductRateViewController: UIViewController {
         super.viewDidLoad()
 
         // Set Values to Outlets
-        self.productNameLbl.text = productName
+        self.productNameLbl.text = self.viewModel.getProductName()
         
-        let url = URL(string: productImgStrUrl)
+        let url = URL(string: self.viewModel.getProductImgStr())
         if let actualUrl = url {
             let data = try? Data(contentsOf: actualUrl)
             if let actualData = data {
@@ -56,13 +49,13 @@ class ProductRateViewController: UIViewController {
         addTapGesture(view: view)
         addTapGesture(imgViews: stars)
         
-        paintStars(curRating: rating)
+        paintStars(curRating: self.viewModel.getRating())
         setupObservers()
     }
     
     func paintStars(curRating: Int) {
         for i in 1...5 {
-            if i <= rating {
+            if i <= self.viewModel.getRating() {
                 stars[i-1].image = UIImage(named: "star_check")
             } else {
                 stars[i-1].image = UIImage(named: "star_unchek")
@@ -91,14 +84,14 @@ class ProductRateViewController: UIViewController {
     @objc func imgViewTapped(_ sender: UITapGestureRecognizer) {
         if let senderView = sender.view as? UIImageView {
             if let newRating = stars.firstIndex(of: senderView) {
-                rating = newRating + 1
-                paintStars(curRating: rating)
+                self.viewModel.rating = newRating + 1
+                paintStars(curRating: self.viewModel.getRating())
             }
         }
     }
     
     @IBAction func senderBtnTapped(_ sender: UIButton) {
-        self.viewModel.rateProduct(productId: String(productId), rating: rating)
+        self.viewModel.rateProduct()
         showLoader(view: self.view, aicView: &loaderViewScreen)
     }
     
