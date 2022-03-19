@@ -59,6 +59,7 @@
 		925FA06F27D9C8C400C27C9E /* AddressListViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FA06E27D9C8C400C27C9E /* AddressListViewFooter.swift */; };
 		925FA07127D9C92200C27C9E /* AddressListViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 925FA07027D9C92200C27C9E /* AddressListViewFooter.xib */; };
 		926E497027E5A27500BAECAD /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E496F27E5A27500BAECAD /* SideMenuViewModel.swift */; };
+		926E497427E5B95200BAECAD /* Gotham Book Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 926E497327E5B95200BAECAD /* Gotham Book Italic.ttf */; };
 		928AE81C27C686C600325B64 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298673627C6487600F65D64 /* SideMenuCell.swift */; };
 		9298673327C6436900F65D64 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298673127C6436900F65D64 /* SideMenuViewController.swift */; };
 		9298673427C6436A00F65D64 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9298673227C6436900F65D64 /* SideMenuViewController.xib */; };
@@ -189,6 +190,7 @@
 		925FA06E27D9C8C400C27C9E /* AddressListViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewFooter.swift; sourceTree = "<group>"; };
 		925FA07027D9C92200C27C9E /* AddressListViewFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListViewFooter.xib; sourceTree = "<group>"; };
 		926E496F27E5A27500BAECAD /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
+		926E497327E5B95200BAECAD /* Gotham Book Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Gotham Book Italic.ttf"; path = "../../../../../../../Downloads/Gotham Book Italic/Gotham Book Italic.ttf"; sourceTree = "<group>"; };
 		9298673127C6436900F65D64 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		9298673227C6436900F65D64 /* SideMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuViewController.xib; sourceTree = "<group>"; };
 		9298673627C6487600F65D64 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
@@ -742,6 +744,7 @@
 		92A92DF027AB9BCC00FCEE14 /* Custom Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				926E497327E5B95200BAECAD /* Gotham Book Italic.ttf */,
 				92A2128A27B521CB002C9585 /* Gotham Book Regular.otf */,
 				92A92DF327AB9C3100FCEE14 /* GothamMedium.otf */,
 				92A92DF127AB9C1B00FCEE14 /* GothamBold.otf */,
@@ -990,6 +993,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				925FA07127D9C92200C27C9E /* AddressListViewFooter.xib in Resources */,
+				926E497427E5B95200BAECAD /* Gotham Book Italic.ttf in Resources */,
 				920560BE27D72096006BFE8D /* StoreLocatorCell.xib in Resources */,
 				925EE47727A93FDD00B2B73F /* LaunchScreen.storyboard in Resources */,
 				9298673927C6487600F65D64 /* SideMenuCell.xib in Resources */,
