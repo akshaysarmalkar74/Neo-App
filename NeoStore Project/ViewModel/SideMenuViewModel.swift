@@ -35,7 +35,7 @@ class SideMenuViewModel: SideMenuViewType {
         UserService.getUserDetails { res in
             switch res {
             case .success(value: let value):
-                if let totalCarts = value.data?.totalCarts, totalCarts != 0 {
+                if let totalCarts = value.data?.totalCarts {
                     self.totalNumOfCarts = totalCarts
                     self.tableViewShouldReload.value = true
                 }

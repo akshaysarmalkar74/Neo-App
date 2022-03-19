@@ -17,6 +17,8 @@ protocol CartListViewType {
     var tableViewShouldReload: ReactiveListener<Bool> {get set}
     var fetchCartStatus: ReactiveListener<FetchCartApiResult> {get set}
     
+    var quantity: [Int] {get}
+    var selectedRow: Int {get set}
     var cartItems: [CartListData] {get set}
     var total: Int {get set}
     
@@ -27,12 +29,16 @@ protocol CartListViewType {
     func getTotalPrice() -> Int
     func deleteCart(productId: String)
     func editCart(productId: String, quantity: Int)
+    func numOfQuantityItems() -> Int
+    func itemAtIndexInQuantity(idx: Int) -> Int
+    func getSelectedRow() -> Int
 }
 
 class CartListViewModel: CartListViewType {
     
     var total: Int = 0
-    
+    let quantity = [1,2,3,4,5,6,7]
+    var selectedRow = 0
     var cartItems = [CartListData]()
     
     var tableViewShouldReload: ReactiveListener<Bool> = ReactiveListener(false)
@@ -71,6 +77,18 @@ class CartListViewModel: CartListViewType {
     
     func getTotalPrice() -> Int {
         return total
+    }
+    
+    func numOfQuantityItems() -> Int {
+        return quantity.count
+    }
+    
+    func itemAtIndexInQuantity(idx: Int) -> Int {
+        return quantity[idx]
+    }
+    
+    func getSelectedRow() -> Int {
+        return selectedRow
     }
     
     // MARK - Delete Cart Item

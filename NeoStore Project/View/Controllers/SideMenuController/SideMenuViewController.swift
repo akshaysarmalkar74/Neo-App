@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SideMenuViewControllerDelegate {
+protocol SideMenuViewControllerDelegate: AnyObject {
     func didTapMenuItem(vcAttr: SideMenuControllerNames)
 }
 
@@ -17,7 +17,7 @@ class SideMenuViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // Variables
-    var customDelegate: SideMenuViewControllerDelegate?
+    weak var customDelegate: SideMenuViewControllerDelegate?
     var viewModel: SideMenuViewType!
     
     init(viewModel: SideMenuViewType) {
@@ -27,6 +27,10 @@ class SideMenuViewController: UIViewController {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        print("Side Menu Deleted")
     }
     
     override func viewDidLoad() {
@@ -74,8 +78,8 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuCell", for: indexPath) as! SideMenuCell
-        if indexPath.row == 0 {
-            let totalNumOfCarts = self.viewModel.getTotalNumOfCarts()
+        let totalNumOfCarts = self.viewModel.getTotalNumOfCarts()
+        if indexPath.row == 0 && totalNumOfCarts != 0 {
             cell.configure(img: self.viewModel.itemImages[indexPath.row], name: self.viewModel.itemNames[indexPath.row], num: totalNumOfCarts)
         } else {
             cell.configure(img: self.viewModel.itemImages[indexPath.row], name: self.viewModel.itemNames[indexPath.row], num: nil)

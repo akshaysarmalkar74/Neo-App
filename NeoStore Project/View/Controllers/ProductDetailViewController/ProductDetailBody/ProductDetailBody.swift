@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ShareButtonDelegate {
+protocol ShareButtonDelegate: AnyObject {
     func didTapShareBtn()
 }
 
@@ -20,7 +20,7 @@ class ProductDetailBody: UITableViewCell {
     
     // Variables
     var allImages: [ProductImage]!
-    var delegate: ShareButtonDelegate?
+    weak var delegate: ShareButtonDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

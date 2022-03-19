@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol ProductBuyViewControllerDelegate {
+protocol ProductBuyViewControllerDelegate: AnyObject {
     func didReceiveResponse(userMsg: String?)
 }
 
@@ -21,7 +21,7 @@ class ProductBuyViewController: UIViewController {
     
     // Variables
     var viewModel: ProductBuyViewType!
-    var delegate: ProductBuyViewControllerDelegate?
+    weak var delegate: ProductBuyViewControllerDelegate?
     var isViewShifted = false
     var loaderViewScreen: UIView?
     

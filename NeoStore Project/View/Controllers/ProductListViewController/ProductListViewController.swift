@@ -26,6 +26,10 @@ class ProductListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("Product List Deleted")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

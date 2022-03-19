@@ -139,7 +139,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="mainImg" destination="U11-yV-jHZ" id="uD8-p5-WAK"/>
+                <outlet property="mainImg" destination="U11-yV-jHZ" id="DgE-mw-4mr"/>
                 <outlet property="productDesc" destination="7vM-9Q-ha7" id="3vr-AG-zrJ"/>
                 <outlet property="productImages" destination="BpD-Lr-aj3" id="iV1-dT-anF"/>
                 <outlet property="productPrice" destination="woe-bU-4uq" id="6yv-ev-xBc"/>

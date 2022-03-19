@@ -18,12 +18,9 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
     @IBOutlet weak var cartTable: UITableView!
     
     // Variables
-    var cartProducts = [[String: Any]]()
     var viewModel: CartListViewType!
-    var selectedRow = 0
     let screenWidth = UIScreen.main.bounds.width - 10
     let screenHeight = UIScreen.main.bounds.height / 5
-    let quantity = [1,2,3,4,5,6,7]
     var loaderViewScreen: UIView?
     
     init(viewModel: CartListViewType) {
@@ -251,7 +248,7 @@ extension CartListViewController: CartEditButtonDelegate, UIPickerViewDelegate, 
         }))
         
         alert.addAction(UIAlertAction(title: "Select", style: .default, handler: { [weak self] (UIAlertAction) in
-            if let updatedQuantityNum = self?.selectedRow {
+            if let updatedQuantityNum = self?.viewModel.getSelectedRow() {
                 // Call API
                 self?.viewModel.editCart(productId: "\(id)", quantity: updatedQuantityNum)
             }
@@ -266,15 +263,15 @@ extension CartListViewController: CartEditButtonDelegate, UIPickerViewDelegate, 
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return quantity.count
+        return self.viewModel.numOfQuantityItems()
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(quantity[row])"
+        return "\(self.viewModel.itemAtIndexInQuantity(idx: row))"
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        self.selectedRow = row + 1
+        self.viewModel.selectedRow = row + 1
     }
     
 }
