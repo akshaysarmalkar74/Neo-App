@@ -18,8 +18,6 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     @IBOutlet weak var sliderHeightConstrant: NSLayoutConstraint!
     
     // MARK:- Variables
-    let sliderImages = ["slider_img1", "slider_img2", "slider_img3", "slider_img4"]
-    let categoryImages = ["tableicon", "sofaicon" ,"chairsicon", "cupboardicon"]
     var currentIdx = 0
     var timer: Timer?
     let screenHeight = UIScreen.main.bounds.height
@@ -56,7 +54,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         timer = Timer.scheduledTimer(timeInterval: 3.0, target: self, selector: #selector(changeSliderImg(_:)), userInfo: nil, repeats: true)
         
         // Configure Slider Page Control
-        sliderPageControl.numberOfPages = sliderImages.count
+        sliderPageControl.numberOfPages = self.viewModel.sliderImages.count
         
         // Update Height of Slider Image Constraint
         sliderHeightConstrant.constant = screenHeight * 0.35
@@ -73,7 +71,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
 
     
     @objc func changeSliderImg(_ sender: Timer) {
-        if currentIdx < sliderImages.count - 1 {
+        if currentIdx < self.viewModel.getSliderTotal() - 1 {
             currentIdx += 1
         } else {
             currentIdx = 0
@@ -174,31 +172,6 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         }
     }
     
-//    func setRootToLoginController() {
-//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-//            print(appDelegate.rootNavVc.viewControllers)
-//            print(appDelegate.rootNavVc.viewControllers.contains(ProductHomeViewController(viewModel: ProductHomeViewModel())))
-//        var isPopped = false
-//            for controller in appDelegate.rootNavVc.viewControllers {
-//                print("In Loop")
-//                if controller.isKind(of: LoginScreenViewController.self) {
-//                    print("True")
-//                    self.navigationController?.popToViewController(controller, animated: true)
-//                    isPopped = true
-//                    break
-//                }
-//            }
-//
-//            if !isPopped {
-//                print("iSPopped")
-//                appDelegate.rootNavVc.viewControllers[0] = LoginScreenViewController(viewModel: LoginScreenViewModel())
-//                print(appDelegate.rootNavVc.viewControllers)
-//                appDelegate.rootNavVc.popToRootViewController(animated: true)
-//            }
-//
-//        }
-//    }
-    
     func setRootToLogInController() {
             // Clear User Defaults
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
@@ -222,25 +195,28 @@ extension ProductHomeViewController: UICollectionViewDelegateFlowLayout, UIColle
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.restorationIdentifier == "SliderCollectionView" {
             return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        } else {
+            return CGSize(width: (collectionView.frame.width - 12) / 2, height: (collectionView.frame.width - 12) / 2)
         }
-        return CGSize(width: (collectionView.frame.width - 12) / 2, height: (collectionView.frame.width - 12) / 2)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.restorationIdentifier == "SliderCollectionView" {
-            return sliderImages.count
+            return self.viewModel.getSliderTotal()
+        } else {
+            return self.viewModel.getCategoryTotal()
         }
-        return categoryImages.count
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.restorationIdentifier == "SliderCollectionView" {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SliderCell", for: indexPath) as! SliderCell
-            cell.productImg.image = UIImage(named: sliderImages[indexPath.row])
+            cell.productImg.image = UIImage(named: self.viewModel.getSliderImgAtIdx(idx: indexPath.row))
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryViewCell
-            cell.categoryImg.image = UIImage(named: categoryImages[indexPath.row])
+            cell.categoryImg.image = UIImage(named: self.viewModel.getCategoryAtIndex(idx: indexPath.row))
             return cell
         }
     }

@@ -14,55 +14,40 @@ enum FetchAccountDetail {
 }
 
 protocol ProductHomeViewType {
-    var fetchAccountDetailStatus: ReactiveListener<FetchAccountDetail> {get set}
+    var sliderImages: [String] {get}
+    var categoryImages: [String] {get}
     var totalCartProducts: Int {get set}
     
-//    func fetchAccountDetails()
+    func getSliderTotal() -> Int
+    func getCategoryTotal() -> Int
+    func getCategoryAtIndex(idx: Int) -> String
+    func getSliderImgAtIdx(idx: Int) -> String
     func getTotalCartProduct() -> Int
 }
 
 class ProductHomeViewModel: ProductHomeViewType {
-    
+    let sliderImages = ["slider_img1", "slider_img2", "slider_img3", "slider_img4"]
+    let categoryImages = ["tableicon", "sofaicon" ,"chairsicon", "cupboardicon"]
     var totalCartProducts: Int = 0
-    
-    var fetchAccountDetailStatus: ReactiveListener<FetchAccountDetail> = ReactiveListener(.none)
-    
-//    func fetchAccountDetails() {
-//        UserService.getUserDetails { res in
-//            switch res {
-//            case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-//
-//                        if let statusCode = mainData["status"] as? Int {
-//                            if statusCode == 200 {
-//                                let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
-//                                let user = tempData["user_data"] as? [String: Any] ?? [String: Any]()
-//
-//                                // Update User Defaults
-//                                UserDefaults.standard.saveUser(value: user)
-//
-//                                // Update Cart Number
-//                                self.totalCartProducts = tempData["total_carts"] as? Int ?? 0
-//                                self.fetchAccountDetailStatus.value = .success
-//                            } else {
-//                                self.fetchAccountDetailStatus.value = .failure
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                }
-//            case .failure(error: let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
     
     func getTotalCartProduct() -> Int {
         return totalCartProducts
     }
 
+    func getSliderTotal() -> Int {
+        return sliderImages.count
+    }
+    
+    func getCategoryTotal() -> Int {
+        return categoryImages.count
+    }
+    
+    func getSliderImgAtIdx(idx: Int) -> String {
+        return sliderImages[idx]
+    }
+    
+    func getCategoryAtIndex(idx: Int) -> String {
+        return categoryImages[idx]
+    }
     
 }
