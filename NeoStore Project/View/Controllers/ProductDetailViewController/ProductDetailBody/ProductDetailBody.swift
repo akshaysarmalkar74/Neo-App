@@ -48,6 +48,10 @@ class ProductDetailBody: UITableViewCell {
             if let actualUrl = url {
                 mainImg.loadImage(fromURL: actualUrl, placeHolderImage: "place")
             }
+            
+            mainImg.layer.masksToBounds = true
+            mainImg.layer.borderWidth = 1.5
+            mainImg.layer.borderColor = UIColor.green.cgColor
         }
         
         // Reload Collection View

@@ -21,7 +21,16 @@ class SideMenuViewController: UIViewController {
     let itemImages = ["shoppingcart_icon", "tables_icon", "sofa_icon", "chair", "cupboard_icon", "username_icon", "storelocator_icon", "myorders_icon", "logout_icon"]
     var user: UserData!
     var customDelegate: SideMenuViewControllerDelegate?
-    var totalNumOfCarts: Int!
+    var viewModel: SideMenuViewType!
+    
+    init(viewModel: SideMenuViewType) {
+        self.viewModel = viewModel
+        super.init(nibName: "SideMenuViewController", bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +43,26 @@ class SideMenuViewController: UIViewController {
         tableView.register(UINib(nibName: "SideMenuCell", bundle: nil), forCellReuseIdentifier: "SideMenuCell")
         
         
-        // Get User
+        // Setup Observers
+        setupObservers()
+        
+        // Get User & Carts
         user = UserDefaults.standard.getUserInstance()
+        self.viewModel.fetchAccount()
     }
-
+    
+    // Setup Observers
+    func setupObservers() {
+        self.viewModel.tableViewShouldReload.bindAndFire { [weak self] (value) in
+            guard let `self` = self else {return}
+            if value {
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+                
+            }
+        }
+    }
 }
 
 
@@ -49,7 +74,8 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuCell", for: indexPath) as! SideMenuCell
         if indexPath.row == 0 {
-            cell.configure(img: itemImages[indexPath.row], name: itemNames[indexPath.row], num: 2)
+            let totalNumOfCarts = self.viewModel.getTotalNumOfCarts()
+            cell.configure(img: itemImages[indexPath.row], name: itemNames[indexPath.row], num: totalNumOfCarts)
         } else {
             cell.configure(img: itemImages[indexPath.row], name: itemNames[indexPath.row], num: nil)
         }

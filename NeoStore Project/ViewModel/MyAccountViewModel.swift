@@ -125,7 +125,7 @@ class MyAccountScreenViewModel: MyAccountViewType {
                         self.userDetailsStatus.value = .success(user: userData)
                     }
                 } else {
-                    self.userDetailsStatus.value = .failure(msg: value.userMsg)
+//                    self.userDetailsStatus.value = .failure(msg: value.userMsg)
                 }
             case .failure(error: let error):
                 print(error.localizedDescription)

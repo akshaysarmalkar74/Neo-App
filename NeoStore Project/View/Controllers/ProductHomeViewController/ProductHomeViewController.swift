@@ -9,7 +9,7 @@ import UIKit
 import SideMenu
 
 class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegate {
-    let sideMenu = SideMenuNavigationController(rootViewController: SideMenuViewController())
+    let sideMenu = SideMenuNavigationController(rootViewController: SideMenuViewController(viewModel: SideMenuViewModel()))
     
     // MARK:- IBOutlets
     @IBOutlet weak var sliderCollectionView: UICollectionView!
@@ -68,8 +68,6 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // Show Navigation Bar
-        
-        
         configureSideMenu()
     }
 
@@ -115,11 +113,6 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     
     // MARK:- Side Menu
     func configureSideMenu() {
-        if let tempSideController = sideMenu.navigationController?.viewControllers[0] as? SideMenuViewController {
-            print("Done")
-            tempSideController.totalNumOfCarts = self.viewModel.getTotalCartProduct()
-        }
-        print("Not Done")
         sideMenu.leftSide = true
         SideMenuManager.default.leftMenuNavigationController = sideMenu
         SideMenuManager.default.addPanGestureToPresent(toView: view)
@@ -139,22 +132,22 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
             self.sideMenu.dismiss(animated: false, completion: nil)
         case .Tables:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "1", viewModel: myCartVm, title: "Tables")
+            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Tables.rawValue, viewModel: myCartVm, title: "Tables")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Sofas:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "3", viewModel: myCartVm, title: "Sofas")
+            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Sofas.rawValue, viewModel: myCartVm, title: "Sofas")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Chair:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "2", viewModel: myCartVm, title: "Chairs")
+            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Chair.rawValue, viewModel: myCartVm, title: "Chairs")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .Cupboard:
             let myCartVm = ProductListViewModel()
-            let myCartVc = ProductListViewController(categoryId: "4", viewModel: myCartVm, title: "CupBoards")
+            let myCartVc = ProductListViewController(categoryId: ProductCategoryId.Cupboards.rawValue, viewModel: myCartVm, title: "CupBoards")
             self.sideMenu.dismiss(animated: false, completion: nil)
             self.navigationController?.pushViewController(myCartVc, animated: true)
         case .MyAccount:
@@ -176,34 +169,52 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
 //            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
             
             // Pop to Login Vc
-            setRootToLoginController()
+            setRootToLogInController()
 //            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     
-    func setRootToLoginController() {
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+//    func setRootToLoginController() {
+//        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 //            print(appDelegate.rootNavVc.viewControllers)
 //            print(appDelegate.rootNavVc.viewControllers.contains(ProductHomeViewController(viewModel: ProductHomeViewModel())))
-        var isPopped = false
-            for controller in appDelegate.rootNavVc.viewControllers {
-                print("In Loop")
-                if controller.isKind(of: LoginScreenViewController.self) {
-                    print("True")
-                    self.navigationController?.popToViewController(controller, animated: true)
-                    isPopped = true
-                    break
-                }
+//        var isPopped = false
+//            for controller in appDelegate.rootNavVc.viewControllers {
+//                print("In Loop")
+//                if controller.isKind(of: LoginScreenViewController.self) {
+//                    print("True")
+//                    self.navigationController?.popToViewController(controller, animated: true)
+//                    isPopped = true
+//                    break
+//                }
+//            }
+//
+//            if !isPopped {
+//                print("iSPopped")
+//                appDelegate.rootNavVc.viewControllers[0] = LoginScreenViewController(viewModel: LoginScreenViewModel())
+//                print(appDelegate.rootNavVc.viewControllers)
+//                appDelegate.rootNavVc.popToRootViewController(animated: true)
+//            }
+//
+//        }
+//    }
+    
+    func setRootToLogInController() {
+            // Clear User Defaults
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.user.rawValue)
+            UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
+            print("Here")
+        
+            if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
+                    let viewControllers = appDelegate.rootNavVc.viewControllers
+                    if !viewControllers.contains(LoginScreenViewController(viewModel: LoginScreenViewModel())) {
+                        print("Hello There")
+                        appDelegate.rootNavVc.viewControllers[0] =  LoginScreenViewController(viewModel: LoginScreenViewModel())
+                    }
+                    print("Bye")
+                    appDelegate.rootNavVc.popToRootViewController(animated: true)
             }
-            
-            if !isPopped {
-                print("iSPopped")
-                appDelegate.rootNavVc.viewControllers[0] = LoginScreenViewController(viewModel: LoginScreenViewModel())
-                print(appDelegate.rootNavVc.viewControllers)
-                appDelegate.rootNavVc.popToRootViewController(animated: true)
-            }
-            
-        }
     }
 }
 

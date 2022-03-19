@@ -31,7 +31,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         let navVc = UINavigationController(rootViewController: rootVc)
         rootNavVc = navVc
-        window?.rootViewController = navVc
+        window?.rootViewController = rootNavVc
         window?.makeKeyAndVisible()
         
 //        let navVc = UINavigationController(rootViewController: rootVc)

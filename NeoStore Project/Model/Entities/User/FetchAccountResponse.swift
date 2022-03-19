@@ -11,11 +11,9 @@ import Foundation
 struct FetchAccountResponse: Codable {
     let status: Int?
     let data: DataClass?
-    let message, userMsg: String?
 
     enum CodingKeys: String, CodingKey {
-        case status, data, message
-        case userMsg = "user_msg"
+        case status, data
     }
 }
 

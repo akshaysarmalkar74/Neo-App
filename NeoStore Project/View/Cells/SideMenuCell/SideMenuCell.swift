@@ -27,6 +27,7 @@ class SideMenuCell: UITableViewCell {
     func configure(img: String, name: String, num: Int?) {
         if let actualNum = num {
             itemNum.text = "\(actualNum)"
+            itemNum.isHidden = false
         } else {
             itemNum.isHidden = true
         }

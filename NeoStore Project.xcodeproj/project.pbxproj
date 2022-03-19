@@ -58,6 +58,7 @@
 		925EE48E27A9556300B2B73F /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EE48D27A9556300B2B73F /* StringConstants.swift */; };
 		925FA06F27D9C8C400C27C9E /* AddressListViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FA06E27D9C8C400C27C9E /* AddressListViewFooter.swift */; };
 		925FA07127D9C92200C27C9E /* AddressListViewFooter.xib in Resources */ = {isa = PBXBuildFile; fileRef = 925FA07027D9C92200C27C9E /* AddressListViewFooter.xib */; };
+		926E497027E5A27500BAECAD /* SideMenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926E496F27E5A27500BAECAD /* SideMenuViewModel.swift */; };
 		928AE81C27C686C600325B64 /* SideMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298673627C6487600F65D64 /* SideMenuCell.swift */; };
 		9298673327C6436900F65D64 /* SideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9298673127C6436900F65D64 /* SideMenuViewController.swift */; };
 		9298673427C6436A00F65D64 /* SideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9298673227C6436900F65D64 /* SideMenuViewController.xib */; };
@@ -187,6 +188,7 @@
 		925EE48D27A9556300B2B73F /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
 		925FA06E27D9C8C400C27C9E /* AddressListViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressListViewFooter.swift; sourceTree = "<group>"; };
 		925FA07027D9C92200C27C9E /* AddressListViewFooter.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AddressListViewFooter.xib; sourceTree = "<group>"; };
+		926E496F27E5A27500BAECAD /* SideMenuViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewModel.swift; sourceTree = "<group>"; };
 		9298673127C6436900F65D64 /* SideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuViewController.swift; sourceTree = "<group>"; };
 		9298673227C6436900F65D64 /* SideMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuViewController.xib; sourceTree = "<group>"; };
 		9298673627C6487600F65D64 /* SideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuCell.swift; sourceTree = "<group>"; };
@@ -508,6 +510,7 @@
 				92D2DECA27D5E2D300E44022 /* NewAddressViewModel.swift */,
 				920560B627D71096006BFE8D /* AddressListViewModel.swift */,
 				920BE66427D8651100FAE0DB /* ProductHomeViewModel.swift */,
+				926E496F27E5A27500BAECAD /* SideMenuViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1093,6 +1096,7 @@
 				920A4DEA27DF14F600B68FDE /* PlaceOrderResponse.swift in Sources */,
 				92F349C427BFBE840076ABC4 /* ProductListViewController.swift in Sources */,
 				92E0404327B1257C00E72818 /* RegisterScreenViewModel.swift in Sources */,
+				926E497027E5A27500BAECAD /* SideMenuViewModel.swift in Sources */,
 				92A2129427B62D16002C9585 /* ResetPasswordViewController.swift in Sources */,
 				92E7426C27B3D6A8007BEE0D /* TestViewController.swift in Sources */,
 				92FEBB4427CF5930008AC613 /* ProductRateViewModel.swift in Sources */,

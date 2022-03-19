@@ -17,6 +17,7 @@ enum UserDefaultsKeys : String {
     case userToken
     case user
     case isProfileUpdated
+    case address
 }
 
 enum SideMenuControllerNames {
@@ -29,4 +30,11 @@ enum SideMenuControllerNames {
     case StoreLocator
     case MyOrders
     case Logout
+}
+
+enum ProductCategoryId: String {
+    case Tables = "1"
+    case Chair = "2"
+    case Sofas = "3"
+    case Cupboards = "4"
 }

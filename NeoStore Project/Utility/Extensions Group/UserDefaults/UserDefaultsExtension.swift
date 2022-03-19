@@ -30,28 +30,28 @@ extension UserDefaults{
     }
     
     //MARK: Save Entire User Data
-    func saveUser(value: [String : Any]) {
-        do {
-            // Encode and Save the data
-            let encodedData = try NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false)
-            set(encodedData, forKey: UserDefaultsKeys.user.rawValue)
-        } catch let err {
-            print("Error - \(err.localizedDescription)")
-        }
-    }
+//    func saveUser(value: [String : Any]) {
+//        do {
+//            // Encode and Save the data
+//            let encodedData = try NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false)
+//            set(encodedData, forKey: UserDefaultsKeys.user.rawValue)
+//        } catch let err {
+//            print("Error - \(err.localizedDescription)")
+//        }
+//    }
     
     //MARK: Get Entire User
-    func getUser() -> [String: Any] {
-        do {
-            // Get Data and decode it
-            let decoded  = object(forKey: UserDefaultsKeys.user.rawValue) as! Data
-            let decodedUser = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as? [String: Any] ?? [String: Any]()
-            return decodedUser
-        } catch let err {
-            print(err.localizedDescription)
-            return [String: Any]()
-        }
-    }
+//    func getUser() -> [String: Any] {
+//        do {
+//            // Get Data and decode it
+//            let decoded  = object(forKey: UserDefaultsKeys.user.rawValue) as! Data
+//            let decodedUser = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as? [String: Any] ?? [String: Any]()
+//            return decodedUser
+//        } catch let err {
+//            print(err.localizedDescription)
+//            return [String: Any]()
+//        }
+//    }
     
     //MARK:- Set Profile Update
     func setUpdatedProfile(value: Bool){
@@ -65,14 +65,14 @@ extension UserDefaults{
     
     // MARK:- Add New Address
     func addNewAddress(address: String) {
-        var allAddress = UserDefaults.standard.stringArray(forKey: "address") ?? [String]()
+        var allAddress = UserDefaults.standard.stringArray(forKey: UserDefaultsKeys.address.rawValue) ?? [String]()
         allAddress.append(address)
-        UserDefaults.standard.set(allAddress, forKey: "address")
+        UserDefaults.standard.set(allAddress, forKey: UserDefaultsKeys.address.rawValue)
     }
     
     // MARK:- Get All Address
     func getAllAddress() -> [String] {
-        let allAddress = UserDefaults.standard.stringArray(forKey: "address") ?? [String]()
+        let allAddress = UserDefaults.standard.stringArray(forKey: UserDefaultsKeys.address.rawValue) ?? [String]()
         return allAddress
     }
     
@@ -81,14 +81,14 @@ extension UserDefaults{
         let encoder = JSONEncoder()
         if let encoded = try? encoder.encode(user) {
             let defaults = UserDefaults.standard
-            defaults.set(encoded, forKey: "SavedPerson")
+            defaults.set(encoded, forKey: UserDefaultsKeys.user.rawValue)
         }
     }
     
     // MARK: Get User Instance
     func getUserInstance() -> UserData? {
         let defaults = UserDefaults.standard
-        if let savedPerson = defaults.object(forKey: "SavedPerson") as? Data {
+        if let savedPerson = defaults.object(forKey: UserDefaultsKeys.user.rawValue) as? Data {
             let decoder = JSONDecoder()
             if let loadedPerson = try? decoder.decode(UserData.self, from: savedPerson) {
                 return loadedPerson
