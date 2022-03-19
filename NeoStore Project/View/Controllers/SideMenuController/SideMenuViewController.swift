@@ -17,9 +17,6 @@ class SideMenuViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     // Variables
-    let itemNames = ["My Cart", "Tables", "Sofas", "Chair", "Cupboards", "My Account", "Store Locator", "My Orders", "Logout"]
-    let itemImages = ["shoppingcart_icon", "tables_icon", "sofa_icon", "chair", "cupboard_icon", "username_icon", "storelocator_icon", "myorders_icon", "logout_icon"]
-    var user: UserData!
     var customDelegate: SideMenuViewControllerDelegate?
     var viewModel: SideMenuViewType!
     
@@ -47,7 +44,7 @@ class SideMenuViewController: UIViewController {
         setupObservers()
         
         // Get User & Carts
-        user = UserDefaults.standard.getUserInstance()
+        self.viewModel.getUser()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,16 +69,16 @@ class SideMenuViewController: UIViewController {
 
 extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemNames.count
+        return self.viewModel.getTotalNumOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SideMenuCell", for: indexPath) as! SideMenuCell
         if indexPath.row == 0 {
             let totalNumOfCarts = self.viewModel.getTotalNumOfCarts()
-            cell.configure(img: itemImages[indexPath.row], name: itemNames[indexPath.row], num: totalNumOfCarts)
+            cell.configure(img: self.viewModel.itemImages[indexPath.row], name: self.viewModel.itemNames[indexPath.row], num: totalNumOfCarts)
         } else {
-            cell.configure(img: itemImages[indexPath.row], name: itemNames[indexPath.row], num: nil)
+            cell.configure(img: self.viewModel.itemImages[indexPath.row], name: self.viewModel.itemNames[indexPath.row], num: nil)
         }
         return cell
     }
@@ -98,9 +95,9 @@ extension SideMenuViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         // Configure Header
-        let firstName = user.firstName ?? ""
-        let lastName = user.lastName ?? ""
-        let email = user.email ?? ""
+        let firstName = self.viewModel.user.firstName ?? ""
+        let lastName = self.viewModel.user.lastName ?? ""
+        let email = self.viewModel.user.email ?? ""
         
         headerView.configure(firstName: firstName, lastName: lastName, userEmail: email)
         
