@@ -26,25 +26,6 @@ class AddressListViewModel: AddressListViewType {
         OrderService.placeOrder(address: address) { res in
             switch res {
             case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-//                        if let statusCode = mainData["status"] as? Int {
-//                            let userMsg = mainData["user_msg"] as? String
-//                            if statusCode == 200 {
-//                                // Show Success Alert
-//                                self.placeOrderStatus.value = .success(msg: userMsg)
-//                            } else {
-//                                // Show Error to User
-//                                self.placeOrderStatus.value = .failure(msg: userMsg)
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                } else {
-//                    print("Some Another Error")
-//                }
                 // Check for success status
                 if let statusCode = value.status, statusCode == 200 {
                     self.placeOrderStatus.value = .success(msg: value.userMsg)

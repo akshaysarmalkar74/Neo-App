@@ -45,6 +45,7 @@
 		92134E8927CCE63D00096523 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92134E8727CCE63D00096523 /* ProductDetailViewController.xib */; };
 		9213B74127E061AF00B86019 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213B74027E061AF00B86019 /* StringExtension.swift */; };
 		9213B74427E080D900B86019 /* UiApplicationExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9213B74327E080D900B86019 /* UiApplicationExt.swift */; };
+		9214D4E527E6273400059EAA /* Reachibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9214D4E427E6273400059EAA /* Reachibility.swift */; };
 		923D4DFD27AD031000598034 /* RegisterScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923D4DFB27AD031000598034 /* RegisterScreenViewController.swift */; };
 		923D4DFE27AD031000598034 /* RegisterScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 923D4DFC27AD031000598034 /* RegisterScreenViewController.xib */; };
 		9241394D27D8D2CC0081336F /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9241394C27D8D2CC0081336F /* ViewControllerExtension.swift */; };
@@ -174,6 +175,7 @@
 		92134E8727CCE63D00096523 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		9213B74027E061AF00B86019 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		9213B74327E080D900B86019 /* UiApplicationExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UiApplicationExt.swift; sourceTree = "<group>"; };
+		9214D4E427E6273400059EAA /* Reachibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachibility.swift; sourceTree = "<group>"; };
 		923D4DFB27AD031000598034 /* RegisterScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterScreenViewController.swift; sourceTree = "<group>"; };
 		923D4DFC27AD031000598034 /* RegisterScreenViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterScreenViewController.xib; sourceTree = "<group>"; };
 		9241394C27D8D2CC0081336F /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
@@ -433,6 +435,14 @@
 			path = UIApplicationExt;
 			sourceTree = "<group>";
 		};
+		9214D4E327E6271C00059EAA /* Reachibility */ = {
+			isa = PBXGroup;
+			children = (
+				9214D4E427E6273400059EAA /* Reachibility.swift */,
+			);
+			path = Reachibility;
+			sourceTree = "<group>";
+		};
 		923D4DFA27AD02D900598034 /* RegisterScreenViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -538,6 +548,7 @@
 		925EE48627A94FAC00B2B73F /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				9214D4E327E6271C00059EAA /* Reachibility */,
 				92E7426927B3D653007BEE0D /* ReactiveListener */,
 				92F7A06F27ACE8A200D53B68 /* Validators */,
 				92A92DEB27AB97B200FCEE14 /* Extensions Group */,
@@ -1157,6 +1168,7 @@
 				92A2128F27B52394002C9585 /* MyAccountViewController.swift in Sources */,
 				92134E8827CCE63D00096523 /* ProductDetailViewController.swift in Sources */,
 				920A4DFD27DFAD4D00B68FDE /* FetchAccountResponse.swift in Sources */,
+				9214D4E527E6273400059EAA /* Reachibility.swift in Sources */,
 				92A4A68127BCD7600064105A /* SliderCell.swift in Sources */,
 				92E7426827B3D64D007BEE0D /* ReactiveListener.swift in Sources */,
 				92D6D77E27CDD80B00764509 /* ProductDetailViewModel.swift in Sources */,

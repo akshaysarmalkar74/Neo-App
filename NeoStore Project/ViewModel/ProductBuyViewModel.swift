@@ -14,35 +14,33 @@ enum ProductBuyApiResponse {
 }
 
 protocol ProductBuyViewType {
+    var productId: Int! {get set}
+    var productImgStrUrl: String! {get set}
+    var productName: String! {get set}
     var productBuyDetailStatus: ReactiveListener<ProductBuyApiResponse> {get set}
     
-    func buyProduct(productId: String, quantity: Int)
+    func getProductName() -> String
+    func getProductImgStr() -> String
+    func buyProduct(quantity: Int)
 }
 
 class ProductBuyViewModel: ProductBuyViewType {
+    var productId: Int!
+    var productImgStrUrl: String!
+    var productName: String!
+    
     var productBuyDetailStatus: ReactiveListener<ProductBuyApiResponse> = ReactiveListener(.none)
     
-    func buyProduct(productId: String, quantity: Int) {
-        CartService.addToCart(productId: productId, quantity: quantity) { res in
+    init(productId: Int, productImgStrUrl: String, productName: String) {
+        self.productId = productId
+        self.productImgStrUrl = productImgStrUrl
+        self.productName = productName
+    }
+    
+    func buyProduct(quantity: Int) {
+        CartService.addToCart(productId: String(productId), quantity: quantity) { res in
             switch res {
             case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-//                        if let statusCode = mainData["status"] as? Int {
-//                            let userMsg = mainData["user_msg"] as? String
-//                            if statusCode == 200 {
-//                                self.productBuyDetailStatus.value = .success(msg: userMsg)
-//                            } else {
-//                                self.productBuyDetailStatus.value = .failure(err: userMsg)
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                } else {
-//                    print("Some Another Error")
-//                }
             // Check for success status
             if let statusCode = value.status, statusCode == 200 {
                 self.productBuyDetailStatus.value = .success(msg: value.userMsg)
@@ -56,5 +54,12 @@ class ProductBuyViewModel: ProductBuyViewType {
         }
     }
     
+    func getProductName() -> String {
+        return productName
+    }
+    
+    func getProductImgStr() -> String {
+        return productImgStrUrl
+    }
     
 }

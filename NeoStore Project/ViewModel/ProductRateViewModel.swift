@@ -26,24 +26,6 @@ class ProductRateViewModel: ProductRateViewType {
         ProductService.setProductRating(productId: productId, rating: rating) { res in
             switch res {
             case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String : Any]
-//                        print(mainData)
-//                        if let statusCode = mainData["status"] as? Int {
-//                            let userMsg = mainData["user_msg"] as? String
-//                            if statusCode == 200 {
-//                                self.productRateDetailStatus.value = .success(msg: userMsg)
-//                            } else {
-//                                self.productRateDetailStatus.value = .failure(err: userMsg)
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                } else {
-//                    print("Some Another Error")
-//                }
                 // Check for success status
                 if let statusCode = value.status, statusCode == 200 {
                     self.productRateDetailStatus.value = .success(msg: value.userMsg)

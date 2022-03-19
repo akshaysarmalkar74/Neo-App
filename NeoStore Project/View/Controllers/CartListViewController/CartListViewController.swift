@@ -22,7 +22,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
     var viewModel: CartListViewType!
     var selectedRow = 0
     let screenWidth = UIScreen.main.bounds.width - 10
-    let screenHeight = UIScreen.main.bounds.height / 3
+    let screenHeight = UIScreen.main.bounds.height / 5
     let quantity = [1,2,3,4,5,6,7]
     var loaderViewScreen: UIView?
     

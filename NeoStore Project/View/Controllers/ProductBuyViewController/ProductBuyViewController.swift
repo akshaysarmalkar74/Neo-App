@@ -20,19 +20,13 @@ class ProductBuyViewController: UIViewController {
     @IBOutlet weak var containerViewTopConstraint: NSLayoutConstraint!
     
     // Variables
-    var productId: Int!
-    var productImgStrUrl: String!
-    var productName: String!
     var viewModel: ProductBuyViewType!
     var delegate: ProductBuyViewControllerDelegate?
     var isViewShifted = false
     var loaderViewScreen: UIView?
     
-    init(productId: Int, productImgStrUrl: String, productName: String, viewModel: ProductBuyViewType) {
+    init(viewModel: ProductBuyViewType) {
         self.viewModel = viewModel
-        self.productId = productId
-        self.productImgStrUrl = productImgStrUrl
-        self.productName = productName
         super.init(nibName: "ProductBuyViewController", bundle: nil)
     }
     
@@ -44,10 +38,10 @@ class ProductBuyViewController: UIViewController {
         super.viewDidLoad()
 
         // Set Values to Outlets
-        self.productNameLbl.text = productName
+        self.productNameLbl.text = self.viewModel.getProductName()
         qtyInput.delegate = self
         
-        let url = URL(string: productImgStrUrl)
+        let url = URL(string: self.viewModel.getProductImgStr())
         if let actualUrl = url {
             let data = try? Data(contentsOf: actualUrl)
             if let actualData = data {
@@ -109,7 +103,7 @@ class ProductBuyViewController: UIViewController {
     @IBAction func submitBtnTapped(_ sender: UIButton) {
         let qtyResult = Validator.validateQuantity(val: qtyInput.text ?? "")
         if qtyResult.result {
-            viewModel.buyProduct(productId: String(productId), quantity: Int(qtyInput.text!)!)
+            viewModel.buyProduct(quantity: Int(qtyInput.text!)!)
             showLoader(view: self.view, aicView: &loaderViewScreen)
         } else {
             // Show Error
@@ -119,7 +113,7 @@ class ProductBuyViewController: UIViewController {
     
     // Error Alert Function
     func showAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
         let alertBtn = UIAlertAction(title: "Okay", style: .default, handler: nil)
         
         // Add Button to Alert
