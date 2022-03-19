@@ -12,15 +12,12 @@ class ProductDetailViewController: UIViewController {
     
     // Variables
     var viewModel: ProductDetailViewType!
-    var productId: String!
-    var curProduct: ProductDetail?
     var loaderViewScreen: UIView?
     @IBOutlet weak var contentHidderView: UIView!
     
-    init(viewModel: ProductDetailViewType, productId: String) {
+    init(viewModel: ProductDetailViewType) {
         super.init(nibName: "ProductDetailViewController", bundle: nil)
         self.viewModel = viewModel
-        self.productId = productId
     }
     
     required init?(coder: NSCoder) {
@@ -41,7 +38,7 @@ class ProductDetailViewController: UIViewController {
         tableView.register(UINib(nibName: "ProductDetailFooter", bundle: nil), forCellReuseIdentifier: "ProductDetailFooter")
         
         // Get Data
-        viewModel.fetchProductDetails(productId: productId)
+        viewModel.fetchProductDetails()
         
         // Set Observers
         setupObservers()
@@ -53,14 +50,13 @@ class ProductDetailViewController: UIViewController {
     func setupObservers() {
         self.viewModel.fetchProductDetailStatus.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
+            let product = self.viewModel.getProduct()
             switch value {
-            case .success(let product):
-                self.curProduct = product
+            case .success:
                 DispatchQueue.main.async {
                     self.contentHidderView.isHidden = true
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    // Customise Navbar
-                    self.customiseNavbar(pageTitle: self.curProduct?.name ?? "")
+                    self.customiseNavbar(pageTitle: product?.name ?? "")
                     self.tableView.reloadData()
                 }
             case .failure(let msg):
@@ -111,10 +107,12 @@ class ProductDetailViewController: UIViewController {
         return ""
     }
     @IBAction func buyNowTapped(_ sender: Any) {
+        let product = self.viewModel.getProduct()
+        
         // Get Id, Name and Image URL
-        let images = self.curProduct?.productImages ?? [ProductImage]()
-        let name = self.curProduct?.name ?? ""
-        let id = self.curProduct?.id
+        let images = product?.productImages ?? [ProductImage]()
+        let name = product?.name ?? ""
+        let id = product?.id
         
         if let mainImgUrl = images[0].image, let mainId = id {
             let viewModel = ProductBuyViewModel()
@@ -128,10 +126,12 @@ class ProductDetailViewController: UIViewController {
     }
     
     @IBAction func rateNowTapped(_ sender: Any) {
+        let product = self.viewModel.getProduct()
+        
         // Get Id, Name and Image URL
-        let images = self.curProduct?.productImages ?? [ProductImage]()
-        let name = self.curProduct?.name ?? ""
-        let id = self.curProduct?.id
+        let images = product?.productImages ?? [ProductImage]()
+        let name = product?.name ?? ""
+        let id = product?.id
         
         if let mainImgUrl = images[0].image, let mainId = id {
             let viewModel = ProductRateViewModel()
@@ -170,12 +170,13 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
             let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailHeader", for: indexPath) as! ProductDetailHeader
             cell.selectionStyle = .none
             
+            let product = self.viewModel.getProduct()
             // Configure Header
-            let name = self.curProduct?.name ?? ""
-            let provider = self.curProduct?.producer ?? ""
-            let rating = self.curProduct?.rating ?? 0
+            let name = product?.name ?? ""
+            let provider = product?.producer ?? ""
+            let rating = product?.rating ?? 0
             
-            let categoryId = self.curProduct?.productCategoryID ?? 0
+            let categoryId = product?.productCategoryID ?? 0
             let category = convertIdToCategory(categoryId: categoryId)
             
             
@@ -187,10 +188,11 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.selectionStyle = .none
             cell.delegate = self
             
+            let product = self.viewModel.getProduct()
             // Configure Header
-            let price = self.curProduct?.cost ?? 0
-            let description = self.curProduct?.dataDescription ?? ""
-            let images = self.curProduct?.productImages ?? [ProductImage]()
+            let price = product?.cost ?? 0
+            let description = product?.dataDescription ?? ""
+            let images = product?.productImages ?? [ProductImage]()
 
             // Set Other Images
             cell.allImages = images
@@ -199,11 +201,11 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
             cell.configureCell(price: price, description: description)
             
             return cell
-        case 2:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailFooter", for: indexPath) as! ProductDetailFooter
-            cell.delegate = self
-            cell.selectionStyle = .none
-            return cell
+//        case 2:
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailFooter", for: indexPath) as! ProductDetailFooter
+//            cell.delegate = self
+//            cell.selectionStyle = .none
+//            return cell
         default:
             return UITableViewCell()
         }
@@ -219,49 +221,51 @@ extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSourc
     
 }
 
-extension ProductDetailViewController: ProductDetailFooterDelegate {
-    func didTapBuyNow() {
-        // Get Id, Name and Image URL
-        let images = self.curProduct?.productImages ?? [ProductImage]()
-        let name = self.curProduct?.name ?? ""
-        let id = self.curProduct?.id
-        
-        if let mainImgUrl = images[0].image, let mainId = id {
-            let viewModel = ProductBuyViewModel()
-            let vc = ProductBuyViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.modalTransitionStyle = .crossDissolve
-            vc.delegate = self
-            
-            self.present(vc, animated: true, completion: nil)
-        }
-        
-        
-    }
-    
-    func didTapRateBtn() {
-        // Get Id, Name and Image URL
-        let images = self.curProduct?.productImages ?? [ProductImage]()
-        let name = self.curProduct?.name ?? ""
-        let id = self.curProduct?.id
-        
-        if let mainImgUrl = images[0].image, let mainId = id {
-            let viewModel = ProductRateViewModel()
-            let vc = ProductRateViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
-            vc.modalPresentationStyle = .overCurrentContext
-            vc.modalTransitionStyle = .crossDissolve
-            vc.delegate = self
-            
-            self.present(vc, animated: true, completion: nil)
-        }
-    }
-}
+//extension ProductDetailViewController: ProductDetailFooterDelegate {
+//    func didTapBuyNow() {
+//        // Get Id, Name and Image URL
+//        let images = self.curProduct?.productImages ?? [ProductImage]()
+//        let name = self.curProduct?.name ?? ""
+//        let id = self.curProduct?.id
+//
+//        if let mainImgUrl = images[0].image, let mainId = id {
+//            let viewModel = ProductBuyViewModel()
+//            let vc = ProductBuyViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
+//            vc.modalPresentationStyle = .overCurrentContext
+//            vc.modalTransitionStyle = .crossDissolve
+//            vc.delegate = self
+//
+//            self.present(vc, animated: true, completion: nil)
+//        }
+//
+//
+//    }
+//
+//    func didTapRateBtn() {
+//        // Get Id, Name and Image URL
+//        let images = self.curProduct?.productImages ?? [ProductImage]()
+//        let name = self.curProduct?.name ?? ""
+//        let id = self.curProduct?.id
+//
+//        if let mainImgUrl = images[0].image, let mainId = id {
+//            let viewModel = ProductRateViewModel()
+//            let vc = ProductRateViewController(productId: mainId, productImgStrUrl: mainImgUrl, productName: name, viewModel: viewModel)
+//            vc.modalPresentationStyle = .overCurrentContext
+//            vc.modalTransitionStyle = .crossDissolve
+//            vc.delegate = self
+//
+//            self.present(vc, animated: true, completion: nil)
+//        }
+//    }
+//}
 
 extension ProductDetailViewController: ProductBuyViewControllerDelegate, ShareButtonDelegate {
     func didTapShareBtn() {
-        let productName = curProduct?.name ?? ""
-        let productProducer = curProduct?.producer ?? ""
-        let productRating = curProduct?.rating ?? 0
+        let product = self.viewModel.getProduct()
+        
+        let productName = product?.name ?? ""
+        let productProducer = product?.producer ?? ""
+        let productRating = product?.rating ?? 0
         
         let sharableText = """
         Name - \(productName)
@@ -279,7 +283,7 @@ extension ProductDetailViewController: ProductBuyViewControllerDelegate, ShareBu
     
     
     func didReceiveResponse(userMsg: String?) {
-        self.viewModel.fetchProductDetails(productId: self.productId)
+        self.viewModel.fetchProductDetails()
         showSuccessAlert(msg: userMsg)
     }
     

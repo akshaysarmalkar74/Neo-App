@@ -120,8 +120,8 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let product = viewModel.getItemAndIndexPath(index: indexPath.row)
         let productId = product.id ?? 0
-        let productDetailViewModel = ProductDetailViewModel()
-        let vc = ProductDetailViewController(viewModel: productDetailViewModel, productId: String(productId))
+        let productDetailViewModel = ProductDetailViewModel(productId: String(productId))
+        let vc = ProductDetailViewController(viewModel: productDetailViewModel)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
