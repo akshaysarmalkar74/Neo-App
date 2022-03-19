@@ -11,12 +11,10 @@ class AddressListViewController: UIViewController {
 
     @IBOutlet weak var contentHidderView: UIView!
     @IBOutlet weak var tableView: UITableView!
-    var allAddress = [String]()
-    let user = UserDefaults.standard.getUserInstance()
-    var currentSelectedIdx = 0
+    
+    // Variables
     var viewModel: AddressListViewType!
     var loaderViewScreen: UIView?
-    
     
     init(viewModel: AddressListViewType) {
         super.init(nibName: "AddressListViewController", bundle: nil)
@@ -42,8 +40,11 @@ class AddressListViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        allAddress = UserDefaults.standard.getAllAddress()
         
+        // Fetch All Address
+        self.viewModel.fetchAddress()
+        
+        let allAddress = self.viewModel.getAllAddress()
         // Show/Hide Table View
         if allAddress.isEmpty {
             contentHidderView.isHidden = false
@@ -142,20 +143,21 @@ class AddressListViewController: UIViewController {
 
 extension AddressListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allAddress.count
+        return self.viewModel.getTotalNumOfAddress()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "AddressListCell", for: indexPath) as! AddressListCell
         cell.selectionStyle = .none
         
+        let user = self.viewModel.getCurUser()
         // Configure Cell
         let firstName = user?.firstName ?? ""
         let lastName = user?.lastName ?? ""
-        let address = allAddress[indexPath.row]
+        let address = self.viewModel.getAddressAtRow(idx: indexPath.row)
         let fullName = "\(firstName) \(lastName)"
         
-        if indexPath.row == currentSelectedIdx {
+        if indexPath.row == self.viewModel.getCurSelectedIdx() {
             cell.configureCell(name: fullName, address: address, isChecked: true)
         } else {
             cell.configureCell(name: fullName, address: address, isChecked: false)
@@ -181,9 +183,9 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let oldIdx = currentSelectedIdx
-        currentSelectedIdx = indexPath.row
-        tableView.reloadRows(at: [IndexPath(row: oldIdx, section: 0), IndexPath(row: currentSelectedIdx, section: 0)], with: .none)
+        let oldIdx = self.viewModel.getCurSelectedIdx()
+        self.viewModel.currentSelectedIdx = indexPath.row
+        tableView.reloadRows(at: [IndexPath(row: oldIdx, section: 0), IndexPath(row: self.viewModel.getCurSelectedIdx(), section: 0)], with: .none)
     }
     
 }
@@ -191,7 +193,7 @@ extension AddressListViewController: UITableViewDelegate, UITableViewDataSource 
 
 extension AddressListViewController: AddressListViewFooterDelegate {
     func didTapppedOrderBtn() {
-        let selectedAddress = allAddress[currentSelectedIdx]
+        let selectedAddress = self.viewModel.getAddressAtRow(idx: self.viewModel.currentSelectedIdx)
         showLoader(view: self.view, aicView: &loaderViewScreen)
         self.viewModel.placeOrder(address: selectedAddress)
     }

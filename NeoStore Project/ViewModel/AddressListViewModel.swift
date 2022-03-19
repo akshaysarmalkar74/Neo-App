@@ -14,12 +14,33 @@ enum PlaceOrderApiResult {
 }
 
 protocol AddressListViewType {
+    var allAddress: [String] {get set}
+    var user: UserData? {get}
+    var currentSelectedIdx: Int {get set}
     var placeOrderStatus: ReactiveListener<PlaceOrderApiResult> {get set}
+    
     func placeOrder(address: String)
+    func getTotalNumOfAddress() -> Int
+    func getCurUser() -> UserData?
+    func getCurSelectedIdx() -> Int
+    func getAllAddress() -> [String]
+    func getAddressAtRow(idx: Int) -> String
+    func fetchAddress()
 }
 
 class AddressListViewModel: AddressListViewType {
+
+    var allAddress = [String]()
+    let user = UserDefaults.standard.getUserInstance()
+    var currentSelectedIdx = 0
     var placeOrderStatus: ReactiveListener<PlaceOrderApiResult> = ReactiveListener(.none)
+    
+    init() { }
+    
+    // Fetch Address
+    func fetchAddress() {
+        allAddress = UserDefaults.standard.getAllAddress()
+    }
     
     // Place Order
     func placeOrder(address: String) {
@@ -37,5 +58,25 @@ class AddressListViewModel: AddressListViewType {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func getTotalNumOfAddress() -> Int {
+        return allAddress.count
+    }
+    
+    func getCurUser() -> UserData? {
+        return user
+    }
+    
+    func getCurSelectedIdx() -> Int {
+        return currentSelectedIdx
+    }
+    
+    func getAllAddress() -> [String] {
+        return allAddress
+    }
+    
+    func getAddressAtRow(idx: Int) -> String {
+        return allAddress[idx]
     }
 }
