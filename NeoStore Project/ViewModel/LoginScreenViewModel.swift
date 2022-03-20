@@ -20,14 +20,19 @@ enum LoginStatus {
 }
 
 protocol LoginScreenViewType {
+    var username: String {get set}
+    var password: String {get set}
     var userLoginStatus: ReactiveListener<LoginStatus> {get set}
     var userForgotStatus: ReactiveListener<ForgotApiStatus> {get set}
     
-    func doLogin(username: String, password: String)
+    func doLogin()
     func forgotPassword(email: String)
+    func saveTextFromTextField(text: String?, tag: Int)
 }
 
 class LoginScreenViewModel: LoginScreenViewType {
+    var username: String = ""
+    var password: String = ""
     
     var userLoginStatus: ReactiveListener<LoginStatus> = ReactiveListener(.none)
     var userForgotStatus: ReactiveListener<ForgotApiStatus> = ReactiveListener(.none)
@@ -35,11 +40,21 @@ class LoginScreenViewModel: LoginScreenViewType {
     init() {}
     
     // MARK:- Methods
-    func doLogin(username: String, password: String) {
+    func doLogin() {
         let emailTuple = Validator.email(str: username)
         let passwordTuple  = Validator.loginPassword(str: password)
         
+        // Validate Email
+        
+        // Validate Password
+        
+        // Check Reachibility
+        
+        // Send API Request
+        
         if emailTuple.result && passwordTuple.result {
+            print(username)
+            print(password)
             UserService.userLogin(username: username, password: password) { res in
                 switch res {
                 case .success(value: let value):
@@ -77,26 +92,6 @@ class LoginScreenViewModel: LoginScreenViewType {
             UserService.userForgotPassword(email: email) { res in
                 switch res {
                 case .success(value: let value):
-//                    if let curData = value as? Data {
-//                        do {
-//                            let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-//
-//                            if let statusCode = mainData["status"] as? Int {
-//                                let userMsg = mainData["user_msg"] as? String
-//                                if statusCode == 200 {
-//                                    self.userForgotStatus.value = .success(msg: userMsg)
-//                                } else {
-//                                    // Show Error to User
-//                                    self.userForgotStatus.value = .failure(msg: userMsg)
-//                                }
-//                            }
-//                        } catch let err {
-//                            print(err.localizedDescription)
-//                        }
-//                    } else {
-//                        print("Some Another Error")
-//                    }
-                
                     // Check for success status
                     if let statusCode = value.status, statusCode == 200 {
                         self.userForgotStatus.value = .success(msg: value.userMsg)
@@ -110,6 +105,18 @@ class LoginScreenViewModel: LoginScreenViewType {
             }
         } else {
             self.userForgotStatus.value = .failure(msg: emailResult.message)
+        }
+    }
+    
+    // Extract Text from Text Fields
+    func saveTextFromTextField(text: String?, tag: Int) {
+        switch tag {
+        case 1:
+            username = text ?? ""
+        case 2:
+            password = text ?? ""
+        default:
+            break
         }
     }
 }

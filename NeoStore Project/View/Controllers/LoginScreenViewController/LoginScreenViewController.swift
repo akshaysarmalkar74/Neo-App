@@ -50,9 +50,9 @@ class LoginScreenViewController: UIViewController {
     }
 
     @IBAction func loginBtnTapped(_ sender: UIButton) {
-        viewModel.doLogin(username: usernameField.text ?? "", password: passwordField.text ?? "")
-        
+        self.view.endEditing(true)
         showLoader(view: self.view, aicView: &loaderViewScreen)
+        viewModel.doLogin()
     }
     
     @IBAction func forgotBtnTapped(_ sender: UIButton) {
@@ -75,21 +75,6 @@ class LoginScreenViewController: UIViewController {
         
         self.present(alertVc, animated: true, completion: nil)
     }
-    
-    // Error Alert Function
-//    func showErrorAlert(error: String?) {
-//        let alertVc = UIAlertController(title: nil, message: error, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-//            self?.dismiss(animated: true, completion: nil)
-//        }
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
-    
 }
 
 extension LoginScreenViewController {
@@ -101,6 +86,10 @@ extension LoginScreenViewController {
         // Set Border Color to Input
         usernameField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         passwordField.layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        
+        // Set Delegates
+        usernameField.delegate = self
+        passwordField.delegate = self
         
         // Add gestures
         addTapGestureToView()
@@ -168,10 +157,6 @@ extension LoginScreenViewController {
         textField.leftView = view
     }
     
-    func addCanceBtnToTextField() {
-        
-    }
-    
     // Add Tap Gesture to View
     func addTapGestureToView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(_:)))
@@ -179,7 +164,6 @@ extension LoginScreenViewController {
     }
     
     @objc func viewTapped(_ sender: UITapGestureRecognizer) {
-        print("Here!")
         self.view.endEditing(true)
     }
     
@@ -194,18 +178,10 @@ extension LoginScreenViewController {
         navigationController?.pushViewController(RegisterScreenViewController(viewModel: viewModel), animated: true)
     }
     
-    // Success Alert Function
-//    func showSuccessAlert(msg: String?) {
-//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-//            self?.dismiss(animated: true, completion: nil)
-//            self?.navigationController?.popViewController(animated: true)
-//        }
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
+}
+
+extension LoginScreenViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.viewModel.saveTextFromTextField(text: textField.text, tag: textField.tag)
+    }
 }

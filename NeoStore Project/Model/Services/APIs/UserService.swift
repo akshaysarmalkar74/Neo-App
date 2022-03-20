@@ -21,6 +21,7 @@ class UserService {
                 // Decode the data
                 do {
                     if let extractedData = value as? Data {
+                        let tempData = try JSONSerialization.jsonObject(with: extractedData, options: .mutableContainers)
                         let registerRes = try JSONDecoder().decode(AuthResponse.self, from: extractedData)
                         completionHandler(.success(value: registerRes))
                     } else {
