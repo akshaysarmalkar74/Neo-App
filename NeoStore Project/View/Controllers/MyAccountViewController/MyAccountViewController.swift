@@ -24,6 +24,7 @@ class MyAccountViewController: UIViewController {
     var viewModel: MyAccountViewType!
     var currentProfileImgUrl: String!
     var loaderViewScreen: UIView?
+    var isAnyTextFieldChanged = false
     
     init(viewModel: MyAccountViewType) {
         super.init(nibName: "MyAccountViewController", bundle: nil)
@@ -126,6 +127,9 @@ extension MyAccountViewController {
             // Set Border Color to Input
             textFields[idx].layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             
+            // Set Delegate of TexFields
+            textFields[idx].delegate = self
+            
             // Customise Text Fields
             customiseTextField(textField: textFields[idx], imgName: inputImgs[idx])
         }
@@ -151,15 +155,15 @@ extension MyAccountViewController {
     
     // Date Picker BirthDate
     func createDatePicker() {
-        // let toolBar = UIToolbar()
-        // toolBar.sizeToFit()
-        
-        // Bar Button
-        // let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
-        // toolBar.setItems([doneBtn], animated: true)
-        
-        // Assign ToolBar
-        // birthDateField.inputAccessoryView = toolBar
+//         let toolBar = UIToolbar()
+//         toolBar.sizeToFit()
+//
+//         // Bar Button
+//         let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneTapped(_:)))
+//         toolBar.setItems([doneBtn], animated: true)
+//
+//         // Assign ToolBar
+//         birthDateField.inputAccessoryView = toolBar
         
         // Assign Date Picker to text Field
         birthDateField.inputView = datePicker
@@ -249,12 +253,42 @@ extension MyAccountViewController {
         self.title = "My Account"
         
         // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = UIColor.blue
+        self.navigationController?.navigationBar.barTintColor = .mainRed
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         // Customise Back Button Color & Title
         self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+        
+        // Add Left Bar Button
+        let leftBackBtn = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backBtnTapped(_:)))
+        self.navigationItem.leftBarButtonItem = leftBackBtn
+    }
+    
+    @objc func backBtnTapped(_ sender: UIBarButtonItem) {
+        // Check if any field is changed or not
+        print(isAnyTextFieldChanged)
+        if isAnyTextFieldChanged {
+            let alertVc = UIAlertController(title: nil, message: "Any Changes made will be discarded. Do you still want to proceed?", preferredStyle: .alert)
+            
+            // Add Buttons
+            let yesBtn = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+                print("Yes Tapped")
+                self?.dismiss(animated: true, completion: nil)
+                self?.navigationController?.popViewController(animated: true)
+            }
+            let noBtn = UIAlertAction(title: "No", style: .default) { [weak self] _ in
+                self?.dismiss(animated: true, completion: nil)
+                print("No Tapped")
+            }
+            
+            alertVc.addAction(yesBtn)
+            alertVc.addAction(noBtn)
+            
+            self.present(alertVc, animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     // Add Tap Gesture to View
@@ -315,5 +349,12 @@ extension MyAccountViewController: UIImagePickerControllerDelegate & UINavigatio
         let imageData = Data(base64Encoded: imageBase64String)
         let image = UIImage(data: imageData!)
         return image!
+    }
+}
+
+extension MyAccountViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        isAnyTextFieldChanged = true
+        return true
     }
 }
