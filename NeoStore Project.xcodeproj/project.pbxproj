@@ -419,22 +419,6 @@
 			path = ProductDetailFooter;
 			sourceTree = "<group>";
 		};
-		9213B73F27E0618D00B86019 /* StringExt */ = {
-			isa = PBXGroup;
-			children = (
-				9213B74027E061AF00B86019 /* StringExtension.swift */,
-			);
-			path = StringExt;
-			sourceTree = "<group>";
-		};
-		9213B74227E080AB00B86019 /* UIApplicationExt */ = {
-			isa = PBXGroup;
-			children = (
-				9213B74327E080D900B86019 /* UiApplicationExt.swift */,
-			);
-			path = UIApplicationExt;
-			sourceTree = "<group>";
-		};
 		9214D4E327E6271C00059EAA /* Reachibility */ = {
 			isa = PBXGroup;
 			children = (
@@ -450,14 +434,6 @@
 				923D4DFC27AD031000598034 /* RegisterScreenViewController.xib */,
 			);
 			path = RegisterScreenViewController;
-			sourceTree = "<group>";
-		};
-		9241394B27D8D29D0081336F /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				9241394C27D8D2CC0081336F /* ViewControllerExtension.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		925EE45E27A93FDA00B2B73F = {
@@ -725,12 +701,12 @@
 		92A92DEB27AB97B200FCEE14 /* Extensions Group */ = {
 			isa = PBXGroup;
 			children = (
-				9213B74227E080AB00B86019 /* UIApplicationExt */,
-				9213B73F27E0618D00B86019 /* StringExt */,
-				9241394B27D8D29D0081336F /* ViewController */,
-				92F349CB27C355E80076ABC4 /* ImageView */,
-				92E7426627B3D60D007BEE0D /* UserDefaults */,
-				92A92DED27AB981400FCEE14 /* Colors */,
+				9213B74327E080D900B86019 /* UiApplicationExt.swift */,
+				9213B74027E061AF00B86019 /* StringExtension.swift */,
+				9241394C27D8D2CC0081336F /* ViewControllerExtension.swift */,
+				92F349CC27C356010076ABC4 /* LazyImageView.swift */,
+				92E7426327B3D5EE007BEE0D /* UserDefaultsExtension.swift */,
+				92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */,
 				92A92DEC27AB980300FCEE14 /* Fonts */,
 			);
 			path = "Extensions Group";
@@ -742,14 +718,6 @@
 				92A92DF027AB9BCC00FCEE14 /* Custom Fonts */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		92A92DED27AB981400FCEE14 /* Colors */ = {
-			isa = PBXGroup;
-			children = (
-				92A92DEE27AB9A2100FCEE14 /* ColorExtension.swift */,
-			);
-			path = Colors;
 			sourceTree = "<group>";
 		};
 		92A92DF027AB9BCC00FCEE14 /* Custom Fonts */ = {
@@ -808,14 +776,6 @@
 			path = ProductBuyViewController;
 			sourceTree = "<group>";
 		};
-		92E7426627B3D60D007BEE0D /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				92E7426327B3D5EE007BEE0D /* UserDefaultsExtension.swift */,
-			);
-			path = UserDefaults;
-			sourceTree = "<group>";
-		};
 		92E7426927B3D653007BEE0D /* ReactiveListener */ = {
 			isa = PBXGroup;
 			children = (
@@ -858,14 +818,6 @@
 				92F349C327BFBE840076ABC4 /* ProductListViewController.xib */,
 			);
 			path = ProductListViewController;
-			sourceTree = "<group>";
-		};
-		92F349CB27C355E80076ABC4 /* ImageView */ = {
-			isa = PBXGroup;
-			children = (
-				92F349CC27C356010076ABC4 /* LazyImageView.swift */,
-			);
-			path = ImageView;
 			sourceTree = "<group>";
 		};
 		92F349CE27C382BD0076ABC4 /* ProductDetailViewController */ = {
