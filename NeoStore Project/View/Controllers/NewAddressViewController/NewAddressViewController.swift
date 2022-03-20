@@ -21,7 +21,7 @@ class NewAddressViewController: UIViewController {
     var loaderViewScreen: UIView?
     
     init(viewModel: NewAddressViewType) {
-        super.init(nibName: "NewAddressViewController", bundle: nil)
+        super.init(nibName: StringConstants.NewAddressViewController, bundle: nil)
         self.viewModel = viewModel
     }
     

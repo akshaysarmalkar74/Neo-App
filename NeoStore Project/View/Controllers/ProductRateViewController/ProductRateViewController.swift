@@ -20,7 +20,7 @@ class ProductRateViewController: UIViewController {
     
     init(viewModel: ProductRateViewType) {
         self.viewModel = viewModel
-        super.init(nibName: "ProductRateViewController", bundle: nil)
+        super.init(nibName: StringConstants.ProductRateViewController, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

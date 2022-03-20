@@ -22,7 +22,7 @@ class SideMenuViewController: UIViewController {
     
     init(viewModel: SideMenuViewType) {
         self.viewModel = viewModel
-        super.init(nibName: "SideMenuViewController", bundle: nil)
+        super.init(nibName: StringConstants.SideMenuController, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

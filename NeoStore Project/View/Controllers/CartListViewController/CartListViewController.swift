@@ -24,7 +24,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
     var loaderViewScreen: UIView?
     
     init(viewModel: CartListViewType) {
-        super.init(nibName: "CartListViewController", bundle: nil)
+        super.init(nibName: StringConstants.CartListViewController, bundle: nil)
         self.viewModel = viewModel
     }
     

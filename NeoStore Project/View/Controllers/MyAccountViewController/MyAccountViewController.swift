@@ -27,7 +27,7 @@ class MyAccountViewController: UIViewController {
     var isAnyTextFieldChanged = false
     
     init(viewModel: MyAccountViewType) {
-        super.init(nibName: "MyAccountViewController", bundle: nil)
+        super.init(nibName: StringConstants.MyAccountViewController, bundle: nil)
         self.viewModel = viewModel
     }
     

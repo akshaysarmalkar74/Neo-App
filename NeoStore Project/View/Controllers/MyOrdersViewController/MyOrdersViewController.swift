@@ -16,7 +16,7 @@ class MyOrdersViewController: UIViewController {
     
     init(viewModel: MyOrdersViewType) {
         self.viewModel = viewModel
-        super.init(nibName: "MyOrdersViewController", bundle: nil)
+        super.init(nibName: StringConstants.MyOrdersViewController, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

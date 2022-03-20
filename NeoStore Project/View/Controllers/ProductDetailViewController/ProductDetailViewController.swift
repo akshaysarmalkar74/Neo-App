@@ -16,7 +16,7 @@ class ProductDetailViewController: UIViewController {
     @IBOutlet weak var contentHidderView: UIView!
     
     init(viewModel: ProductDetailViewType) {
-        super.init(nibName: "ProductDetailViewController", bundle: nil)
+        super.init(nibName: StringConstants.ProductDetailViewController, bundle: nil)
         self.viewModel = viewModel
     }
     

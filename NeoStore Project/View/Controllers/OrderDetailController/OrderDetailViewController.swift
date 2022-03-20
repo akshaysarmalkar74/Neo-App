@@ -16,7 +16,7 @@ class OrderDetailViewController: UIViewController {
     var loaderViewScreen: UIView?
     
     init(viewModel: OrderDetailViewType, orderId: Int) {
-        super.init(nibName: "OrderDetailViewController", bundle: nil)
+        super.init(nibName: StringConstants.OrderDetailViewController, bundle: nil)
         self.viewModel = viewModel
         self.orderId = orderId
     }

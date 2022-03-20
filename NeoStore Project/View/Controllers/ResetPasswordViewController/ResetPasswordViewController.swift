@@ -22,7 +22,7 @@ class ResetPasswordViewController: UIViewController {
     
     init(viewModel: ResetPasswordScreenViewType) {
         self.viewModel = viewModel
-        super.init(nibName: "ResetPasswordViewController", bundle: nil)
+        super.init(nibName: StringConstants.ResetPasswordViewController, bundle: nil)
     }
     
     required init?(coder: NSCoder) {

@@ -24,7 +24,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     var viewModel: ProductHomeViewType!
     
     init(viewModel: ProductHomeViewType) {
-        super.init(nibName: "ProductHomeViewController", bundle: nil)
+        super.init(nibName: StringConstants.ProductHomeViewController, bundle: nil)
         self.viewModel = viewModel
     }
     

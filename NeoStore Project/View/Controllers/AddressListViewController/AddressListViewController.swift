@@ -17,7 +17,7 @@ class AddressListViewController: UIViewController {
     var loaderViewScreen: UIView?
     
     init(viewModel: AddressListViewType) {
-        super.init(nibName: "AddressListViewController", bundle: nil)
+        super.init(nibName: StringConstants.AddressListViewController, bundle: nil)
         self.viewModel = viewModel
     }
     

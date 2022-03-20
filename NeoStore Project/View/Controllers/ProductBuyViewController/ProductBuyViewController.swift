@@ -27,7 +27,7 @@ class ProductBuyViewController: UIViewController {
     
     init(viewModel: ProductBuyViewType) {
         self.viewModel = viewModel
-        super.init(nibName: "ProductBuyViewController", bundle: nil)
+        super.init(nibName: StringConstants.ProductBuyViewController, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
