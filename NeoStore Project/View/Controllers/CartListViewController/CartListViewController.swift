@@ -22,6 +22,10 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
         self.viewModel = viewModel
     }
     
+    deinit {
+        print("\(StringConstants.CartListViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

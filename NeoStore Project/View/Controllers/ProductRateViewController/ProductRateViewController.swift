@@ -23,6 +23,10 @@ class ProductRateViewController: UIViewController {
         super.init(nibName: StringConstants.ProductRateViewController, bundle: nil)
     }
     
+    deinit {
+        print("\(StringConstants.ProductRateViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

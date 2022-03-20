@@ -30,7 +30,7 @@ class SideMenuViewController: UIViewController {
     }
     
     deinit {
-        print("Side Menu Deleted")
+        print("\(StringConstants.SideMenuController) was deleted")
     }
     
     override func viewDidLoad() {

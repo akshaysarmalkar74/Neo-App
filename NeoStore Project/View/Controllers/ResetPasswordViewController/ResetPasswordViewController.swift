@@ -25,6 +25,10 @@ class ResetPasswordViewController: UIViewController {
         super.init(nibName: StringConstants.ResetPasswordViewController, bundle: nil)
     }
     
+    deinit {
+        print("\(StringConstants.ResetPasswordViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

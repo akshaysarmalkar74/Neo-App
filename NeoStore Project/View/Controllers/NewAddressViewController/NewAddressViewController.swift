@@ -25,6 +25,10 @@ class NewAddressViewController: UIViewController {
         self.viewModel = viewModel
     }
     
+    deinit {
+        print("\(StringConstants.NewAddressViewController) was deleted")
+    }
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

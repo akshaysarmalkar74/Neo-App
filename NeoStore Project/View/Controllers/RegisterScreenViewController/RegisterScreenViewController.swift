@@ -42,6 +42,10 @@ class RegisterScreenViewController: UIViewController {
         super.init(nibName: StringConstants.registerViewController, bundle: nil)
     }
     
+    deinit {
+        print("\(StringConstants.registerViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

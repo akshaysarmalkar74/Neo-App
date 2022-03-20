@@ -19,13 +19,13 @@ class ProductDetailViewController: UIViewController {
         super.init(nibName: StringConstants.ProductDetailViewController, bundle: nil)
         self.viewModel = viewModel
     }
-    
+        
+    deinit {
+        print("\(StringConstants.ProductDetailViewController) was deleted")
+    }
+ 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    deinit {
-        print("Product List Deleted")
     }
     
     override func viewDidLoad() {

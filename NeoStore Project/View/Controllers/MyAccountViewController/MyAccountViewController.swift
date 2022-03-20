@@ -31,6 +31,10 @@ class MyAccountViewController: UIViewController {
         self.viewModel = viewModel
     }
     
+    deinit {
+        print("\(StringConstants.MyAccountViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

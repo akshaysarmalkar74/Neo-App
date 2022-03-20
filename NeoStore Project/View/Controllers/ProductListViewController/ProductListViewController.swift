@@ -22,12 +22,12 @@ class ProductListViewController: UIViewController {
         self.pageTitle = title
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    deinit {
+        print("\(StringConstants.ProductListViewController) was deleted")
     }
     
-    deinit {
-        print("Product List Deleted")
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

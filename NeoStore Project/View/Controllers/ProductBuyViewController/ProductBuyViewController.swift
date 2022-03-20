@@ -30,6 +30,10 @@ class ProductBuyViewController: UIViewController {
         super.init(nibName: StringConstants.ProductBuyViewController, bundle: nil)
     }
     
+    deinit {
+        print("\(StringConstants.ProductBuyViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

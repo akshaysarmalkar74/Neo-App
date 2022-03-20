@@ -23,6 +23,10 @@ class LoginScreenViewController: UIViewController {
         super.init(nibName: StringConstants.loginViewController, bundle: nil)
     }
     
+    deinit {
+        print("\(StringConstants.loginViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

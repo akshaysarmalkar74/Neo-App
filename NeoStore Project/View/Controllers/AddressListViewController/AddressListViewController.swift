@@ -21,6 +21,10 @@ class AddressListViewController: UIViewController {
         self.viewModel = viewModel
     }
     
+    deinit {
+        print("\(StringConstants.AddressListViewController) was deleted")
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
