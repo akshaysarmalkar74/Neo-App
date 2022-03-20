@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol CartEditButtonDelegate {
+protocol CartEditButtonDelegate: AnyObject {
     func didTapEditBtn(id: Int, quantity: String?)
 }
 
@@ -21,7 +21,7 @@ class CartProductCell: UITableViewCell {
     
     // Variables & Constants
     var productId: Int?
-    var delegate: CartEditButtonDelegate?
+    weak var delegate: CartEditButtonDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

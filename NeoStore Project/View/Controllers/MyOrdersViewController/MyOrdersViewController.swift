@@ -117,8 +117,8 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource {
         let orderId = item.id ?? 0
         
         // Create View Controller
-        let viewModel = OrderDetailViewModel()
-        let vc = OrderDetailViewController(viewModel: viewModel, orderId: orderId)
+        let viewModel = OrderDetailViewModel(orderId: orderId)
+        let vc = OrderDetailViewController(viewModel: viewModel)
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

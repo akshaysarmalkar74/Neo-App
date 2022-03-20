@@ -15,25 +15,32 @@ enum OrderDetailStatus {
 protocol OrderDetailViewType {
     var orderItems: [SpecificOrderDetail] {get set}
     var total: Double? {get set}
+    var orderId: Int! {get set}
     
     var orderDetailStatus: ReactiveListener<OrderDetailStatus> {get set}
     var tableViewShouldReload: ReactiveListener<Bool> {get set}
     
-    func getOrderWith(id: Int)
+    func getOrderWith()
     func getNumOfRows() -> Int
     func getItemAndIndexPath(index: Int) -> SpecificOrderDetail
     func getTotalPrice() -> Double
+    func getPageTitle() -> String
 }
 
 class OrderDetailViewModel: OrderDetailViewType {
+    var orderId: Int!
     var total: Double?
     var orderItems = [SpecificOrderDetail]()
     
     var orderDetailStatus: ReactiveListener<OrderDetailStatus> = ReactiveListener(.none)
     var tableViewShouldReload: ReactiveListener<Bool> = ReactiveListener(false)
     
-    func getOrderWith(id: Int) {
-        OrderService.fetchOrderWith(id: id) { res in
+    init(orderId: Int) {
+        self.orderId = orderId
+    }
+    
+    func getOrderWith() {
+        OrderService.fetchOrderWith(id: orderId) { res in
             switch res {
             case .success(value: let value):
 //                if let curData = value as? Data {
@@ -86,5 +93,9 @@ class OrderDetailViewModel: OrderDetailViewType {
     
     func getTotalPrice() -> Double {
         return total ?? 0
+    }
+    
+    func getPageTitle() -> String {
+        return String(orderId)
     }
 }

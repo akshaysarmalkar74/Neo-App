@@ -7,14 +7,14 @@
 
 import UIKit
 
-protocol ProductDetailFooterDelegate {
+protocol ProductDetailFooterDelegate: AnyObject {
     func didTapBuyNow()
     func didTapRateBtn()
 }
 
 class ProductDetailFooter: UITableViewCell {
     
-    var delegate: ProductDetailFooterDelegate?
+    weak var delegate: ProductDetailFooterDelegate?
 
     override func awakeFromNib() {
         super.awakeFromNib()

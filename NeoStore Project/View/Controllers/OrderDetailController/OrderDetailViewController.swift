@@ -12,13 +12,11 @@ class OrderDetailViewController: UIViewController {
     // MARK:- Outlets & Variables
     @IBOutlet weak var tableView: UITableView!
     var viewModel: OrderDetailViewType!
-    var orderId: Int!
     var loaderViewScreen: UIView?
     
-    init(viewModel: OrderDetailViewType, orderId: Int) {
+    init(viewModel: OrderDetailViewType) {
         super.init(nibName: StringConstants.OrderDetailViewController, bundle: nil)
         self.viewModel = viewModel
-        self.orderId = orderId
     }
     
     required init?(coder: NSCoder) {
@@ -35,7 +33,7 @@ class OrderDetailViewController: UIViewController {
         
         // Set Observers
         setupObservers()
-        customiseNavbar(title: "Order ID: \(orderId)", vcType: StringConstants.OrderDetailViewController, btnSelector: nil)
+        customiseNavbar(title: "Order ID: \(self.viewModel.getPageTitle())", vcType: StringConstants.OrderDetailViewController, btnSelector: nil)
         
         // Register Cell
         tableView.register(UINib(nibName: "OrderDetailCell", bundle: nil), forCellReuseIdentifier: "OrderDetailCell")
@@ -43,7 +41,7 @@ class OrderDetailViewController: UIViewController {
         
         // Get Order
         showLoader(view: self.view, aicView: &loaderViewScreen)
-        self.viewModel.getOrderWith(id: orderId)
+        self.viewModel.getOrderWith()
     }
 
     // Setup Observers

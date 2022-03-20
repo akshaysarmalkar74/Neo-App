@@ -8,12 +8,6 @@
 import UIKit
 
 class CartListViewController: UIViewController, CartListSectionFooterDelegate {
-    func didTappedOrderButton() {
-        let viewModel = AddressListViewModel()
-        let vc = AddressListViewController(viewModel: viewModel)
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-
     // Outlets
     @IBOutlet weak var cartTable: UITableView!
     
@@ -48,6 +42,13 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
         // Fetch Carts
         showLoader(view: self.view, aicView: &loaderViewScreen)
         self.viewModel.fetchCart()
+    }
+    
+    // Did Tap Method
+    func didTappedOrderButton() {
+        let viewModel = AddressListViewModel()
+        let vc = AddressListViewController(viewModel: viewModel)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // Setup Observers

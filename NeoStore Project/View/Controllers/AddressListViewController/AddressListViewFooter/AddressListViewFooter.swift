@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol AddressListViewFooterDelegate {
+protocol AddressListViewFooterDelegate: AnyObject {
     func didTapppedOrderBtn()
 }
 
 class AddressListViewFooter: UITableViewHeaderFooterView {
 
-    var delegate: AddressListViewFooterDelegate?
+    weak var delegate: AddressListViewFooterDelegate?
     
     @IBAction func placeOrderTapped(_ sender: UIButton) {
         self.delegate?.didTapppedOrderBtn()

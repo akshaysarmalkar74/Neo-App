@@ -15,7 +15,7 @@ class ProductRateViewController: UIViewController {
     
     // Variables
     var viewModel: ProductRateViewType!
-    var delegate: ProductBuyViewControllerDelegate?
+    weak var delegate: ProductBuyViewControllerDelegate?
     var loaderViewScreen: UIView?
     
     init(viewModel: ProductRateViewType) {

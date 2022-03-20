@@ -7,13 +7,13 @@
 
 import UIKit
 
-protocol CartListSectionFooterDelegate {
+protocol CartListSectionFooterDelegate: AnyObject {
     func didTappedOrderButton()
 }
 
 class CartListSectionFooter: UITableViewHeaderFooterView {
     
-    var delegate: CartListSectionFooterDelegate?
+    weak var delegate: CartListSectionFooterDelegate?
     
     @IBAction func orderTapped(_ sender: Any) {
         self.delegate?.didTappedOrderButton()
