@@ -124,7 +124,6 @@ class UserService {
                     print("Error - \(error.localizedDescription)")
                 }
             case .failure(error: let error):
-                print(error.localizedDescription)
                 completionHandler(.failure(error: error))
             }
         }

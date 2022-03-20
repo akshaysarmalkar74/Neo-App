@@ -140,8 +140,6 @@ extension MyAccountViewController {
         // Customise Navigation Bar
         customiseNavbar(title: "My Account", vcType: StringConstants.MyAccountViewController, btnSelector: #selector(backBtnTapped(_:)))
         
-        // Set User Details
-//        setUserDetails(user: user)
         
         // Configure Date Picker
         createDatePicker()
@@ -186,6 +184,7 @@ extension MyAccountViewController {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                 }
                 UserDefaults.standard.setUpdatedProfile(value: true)
+                self.isAnyTextFieldChanged = false
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)

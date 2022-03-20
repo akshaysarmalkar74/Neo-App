@@ -45,26 +45,6 @@ class MyAccountScreenViewModel: MyAccountViewType {
             UserService.updateUser(firstName: firstName, lastName: lastName ,email: email, phoneNo: actualPhoneNum, birthDate: birthDate, profilePic: profilePic) { res in
                 switch res {
                 case .success(value: let value):
-    //                if let curData = value as? Data {
-    //                    do {
-    //                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-    //                        print(mainData)
-    //                        if let statusCode = mainData["status"] as? Int {
-    //                            if statusCode == 200 {
-    //                                self.updateUserStatus.value = .success
-    //                            } else {
-    //                                // Show Error to User
-    //                                let userMsg = mainData["user_msg"] as? String
-    //                                self.updateUserStatus.value = .failure(msg: userMsg)
-    //                            }
-    //                        }
-    //                    } catch let err {
-    //                        print(err.localizedDescription)
-    //                    }
-    //                } else {
-    //                    print("Some Another Error")
-    //                }
-                
                     if let statusCode = value.status, statusCode == 200 {
                         self.updateUserStatus.value = .success
                     } else {

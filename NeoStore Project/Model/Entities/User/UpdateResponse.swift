@@ -9,11 +9,10 @@ import Foundation
 
 struct UpdateResponse: Codable {
     let status: Int?
-    let data: [Bool]?
     let message, userMsg: String?
 
     enum CodingKeys: String, CodingKey {
-        case status, data, message
+        case status, message
         case userMsg = "user_msg"
     }
 }
