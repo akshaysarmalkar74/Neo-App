@@ -35,7 +35,7 @@ class OrderDetailViewController: UIViewController {
         
         // Set Observers
         setupObservers()
-        customiseNavbar(orderId: orderId)
+        customiseNavbar(title: "Order ID: \(orderId)", vcType: StringConstants.OrderDetailViewController, btnSelector: nil)
         
         // Register Cell
         tableView.register(UINib(nibName: "OrderDetailCell", bundle: nil), forCellReuseIdentifier: "OrderDetailCell")
@@ -87,18 +87,18 @@ class OrderDetailViewController: UIViewController {
 //    }
     
     // Customise Navigation Bar
-    func customiseNavbar(orderId: Int) {
-        // Set Title
-        self.title = "Order Id: \(orderId)"
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-    }
+//    func customiseNavbar(orderId: Int) {
+//        // Set Title
+//        self.title = "Order Id: \(orderId)"
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//    }
 
 }
 

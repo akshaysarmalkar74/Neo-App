@@ -39,7 +39,7 @@ class ProductListViewController: UIViewController {
         setupObservers()
         
         // Setup Navigation
-        customiseNavbar(pageTitle: pageTitle)
+        customiseNavbar(title: pageTitle, vcType: StringConstants.ProductListViewController, btnSelector: nil)
         
         // Configure TableView
         tableView.delegate = self
@@ -134,16 +134,16 @@ extension ProductListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     // Customise Navigation Bar
-    func customiseNavbar(pageTitle: String) {
-        // Set Title
-        self.title = pageTitle
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-    }
+//    func customiseNavbar(pageTitle: String) {
+//        // Set Title
+//        self.title = pageTitle
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//    }
 }

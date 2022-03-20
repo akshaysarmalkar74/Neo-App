@@ -135,7 +135,7 @@ extension LoginScreenViewController {
             case .success(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.showSuccessAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.loginViewController, shouldPop: true)
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
@@ -191,17 +191,17 @@ extension LoginScreenViewController {
     }
     
     // Success Alert Function
-    func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showSuccessAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
 }

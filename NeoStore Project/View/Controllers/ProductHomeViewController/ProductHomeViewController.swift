@@ -38,7 +38,6 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        customiseNavbar()
         
         // Set Delegate and Datasource
         sliderCollectionView.delegate = self
@@ -59,7 +58,7 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
         // Update Height of Slider Image Constraint
         sliderHeightConstrant.constant = screenHeight * 0.35
         
-        customiseNavbar()
+        customiseNavbar(title: "NeoStore", vcType: StringConstants.ProductHomeViewController, btnSelector: #selector(menuTapped(_:)))
         
     }
     
@@ -85,25 +84,25 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     }
     
     // Customise Navigation Bar
-    func customiseNavbar() {
-        // Set Title
-        self.title = "NeoStore"
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-        
-        // Hide Back Bar Button
-        self.navigationItem.setHidesBackButton(true, animated: true)
-        
-        // Add Menu Button
-        let menuBtn = UIBarButtonItem(image: UIImage(named: "menu_icon"), style: .plain, target: self, action: #selector(menuTapped(_:)))
-        self.navigationItem.leftBarButtonItem = menuBtn
-    }
+//    func customiseNavbar() {
+//        // Set Title
+//        self.title = "NeoStore"
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//
+//        // Hide Back Bar Button
+//        self.navigationItem.setHidesBackButton(true, animated: true)
+//
+//        // Add Menu Button
+//        let menuBtn = UIBarButtonItem(image: UIImage(named: "menu_icon"), style: .plain, target: self, action: #selector(menuTapped(_:)))
+//        self.navigationItem.leftBarButtonItem = menuBtn
+//    }
     
     @objc func menuTapped(_ sender: UIBarButtonItem) {
         self.present(sideMenu, animated: true, completion: nil)

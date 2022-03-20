@@ -33,7 +33,7 @@ class NewAddressViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        customiseNavbar()
+        customiseNavbar(title: "Add Address", vcType: StringConstants.NewAddressViewController, btnSelector: nil)
         setupObservers()
     }
 
@@ -80,17 +80,17 @@ class NewAddressViewController: UIViewController {
 //    }
 //
     // Customise Navbar
-    func customiseNavbar() {
-        // Set Title
-        self.title = "Add Address"
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-        
-    }
+//    func customiseNavbar() {
+//        // Set Title
+//        self.title = "Add Address"
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//
+//    }
 }

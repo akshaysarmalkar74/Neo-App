@@ -28,7 +28,8 @@ class AddressListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        customiseNavbar()
+        customiseNavbar(title: "Select Address", vcType: StringConstants.AddressListViewController, btnSelector: #selector(newBtnTapped(_:)))
+        
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: "AddressListCell", bundle: nil), forCellReuseIdentifier: "AddressListCell")
@@ -55,21 +56,21 @@ class AddressListViewController: UIViewController {
     }
     
     // Customise Navbar
-    func customiseNavbar() {
-        // Set Title
-        self.title = "Select Address"
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-        
-        let addNewBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newBtnTapped(_:)))
-        self.navigationItem.rightBarButtonItem = addNewBtn
-    }
+//    func customiseNavbar() {
+//        // Set Title
+//        self.title = "Select Address"
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//
+//        let addNewBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(newBtnTapped(_:)))
+//        self.navigationItem.rightBarButtonItem = addNewBtn
+//    }
     
     @objc func newBtnTapped(_ sender: UIBarButtonItem) {
         let viewModel = NewAddressViewModel()

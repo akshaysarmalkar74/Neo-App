@@ -123,7 +123,7 @@ extension ResetPasswordViewController {
         addTapGestureToView()
         
         // Customise Navigation Bar
-        customiseNavbar()
+        customiseNavbar(title: "Reset Password", vcType: StringConstants.ResetPasswordViewController, btnSelector: nil)
         
     }
     
@@ -159,18 +159,18 @@ extension ResetPasswordViewController {
     }
     
     // Customise Navigation Bar
-    func customiseNavbar() {
-        // Set Title
-        self.title = "Reset Password"
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-    }
+//    func customiseNavbar() {
+//        // Set Title
+//        self.title = "Reset Password"
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//    }
     
     // Add Tap Gesture to View
     func addTapGestureToView() {

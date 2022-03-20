@@ -60,7 +60,7 @@ class ProductDetailViewController: UIViewController {
                 DispatchQueue.main.async {
                     self.contentHidderView.isHidden = true
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.customiseNavbar(pageTitle: product?.name ?? "")
+                    self.customiseNavbar(title: product?.name ?? "", vcType: StringConstants.ProductDetailViewController, btnSelector: nil)
                     self.tableView.reloadData()
                 }
             case .failure(let msg):
@@ -149,18 +149,18 @@ class ProductDetailViewController: UIViewController {
     }
     
     // Customise Navigation Bar
-    func customiseNavbar(pageTitle: String) {
-        // Set Title
-        self.title = pageTitle
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-    }
+//    func customiseNavbar(pageTitle: String) {
+//        // Set Title
+//        self.title = pageTitle
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//    }
 }
 
 extension ProductDetailViewController: UITableViewDelegate, UITableViewDataSource {

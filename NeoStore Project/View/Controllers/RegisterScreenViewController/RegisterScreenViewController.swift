@@ -127,7 +127,7 @@ extension RegisterScreenViewController {
         addTapGestureToView()
         
         // Customise Navigation Bar
-        customiseNavbar()
+        customiseNavbar(title: "Register", vcType: StringConstants.registerViewController, btnSelector: nil)
         
         // Change Terms Label Text Color
         termsLabel.textColor = .white
@@ -173,19 +173,19 @@ extension RegisterScreenViewController {
     }
     
     // Customise Navigation Bar
-    func customiseNavbar() {
-        // Set Title
-        self.title = "Register"
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-    }
-    
+//    func customiseNavbar() {
+//        // Set Title
+//        self.title = "Register"
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//    }
+//
     // Add Tap Gesture to View
     func addTapGestureToView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(_:)))

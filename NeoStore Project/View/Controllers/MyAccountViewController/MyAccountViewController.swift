@@ -138,7 +138,7 @@ extension MyAccountViewController {
         addTapGestureToView()
         
         // Customise Navigation Bar
-        customiseNavbar()
+        customiseNavbar(title: "My Account", vcType: StringConstants.MyAccountViewController, btnSelector: #selector(backBtnTapped(_:)))
         
         // Set User Details
 //        setUserDetails(user: user)
@@ -248,22 +248,22 @@ extension MyAccountViewController {
     }
     
     // Customise Navigation Bar
-    func customiseNavbar() {
-        // Set Title
-        self.title = "My Account"
-        
-        // Customise Naviagtion Bar
-        self.navigationController?.navigationBar.barTintColor = .mainRed
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        
-        // Customise Back Button Color & Title
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-        
-        // Add Left Bar Button
-        let leftBackBtn = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backBtnTapped(_:)))
-        self.navigationItem.leftBarButtonItem = leftBackBtn
-    }
+//    func customiseNavbar() {
+//        // Set Title
+//        self.title = "My Account"
+//
+//        // Customise Naviagtion Bar
+//        self.navigationController?.navigationBar.barTintColor = .mainRed
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//
+//        // Customise Back Button Color & Title
+//        self.navigationController?.navigationBar.tintColor = .white
+//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+//
+//        // Add Left Bar Button
+//        let leftBackBtn = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backBtnTapped(_:)))
+//        self.navigationItem.leftBarButtonItem = leftBackBtn
+//    }
     
     @objc func backBtnTapped(_ sender: UIBarButtonItem) {
         // Check if any field is changed or not

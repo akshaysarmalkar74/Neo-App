@@ -64,4 +64,38 @@ extension UIViewController {
         self.present(alertVc, animated: true, completion: nil)
     }
     
+    // Navigation Controller
+    func customiseNavbar(title: String, vcType: String, btnSelector: Selector?) {
+        // Set Title
+        self.title = title
+        
+        // Customise Naviagtion Bar
+        self.navigationController?.navigationBar.barTintColor = .mainRed
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "Gotham Medium", size: 20.0)]
+        
+        // Customise Back Button Color & Title
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
+        
+        
+        if vcType == StringConstants.ProductHomeViewController {
+            let menuBtn = UIBarButtonItem(image: UIImage(named: "menu_icon"), style: .plain, target: self, action: btnSelector)
+            self.navigationItem.leftBarButtonItem = menuBtn
+            
+            // Hide Back Bar Button
+            self.navigationItem.setHidesBackButton(true, animated: true)
+        } else if vcType == StringConstants.MyAccountViewController {
+            let leftBackBtn = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: btnSelector)
+            self.navigationItem.leftBarButtonItem = leftBackBtn
+            
+            // Hide Back Bar Button
+            self.navigationItem.setHidesBackButton(true, animated: true)
+        } else if vcType == StringConstants.AddressListViewController {
+            let addNewBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: btnSelector)
+            self.navigationItem.rightBarButtonItem = addNewBtn
+        }
+        
+    }
+    
 }
