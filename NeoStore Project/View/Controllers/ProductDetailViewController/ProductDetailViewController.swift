@@ -66,7 +66,7 @@ class ProductDetailViewController: UIViewController {
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.showErrorAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.ProductDetailViewController, shouldPop: true)
                 }
             case .none:
                 break
@@ -75,33 +75,33 @@ class ProductDetailViewController: UIViewController {
     }
     
     // Error Alert Function
-    func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showErrorAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
     
     // Show Success Alert
-    func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showSuccessAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
     
     func convertIdToCategory(categoryId: Int) -> String {
         let categories = ["Tables", "Sofa", "Chair", "CupBoards"]
@@ -288,7 +288,7 @@ extension ProductDetailViewController: ProductBuyViewControllerDelegate, ShareBu
     
     func didReceiveResponse(userMsg: String?) {
         self.viewModel.fetchProductDetails()
-        showSuccessAlert(msg: userMsg)
+        self.showAlert(msg: userMsg, vcType: StringConstants.ProductDetailViewController, shouldPop: false)
     }
     
     

@@ -69,37 +69,37 @@ class ResetPasswordViewController: UIViewController {
     }
     
     // Error Alert Function
-    func showErrorAlert(msg: String?) {
-        self.hideLoader(viewLoaderScreen: loaderViewScreen)
-        
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showErrorAlert(msg: String?) {
+//        self.hideLoader(viewLoaderScreen: loaderViewScreen)
+//
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
     
     // Success Alert Function
-    func showSuccessAlert(msg: String?) {
-        self.hideLoader(viewLoaderScreen: loaderViewScreen)
-        
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showSuccessAlert(msg: String?) {
+//        self.hideLoader(viewLoaderScreen: loaderViewScreen)
+//
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
 }
 
 extension ResetPasswordViewController {
@@ -132,13 +132,9 @@ extension ResetPasswordViewController {
         self.viewModel.passwordResetStatus.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
             switch value {
-            case .success(let msg):
+            case .success(let msg), .failure(let msg):
                 DispatchQueue.main.async {
-                    self.showSuccessAlert(msg: msg)
-                }
-            case .failure(let msg):
-                DispatchQueue.main.async {
-                    self.showErrorAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.ResetPasswordViewController, shouldPop: true)
                 }
             case .none:
                 break

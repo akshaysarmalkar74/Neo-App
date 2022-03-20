@@ -73,18 +73,18 @@ class LoginScreenViewController: UIViewController {
     }
     
     // Error Alert Function
-    func showErrorAlert(error: String?) {
-        let alertVc = UIAlertController(title: nil, message: error, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showErrorAlert(error: String?) {
+//        let alertVc = UIAlertController(title: nil, message: error, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
     
 }
 
@@ -122,7 +122,7 @@ extension LoginScreenViewController {
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.showErrorAlert(error: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.loginViewController, shouldPop: false)
                 }
             case .none:
                 break
@@ -140,7 +140,7 @@ extension LoginScreenViewController {
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.showErrorAlert(error: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.loginViewController, shouldPop: false)
                 }
             case .none:
                 break

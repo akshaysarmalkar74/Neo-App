@@ -60,7 +60,7 @@ class ProductListViewController: UIViewController {
                 print("In Success")
             case .failure(let msg):
                 DispatchQueue.main.async {
-                    self.showErrorAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.ProductListViewController, shouldPop: false)
                 }
             case .none:
                 break
@@ -81,18 +81,18 @@ class ProductListViewController: UIViewController {
     }
     
     // Error Alert Function
-    func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showErrorAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
 }
 
 extension ProductListViewController: UITableViewDelegate, UITableViewDataSource {

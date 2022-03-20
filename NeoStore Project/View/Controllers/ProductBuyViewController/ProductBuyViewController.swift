@@ -107,21 +107,22 @@ class ProductBuyViewController: UIViewController {
             showLoader(view: self.view, aicView: &loaderViewScreen)
         } else {
             // Show Error
-            showAlert(msg: qtyResult.message)
+//            showAlert(msg: qtyResult.message)
+            self.showAlert(msg: qtyResult.message, vcType: StringConstants.ProductBuyViewController, shouldPop: false)
         }
     }
     
     // Error Alert Function
-    func showAlert(msg: String?) {
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default, handler: nil)
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default, handler: nil)
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
     
     func createToolBar() {
          let toolBar = UIToolbar()
@@ -140,6 +141,7 @@ class ProductBuyViewController: UIViewController {
         if qtyResult.result {
             // Dismiss the keyboard
             self.view.endEditing(true)
+            
             // Shift Container View Back to Original Position
             containerViewTopConstraint.constant += 70
             UIView.animate(withDuration: 0.3) {
@@ -148,7 +150,7 @@ class ProductBuyViewController: UIViewController {
             isViewShifted = false
         } else {
             // Show Alert Message
-            self.showAlert(msg: qtyResult.message)
+            self.showAlert(msg: qtyResult.message, vcType: StringConstants.ProductBuyViewController, shouldPop: false)
         }
     }
     

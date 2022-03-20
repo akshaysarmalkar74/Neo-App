@@ -100,18 +100,18 @@ class MyAccountViewController: UIViewController {
     }
     
     // Error Alert Function
-    func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showErrorAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
 }
 
 extension MyAccountViewController {
@@ -190,7 +190,7 @@ extension MyAccountViewController {
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.setUserDetails(user: self.user)
-                    self.showErrorAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.MyAccountViewController, shouldPop: false)
                 }
             case .none:
                 break
@@ -211,7 +211,7 @@ extension MyAccountViewController {
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.showErrorAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.MyAccountViewController, shouldPop: false)
                 }
             case .none:
                 break
@@ -267,7 +267,6 @@ extension MyAccountViewController {
     
     @objc func backBtnTapped(_ sender: UIBarButtonItem) {
         // Check if any field is changed or not
-        print(isAnyTextFieldChanged)
         if isAnyTextFieldChanged {
             let alertVc = UIAlertController(title: nil, message: "Any Changes made will be discarded. Do you still want to proceed?", preferredStyle: .alert)
             

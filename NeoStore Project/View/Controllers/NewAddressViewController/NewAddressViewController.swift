@@ -34,7 +34,6 @@ class NewAddressViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         customiseNavbar()
-        
         setupObservers()
     }
 
@@ -43,7 +42,6 @@ class NewAddressViewController: UIViewController {
         self.viewModel.addNewAddress(address: addressField.text ?? "", landmark: landMarkField.text ?? "", city: cityField.text ?? "", zipCode: zipCodeField.text ?? "", state: stateField.text ?? "", country: countryField.text ?? "")
         
         showLoader(view: self.view, aicView: &loaderViewScreen)
-//        self.navigationController?.popViewController(animated: true)
     }
     
     // Setup Observers
@@ -59,7 +57,7 @@ class NewAddressViewController: UIViewController {
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.showErrorAlert(error: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.NewAddressViewController, shouldPop: false)
                 }
             case .none:
                 break
@@ -68,19 +66,19 @@ class NewAddressViewController: UIViewController {
     }
  
     // Error Alert Function
-    func showErrorAlert(error: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: error, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
-    
+//    func showErrorAlert(error: String?) {
+//        let alertVc = UIAlertController(title: "Something went wrong!", message: error, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
+//
     // Customise Navbar
     func customiseNavbar() {
         // Set Title

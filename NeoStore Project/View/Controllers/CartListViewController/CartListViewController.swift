@@ -59,7 +59,7 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                     self.cartTable.isHidden = true
-                    self.showErrorAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.CartListViewController, shouldPop: true)
                 }
             case .none:
                 break
@@ -79,34 +79,34 @@ class CartListViewController: UIViewController, CartListSectionFooterDelegate {
     }
     
     // Success Alert Function
-    func showSuccessAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
-    
+//    func showSuccessAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: "Password has been sent to your email!", message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
+//
     // Error Alert Function
-    func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-            self?.navigationController?.popViewController(animated: true)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showErrorAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//            self?.navigationController?.popViewController(animated: true)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
     
     // Customise Navigation Bar
     func customiseNavbar() {

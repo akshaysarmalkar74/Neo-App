@@ -49,7 +49,7 @@ class MyOrdersViewController: UIViewController {
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.showErrorAlert(msg: msg)
+                    self.showAlert(msg: msg, vcType: StringConstants.MyOrdersViewController, shouldPop: false)
                 }
             case .none:
                 break
@@ -68,18 +68,18 @@ class MyOrdersViewController: UIViewController {
     }
     
     // Error Alert Function
-    func showErrorAlert(msg: String?) {
-        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
-        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-            self?.dismiss(animated: true, completion: nil)
-        }
-        
-        // Add Button to Alert
-        alertVc.addAction(alertBtn)
-        
-        // Present Alert
-        self.present(alertVc, animated: true, completion: nil)
-    }
+//    func showErrorAlert(msg: String?) {
+//        let alertVc = UIAlertController(title: "Something went wrong!", message: msg, preferredStyle: .alert)
+//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+//            self?.dismiss(animated: true, completion: nil)
+//        }
+//
+//        // Add Button to Alert
+//        alertVc.addAction(alertBtn)
+//
+//        // Present Alert
+//        self.present(alertVc, animated: true, completion: nil)
+//    }
     
     // Customise Navigation Bar
     func customiseNavbar() {

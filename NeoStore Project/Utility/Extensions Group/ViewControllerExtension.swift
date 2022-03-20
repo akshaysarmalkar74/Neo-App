@@ -36,4 +36,32 @@ extension UIViewController {
     func hideLoader(viewLoaderScreen: UIView?) {
         viewLoaderScreen?.removeFromSuperview()
     }
+    
+    // Error Alert Function
+    func showAlert(msg: String?, vcType: String, shouldPop: Bool) {
+        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
+        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
+            self?.dismiss(animated: true, completion: nil)
+            if shouldPop {
+                self?.navigationController?.popViewController(animated: true)
+            }
+            
+            // Special Case for AddressList Controller
+            if vcType == "AddressListViewController" {
+                for controller in (self?.navigationController!.viewControllers)! as Array {
+                    if controller.isKind(of: ProductHomeViewController.self) {
+                        self?.navigationController!.popToViewController(controller, animated: true)
+                        break
+                    }
+                }
+            }
+        }
+        
+        // Add Button to Alert
+        alertVc.addAction(alertBtn)
+        
+        // Present Alert
+        self.present(alertVc, animated: true, completion: nil)
+    }
+    
 }
