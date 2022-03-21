@@ -54,6 +54,7 @@ enum ValidationMessages: String {
     case noPhone = "Please enter phone number"
     case invalidPhone = "Phone number should be 10 digits exactly"
     case noBirthDate = "Please select birth date"
+    case invalidQty = "Please enter valid quantity"
 }
 
 

@@ -105,28 +105,10 @@ class ProductBuyViewController: UIViewController {
     // Submit Btn Tapped
     
     @IBAction func submitBtnTapped(_ sender: UIButton) {
-        let qtyResult = Validator.validateQuantity(val: qtyInput.text ?? "")
-        if qtyResult.result {
-            viewModel.buyProduct(quantity: Int(qtyInput.text!)!)
-            showLoader(view: self.view, aicView: &loaderViewScreen)
-        } else {
-            // Show Error
-//            showAlert(msg: qtyResult.message)
-            self.showAlert(msg: qtyResult.message, vcType: StringConstants.ProductBuyViewController, shouldPop: false)
-        }
+        self.view.endEditing(true)
+        self.viewModel.buyProduct()
     }
     
-    // Error Alert Function
-//    func showAlert(msg: String?) {
-//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default, handler: nil)
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
     
     func createToolBar() {
          let toolBar = UIToolbar()
@@ -183,6 +165,10 @@ extension ProductBuyViewController: UIGestureRecognizerDelegate, UITextFieldDele
             }
             isViewShifted = true
         }
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.viewModel.saveTextFromTextField(text: textField.text, tag: textField.tag)
     }
 }
 
