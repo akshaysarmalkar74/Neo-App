@@ -38,3 +38,15 @@ enum ProductCategoryId: String {
     case Sofas = "3"
     case Cupboards = "4"
 }
+
+enum ValidationMessages: String {
+    case noEmail = "Please enter email"
+    case invalidEmail = "Please enter a valid email"
+    case noPasswordLogin = "Please enter password"
+}
+
+
+enum ValidationResult {
+    case success
+    case failure(msg: ValidationMessages)
+}

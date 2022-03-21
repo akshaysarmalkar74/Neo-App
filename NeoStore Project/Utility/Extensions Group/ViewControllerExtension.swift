@@ -34,7 +34,7 @@ extension UIViewController {
     }
     
     func hideLoader(viewLoaderScreen: UIView?) {
-        viewLoaderScreen?.removeFromSuperview()
+        viewLoaderScreen?.isHidden = true
     }
     
     // Error Alert Function

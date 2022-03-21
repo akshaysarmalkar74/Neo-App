@@ -59,12 +59,15 @@ class LoginScreenViewController: UIViewController {
         
         // Create Alert with TextFields
         let alertVc = UIAlertController(title: "Forgot Password", message: "Please enter email", preferredStyle: .alert)
+        
         alertVc.addTextField(configurationHandler: nil)
+        alertVc.textFields?[0].tag = 3
+        alertVc.textFields?[0].delegate = self
         
         let submitBtn = UIAlertAction(title: "Submit", style: .default) { action in
-            // Send Request
-            let textField = alertVc.textFields?[0]
-            self.viewModel.forgotPassword(email: textField?.text ?? "")
+            self.view.endEditing(true)
+            self.showLoader(view: self.view, aicView: &self.loaderViewScreen)
+            self.viewModel.forgotPassword()
         }
         let cancelBtn = UIAlertAction(title: "Cancel", style: .cancel) { action in
             self.dismiss(animated: true, completion: nil)
