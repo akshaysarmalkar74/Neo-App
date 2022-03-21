@@ -47,6 +47,13 @@ enum ValidationMessages: String {
     case noNewPassword = "Please enter new password"
     case shortNewPassword = "Password should be more than 6 characters"
     case invalidConfirmPassword = "Passwords does not match"
+    case noFirstName = "Please enter first name"
+    case invalidFirstName = "No Characters/Digits allowed in first name"
+    case noLastName = "Please enter last name"
+    case invalidLastName = "No Characters/Digits allowed in last name"
+    case noPhone = "Please enter phone number"
+    case invalidPhone = "Phone number should be 10 digits exactly"
+    case noBirthDate = "Please select birth date"
 }
 
 

@@ -19,4 +19,8 @@ extension String {
         let result = emailPred.evaluate(with: self)
         return result
     }
+    
+    func isValidPhone() -> Bool {
+        return self.count == 10
+    }
 }

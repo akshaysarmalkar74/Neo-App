@@ -19,7 +19,6 @@ class MyAccountViewController: UIViewController {
     @IBOutlet weak var resetPasswordBtn: UIButton!
     
     // Variables
-    var user: UserData!
     let datePicker = UIDatePicker()
     var viewModel: MyAccountViewType!
     var currentProfileImgUrl: String!
@@ -48,9 +47,9 @@ class MyAccountViewController: UIViewController {
         if UserDefaults.standard.isProfileUpdated() {
             self.viewModel.getUser()
         } else {
-            user = UserDefaults.standard.getUserInstance()
-            currentProfileImgUrl = user.profilePic ?? "profileDemo"
-            setUserDetails(user: user)
+            self.viewModel.getUserFromDefaults()
+            self.viewModel.getCurrentProfileImgUrl()
+            setUserDetails(user: self.viewModel.retriveCurrentUser())
             hideLoader(viewLoaderScreen: loaderViewScreen)
         }
         
@@ -65,8 +64,8 @@ class MyAccountViewController: UIViewController {
             resetPasswordBtn.isHidden = true
             sender.setTitle("Submit", for: .normal)
         } else {
-            self.viewModel.updateUser(firstName: firstNameField.text ?? "", lastName: lastNameField.text ?? "", email: emailField.text ?? "", birthDate: birthDateField.text ?? "", phoneNo: phoneField.text ?? "", profilePic: "")
-            
+            self.view.endEditing(true)
+            self.viewModel.updateUser()
             // Send Request
             sender.setTitle("Edit Profile", for: .normal)
             resetPasswordBtn.isHidden = false
@@ -103,19 +102,6 @@ class MyAccountViewController: UIViewController {
         profileImg.isUserInteractionEnabled = !profileImg.isUserInteractionEnabled
     }
     
-    // Error Alert Function
-//    func showErrorAlert(msg: String?) {
-//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-//            self?.dismiss(animated: true, completion: nil)
-//        }
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
 }
 
 extension MyAccountViewController {
@@ -192,7 +178,7 @@ extension MyAccountViewController {
             case .failure(let msg):
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.setUserDetails(user: self.user)
+                    self.setUserDetails(user: self.viewModel.retriveCurrentUser())
                     self.showAlert(msg: msg, vcType: StringConstants.MyAccountViewController, shouldPop: false)
                 }
             case .none:
@@ -203,13 +189,12 @@ extension MyAccountViewController {
         self.viewModel.userDetailsStatus.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
             switch value {
-            case .success(let user):
+            case .success:
                 // Update isUpdated Profile
-                self.user = user
                 UserDefaults.standard.setUpdatedProfile(value: false)
                 DispatchQueue.main.async {
                     self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
-                    self.setUserDetails(user: user)
+                    self.setUserDetails(user: self.viewModel.retriveCurrentUser())
                 }
             case .failure(let msg):
                 DispatchQueue.main.async {
@@ -249,24 +234,6 @@ extension MyAccountViewController {
         textField.leftViewMode = UITextField.ViewMode.always
         textField.leftView = view
     }
-    
-    // Customise Navigation Bar
-//    func customiseNavbar() {
-//        // Set Title
-//        self.title = "My Account"
-//
-//        // Customise Naviagtion Bar
-//        self.navigationController?.navigationBar.barTintColor = .mainRed
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//
-//        // Customise Back Button Color & Title
-//        self.navigationController?.navigationBar.tintColor = .white
-//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-//
-//        // Add Left Bar Button
-//        let leftBackBtn = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"), style: .plain, target: self, action: #selector(backBtnTapped(_:)))
-//        self.navigationItem.leftBarButtonItem = leftBackBtn
-//    }
     
     @objc func backBtnTapped(_ sender: UIBarButtonItem) {
         // Check if any field is changed or not
@@ -358,5 +325,9 @@ extension MyAccountViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         isAnyTextFieldChanged = true
         return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.viewModel.saveTextFromTextField(text: textField.text, tag: textField.tag)
     }
 }

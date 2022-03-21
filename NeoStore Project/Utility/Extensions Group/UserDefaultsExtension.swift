@@ -29,30 +29,6 @@ extension UserDefaults{
         return string(forKey: UserDefaultsKeys.userToken.rawValue)
     }
     
-    //MARK: Save Entire User Data
-//    func saveUser(value: [String : Any]) {
-//        do {
-//            // Encode and Save the data
-//            let encodedData = try NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: false)
-//            set(encodedData, forKey: UserDefaultsKeys.user.rawValue)
-//        } catch let err {
-//            print("Error - \(err.localizedDescription)")
-//        }
-//    }
-    
-    //MARK: Get Entire User
-//    func getUser() -> [String: Any] {
-//        do {
-//            // Get Data and decode it
-//            let decoded  = object(forKey: UserDefaultsKeys.user.rawValue) as! Data
-//            let decodedUser = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(decoded) as? [String: Any] ?? [String: Any]()
-//            return decodedUser
-//        } catch let err {
-//            print(err.localizedDescription)
-//            return [String: Any]()
-//        }
-//    }
-    
     //MARK:- Set Profile Update
     func setUpdatedProfile(value: Bool){
         set(value, forKey: UserDefaultsKeys.isProfileUpdated.rawValue)

@@ -14,35 +14,68 @@ enum UpdateAccountApiResult {
 }
 
 enum UserDetailsApiResult {
-    case success(user: UserData)
+    case success
     case failure(msg: String?)
     case none
 }
 
 protocol MyAccountViewType {
+    var firstName: String {get set}
+    var lastName: String {get set}
+    var email: String {get set}
+    var phoneNum: String {get set}
+    var birthDate: String {get set}
+    var user: UserData! {get set}
+    var currentProfileImgUrl: String {get set}
+    
     var updateUserStatus: ReactiveListener<UpdateAccountApiResult> {get set}
     var userDetailsStatus: ReactiveListener<UserDetailsApiResult> {get set}
     
-    func updateUser(firstName: String, lastName: String, email: String, birthDate: String, phoneNo: String, profilePic: String)
+    func updateUser()
     func getUser()
+    func getUserFromDefaults()
+    func retriveCurrentUser() -> UserData
+    func getCurrentProfileImgUrl()
+    func saveTextFromTextField(text: String?, tag: Int)
 }
 
 class MyAccountScreenViewModel: MyAccountViewType {
+    var firstName: String = ""
+    var lastName: String = ""
+    var email: String = ""
+    var phoneNum: String = ""
+    var birthDate: String = ""
+    var currentProfileImgUrl: String = ""
+    var user: UserData! {
+        didSet {
+            firstName = user.firstName ?? ""
+            lastName = user.lastName ?? ""
+            email = user.email ?? ""
+            phoneNum = user.phoneNo ?? ""
+            birthDate = user.dob ?? ""
+        }
+    }
+    
     var userDetailsStatus: ReactiveListener<UserDetailsApiResult> = ReactiveListener(.none)
     var updateUserStatus: ReactiveListener<UpdateAccountApiResult> = ReactiveListener(.none)
     
     // Update User
-    func updateUser(firstName: String, lastName: String, email: String, birthDate: String, phoneNo: String, profilePic: String) {
-        // Get Validations Results
-        let firstNameResult = Validator.firstName(str: firstName)
-        let lastNameResult = Validator.lastName(str: lastName)
-        let emailResult = Validator.email(str: email)
-        let phoneResult = Validator.phoneNumber(str: phoneNo)
+    func updateUser() {
+        // Get Validation Result
+        let validationResult = validateMyAccountFields()
         
-        if firstNameResult.result && lastNameResult.result && emailResult.result && phoneResult.result {
-            let actualPhoneNum: Int = Int(phoneNo)!
+        switch validationResult {
+        case .success:
+            break
+        case .failure(msg: let msg):
+            self.updateUserStatus.value = .failure(msg: msg.rawValue)
+            return
+        }
+        
+        if Reachability.isConnectedToNetwork() {
+            let actualPhoneNum: Int = Int(phoneNum)!
                 
-            UserService.updateUser(firstName: firstName, lastName: lastName ,email: email, phoneNo: actualPhoneNum, birthDate: birthDate, profilePic: profilePic) { res in
+            UserService.updateUser(firstName: firstName, lastName: lastName ,email: email, phoneNo: actualPhoneNum, birthDate: birthDate, profilePic: "") { res in
                 switch res {
                 case .success(value: let value):
                     if let statusCode = value.status, statusCode == 200 {
@@ -54,17 +87,10 @@ class MyAccountScreenViewModel: MyAccountViewType {
                     print(error.localizedDescription)
                 }
             }
-        } else if !firstNameResult.result {
-            self.updateUserStatus.value = .failure(msg: firstNameResult.message)
-        } else if !lastNameResult.result {
-            self.updateUserStatus.value = .failure(msg: lastNameResult.message)
-        } else if !emailResult.result {
-            self.updateUserStatus.value = .failure(msg: emailResult.message)
         } else {
-            self.updateUserStatus.value = .failure(msg: phoneResult.message)
+            self.updateUserStatus.value = .failure(msg: "No Internet, please try again!")
         }
-        
-        
+
     }
     
     // Get Current User
@@ -72,37 +98,13 @@ class MyAccountScreenViewModel: MyAccountViewType {
         UserService.getUserDetails { res in
             switch res {
             case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-//
-//                        if let statusCode = mainData["status"] as? Int {
-//                            if statusCode == 200 {
-//                                print("Got User from API")
-//                                let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
-//                                let user = tempData["user_data"] as? [String: Any] ?? [String: Any]()
-//
-//                                // Update User Defaults
-//                                UserDefaults.standard.saveUser(value: user)
-//
-//                                // Pass user to VC
-//                                self.userDetailsStatus.value = .success(user: user)
-//                            } else {
-//                                // Show Error to User
-//                                let userMsg = mainData["user_msg"] as? String
-//                                self.updateUserStatus.value = .failure(msg: userMsg)
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                }
                 if let statusCode = value.status, statusCode == 200 {
                     if let userData = value.data?.userData {
                         // Save User to Defaults
                         UserDefaults.standard.saveUserInstance(user: userData)
-                        // Pass User to Vc
-                        self.userDetailsStatus.value = .success(user: userData)
+                        // Update user in view mode
+                        self.user = userData
+                        self.userDetailsStatus.value = .success
                     }
                 } else {
 //                    self.userDetailsStatus.value = .failure(msg: value.userMsg)
@@ -111,5 +113,80 @@ class MyAccountScreenViewModel: MyAccountViewType {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    // Get User from User Defaults
+    func getUserFromDefaults() {
+        self.user = UserDefaults.standard.getUserInstance()
+    }
+    
+    // Send stored User
+    func retriveCurrentUser() -> UserData {
+        return user
+    }
+    
+    // Get Current Profile Image
+    func getCurrentProfileImgUrl() {
+        currentProfileImgUrl =  user.profilePic ?? "profileDemo"
+    }
+    
+    // Extract Text from Text Fields
+    func saveTextFromTextField(text: String?, tag: Int) {
+        switch tag {
+        case 1:
+            firstName = text ?? ""
+        case 2:
+            lastName = text ?? ""
+        case 3:
+            email = text ?? ""
+        case 4:
+            phoneNum = text ?? ""
+        case 5:
+            birthDate = text ?? ""
+        default:
+            break
+        }
+    }
+    
+    // Validate Fields
+    func validateMyAccountFields() -> ValidationResult {
+        
+        if firstName.isEmpty {
+            return .failure(msg: .noFirstName)
+        }
+        
+        if !firstName.containsOnlyLettersAndWhitespace() {
+            return .failure(msg: .invalidFirstName)
+        }
+        
+        if lastName.isEmpty {
+            return .failure(msg: .noLastName)
+        }
+        
+        if !lastName.containsOnlyLettersAndWhitespace() {
+            return .failure(msg: .invalidLastName)
+        }
+        
+        if email.isEmpty {
+            return .failure(msg: .noEmail)
+        }
+        
+        if !email.isValidEmail() {
+            return .failure(msg: .invalidEmail)
+        }
+
+        if phoneNum.isEmpty {
+            return .failure(msg: .noPhone)
+        }
+        
+        if !phoneNum.isValidPhone() {
+            return .failure(msg: .invalidPhone)
+        }
+        
+        if birthDate.isEmpty {
+            return .failure(msg: .noBirthDate)
+        }
+        
+        return .success
     }
 }
