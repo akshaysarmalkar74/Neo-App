@@ -26,6 +26,7 @@ class ResetPasswordViewController: UIViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self)
         print("\(StringConstants.ResetPasswordViewController) was deleted")
     }
     
@@ -44,9 +45,9 @@ class ResetPasswordViewController: UIViewController {
     }
 
     @IBAction func resetBtnTapped(_ sender: UIButton) {
-        self.viewModel.reset(password: newPassword.text ?? "", confirmPassword: newPasswordConfirm.text ?? "", oldPassword: currentPassword.text ?? "")
-        
+        self.view.endEditing(true)
         showLoader(view: self.view, aicView: &loaderViewScreen)
+        self.viewModel.reset()
     }
     
     // KeyBoard Notification Functions
@@ -71,39 +72,6 @@ class ResetPasswordViewController: UIViewController {
             }
         }
     }
-    
-    // Error Alert Function
-//    func showErrorAlert(msg: String?) {
-//        self.hideLoader(viewLoaderScreen: loaderViewScreen)
-//
-//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-//            self?.dismiss(animated: true, completion: nil)
-//        }
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
-    
-    // Success Alert Function
-//    func showSuccessAlert(msg: String?) {
-//        self.hideLoader(viewLoaderScreen: loaderViewScreen)
-//
-//        let alertVc = UIAlertController(title: nil, message: msg, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-//            self?.dismiss(animated: true, completion: nil)
-//            self?.navigationController?.popViewController(animated: true)
-//        }
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
 }
 
 extension ResetPasswordViewController {
@@ -118,6 +86,9 @@ extension ResetPasswordViewController {
             
             // Set Border Color to Input
             textFields[idx].layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            
+            // Set Delegate
+            textFields[idx].delegate = self
             
             // Customise Text Fields
             customiseTextField(textField: textFields[idx], imgName: inputImgs[idx])
@@ -136,9 +107,15 @@ extension ResetPasswordViewController {
         self.viewModel.passwordResetStatus.bindAndFire { [weak self] (value) in
             guard let `self` = self else {return}
             switch value {
-            case .success(let msg), .failure(let msg):
+            case .success(let msg):
                 DispatchQueue.main.async {
                     self.showAlert(msg: msg, vcType: StringConstants.ResetPasswordViewController, shouldPop: true)
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
+                }
+            case .failure(let msg):
+                DispatchQueue.main.async {
+                    self.showAlert(msg: msg, vcType: StringConstants.ResetPasswordViewController, shouldPop: false)
+                    self.hideLoader(viewLoaderScreen: self.loaderViewScreen)
                 }
             case .none:
                 break
@@ -162,20 +139,6 @@ extension ResetPasswordViewController {
         textField.leftView = view
     }
     
-    // Customise Navigation Bar
-//    func customiseNavbar() {
-//        // Set Title
-//        self.title = "Reset Password"
-//
-//        // Customise Naviagtion Bar
-//        self.navigationController?.navigationBar.barTintColor = .mainRed
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//
-//        // Customise Back Button Color & Title
-//        self.navigationController?.navigationBar.tintColor = .white
-//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-//    }
-    
     // Add Tap Gesture to View
     func addTapGestureToView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(_:)))
@@ -186,4 +149,10 @@ extension ResetPasswordViewController {
         self.view.endEditing(true)
     }
     
+}
+
+extension ResetPasswordViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.viewModel.saveTextFromTextField(text: textField.text, tag: textField.tag)
+    }
 }

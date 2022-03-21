@@ -43,6 +43,10 @@ enum ValidationMessages: String {
     case noEmail = "Please enter email"
     case invalidEmail = "Please enter a valid email"
     case noPasswordLogin = "Please enter password"
+    case noCurrentPassword = "Please enter current password"
+    case noNewPassword = "Please enter new password"
+    case shortNewPassword = "Password should be more than 6 characters"
+    case invalidConfirmPassword = "Passwords does not match"
 }
 
 

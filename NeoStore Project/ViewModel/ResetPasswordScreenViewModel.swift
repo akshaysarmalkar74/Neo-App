@@ -14,45 +14,40 @@ enum ResetApiStatus {
 }
 
 protocol ResetPasswordScreenViewType {
+    var newPassword: String {get set}
+    var confirmPassword: String {get set}
+    var currentPassword: String {get set}
     var passwordResetStatus: ReactiveListener<ResetApiStatus> {get set}
     
-    func reset(password: String, confirmPassword: String, oldPassword: String)
+    func reset()
+    func saveTextFromTextField(text: String?, tag: Int)
 }
 
 class ResetPasswordScreenViewModel: ResetPasswordScreenViewType {
+    var newPassword: String = ""
+    var confirmPassword: String = ""
+    var currentPassword: String = ""
+    
     var passwordResetStatus: ReactiveListener<ResetApiStatus> = ReactiveListener(.none)
     
-    func reset(password: String, confirmPassword: String, oldPassword: String) {
-        let passwordResult = Validator.loginPassword(str: oldPassword)
-        let newPasswordResult = Validator.registerPassword(str: password)
-        let confirmPassResult = Validator.confirmPassword(password: password, confirmPass: confirmPassword)
+    init() {}
+    
+    func reset() {
         
+        // Get Validation Result
+        let validationResult = validateResetFields()
         
-        if passwordResult.result && newPasswordResult.result && confirmPassResult.result {
-            // Make Request
-            UserService.resetPassword(password: password, confirmPassword: confirmPassword, oldPassword: oldPassword) { res in
+        switch validationResult {
+        case .success:
+            break
+        case .failure(msg: let msg):
+            self.passwordResetStatus.value = .failure(msg: msg.rawValue)
+        }
+        
+        if Reachability.isConnectedToNetwork() {
+            UserService.resetPassword(password: newPassword, confirmPassword: confirmPassword, oldPassword: currentPassword) { res in
                 switch res {
                 case .success(value: let value):
-//                    if let curData = value as? Data {
-//                        do {
-//                            let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-//
-//                            if let statusCode = mainData["status"] as? Int {
-//                                let userMsg = mainData["user_msg"] as? String
-//                                if statusCode == 200 {
-//                                    self.passwordResetStatus.value = .success(success: userMsg)
-//                                } else {
-//                                    // Show Error to User
-//                                    self.passwordResetStatus.value = .failure(msg: userMsg)
-//                                }
-//                            }
-//                        } catch let err {
-//                            print(err.localizedDescription)
-//                        }
-//                    } else {
-//                        print("Some Another Error")
-//                    }
-                
                     // Check for success status
                     if let statusCode = value.status, statusCode == 200 {
                         self.passwordResetStatus.value = .success(success: value.userMsg)
@@ -64,14 +59,44 @@ class ResetPasswordScreenViewModel: ResetPasswordScreenViewType {
                     print(error.localizedDescription)
                 }
             }
-        } else if !passwordResult.result {
-            self.passwordResetStatus.value = .failure(msg: passwordResult.message)
-        } else if !newPasswordResult.result {
-            self.passwordResetStatus.value = .failure(msg: newPasswordResult.message)
         } else {
-            self.passwordResetStatus.value = .failure(msg: confirmPassResult.message)
+            self.passwordResetStatus.value = .failure(msg: "No Internet, please try again!")
         }
     }
     
+    // Extract Text from Text Fields
+    func saveTextFromTextField(text: String?, tag: Int) {
+        switch tag {
+        case 1:
+            currentPassword = text ?? ""
+        case 2:
+            newPassword = text ?? ""
+        case 3:
+            confirmPassword = text ?? ""
+        default:
+            break
+        }
+    }
+    
+    // Validate Reset Fields
+    func validateResetFields() -> ValidationResult {
+        if currentPassword.isEmpty {
+            return .failure(msg: .noCurrentPassword)
+        }
+        
+        if newPassword.isEmpty {
+            return .failure(msg: .noNewPassword)
+        }
+        
+        if newPassword.count < 6 {
+            return .failure(msg: .shortNewPassword)
+        }
+        
+        if confirmPassword != newPassword {
+            return .failure(msg: .invalidConfirmPassword)
+        }
+        
+        return .success
+    }
     
 }
