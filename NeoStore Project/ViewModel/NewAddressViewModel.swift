@@ -14,42 +14,97 @@ enum SaveAddressStatus {
 }
 
 protocol NewAddressViewType {
+    var address: String {get set}
+    var landMark: String {get set}
+    var city: String {get set}
+    var zipCode: String {get set}
+    var state: String {get set}
+    var country: String {get set}
     var saveAddressStatus: ReactiveListener<SaveAddressStatus> {get set}
     
-    func addNewAddress(address: String, landmark: String, city: String, zipCode: String, state: String, country: String)
+    func addNewAddress()
+    func saveTextFromTextField(text: String?, tag: Int)
 }
 
 class NewAddressViewModel: NewAddressViewType {
+    var address: String = ""
+    var landMark: String = ""
+    var city: String = ""
+    var zipCode: String = ""
+    var state: String = ""
+    var country: String = ""
+    
     var saveAddressStatus: ReactiveListener<SaveAddressStatus> = ReactiveListener(.none)
     
-    func addNewAddress(address: String, landmark: String, city: String, zipCode: String, state: String, country: String) {
-        let addressResult = Validator.address(str: address)
-        let landMarkResult = Validator.landMark(str: landmark)
-        let cityResult = Validator.city(str: city)
-        let zipCodeResult = Validator.pincode(str: zipCode)
-        let stateResult = Validator.state(str: state)
-        let countryResult = Validator.country(str: country)
+    func addNewAddress() {
         
-        // Check for result
-        if addressResult.result && landMarkResult.result && cityResult.result && zipCodeResult.result && stateResult.result && countryResult.result {
-            // Save the address
-            let curAddress = "\(address), Near \(landmark), \(city), \(state), \(country), Pincode - \(zipCode)"
+        // Get Validation Results
+        let validationResult = validateAddressFields()
+        
+        switch validationResult {
+        case .success:
+            break
+        case .failure(msg: let msg):
+            self.saveAddressStatus.value = .failure(msg: msg.rawValue)
+            return
+        }
+        
+        if Reachability.isConnectedToNetwork() {
+            let curAddress = "\(address), Near \(landMark), \(city), \(state), \(country), Pincode - \(zipCode)"
             UserDefaults.standard.addNewAddress(address: curAddress)
             self.saveAddressStatus.value = .success
-        } else if !addressResult.result {
-            self.saveAddressStatus.value = .failure(msg: addressResult.message)
-        } else if !landMarkResult.result {
-            self.saveAddressStatus.value = .failure(msg: landMarkResult.message)
-        } else if !cityResult.result {
-            self.saveAddressStatus.value = .failure(msg: cityResult.message)
-        } else if !zipCodeResult.result {
-            self.saveAddressStatus.value = .failure(msg: zipCodeResult.message)
-        } else if !stateResult.result {
-            self.saveAddressStatus.value = .failure(msg: stateResult.message)
         } else {
-            self.saveAddressStatus.value = .failure(msg: countryResult.message)
+            self.saveAddressStatus.value = .failure(msg: "No Internet, please try again!")
         }
     }
     
+    // Extract Text from Text Fields
+    func saveTextFromTextField(text: String?, tag: Int) {
+        switch tag {
+        case 1:
+            address = text ?? ""
+        case 2:
+            landMark = text ?? ""
+        case 3:
+            city = text ?? ""
+        case 4:
+            state = text ?? ""
+        case 5:
+            zipCode = text ?? ""
+        case 6:
+            country = text ?? ""
+        default:
+            break
+        }
+    }
+    
+    // Valide Fields
+    func validateAddressFields() -> ValidationResult {
+        if address.isEmpty {
+            return .failure(msg: .noAddress)
+        }
+        
+        if landMark.isEmpty {
+            return .failure(msg: .noLandmark)
+        }
+        
+        if city.isEmpty {
+            return .failure(msg: .noCity)
+        }
+        
+        if state.isEmpty {
+            return .failure(msg: .noState)
+        }
+        
+        if zipCode.isEmpty {
+            return .failure(msg: .noZipCode)
+        }
+        
+        if country.isEmpty {
+            return .failure(msg: .noCountry)
+        }
+        
+        return .success
+    }
     
 }

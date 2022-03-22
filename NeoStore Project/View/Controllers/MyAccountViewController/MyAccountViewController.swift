@@ -21,7 +21,6 @@ class MyAccountViewController: UIViewController {
     // Variables
     let datePicker = UIDatePicker()
     var viewModel: MyAccountViewType!
-    var currentProfileImgUrl: String!
     var loaderViewScreen: UIView?
     var isAnyTextFieldChanged = false
     

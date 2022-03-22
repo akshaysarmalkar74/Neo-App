@@ -38,14 +38,25 @@ class NewAddressViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         customiseNavbar(title: "Add Address", vcType: StringConstants.NewAddressViewController, btnSelector: nil)
+        setup()
         setupObservers()
     }
 
     @IBAction func addAddressTapped(_ sender: UIButton) {
         // Add Address to User Defaults
-        self.viewModel.addNewAddress(address: addressField.text ?? "", landmark: landMarkField.text ?? "", city: cityField.text ?? "", zipCode: zipCodeField.text ?? "", state: stateField.text ?? "", country: countryField.text ?? "")
-        
+        self.view.endEditing(true)
+        self.viewModel.addNewAddress()
         showLoader(view: self.view, aicView: &loaderViewScreen)
+    }
+    
+    // Setuo
+    func setup() {
+        let textFields: [UITextField] = [landMarkField, cityField, stateField, zipCodeField, countryField]
+        
+        for textField in textFields {
+            textField.delegate = self
+        }
+        addressField.delegate = self
     }
     
     // Setup Observers
@@ -68,33 +79,14 @@ class NewAddressViewController: UIViewController {
             }
         }
     }
- 
-    // Error Alert Function
-//    func showErrorAlert(error: String?) {
-//        let alertVc = UIAlertController(title: "Something went wrong!", message: error, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-//            self?.dismiss(animated: true, completion: nil)
-//        }
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
-//
-    // Customise Navbar
-//    func customiseNavbar() {
-//        // Set Title
-//        self.title = "Add Address"
-//
-//        // Customise Naviagtion Bar
-//        self.navigationController?.navigationBar.barTintColor = .mainRed
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//
-//        // Customise Back Button Color & Title
-//        self.navigationController?.navigationBar.tintColor = .white
-//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-//
-//    }
+}
+
+extension NewAddressViewController: UITextFieldDelegate, UITextViewDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.viewModel.saveTextFromTextField(text: textField.text, tag: textField.tag)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.viewModel.saveTextFromTextField(text: textView.text, tag: textView.tag)
+    }
 }

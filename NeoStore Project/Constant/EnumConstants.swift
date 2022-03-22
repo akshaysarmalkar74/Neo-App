@@ -56,6 +56,12 @@ enum ValidationMessages: String {
     case noBirthDate = "Please select birth date"
     case invalidQty = "Please enter valid quantity"
     case termsNotChecked = "Please accept the terms"
+    case noAddress = "Please enter address"
+    case noLandmark = "Please enter landmark"
+    case noCity = "Please enter city"
+    case noState = "Please enter state"
+    case noZipCode = "Please enter zipcode"
+    case noCountry = "Please enter country"
 }
 
 
