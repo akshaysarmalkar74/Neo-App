@@ -64,27 +64,17 @@ class RegisterScreenViewController: UIViewController {
     
     
     @IBAction func registerBtnTapped(_ sender: UIButton) {
+        self.view.endEditing(true)
         
+        // Set Gender and Terms Value
         let genderValue: String = maleBtn.isSelected ? "M" : "F"
+        self.viewModel.setGenderValue(value: genderValue)
+        self.viewModel.setTermsChecked(value: termsBtn.isSelected)
         
-        viewModel.doRegister(firstName: firstNameField.text ?? "", lastName: lastNameField.text ?? "", email: emailField.text ?? "", password: passwordField.text ?? "", confirmPassword: confirmPasswordField.text ?? "", gender: genderValue, phoneNumber: phoneField.text ?? "", termsBtn: termsBtn)
-        
+        // Make request
+        self.viewModel.doRegister()
         showLoader(view: self.view, aicView: &loaderViewScreen)
     }
-    
-    // Error Alert Function
-//    func showErrorAlert(error: String?) {
-//        let alertVc = UIAlertController(title: nil, message: error, preferredStyle: .alert)
-//        let alertBtn = UIAlertAction(title: "Okay", style: .default) { [weak self] alertAction in
-//            self?.dismiss(animated: true, completion: nil)
-//        }
-//
-//        // Add Button to Alert
-//        alertVc.addAction(alertBtn)
-//
-//        // Present Alert
-//        self.present(alertVc, animated: true, completion: nil)
-//    }
     
     // KeyBoard Notification Functions
     @objc func keyboardAppeared(_ notification: Notification) {
@@ -122,6 +112,9 @@ extension RegisterScreenViewController {
             
             // Set Border Color to Input
             textFields[idx].layer.borderColor = CGColor(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            
+            // Set Delegates
+            textFields[idx].delegate = self
             
             // Customise Text Fields
             customiseTextField(textField: textFields[idx], imgName: inputImgs[idx])
@@ -176,20 +169,6 @@ extension RegisterScreenViewController {
         textField.leftView = view
     }
     
-    // Customise Navigation Bar
-//    func customiseNavbar() {
-//        // Set Title
-//        self.title = "Register"
-//
-//        // Customise Naviagtion Bar
-//        self.navigationController?.navigationBar.barTintColor = .mainRed
-//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-//
-//        // Customise Back Button Color & Title
-//        self.navigationController?.navigationBar.tintColor = .white
-//        self.navigationController?.navigationBar.topItem?.backButtonDisplayMode = .minimal
-//    }
-//
     // Add Tap Gesture to View
     func addTapGestureToView() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped(_:)))
@@ -198,5 +177,11 @@ extension RegisterScreenViewController {
     
     @objc func viewTapped(_ sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+}
+
+extension RegisterScreenViewController: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        self.viewModel.saveTextFromTextField(text: textField.text, tag: textField.tag)
     }
 }
