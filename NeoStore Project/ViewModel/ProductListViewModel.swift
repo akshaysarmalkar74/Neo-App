@@ -45,30 +45,34 @@ class ProductListViewModel: ProductListViewType {
     var fetchProductsStatus: ReactiveListener<FetchProductsApiResult> = ReactiveListener(.none)
     
     func fetchProducts() {
-        ProductService.getProducts(categoryId: categoryId, page: page) { res in
-            switch res {
-            case .success(value: let value):
-                // Check for success status
-                if let statusCode = value.status, statusCode == 200 {
-                    if let allProducts = value.data {
-                        // Update should Paginate
-                        if allProducts.count % 10 == 0 {
-                            self.shouldPaginate = true
-                        } else {
-                            self.shouldPaginate = false
+        if Reachability.isConnectedToNetwork() {
+            ProductService.getProducts(categoryId: categoryId, page: page) { res in
+                switch res {
+                case .success(value: let value):
+                    // Check for success status
+                    if let statusCode = value.status, statusCode == 200 {
+                        if let allProducts = value.data {
+                            // Update should Paginate
+                            if allProducts.count % 10 == 0 {
+                                self.shouldPaginate = true
+                            } else {
+                                self.shouldPaginate = false
+                            }
+                            self.isPaginating = false
+                            
+                            self.products.append(contentsOf: allProducts)
+                            self.fetchProductsStatus.value = .success
+                            self.tableViewShouldReload.value = true
                         }
-                        self.isPaginating = false
-                        
-                        self.products.append(contentsOf: allProducts)
-                        self.fetchProductsStatus.value = .success
-                        self.tableViewShouldReload.value = true
+                    } else {
+                        self.fetchProductsStatus.value = .failure(msg: value.userMsg)
                     }
-                } else {
-                    self.fetchProductsStatus.value = .failure(msg: value.userMsg)
+                case .failure(error: let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(error: let error):
-                print(error.localizedDescription)
             }
+        } else {
+            self.fetchProductsStatus.value = .failure(msg: "No Internet, please try again!")
         }
     }
     

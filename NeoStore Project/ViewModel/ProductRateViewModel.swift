@@ -41,18 +41,22 @@ class ProductRateViewModel: ProductRateViewType {
     var productRateDetailStatus: ReactiveListener<ProductRateApiResponse> = ReactiveListener(.none)
     
     func rateProduct() {
-        ProductService.setProductRating(productId: String(productId), rating: rating) { res in
-            switch res {
-            case .success(value: let value):
-                // Check for success status
-                if let statusCode = value.status, statusCode == 200 {
-                    self.productRateDetailStatus.value = .success(msg: value.userMsg)
-                } else {
-                    self.productRateDetailStatus.value = .failure(err: value.userMsg)
+        if Reachability.isConnectedToNetwork() {
+            ProductService.setProductRating(productId: String(productId), rating: rating) { res in
+                switch res {
+                case .success(value: let value):
+                    // Check for success status
+                    if let statusCode = value.status, statusCode == 200 {
+                        self.productRateDetailStatus.value = .success(msg: value.userMsg)
+                    } else {
+                        self.productRateDetailStatus.value = .failure(err: value.userMsg)
+                    }
+                case .failure(error: let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(error: let error):
-                print(error.localizedDescription)
             }
+        } else {
+            self.productRateDetailStatus.value = .failure(err: "No Internet, please try again!")
         }
     }
     

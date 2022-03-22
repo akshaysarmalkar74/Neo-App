@@ -33,19 +33,23 @@ class ProductDetailViewModel: ProductDetailViewType {
     var fetchProductDetailStatus: ReactiveListener<ProductDetailApiResponse> = ReactiveListener(.none)
     
     func fetchProductDetails() {
-        ProductService.getProductDetail(productId: productId) { res in
-            switch res {
-            case .success(value: let value):
-                // Check for success status
-                if let statusCode = value.status, statusCode == 200 {
-                    self.curProduct = value.data
-                    self.fetchProductDetailStatus.value = .success
-                } else {
-                    self.fetchProductDetailStatus.value = .failure(err: value.userMsg)
+        if Reachability.isConnectedToNetwork() {
+            ProductService.getProductDetail(productId: productId) { res in
+                switch res {
+                case .success(value: let value):
+                    // Check for success status
+                    if let statusCode = value.status, statusCode == 200 {
+                        self.curProduct = value.data
+                        self.fetchProductDetailStatus.value = .success
+                    } else {
+                        self.fetchProductDetailStatus.value = .failure(err: value.userMsg)
+                    }
+                case .failure(error: let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(error: let error):
-                print(error.localizedDescription)
             }
+        } else {
+            self.fetchProductDetailStatus.value = .failure(err: "No Internet, please try again!")
         }
     }
     

@@ -45,24 +45,28 @@ class CartListViewModel: CartListViewType {
     var fetchCartStatus: ReactiveListener<FetchCartApiResult> = ReactiveListener(.none)
     
     func fetchCart() {
-        CartService.fetchCart { res in
-            switch res {
-            case .success(value: let value):
-                if let statusCode = value.status, statusCode == 200 {
-                    if let cartItems = value.data {
-                        self.cartItems = cartItems
-                        self.total = value.total ?? 0
-                        self.tableViewShouldReload.value = true
+        if Reachability.isConnectedToNetwork() {
+            CartService.fetchCart { res in
+                switch res {
+                case .success(value: let value):
+                    if let statusCode = value.status, statusCode == 200 {
+                        if let cartItems = value.data {
+                            self.cartItems = cartItems
+                            self.total = value.total ?? 0
+                            self.tableViewShouldReload.value = true
+                        } else {
+                            self.fetchCartStatus.value = .failure(msg: value.userMsg)
+                        }
                     } else {
                         self.fetchCartStatus.value = .failure(msg: value.userMsg)
                     }
-                } else {
-                    self.fetchCartStatus.value = .failure(msg: value.userMsg)
+                      
+                case .failure(error: let error):
+                    print(error.localizedDescription)
                 }
-                  
-            case .failure(error: let error):
-                print(error.localizedDescription)
             }
+        } else {
+            self.fetchCartStatus.value = .failure(msg: "No Internet, please try again!")
         }
     }
 

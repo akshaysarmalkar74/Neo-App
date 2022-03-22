@@ -44,19 +44,23 @@ class AddressListViewModel: AddressListViewType {
     
     // Place Order
     func placeOrder(address: String) {
-        OrderService.placeOrder(address: address) { res in
-            switch res {
-            case .success(value: let value):
-                // Check for success status
-                if let statusCode = value.status, statusCode == 200 {
-                    self.placeOrderStatus.value = .success(msg: value.userMsg)
-                } else {
-                    self.placeOrderStatus.value = .failure(msg: value.userMsg)
+        if Reachability.isConnectedToNetwork() {
+            OrderService.placeOrder(address: address) { res in
+                switch res {
+                case .success(value: let value):
+                    // Check for success status
+                    if let statusCode = value.status, statusCode == 200 {
+                        self.placeOrderStatus.value = .success(msg: value.userMsg)
+                    } else {
+                        self.placeOrderStatus.value = .failure(msg: value.userMsg)
+                    }
+                
+                case .failure(error: let error):
+                    print(error.localizedDescription)
                 }
-            
-            case .failure(error: let error):
-                print(error.localizedDescription)
             }
+        } else {
+            self.placeOrderStatus.value = .failure(msg: "No Internet, please try again!")
         }
     }
     

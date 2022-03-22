@@ -40,46 +40,26 @@ class OrderDetailViewModel: OrderDetailViewType {
     }
     
     func getOrderWith() {
-        OrderService.fetchOrderWith(id: orderId) { res in
-            switch res {
-            case .success(value: let value):
-//                if let curData = value as? Data {
-//                    do {
-//                        let mainData = try JSONSerialization.jsonObject(with: curData, options: .mutableContainers) as! [String: Any]
-//                        if let statusCode = mainData["status"] as? Int {
-//                            if statusCode == 200 {
-//                                let tempData = mainData["data"] as? [String: Any] ?? [String: Any]()
-//                                let productsData = tempData["order_details"] as? [[String: Any]] ?? [[String: Any]]()
-//
-//                                self.total = tempData["cost"] as? Int
-//                                self.orderItems.append(contentsOf: productsData)
-//                                self.tableViewShouldReload.value = true
-//                            } else {
-//                                // Show Error to User
-//                                let userMsg = mainData["user_msg"] as? String
-//                                self.orderDetailStatus.value = .failure(msg: userMsg)
-//                            }
-//                        }
-//                    } catch let err {
-//                        print(err.localizedDescription)
-//                    }
-//                } else {
-//                    print("Some Another Error")
-//                }
-            
-                // Check for success status
-                if let statusCode = value.status, statusCode == 200 {
-                    if let order = value.data {
-                        self.total = order.cost
-                        self.orderItems.append(contentsOf: order.orderDetails ?? [SpecificOrderDetail]())
-                        self.tableViewShouldReload.value = true
+        if Reachability.isConnectedToNetwork() {
+            OrderService.fetchOrderWith(id: orderId) { res in
+                switch res {
+                case .success(value: let value):
+                    // Check for success status
+                    if let statusCode = value.status, statusCode == 200 {
+                        if let order = value.data {
+                            self.total = order.cost
+                            self.orderItems.append(contentsOf: order.orderDetails ?? [SpecificOrderDetail]())
+                            self.tableViewShouldReload.value = true
+                        }
+                    } else {
+                        self.orderDetailStatus.value = .failure(msg: value.userMsg)
                     }
-                } else {
-                    self.orderDetailStatus.value = .failure(msg: value.userMsg)
+                case .failure(error: let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(error: let error):
-                print(error.localizedDescription)
             }
+        } else {
+            self.orderDetailStatus.value = .failure(msg: "No Internet, please try again!")
         }
     }
     
