@@ -72,7 +72,7 @@ extension UIViewController {
         // Customise Naviagtion Bar
         self.navigationController?.navigationBar.barTintColor = .mainRed
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "Gotham Medium", size: 20.0)]
+        self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white, .font: UIFont(name: "Gotham Medium", size: 20.0) as Any]
         
         // Customise Back Button Color & Title
         self.navigationController?.navigationBar.tintColor = .white

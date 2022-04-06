@@ -173,21 +173,15 @@ class ProductHomeViewController: UIViewController, SideMenuViewControllerDelegat
     }
     
     func setRootToLogInController() {
-            // Clear User Defaults
+//          Clear User Defaults
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.isLoggedIn.rawValue)
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.user.rawValue)
             UserDefaults.standard.removeObject(forKey: UserDefaultsKeys.userToken.rawValue)
-            print("Here")
         
-            if let appDelegate = UIApplication.shared.delegate as? AppDelegate{
-                    let viewControllers = appDelegate.rootNavVc.viewControllers
-                    if !viewControllers.contains(LoginScreenViewController(viewModel: LoginScreenViewModel())) {
-                        print("Hello There")
-                        appDelegate.rootNavVc.viewControllers[0] =  LoginScreenViewController(viewModel: LoginScreenViewModel())
-                    }
-                    print("Bye")
-                    appDelegate.rootNavVc.popToRootViewController(animated: true)
-            }
+        UIApplication.shared.windows.first?.rootViewController = UINavigationController(rootViewController: LoginScreenViewController(viewModel: LoginScreenViewModel()))
+        
+        // Make it visible
+        UIApplication.shared.windows.first?.makeKeyAndVisible()
     }
 }
 
