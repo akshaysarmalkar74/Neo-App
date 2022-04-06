@@ -21,16 +21,21 @@ class UserService {
                 // Decode the data
                 do {
                     if let extractedData = value as? Data {
-                        let registerRes = try JSONDecoder().decode(AuthResponse.self, from: extractedData)
-                        completionHandler(.success(value: registerRes))
+                        // Check for status
+                        let tempData = try JSONSerialization.jsonObject(with: extractedData) as? [String: Any]
+                        if let statusCode = tempData?["status"] as? Int, statusCode == 200 {
+                            let registerRes = try JSONDecoder().decode(AuthResponse.self, from: extractedData)
+                            completionHandler(.success(value: registerRes))
+                        } else {
+                            throw LoginError.noUserError
+                        }
                     } else {
                         print("Some Error while converting to data")
                     }
                 } catch {
-                    print(error.localizedDescription)
+                    completionHandler(.failure(error: LoginError.noUserError))
                 }
             case .failure(error: let error):
-                print(error.localizedDescription)
                 completionHandler(.failure(error: error))
             }
         }

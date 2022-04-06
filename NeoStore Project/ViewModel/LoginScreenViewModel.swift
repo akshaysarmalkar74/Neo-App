@@ -72,7 +72,7 @@ class LoginScreenViewModel: LoginScreenViewType {
                         self.userLoginStatus.value = .failure(msg: value.userMsg)
                     }
                 case .failure(error: let error):
-                    print(error.localizedDescription)
+                    self.userLoginStatus.value = .failure(msg: "Email or password is wrong!")
                 }
             }
         }else{
